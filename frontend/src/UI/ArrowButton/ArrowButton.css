@@ -1,0 +1,10 @@
+.arrow-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: black;
+    width: 44px;
+    height: 36px;
+    cursor: pointer;
+}

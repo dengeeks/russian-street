@@ -1,0 +1,53 @@
+.checkBoxLabel{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.checkBoxLabel:first-child{
+    margin-bottom: 15px;
+}
+
+.form__item_el_extra-options[type="checkbox"]{
+    position: absolute;
+    width: 1px; /* если у элемента не будет размеров, некоторые браузеры посчитают, что его вообще нет */
+    height: 1px;
+    overflow: hidden; /* без этого свойства тоже сработает, но так наверняка. Мы его ещё изучим, оно скрывает элементы, выходящие за границы родителя */
+    clip-path: inset(0 0 0 0);
+  }
+
+
+.form__pseudo-item_type_plus-minus{
+    display: inline-block; /* элемент span теперь сможет принимать определённую ширину и высоту */
+    vertical-align: middle; /* элемент и текст будут правильно выровнены по вертикали. Работает в паре с inline-block */
+    width: 24px;
+    height: 24px; /* размеры */
+    border: 1px solid white; /* граница */
+    background-image: url(./images/minus.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .form__item_el_extra-options:checked + .form__pseudo-item_type_plus-minus{
+    background-image: url(./images/plus.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+   }
+  
+  .form__item_el_extra-options:disabled + .form__pseudo-item_type_checkbox{
+    border: 1px solid grey;
+   }
+  
+  .form__item_el_extra-options:disabled:checked + .form__pseudo-item_type_checkbox{
+    background-image: url(./images//checkbox-checked-gray.svg);
+  }

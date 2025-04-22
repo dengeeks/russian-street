@@ -1,0 +1,16 @@
+.select{
+    appearance: none;
+    text-transform: uppercase;
+    width: 286px;
+    background-color: #D2D1D0;
+    border: none;
+    padding: 16px 20px 18px;
+    background-image: url(../../images/chevronDown.svg);
+    background-repeat: no-repeat;
+    background-position: calc(100% - 20px);
+
+}
+
+.select_type_white{
+    background-color: white;
+}

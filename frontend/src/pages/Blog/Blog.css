@@ -1,0 +1,183 @@
+.blog {
+  width: 100%;
+}
+
+.blog__city {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 130%;
+}
+
+.blog__title {
+  margin-top: 20px;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%;
+  text-transform: uppercase;
+  width: 572px;
+  height: 84px;
+}
+
+.blog__date {
+  margin-top: 20px;
+  font-family: Bahnschrift;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%;
+}
+
+.blog__image {
+  margin-top: 20px;
+  height: 600px;
+  object-fit: contain;
+}
+
+.blog__image img {
+  height: 600px;
+  width: 100%;
+}
+
+.blog__card {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* Добавляем промежуток между карточками */
+  margin-top: 40px;
+  width: 100%;
+}
+
+.blog__card-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  text-decoration: none; /* Убираем подчеркивание у ссылок */
+  color: inherit; /* Наследуем цвет текста */
+}
+
+.blog__card1 {
+  width: 100%;
+  height: 389px;
+}
+
+.blog__card1--large {
+  flex: 2; /* Устанавливаем гибкость для больших карточек */
+}
+
+.blog__card1--small {
+  flex: 1; /* Устанавливаем гибкость для маленьких карточек */
+}
+
+.blog__image-content {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.blog__card1-title {
+  margin: 8px 0 0 0;
+  font-family: Bahnschrift;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.blog__card1-title p {
+  margin: 0;
+}
+
+.blog__card1-subtitle {
+  margin: 5px 0 0 0;
+  font-family: Bahnschrift;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%;
+  text-align: left;
+}
+
+.blog__card2 {
+  width: 100%;
+  height: 444px;
+}
+
+.blog__card2--large {
+  flex: 2; /* Устанавливаем гибкость для больших карточек второго ряда */
+}
+
+.blog__card2--medium {
+  flex: 1; /* Устанавливаем гибкость для средних карточек второго ряда */
+}
+
+.blog__image-content {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.blog__card1-title,
+.blog__card2-title {
+  margin-top: 10px;
+  font-family: Bahnschrift;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.blog__card1-title p,
+.blog__card2-title p {
+  margin: 0;
+}
+
+.blog__card1-subtitle,
+.blog__card2-subtitle {
+  margin-top: 5px;
+  font-family: Bahnschrift;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%;
+  text-align: left;
+}
+
+.blog__no-news-container {
+  text-align: center;
+  color: var(--white, #FFF);
+}
+
+.blog__no-news {
+  width: 1070px;
+  height: 156px;
+  font-family: Bahnschrift;
+  font-size: 60px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%; /* 78px */
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto; /* Центрирует блок на странице */
+}
+
+.blog__no-news-subtitle {
+  font-family: Bahnschrift;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%; /* 26px */
+  margin-top: 40px;
+}
+
+.blog__no-news-link {
+  color: #FFF;
+  text-decoration: none;
+}

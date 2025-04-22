@@ -1,0 +1,103 @@
+.SuccessMessage__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.SuccessMessage__overlay_active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.SuccessMessage {
+  background: white;
+  padding: 90px;
+  border-radius: 8px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transform: translateY(-10%);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.SuccessMessage__overlay_active .SuccessMessage {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.SuccessMessage h2 {
+  color: var(--dark-grey, #222);
+  text-align: center;
+  font-family: Bahnschrift;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 130%;
+  text-transform: uppercase;
+  width: 728px;
+  height: 84px;
+  margin: 0 0 10px 0;
+}
+
+.SuccessMessage p {
+  color: var(--dark-grey, #222);
+  font-family: Bahnschrift;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%;
+  width: 530px;
+  height: 52px;
+  margin: 0 0 27px 0;
+}
+
+.SuccessMessage__buttons {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  width: 550px;
+  height: 70px;
+}
+
+.SuccessMessage__button {
+  padding: 16px;
+  font-size: 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #B73A34;
+  color: var(--white, #FFF);
+  font-weight: 700;
+  text-transform: uppercase;
+  width: 259px;
+}
+
+.SuccessMessage__support {
+  color: var(--dark-grey, #222);
+  font-family: Bahnschrift;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.SuccessMessage__close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}

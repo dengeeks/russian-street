@@ -1,0 +1,91 @@
+.blog-event {
+  width: 100%;
+}
+
+.blog-event__city {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 130%;
+}
+
+.blog-event__title {
+  margin-top: 20px;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%;
+  text-transform: uppercase;
+  width: 572px;
+  height: 84px;
+}
+
+.blog-event__date {
+  margin-top: 20px;
+  font-family: Bahnschrift;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%;
+}
+
+.blog-event__image {
+  margin-top: 20px;
+  height: 600px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.blog-event__main-image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: opacity 1s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.blog-event__thumbnails {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.blog-event__thumbnail {
+  height: 139px;
+  width: calc((100% - 5 * 20px) / 6); /* Calculated width for 6 thumbnails with 20px spacing */
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.blog-event__thumbnail.active {
+  transform: scale(1.1);
+}
+
+.blog-event__text {
+  margin: 60px 0 0 0;
+  color: var(--grey, #D2D1D0);
+
+  /* body medium */
+  font-family: Bahnschrift;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%; /* 26px */
+  width: 893px;
+}
+
+.blog-event__subtitile {
+  margin: 16px 0 0 0;
+  color: var(--grey, #D2D1D0);
+
+  /* body medium */
+  font-family: Bahnschrift;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%; /* 26px */
+}

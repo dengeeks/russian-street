@@ -1,0 +1,41 @@
+.events-calendar{
+    max-width: 1204px;
+    margin: 0 auto;
+}
+
+.events-calendar__title{
+    margin: 0 0 60px;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 130%;
+    text-transform: uppercase;
+}
+
+.events-calendar__date-menu{
+    display: flex;
+    padding: 0;
+    margin: 0;
+    justify-content: space-between;
+}
+
+.events-calendar__day{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 42px;
+    height: 36px;
+    border: 1px solid black;
+    background-color: white;
+    cursor: pointer;
+}
+
+.events-calendar__day_current{
+    background-color: #D2D1D0;
+}
+
+@media screen and (max-width:570px) {
+    .events-calendar__date-menu{
+        flex-wrap: wrap;
+    }
+}

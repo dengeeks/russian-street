@@ -1,0 +1,30 @@
+.event-card__event{
+    position: relative;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.event-card__title{
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 130%;
+    max-width: 286px;
+    margin: 8px 0 4px;
+}
+
+.event-card__image{
+    max-width: 286px;
+    max-height: 389px;
+    aspect-ratio: 2/3;
+}
+
+.event-card__subtitle{
+    margin: 0;
+    color: #D2D1D0;
+}
+
+.link{
+    text-decoration: none;
+    color: white;
+}

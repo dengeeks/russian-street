@@ -1,0 +1,90 @@
+.create-event-profile {
+    padding: 20px;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.create-event-profile__title {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.create-event-profile__form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.create-event-profile__section {
+    margin-bottom: 20px;
+}
+
+.create-event-profile__section-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.create-event-profile__form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.create-event-profile__form-group label {
+    margin-bottom: 5px;
+}
+
+.create-event-profile__form-group input,
+.create-event-profile__form-group select,
+.create-event-profile__form-group textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #333;
+    color: white;
+}
+
+.create-event-profile__form-group textarea {
+    height: 100px;
+    resize: none;
+}
+
+.create-event-profile__media {
+    display: flex;
+    gap: 10px;
+}
+
+.create-event-profile__media img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.create-event-profile__media-add {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #555;
+    cursor: pointer;
+}
+
+.create-event-profile__media-add span {
+    font-size: 36px;
+    color: white;
+}
+
+.create-event-profile__submit {
+    padding: 15px;
+    background: #B73A34;
+    color: white;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.create-event-profile__submit:hover {
+    background: #a12b2a;
+}
