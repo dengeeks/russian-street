@@ -1,0 +1,81 @@
+.header{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    position: fixed;
+    top:0;
+    left:0;
+    z-index: 100;
+    background-color: var(--block-background);
+}
+
+.headerContent{
+    display: flex;
+    padding: 25px 0;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.menu{
+    display: flex;
+    align-items: center;
+    gap: 41px;
+}
+
+.social {
+    display: flex;
+    gap: 10px;
+}
+
+.menuLink{
+    text-decoration: none;
+    color: var(--white);
+    font-size: 20px;
+    line-height: 130%;
+    font-weight: 400;
+    font-stretch: semi-condensed;
+}
+
+.headerBurger {
+    display: none;
+    min-height: 50px;
+}
+
+.burgerButton {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .headerBurger {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-right: 25px;
+    }
+
+    .headerContent {
+        display: none;
+    }
+
+    .header.active {
+        height: 100vh;
+        flex-direction: column;
+    }
+    .header.active .headerContent {
+        display: flex;
+        flex-direction: column;
+        padding: 25px;
+        background-color: var(--block-background);
+        gap: 37px;
+    }
+
+    .menu{
+        flex-direction: column;
+    }
+}

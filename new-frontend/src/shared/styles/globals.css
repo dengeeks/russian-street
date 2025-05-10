@@ -1,0 +1,52 @@
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --white: #fff;
+  --block-background: #222;
+  --grey: #D2D1D0;
+  --blue: #1E5B9C;
+  --red: #B73A34;
+  --font-Bahnschrift: "Bahnschrift", "Bahnschrift Fallback";
+  --font-Inter: "Inter", "Inter Fallback";
+  --font-Benzin: "Benzin", "Benzin Fallback";
+}
+
+
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-Bahnschrift), sans-serif;
+  padding-top: 78px;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1204px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 50px;
+  }
+}
