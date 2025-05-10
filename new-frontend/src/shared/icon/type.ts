@@ -1,0 +1,16 @@
+export type IconName =
+    | 'arrow'
+    | 'burger'
+    | 'check'
+    | 'chevron'
+    | 'donating'
+    | 'filter-mob'
+    | 'minus'
+    | 'plus'
+    | 'profile'
+    | 'search'
+    | 'telegram'
+    | 'vk'
+    | 'whatsapp'
+    | 'close'
+    | 'youtube';

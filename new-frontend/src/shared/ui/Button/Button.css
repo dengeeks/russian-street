@@ -1,14 +1,15 @@
 .button {
     display: flex;
-    padding: 18px 32px 18px;
+    padding: 18px 32px 16px;
     justify-content: center;
     align-items: center;
-    background-color: #B73A34;
+    background-color: var(--red);
     border: none;
-    color: var(--white, #FFF);
+    color: var(--white);
+    font-family: var(--font-Bahnschrift), sans-serif;
     font-size: 20px;
-    font-style: normal;
     font-weight: 700;
+    font-stretch: semi-condensed;
     line-height: 130%;
     text-transform: uppercase;
     cursor: pointer;
@@ -18,5 +19,5 @@
 
 .button_type_orange-border{
     background-color: transparent;
-    border: 3px solid #B73A34;
+    border: 3px solid var(--red);
 }

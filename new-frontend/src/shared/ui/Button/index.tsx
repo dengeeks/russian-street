@@ -2,7 +2,7 @@ import React from "react";
 import { ButtonProps } from "./ButtonProps";
 import './Button.css';
 
-export function Button({ children, type, onClick }: ButtonProps) {
+const Button = ({ children, type, onClick }: ButtonProps) => {
     const orangeBorder = type === 'orangeBorder' ? 'button_type_orange-border' : '';
 
     return (
@@ -11,3 +11,5 @@ export function Button({ children, type, onClick }: ButtonProps) {
         </button>
     );
 }
+
+export default Button

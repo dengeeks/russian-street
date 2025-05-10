@@ -1,0 +1,15 @@
+.logo-wrapper {
+    max-width: 321px;
+    max-height: 28px;
+    width: 100%;
+    position: relative;
+    aspect-ratio: 1;
+}
+
+@media (max-width: 768px) {
+    .logo-wrapper {
+        max-width: 298px;
+        max-height: 26px;
+    }
+
+}
