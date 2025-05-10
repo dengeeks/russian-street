@@ -1,0 +1,29 @@
+import { IconName } from './type'
+import {SVGProps } from 'react';
+
+interface IconProps extends SVGProps<SVGSVGElement> {
+    icon: IconName;
+    width?: number;
+    height?: number;
+    color?: string;
+    stroke?: string;
+    className?: string;
+}
+
+const Icon = ({icon, width = 24, height = 24, color, stroke, className = '', ...props}: IconProps) => {
+    return (
+        <svg
+            width={width}
+            height={height}
+            stroke={stroke}
+            fill={color}
+            xmlns="http://www.w3.org/2000/svg"
+            className={className}
+            {...props}
+        >
+            <use href={`/svg/icon.svg#${icon}`} />
+        </svg>
+    );
+};
+
+export default Icon

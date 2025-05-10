@@ -1,0 +1,156 @@
+@import './normalize.css';
+
+:root {
+  --background: #f4f4f9;
+  --nav-icon-hover-bg: rgba(1, 1, 27, 0.05);
+  --placeholder-color: #757575;
+  --default-color: #01011b;
+  --green: #188711;
+  --block-background: #ffffff;
+  --font-primary: #ffffff;
+  --label-color: #7d7d91;
+  --footer-color: #606971;
+  --border-color: #dadae8;
+  --background-skeleton: #e5e7eb;
+  --primary-blue: #2196f3;
+  --green-color: #7d7d91;
+  --font-MuseoSansCyrl: 'MuseoSansCyrl', 'MuseoSansCyrl Fallback';
+}
+
+body {
+  background: var(--background);
+  font-family: var(--font-MuseoSansCyrl), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--default-color);
+  -webkit-user-modify: read-only;
+  user-modify: read-only;
+  caret-color: transparent;
+  padding-top: 78px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  -webkit-text-size-adjust: none;
+}
+
+input[type='text'],
+input[type='submit'],
+textarea {
+  -webkit-appearance: none;
+}
+
+.page-title {
+  font-weight: 400;
+  line-height: 1.429em;
+}
+
+.page-title span {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.container {
+  max-width: 1400px;
+  padding: 0 1.25rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (max-width: 959px) {
+  .container {
+    padding: 0 0.6rem;
+  }
+
+  body {
+    padding-top: 60px;
+  }
+}
+
+.skeleton-list {
+  display: flex;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/*категорий*/
+
+.category-list {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  width: 100%;
+  position: relative;
+}
+
+@media (max-width: 600px) {
+  .category-list {
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+}
+
+/*продукты*/
+.product-list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(198px, 1fr));
+  gap: 12px;
+}
+
+@media (max-width: 600px) {
+  .product-list {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    justify-content: center;
+  }
+}
+
+@media (max-width: 360px) {
+  .product-list {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+}
+
+/*рек*/
+
+.recommended-swiper {
+  max-width: 280px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.skeleton-list .skeleton-item {
+  display: none;
+  width: 100%;
+}
+
+.skeleton-list .item-1 {
+  display: block;
+}
+
+@media (max-width: 1250px) {
+  .skeleton-list .skeleton-item {
+    display: block;
+  }
+}
+
+@media (max-width: 1250px) {
+  .recommended-swiper {
+    max-width: 100%;
+  }
+
+  .skeleton-list {
+    display: flex;
+    gap: 16px;
+  }
+}
