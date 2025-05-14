@@ -1,0 +1,33 @@
+.section-title {
+    font-weight: 400;
+    line-height: 130%;
+    font-size: 60px;
+    font-family: var(--font-Benzin), sans-serif;
+    color: var(--white);
+    text-transform: uppercase;
+    width: max-content;
+}
+
+@media (max-width: 1380px) {
+    .section-title {
+        font-size: 50px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .section-title {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .section-title {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 20px;
+    }
+}

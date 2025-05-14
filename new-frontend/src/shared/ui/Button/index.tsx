@@ -2,11 +2,10 @@ import React from "react";
 import { ButtonProps } from "./ButtonProps";
 import './Button.css';
 
-const Button = ({ children, type, onClick }: ButtonProps) => {
-    const orangeBorder = type === 'orangeBorder' ? 'button_type_orange-border' : '';
+const Button = ({ children, className='red', ...rest }: ButtonProps) => {
 
     return (
-        <button className={`button ${orangeBorder}`} onClick={onClick}>
+        <button className={`button ${className}`}  {...rest}>
             {children}
         </button>
     );

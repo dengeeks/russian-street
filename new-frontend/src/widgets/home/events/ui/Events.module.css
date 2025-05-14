@@ -1,0 +1,51 @@
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+
+.imageWrapper {
+    position: relative;
+    aspect-ratio: 1;
+    max-width: 490px;
+    height: auto;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.image {
+    object-fit: cover;
+}
+
+
+@media (max-width: 1000px) {
+
+    .section {
+        gap: 40px;
+    }
+
+    .content {
+        flex-direction: column-reverse;
+    }
+
+    .imageWrapper {
+        max-width: 100%;
+        aspect-ratio: 16 / 9;
+    }
+
+}
+

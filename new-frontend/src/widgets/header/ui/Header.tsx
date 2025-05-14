@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Icon from '@/shared/icon'
 import { useState } from 'react'
 import Logo from '@/shared/ui/Logo'
+import Button from '@/shared/ui/Button'
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -12,7 +13,7 @@ const Header = () => {
 
   return (
     <header className={` ${styles.header} ${menuOpen ? styles.active : ''}`}>
-      <div className={`${styles.headerWrapper} container `}>
+      <div className="container">
         <div className={styles.headerBurger}>
           <button onClick={toggleMenu} className={styles.burgerButton} aria-label="Меню">
             <Icon icon={menuOpen ? 'close' : 'burger'} width={24} height={24} className={styles.burgerMenu} />
@@ -36,6 +37,9 @@ const Header = () => {
             <Link href="/contacts" className={styles.menuLink}>
               Сотрудничество
             </Link>
+            <button className={`hidden-desktop ${styles.buttonAuth}`}>
+              Войти
+            </button>
           </nav>
           <div className={styles.social}>
             <Link href="/">
@@ -45,12 +49,14 @@ const Header = () => {
               <Icon icon="telegram" />
             </Link>
           </div>
-          <Link href="/" className={styles.donating}>
+          <Link href="/" className={`hidden-mobile ${styles.donating}`}>
             <Icon icon="donating" />
           </Link>
-          <Link href="/" className={styles.profile}>
+          <Link href="/" className={`hidden-mobile ${styles.profile}`}>
             <Icon icon="profile" />
           </Link>
+          <Button className="hidden-desktop" >поддержать нас</Button>
+
         </div>
       </div>
     </header>

@@ -1,0 +1,26 @@
+.map-region-section {
+    padding: 120px 0;
+}
+
+.map-region-wrapper {
+    position: relative;
+}
+
+.map-region-filter {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+
+    .map-region-section {
+        padding: 40px 0;
+    }
+
+    .map-region-filter {
+        display: none;
+    }
+
+}
