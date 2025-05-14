@@ -1,0 +1,17 @@
+.galleryMobile {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+
+.item {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+}
+
+.imageGallery {
+    object-fit: cover;
+}
+

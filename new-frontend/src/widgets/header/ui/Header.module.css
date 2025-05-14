@@ -7,7 +7,8 @@
     top:0;
     left:0;
     z-index: 100;
-    background-color: var(--block-background);
+    background-color: var(--dark-grey);
+    min-height: 78px;
 }
 
 .headerContent{
@@ -21,7 +22,9 @@
 .menu{
     display: flex;
     align-items: center;
-    gap: 41px;
+    justify-content: space-between;
+    max-width: 587px;
+    width: 100%;
 }
 
 .social {
@@ -29,7 +32,7 @@
     gap: 10px;
 }
 
-.menuLink{
+.menuLink, .buttonAuth{
     text-decoration: none;
     color: var(--white);
     font-size: 20px;
@@ -43,7 +46,7 @@
     min-height: 50px;
 }
 
-.burgerButton {
+.burgerButton, .buttonAuth {
     background: none;
     border: none;
     padding: 0;
@@ -51,7 +54,38 @@
     cursor: pointer;
 }
 
+
+@media (max-width: 1100px) {
+    .menu{
+        max-width: 460px;
+    }
+
+    .social {
+        display: flex;
+        gap: 6px;
+    }
+
+    .menuLink{
+        font-size: 16px;
+    }
+
+}
+
+@media (max-width: 850px) {
+    .menu{
+        max-width: 420px;
+    }
+
+}
+
+
 @media (max-width: 768px) {
+
+    .header{
+       min-height: 50px;
+
+    }
+
     .headerBurger {
         display: flex;
         align-items: center;
@@ -71,11 +105,28 @@
         display: flex;
         flex-direction: column;
         padding: 25px;
-        background-color: var(--block-background);
         gap: 37px;
     }
 
     .menu{
         flex-direction: column;
+        gap: 41px;
+        align-items: flex-start;
+        width: auto;
     }
+
+    .menuLink, .buttonAuth{
+        font-size: 20px;
+    }
+
+    .social {
+        gap: 20px;
+    }
+
+    .social svg {
+        width: 40px;
+        height: 40px;
+    }
+
 }
+

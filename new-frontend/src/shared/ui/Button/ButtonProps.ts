@@ -1,5 +1,5 @@
 export type ButtonProps = {
     children: string;
-    type?: string;
+    className?: string;
     onClick?: () => void; // Добавьте onClick как опциональное свойство
 }
