@@ -3,12 +3,11 @@ import styles from './Events.module.css'
 import Image from 'next/image'
 import SectionTitle from '@/shared/ui/SectionTitle'
 import Button from '@/shared/ui/Button'
-import EventCard from '@/entities/home/event-card/ui/EventCard'
+import EventCard from '@/entities/home/event-card'
 
 const Events = () => {
   return (
-    <section className="background">
-      <div className="container">
+    <section className="section-spacing-top container">
         <div className={styles.section}>
           <SectionTitle>Мероприятия</SectionTitle>
 
@@ -38,9 +37,8 @@ const Events = () => {
             </div>
           </div>
 
-          <Button className={`${styles.buttonEvent} red`}>Участвовать</Button>
+          <Button type="button" className={`${styles.buttonEvent} red`}>Участвовать</Button>
         </div>
-      </div>
     </section>
   )
 }

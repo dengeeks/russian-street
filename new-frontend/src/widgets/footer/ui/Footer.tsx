@@ -9,7 +9,7 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div className={`${styles.container} container`}>
         <Logo />
-        <div className={` ${styles.orgInfo} hidden-mobile`}>
+        <div className={`${styles.orgInfo} ${styles.hiddenMobile}`}>
           <p className={styles.orgTitle}>
             Общероссийская общественная организация уличной культуры и спорта «Улицы России»
           </p>
@@ -28,13 +28,13 @@ const Footer = () => {
         </nav>
 
         <div className={styles.donation}>
-          <Button>Поддержать нас</Button>
-          <p className={`${styles.supportText} hidden-mobile`}>Служба поддержки <a className={styles.supportLink}>support@mail.ru</a></p>
+          <Button type="button">Поддержать нас</Button>
+          <p className={`${styles.supportText} ${styles.hiddenMobile}`}>Служба поддержки <a className={styles.supportLink}>support@mail.ru</a></p>
         </div>
 
         <div className={styles.social}>
           <div>
-            <p className={`${styles.socialTitle} hidden-mobile`}>Мы в социальных сетях</p>
+            <p className={styles.socialTitle}>Мы в социальных сетях</p>
             <div className={styles.socialIcons}>
               <Link href="#">
                 <Icon icon="youtube" width={42} height={42} />
@@ -48,8 +48,8 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <p className={`${styles.supportText} hidden-desktop`}>Служба поддержки <a className={styles.supportLink}>support@mail.ru</a></p>
-        <div className={`${styles.orgInfo} hidden-desktop`}>
+        <p className={`${styles.supportText} ${styles.hiddenDesktop}`}>Служба поддержки <a className={styles.supportLink}>support@mail.ru</a></p>
+        <div className={`${styles.orgInfo} ${styles.hiddenDesktop}`}>
           <p className={styles.orgTitle}>
             Общероссийская общественная организация уличной культуры и спорта «Улицы России»
           </p>

@@ -22,8 +22,8 @@ const BannerHome = () => {
           </div>
           <h1>общероссийская общественная организация уличной культуры и спорта</h1>
           <div className="banner-wrapper-button">
-            <Button>Участвовать</Button>
-            <Button className="gray hidden-mobile">поддержать организацию</Button>
+            <Button type="button">Участвовать</Button>
+            <Button type="button" className="gray banner-wrapper-button-desktop">поддержать организацию</Button>
           </div>
         </div>
       </div>

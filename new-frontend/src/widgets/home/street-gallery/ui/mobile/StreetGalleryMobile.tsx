@@ -7,7 +7,7 @@ import 'swiper/css/pagination'
 import {Pagination } from 'swiper/modules'
 import Image from 'next/image'
 
-type StreetGalleryMobileProps = {
+interface StreetGalleryMobileProps {
   images: string[]
 }
 
@@ -22,7 +22,7 @@ const StreetGalleryMobile = ({ images }: StreetGalleryMobileProps) => {
         pagination={{
           clickable: true,
         }}
-        className="StreetGallery"
+        className="SwiperPagination"
       >
         {images.map((img, i) => (
           <SwiperSlide key={i}>

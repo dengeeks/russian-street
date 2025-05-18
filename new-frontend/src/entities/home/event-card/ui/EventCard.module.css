@@ -8,13 +8,12 @@
     gap: 20px;
     cursor: pointer;
 }
-
-.itemActive {
-    background-color: var(--blue);
+@media (hover: hover) and (pointer: fine) {
+    .item:hover {
+        background-color: var(--blue);
+    }
 }
-
 .city {
-    color: var(--white);
     font-family: var(--font-Bahnschrift), sans-serif;
     font-size: 20px;
     font-weight: 600;

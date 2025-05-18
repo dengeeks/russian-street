@@ -22,6 +22,10 @@
     justify-content: space-between;
 }
 
+.footer .hiddenDesktop {
+    display: none;
+}
+
 .orgTitle {
     color: var(--grey);
     font-size: 20px;
@@ -73,9 +77,7 @@
     text-align: center;
 }
 
-.supportLink {
-    color: var(--white);
-}
+
 
 .social {
     display: flex;
@@ -133,6 +135,10 @@
         margin-top: 10px;
     }
 
+    .socialTitle {
+        display: none;
+    }
+
     .orgInfo {
         border-left: none;
         padding-left: 0;
@@ -167,4 +173,13 @@
     .copyright {
         padding-top: 10px;
     }
+
+    .footer .hiddenMobile {
+        display: none;
+    }
+
+    .footer .hiddenDesktop {
+        display: flex;
+    }
+
 }

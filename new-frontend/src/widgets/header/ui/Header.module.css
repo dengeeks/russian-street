@@ -32,9 +32,15 @@
     gap: 10px;
 }
 
+
+.header .buttonMobile {
+    display: none;
+}
+
 .menuLink, .buttonAuth{
     text-decoration: none;
     color: var(--white);
+    font-family: var(--font-Bahnschrift), sans-serif;
     font-size: 20px;
     line-height: 130%;
     font-weight: 400;
@@ -48,6 +54,7 @@
 
 .burgerButton, .buttonAuth {
     background: none;
+    color: var(--white);
     border: none;
     padding: 0;
     margin: 0;
@@ -115,6 +122,10 @@
         width: auto;
     }
 
+    .header .buttonMobile {
+        display: block;
+    }
+
     .menuLink, .buttonAuth{
         font-size: 20px;
     }
@@ -126,6 +137,10 @@
     .social svg {
         width: 40px;
         height: 40px;
+    }
+
+    .IconDesktop {
+        display: none;
     }
 
 }

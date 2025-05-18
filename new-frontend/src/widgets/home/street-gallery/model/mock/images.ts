@@ -1,0 +1,19 @@
+export const images = [
+  'gallery.png',
+  'gallery.png',
+  'gallery.png',
+  'gallery.png',
+  'gallery.png',
+  'gallery.png',
+  'gallery.png',
+  'gallery.png',
+  'gallery.png',
+  'gallery.png',
+  'gallery.png',
+  'gallery.png',
+  'gallery.png',
+  'gallery.png',
+  'gallery.png',
+  'gallery.png',
+  'gallery.png'
+]

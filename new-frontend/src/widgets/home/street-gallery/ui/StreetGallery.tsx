@@ -1,7 +1,7 @@
 'use client'
-import styles from './StreetGallery.module.css'
 import dynamic from 'next/dynamic';
 import { useIsMobile } from '@/shared/hooks/useIsMobile'
+import { images } from '@/widgets/home/street-gallery/model/mock/images'
 
 const StreetGalleryDesktop = dynamic(() => import('./desktop/StreetGalleryDesktop'), {
   loading: () => (<></>),
@@ -11,30 +11,10 @@ const StreetGalleryMobile = dynamic(() => import('./mobile/StreetGalleryMobile')
   loading: () => (<></>),
 });
 
-const images = [
-  'gallery.png',
-  'gallery.png',
-  'gallery.png',
-  'gallery.png',
-  'gallery.png',
-  'gallery.png',
-  'gallery.png',
-  'gallery.png',
-  'gallery.png',
-  'gallery.png',
-  'gallery.png',
-  'gallery.png',
-  'gallery.png',
-  'gallery.png',
-  'gallery.png',
-  'gallery.png',
-  'gallery.png'
-]
-
 const StreetGallery = () => {
   const isMobile = useIsMobile()
   return (
-    <section className={`${styles.gallery} background`}>
+    <section className="section-spacing-top">
       {isMobile ? (
         <StreetGalleryMobile images={images} />
       ) : (

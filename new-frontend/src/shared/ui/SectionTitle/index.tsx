@@ -1,7 +1,7 @@
 import './SectionTitle.css'
 import { ReactNode } from 'react'
 
-type SectionTitleProps = {
+interface SectionTitleProps {
   children: ReactNode
   className?: string
 }

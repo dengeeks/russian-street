@@ -60,7 +60,7 @@
 
 .directionMobile svg {
     display: none;
-    fill: var(--white);
+    fill: none;
 }
 
 .directionTitle {
@@ -71,7 +71,6 @@
     left: 50%;
     transform: translateX(-50%) rotate(-90deg);
     white-space: nowrap;
-    color: var(--white);
     font-weight: 700;
     line-height: 150%;
     font-size: 32px;
@@ -101,12 +100,10 @@
 .directionContent p {
     font-size: 20px;
     font-weight: 400;
-    color: var(--white);
 }
 
 .directionTitleInfo {
     white-space: nowrap;
-    color: var(--white);
     font-weight: 700;
     line-height: 150%;
     font-size: 32px;

@@ -16,7 +16,7 @@ interface SelectWithSearchProps {
 }
 
 const SelectWithSearch = ({ options, placeholder = 'Выбрать', value, onChange }: SelectWithSearchProps) => {
-  const [open, setOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
   const [search, setSearch] = useState('')
 
   const filteredOptions = useMemo(() => {
@@ -26,20 +26,20 @@ const SelectWithSearch = ({ options, placeholder = 'Выбрать', value, onCh
 
   const handleSelect = (val: string) => {
     onChange?.(val)
-    setOpen(false)
+    setIsOpen(false)
   }
 
   return (
     <div className="select-wrapper" >
-      <button className="select-trigger" onClick={() => setOpen(prev => !prev)}>
+      <button type="button" className="select-trigger" onClick={() => setIsOpen(prev => !prev)}>
         {placeholder}
-        <Icon icon="chevron" className={open ? 'bottom' : ''} />
+        <Icon icon="chevron" className={isOpen ? 'bottom' : ''} />
       </button>
 
-      {open && (
+      {isOpen && (
         <div className="select-dropdown">
           <div className="select-search">
-            <Icon icon="search" width={24} height={24} fill="write"/>
+            <Icon icon="search" width={24} height={24}/>
             <div className="select-search-icon-group">
               <input
                 type="text"
@@ -47,7 +47,7 @@ const SelectWithSearch = ({ options, placeholder = 'Выбрать', value, onCh
                 value={search}
                 onChange={e => setSearch(e.target.value)}
               />
-              <Icon icon="check" width={24} height={24} />
+              <Icon icon="check" width={24} height={24}/>
             </div>
           </div>
 

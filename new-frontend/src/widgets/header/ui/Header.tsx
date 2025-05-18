@@ -5,18 +5,21 @@ import Icon from '@/shared/icon'
 import { useState } from 'react'
 import Logo from '@/shared/ui/Logo'
 import Button from '@/shared/ui/Button'
+import { useBodyScrollLock } from '@/shared/hooks/useBodyScrollLock'
 
 const Header = () => {
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const toggleMenu = () => setMenuOpen(prev => !prev)
+  useBodyScrollLock(isMenuOpen)
+
+  const toggleMenu = () => setIsMenuOpen(prev => !prev)
 
   return (
-    <header className={` ${styles.header} ${menuOpen ? styles.active : ''}`}>
+    <header className={` ${styles.header} ${isMenuOpen ? styles.active : ''}`}>
       <div className="container">
         <div className={styles.headerBurger}>
-          <button onClick={toggleMenu} className={styles.burgerButton} aria-label="Меню">
-            <Icon icon={menuOpen ? 'close' : 'burger'} width={24} height={24} className={styles.burgerMenu} />
+          <button type="button" onClick={toggleMenu} className={styles.burgerButton} aria-label="Меню">
+            <Icon icon={isMenuOpen ? 'close' : 'burger'} width={24} height={24}/>
           </button>
         </div>
         <div className={styles.headerContent}>
@@ -37,7 +40,7 @@ const Header = () => {
             <Link href="/contacts" className={styles.menuLink}>
               Сотрудничество
             </Link>
-            <button className={`hidden-desktop ${styles.buttonAuth}`}>
+            <button type="button" className={`${styles.buttonAuth} ${styles.buttonMobile}`}>
               Войти
             </button>
           </nav>
@@ -49,14 +52,13 @@ const Header = () => {
               <Icon icon="telegram" />
             </Link>
           </div>
-          <Link href="/" className={`hidden-mobile ${styles.donating}`}>
+          <Link href="/" className={styles.IconDesktop}>
             <Icon icon="donating" />
           </Link>
-          <Link href="/" className={`hidden-mobile ${styles.profile}`}>
+          <Link href="/" className={styles.IconDesktop}>
             <Icon icon="profile" />
           </Link>
-          <Button className="hidden-desktop" >поддержать нас</Button>
-
+          <Button type="button" className={`red ${styles.buttonMobile}`} >поддержать нас</Button>
         </div>
       </div>
     </header>

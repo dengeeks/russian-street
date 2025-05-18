@@ -1,0 +1,44 @@
+
+.article-card, .article-card-link {
+    height: 100%;
+    width: 100%;
+}
+
+.article-img-wrapper {
+    min-width: 286px;
+    max-height: 389px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    aspect-ratio: 286 / 389;
+    margin-bottom: 8px;
+}
+.article-img-wrapper img{
+    object-fit: cover;
+}
+
+.article-card-info {
+    display: flex;
+    gap: 4px;
+    flex-direction: column;
+}
+
+.article-card-info-title {
+    font-size: 20px;
+    line-height: 130%;
+    font-weight: 600;
+    font-stretch: semi-condensed;
+}
+
+.article-card-info p {
+    font-size: 13px;
+    line-height: 130%;
+    font-weight: 400;
+    font-stretch: semi-condensed;
+}
+
+@media (max-width: 768px) {
+    .article-card-info-title {
+        font-size: 15px;
+    }
+}

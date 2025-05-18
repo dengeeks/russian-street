@@ -3,7 +3,7 @@ import styles from './StreetGalleryDesktop.module.css'
 import Image from 'next/image'
 import SectionTitle from '@/shared/ui/SectionTitle'
 
-type StreetGalleryDesktopProps = {
+interface StreetGalleryDesktopProps {
   images: string[]
 }
 
@@ -16,7 +16,7 @@ const StreetGalleryDesktop = ({images}: StreetGalleryDesktopProps) => {
           </div>
         ))}
 
-        <div className={styles.centerBlock}>
+        <div className={`${styles.centerBlock} dashed-all`}>
           <SectionTitle className={styles.titleGallery}>улица - ЭТО МЫ</SectionTitle>
         </div>
 

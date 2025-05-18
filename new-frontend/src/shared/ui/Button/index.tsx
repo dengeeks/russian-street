@@ -1,6 +1,10 @@
-import React from "react";
-import { ButtonProps } from "./ButtonProps";
+import {ReactNode, ButtonHTMLAttributes} from "react";
 import './Button.css';
+
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+    className?: string;
+    children: ReactNode;
+}
 
 const Button = ({ children, className='red', ...rest }: ButtonProps) => {
 
