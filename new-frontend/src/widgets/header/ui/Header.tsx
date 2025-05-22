@@ -7,7 +7,7 @@ import Logo from '@/shared/ui/Logo'
 import Button from '@/shared/ui/Button'
 import { useBodyScrollLock } from '@/shared/hooks/useBodyScrollLock'
 import { usePathname } from 'next/navigation'
-import { getParentPath } from '../lib/getParentPath'
+import { getParentPath } from '../utils/getParentPath'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
