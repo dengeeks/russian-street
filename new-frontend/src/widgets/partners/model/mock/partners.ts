@@ -1,4 +1,4 @@
-import { PartnerListType } from '@/widgets/partners/model/type'
+import { PartnerListType } from '../type'
 
 export const partnerList: PartnerListType[] = [
   {

@@ -4,6 +4,7 @@
     display: flex;
     gap: 60px;
     flex-direction: column;
+    padding-bottom: 120px;
 }
 
 .content-showcase_hidden-desktop {
@@ -14,6 +15,7 @@
 @media (max-width: 768px) {
     .content-showcase {
         gap: 20px;
+        padding-bottom: 40px;
     }
 
     .content-showcase_hidden-desktop {

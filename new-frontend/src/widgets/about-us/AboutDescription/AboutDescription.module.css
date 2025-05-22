@@ -1,0 +1,19 @@
+.aboutDescription {
+    font-size: 32px;
+    font-stretch: semi-condensed;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 130%;
+
+}
+
+.aboutDescription span {
+    color: var(--red-hover);
+}
+
+@media (max-width: 768px) {
+    .aboutDescription {
+        font-size: 20px;
+
+    }
+}

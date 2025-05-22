@@ -1,0 +1,18 @@
+.video {
+    border: none;
+    display: block;
+    pointer-events: none;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 220vh;
+    height: 100vh;
+    transform: translate(-50%, -50%);
+}
+
+@media (max-width: 768px) {
+    .video {
+        width: 140vh;
+    }
+}

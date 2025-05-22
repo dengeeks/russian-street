@@ -1,3 +1,4 @@
+@import "normalize.css";
 @import "decor.css";
 
 :root {
@@ -10,6 +11,7 @@
   --black: #000000;
   --error: #FF3B3B;
   --hover: #D9D9D9;
+  --red-hover: #D55852;
   --divider-white: #BEBDBC;
   --font-Bahnschrift: "Bahnschrift", "Bahnschrift Fallback";
   --font-Inter: "Inter", "Inter Fallback";
