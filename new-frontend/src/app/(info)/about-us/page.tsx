@@ -7,8 +7,6 @@ import Facts from '@/widgets/about-us/facts'
 import Mission from '@/widgets/about-us/mission'
 import Breadcrumbs from '@/widgets/breadcrumbs'
 
-
-
 export default async function AboutUsPage() {
   return (
     <>
