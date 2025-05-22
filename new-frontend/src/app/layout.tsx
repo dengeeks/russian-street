@@ -9,7 +9,9 @@ export default function RootLayout({ children, }: Readonly<{ children: ReactNode
     <html lang="ru">
       <body className={`${Bahnschrift.variable} ${Inter.variable} ${Benzin.variable}`}>
       <Header/>
+      <main className="background">
         {children}
+      </main>
       <Footer/>
       </body>
     </html>

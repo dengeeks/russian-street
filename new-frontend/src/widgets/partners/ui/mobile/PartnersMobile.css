@@ -1,0 +1,5 @@
+.partners-mobile {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}

@@ -1,12 +1,15 @@
-import React from "react";
-import { ButtonProps } from "./ButtonProps";
+import {ReactNode, ButtonHTMLAttributes} from "react";
 import './Button.css';
 
-const Button = ({ children, type, onClick }: ButtonProps) => {
-    const orangeBorder = type === 'orangeBorder' ? 'button_type_orange-border' : '';
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+    className?: string;
+    children: ReactNode;
+}
+
+const Button = ({ children, className='red', ...rest }: ButtonProps) => {
 
     return (
-        <button className={`button ${orangeBorder}`} onClick={onClick}>
+        <button className={`button ${className}`}  {...rest}>
             {children}
         </button>
     );

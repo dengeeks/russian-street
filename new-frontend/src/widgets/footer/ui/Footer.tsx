@@ -9,15 +9,14 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div className={`${styles.container} container`}>
         <Logo />
-        <div className={styles.orgInfo}>
+        <div className={`${styles.orgInfo} ${styles.hiddenMobile}`}>
           <p className={styles.orgTitle}>
             Общероссийская общественная организация уличной культуры и спорта «Улицы России»
           </p>
           <p className={styles.orgSubtitle}>ОГРН: 1217700519101 ИНН: 2636219592</p>
         </div>
       </div>
-
-      <div className={`${styles.menu} container`}>
+      <div className={`${styles.menu} ${styles.container} container`}>
         <nav className={styles.nav}>
           <Link href="/">Мероприятия</Link>
           <Link href="/">О нас</Link>
@@ -29,8 +28,8 @@ const Footer = () => {
         </nav>
 
         <div className={styles.donation}>
-          <Button>Поддержать нас</Button>
-          <p className={styles.supportText}>Служба поддержки support@mail.ru</p>
+          <Button type="button">Поддержать нас</Button>
+          <p className={`${styles.supportText} ${styles.hiddenMobile}`}>Служба поддержки <a className={styles.supportLink}>support@mail.ru</a></p>
         </div>
 
         <div className={styles.social}>
@@ -49,8 +48,14 @@ const Footer = () => {
             </div>
           </div>
         </div>
+        <p className={`${styles.supportText} ${styles.hiddenDesktop}`}>Служба поддержки <a className={styles.supportLink}>support@mail.ru</a></p>
+        <div className={`${styles.orgInfo} ${styles.hiddenDesktop}`}>
+          <p className={styles.orgTitle}>
+            Общероссийская общественная организация уличной культуры и спорта «Улицы России»
+          </p>
+          <p className={styles.orgSubtitle}>ОГРН: 1217700519101 ИНН: 2636219592</p>
+        </div>
       </div>
-
       <p className={styles.copyright}>© 2021 - 2024 «Улицы России»</p>
     </footer>
   )

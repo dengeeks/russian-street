@@ -1,0 +1,45 @@
+.select-menu {
+    position: relative;
+    width: max-content;
+    font-family: sans-serif;
+}
+
+
+
+.select-menu__selected, .select-menu__item {
+    color: var(--dark-grey);
+    cursor: pointer;
+    background: var(--white);
+    display: flex;
+    line-height: 130%;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 12px 24px 13px;
+    align-items: center;
+    font-stretch: semi-condensed;
+}
+
+.select-menu__selected {
+    gap: 12px;
+    justify-content: space-between;
+    fill: none;
+    color: var(--white);
+}
+
+.select-menu__list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    z-index: 10;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.select-menu__item:hover {
+    background-color: var(--hover);
+}
+
+

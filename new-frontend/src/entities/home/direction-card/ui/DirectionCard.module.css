@@ -1,0 +1,213 @@
+.directionItem {
+    position: relative;
+    height: 649px;
+    flex: 1 1 0;
+    min-width: 40px;
+    max-width: 110px;
+    cursor: pointer;
+
+    transition: all 0.5s ease;
+    overflow: hidden;
+
+}
+
+.directionItemActive {
+    flex: 0 0 600px;
+    max-width: 600px;
+    width: 100%;
+    transition: all 0.5s ease;
+}
+
+.directionImage {
+    object-fit: cover;
+    object-position: left;
+    z-index: 1;
+}
+
+.directionOverlay {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: background 0.3s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .directionItem:hover .directionOverlay {
+        background: linear-gradient(
+                to top,
+                rgba(30, 91, 156, 0.85) 0%,
+                rgba(30, 91, 156, 0.6) 20%,
+                rgba(30, 91, 156, 0.3) 60%,
+                rgba(0, 0, 0, 0) 85%
+        );
+    }
+}
+
+.directionItemActive .directionTitle {
+    display: none;
+}
+
+.directionMobile {
+    width: 100%;
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 16px;
+}
+
+.directionMobile svg {
+    display: none;
+    fill: none;
+}
+
+.directionTitle {
+    position: absolute;
+    bottom: 40px;
+    align-items: flex-end;
+    text-align: left;
+    left: 50%;
+    transform: translateX(-50%) rotate(-90deg);
+    white-space: nowrap;
+    font-weight: 700;
+    line-height: 150%;
+    font-size: 32px;
+    z-index: 3;
+    width: 40px;
+    font-stretch: semi-condensed;
+}
+
+.directionInfo {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 25px;
+    gap: 16px;
+}
+
+.directionClose {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    z-index: 4;
+    cursor: pointer;
+}
+
+.directionContent p {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.directionTitleInfo {
+    white-space: nowrap;
+    font-weight: 700;
+    line-height: 150%;
+    font-size: 32px;
+    font-stretch: semi-condensed;
+}
+
+@media (max-width: 1050px) {
+    .directionItem {
+        height: 500px;
+    }
+
+    .directionItemActive {
+        flex: 0 0 350px;
+        max-width: 350px;
+    }
+
+    .directionImage {
+        object-fit: cover;
+        object-position: left;
+        z-index: 1;
+    }
+
+
+    .directionItemActive .directionTitle {
+        display: none;
+    }
+
+    .directionTitle {
+        font-size: 20px;
+    }
+
+    .directionInfo {
+        padding: 20px;
+        gap: 10px;
+    }
+
+    .directionClose {
+        top: 20px;
+        right: 20px;
+    }
+
+    .directionContent p {
+        font-size: 16px;
+    }
+
+    .directionTitleInfo {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .directionItem {
+        position: relative;
+        min-height: 48px;
+        max-width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .directionItemActive {
+        flex: 1 1 500px;
+        max-height: 500px;
+        height: 100%;
+    }
+
+    .directionImage {
+        object-position: center;
+    }
+
+    .directionItemActive .directionMobile {
+        display: none;
+    }
+
+    .directionMobile svg {
+        display: block;
+    }
+
+    .directionTitle {
+        position: relative;
+        font-size: 16px;
+        width: 100%;
+        transform: none;
+        align-items: center;
+        left: 0;
+        bottom: 0;
+    }
+
+    .directionInfo {
+        padding: 16px;
+        gap: 20px;
+        width: 100%
+    }
+
+    .directionClose {
+        top: 16px;
+        right: 16px;
+    }
+
+    .directionContent p {
+        font-size: 16px;
+    }
+
+    .directionTitleInfo {
+        font-size: 18px;
+    }
+}

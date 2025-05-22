@@ -1,0 +1,67 @@
+.checkbox {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+}
+
+.label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.text, .error {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 130%;
+    font-stretch: semi-condensed;
+}
+
+.input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.customBox {
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--white);
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.light .customBox {
+    border-color: var(--white);
+}
+
+.light .customBox svg  {
+    fill: var(--white);
+}
+
+.error {
+    color: var(--error);
+}
+
+.dark .customBox {
+    border-color: var(--dark-grey);
+}
+
+.dark .customBox svg  {
+    fill: var(--dark-grey);
+}
+
+.input:checked + .customBox svg {
+    display: block;
+}
+
+.customBox svg {
+    display: none;
+    pointer-events: none;
+}
