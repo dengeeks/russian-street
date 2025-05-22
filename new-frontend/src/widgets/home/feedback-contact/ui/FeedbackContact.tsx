@@ -9,7 +9,7 @@ const FeedbackContact = () => {
   const address = "улица Сергея Макеева, 1, Москва, 123100";
 
   return (
-    <section className={`container section-spacing-top ${styles.feedbackContact}`}>
+    <section className={`container ${styles.feedbackContact}`}>
       <SectionTitle>ВОЗНИКЛИ ВОПРОСЫ?</SectionTitle>
       <div className={styles.wrapper}>
         <div className={styles.infoBlock}>

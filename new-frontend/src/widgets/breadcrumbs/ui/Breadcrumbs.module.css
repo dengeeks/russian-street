@@ -1,0 +1,33 @@
+.breadcrumbs {
+  display: flex;
+  gap: 12px;
+  min-height: 30px;
+  align-items: center;
+}
+
+.list {
+  padding: 40px 0;
+}
+
+.item {
+  display: inline-flex;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 130%;
+  align-items: center;
+  height: 100%;
+  color: var(--grey);
+  font-stretch: semi-condensed;
+}
+
+.item span {
+  color: var(--white);
+}
+
+
+@media (max-width: 768px) {
+  .breadcrumbs {
+    display: none;
+  }
+
+}

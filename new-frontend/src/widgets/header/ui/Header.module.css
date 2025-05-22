@@ -52,6 +52,22 @@
     min-height: 50px;
 }
 
+.headerBreadcrumbs {
+    display: flex;
+    align-items: center;
+    color: var(--white);
+}
+
+.headerBreadcrumbs.hidden :global(.icon){
+    display: none;
+}
+
+.burgerButton {
+    width: 24px;
+    height: 24px;
+
+}
+
 .burgerButton, .buttonAuth {
     background: none;
     color: var(--white);
@@ -96,8 +112,7 @@
     .headerBurger {
         display: flex;
         align-items: center;
-        justify-content: flex-end;
-        padding-right: 25px;
+        justify-content: space-between;
     }
 
     .headerContent {
@@ -107,7 +122,9 @@
     .header.active {
         height: 100vh;
         flex-direction: column;
+        padding-right: 8px;
     }
+
     .header.active .headerContent {
         display: flex;
         flex-direction: column;

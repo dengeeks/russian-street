@@ -4,7 +4,6 @@
     font-size: 60px;
     font-family: var(--font-Benzin), sans-serif;
     text-transform: uppercase;
-    width: max-content;
 }
 
 @media (max-width: 1380px) {
