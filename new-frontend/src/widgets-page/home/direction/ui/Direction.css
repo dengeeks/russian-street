@@ -1,0 +1,21 @@
+.direction__home-section {
+    gap: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.direction__list {
+    display: flex;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .direction__home-section {
+        gap: 20px;
+    }
+
+    .direction__list {
+        flex-direction: column;
+    }
+}
+

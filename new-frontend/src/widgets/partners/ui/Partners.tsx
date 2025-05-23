@@ -16,7 +16,7 @@ const PartnersMobile = dynamic(() => import('./mobile/PartnersMobile'), {
 const Partners = () => {
   const isMobile = useIsMobile()
   return (
-    <section className="container partners-section section-spacing-top">
+    <section className="container partners-section">
       <SectionTitle>ПАРТНЁРЫ</SectionTitle>
       {isMobile ? (
         <PartnersMobile />

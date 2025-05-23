@@ -30,6 +30,14 @@
     position: relative;
 }
 
+.lineSingle {
+    --dashed-color: var(--dark-grey);
+    transform: rotate(7deg);
+    z-index: 1;
+    background-color: var(--white);
+    color: var(--dark-grey);
+}
+
 .lineGray {
     background-color: var(--red);
     z-index: 2;
