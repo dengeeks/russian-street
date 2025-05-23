@@ -5,7 +5,8 @@ import Image, { ImageProps } from 'next/image';
 type MediaSwitcherProps = | ({
   type: 'photo';
   src: string;
-} & Omit<ImageProps, 'src'>)
+  alt: string;
+} & Omit<ImageProps, 'src' | 'alt'>)
   | ({
   type: 'video';
   src: string;
@@ -26,8 +27,8 @@ const MediaSwitcher = (props: MediaSwitcherProps) => {
     );
   }
 
-  const { src, ...imageProps } = props;
-  return <Image src={src} {...imageProps} />;
+  const { src, alt, ...imageProps } = props;
+  return <Image src={src} alt={alt} {...imageProps} fill/>;
 };
 
 export default MediaSwitcher;

@@ -1,10 +1,10 @@
-import Partners from '@/widgets/partners'
+import Banner from '@/widgets-page/about-us/banner'
+import TeamSection from '@/widgets-page/about-us/team'
+import Facts from '@/widgets-page/about-us/facts'
+import Mission from '@/widgets-page/about-us/mission'
+
 import ContentShowcase from '@/widgets/сontent-showcase'
-import Banner from '@/widgets/about-us/banner'
-import AboutDescription from '@/widgets/about-us/AboutDescription'
-import TeamSection from '@/widgets/about-us/team'
-import Facts from '@/widgets/about-us/facts'
-import Mission from '@/widgets/about-us/mission'
+import Partners from '@/widgets/partners'
 import Breadcrumbs from '@/widgets/breadcrumbs'
 
 export default async function AboutUsPage() {
@@ -12,7 +12,6 @@ export default async function AboutUsPage() {
     <>
       <Breadcrumbs items={[{ label: 'Главная', href: '/' }, { label: 'О нас' }]} />
       <Banner/>
-      <AboutDescription/>
       <Mission/>
       <TeamSection/>
       <Facts/>
