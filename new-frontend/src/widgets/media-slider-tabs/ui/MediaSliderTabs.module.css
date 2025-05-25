@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding-bottom: 40px;
 }
 
 .mediaSlider__main {
@@ -41,7 +40,6 @@
 
 @media (max-width: 768px) {
     .mediaSlider {
-        padding-bottom: 40px;
         padding-top: 20px;
     }
 

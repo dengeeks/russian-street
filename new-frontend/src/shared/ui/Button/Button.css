@@ -24,10 +24,6 @@
 }
 
 
-.button_type_orange-border{
-    background-color: transparent;
-    border: 3px solid var(--red);
-}
 
 @media (max-width: 768px) {
 

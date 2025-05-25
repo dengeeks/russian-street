@@ -352,3 +352,8 @@
   [hidden] {
     display: none;
   }
+
+  address {
+      font-style: normal;
+      transform: none;
+  }

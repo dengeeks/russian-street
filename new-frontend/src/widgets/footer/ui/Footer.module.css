@@ -109,6 +109,10 @@
     font-stretch: semi-condensed;
 }
 
+.supportLink {
+    cursor: pointer;
+}
+
 
 @media (max-width: 768px) {
 

@@ -1,0 +1,95 @@
+.regionLeader {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    padding-bottom: 120px;
+}
+
+.regionLeaderWrapper {
+    display: flex;
+    gap: 65px;
+}
+
+.regionLeaderImageWrapper {
+    position: relative;
+    width: 100%;
+    max-width: 427px;
+    aspect-ratio: 427 / 400;
+}
+
+.regionLeaderContent {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+
+    line-height: 150%;
+    letter-spacing: 0.02em;
+    font-stretch: semi-condensed;
+}
+
+.regionLeaderName {
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.regionLeaderDescription {
+    font-weight: 400;
+    font-size: 20px;
+}
+
+
+.regionLeaderContacts {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+}
+
+.contactItem {
+    display: flex;
+    gap: 8px;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.contactTitle {
+    min-width: 168px;
+}
+
+
+.regionLeaderSocials {
+    display: flex;
+    gap: 24px;
+}
+
+@media (max-width: 768px) {
+    .regionLeader {
+        gap: 20px;
+        padding-bottom: 40px;
+    }
+
+    .regionLeaderWrapper {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .regionLeaderImageWrapper {
+        max-width: 427px;
+        aspect-ratio: 427 / 400;
+    }
+
+    .regionLeaderName {
+        font-size: 20px;
+    }
+
+    .contactItem, .regionLeaderDescription {
+        font-size: 15px;
+    }
+
+    .contactTitle {
+        min-width: 120px;
+    }
+
+}

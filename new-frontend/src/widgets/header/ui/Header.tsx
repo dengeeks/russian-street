@@ -71,7 +71,7 @@ const Header = () => {
           <Link href="/" className={styles.IconDesktop}>
             <Icon icon="donating" />
           </Link>
-          <Link href="/" className={styles.IconDesktop}>
+          <Link href="/profile" className={styles.IconDesktop}>
             <Icon icon="profile" />
           </Link>
           <Button type="button" className={`red ${styles.buttonMobile}`}>поддержать нас</Button>
