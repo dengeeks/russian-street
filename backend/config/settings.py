@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 from pathlib import Path
 
 from decouple import config
@@ -31,7 +32,7 @@ INSTALLED_APPS = [
 # сторонние приложения
 EXTERNAL_APPS = [
     'rest_framework',
-    'rest_framework.authtoken',
+    'rest_framework_simplejwt',
     'corsheaders',
     'django_filters',
     'drf_spectacular',
@@ -103,7 +104,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
@@ -117,6 +118,14 @@ REST_FRAMEWORK = {
         'user': '10000/day',  # Лимит для UserRateThrottle
         'feedback_request': '10/hour'  # Лимит на POST запрос в feedback
     }
+}
+
+# JWT
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes = 15),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days = 30),
+    "SIGNING_KEY": SECRET_KEY,
+    "AUTH_HEADER_TYPES": ("JWT",)
 }
 
 # SPECTACULAR
@@ -183,7 +192,6 @@ if DB_ENGINE == 'postgresql':
         }
     }
 
-
 # Logging
 
 LOGGING = {
@@ -209,5 +217,3 @@ LOGGING = {
         },
     },
 }
-
-
