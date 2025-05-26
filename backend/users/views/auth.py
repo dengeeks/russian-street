@@ -3,26 +3,19 @@ from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.response import Response
 
-from users.models.user import UserAccount
 from users.permissions import IsAdminOrCreateOnly
-from users.serializers.user import UserAccountSerializer
+from users.serializers.auth import UserRegistrationSerializer
+from users.services.auth import UserRegistrationService
 
 
-class SignupView(generics.CreateAPIView):
-    queryset = UserAccount.objects.all()
-    serializer_class = UserAccountSerializer
+class UserRegistrationAPI(generics.CreateAPIView):
+    serializer_class = UserRegistrationSerializer
     permission_classes = (IsAdminOrCreateOnly,)
 
     def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data = request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(
-                {'message': 'Когда ваши данные будут проверены.'
-                            'Вы получите электронное письмо с вашим паролем.'},
-                status = status.HTTP_201_CREATED
-            )
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+        # переопределение поведения метода post
+        data, status = UserRegistrationService.create_user(self.get_serializer, self.request.data)
+        return Response(data = data, status = status)
 
 
 class LoginView(ObtainAuthToken):
