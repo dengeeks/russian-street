@@ -1,15 +1,13 @@
 import importlib
 import os
 
-from django.urls import include, path
-
+# Список для всех URL-шаблонов
 urlpatterns = []
 
 module_dir = os.path.dirname(__file__)
 
-for module_file in os.listdir(module_dir):
-    if module_file.endswith('.py') and not module_file.startswith('_'):
-        module_name = module_file[:-3]
+for module in os.listdir(module_dir):
+    if module.endswith('.py') and not module.startswith('_'):
+        module_name = module[:-3]
         module = importlib.import_module(f'{__name__}.{module_name}')
-        if hasattr(module, 'router'):
-            urlpatterns.append(path('', include(module.router.urls)))
+        urlpatterns.extend(module.urlpatterns)

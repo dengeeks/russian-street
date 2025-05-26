@@ -9,3 +9,5 @@ router.register(
     SubDisciplineViewSet,
     basename = 'sub discipline'
 )
+
+urlpatterns = router.urls

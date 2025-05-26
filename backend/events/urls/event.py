@@ -10,3 +10,5 @@ router.register(
     EventRegistrationViewSet,
     basename = 'registration-for-the-event'
 )
+
+urlpatterns = router.urls

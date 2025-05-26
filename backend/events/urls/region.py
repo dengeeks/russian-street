@@ -6,3 +6,5 @@ router = SimpleRouter()
 
 router.register('city', CityViewSet, basename = 'city')
 router.register('region', RegionViewSet, basename = 'region')
+
+urlpatterns = router.urls
