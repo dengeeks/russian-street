@@ -151,7 +151,9 @@ class UserAccount(AbstractBaseUser, DateTimeMixin, PermissionsMixin):
     last_name = models.CharField(
         max_length = LEN_LAST_NAME,
         validators = [validate_full_name],
-        verbose_name = 'Фамилия'
+        verbose_name = 'Фамилия',
+        blank = True,
+        null = True
     )
     middle_name = models.CharField(
         max_length = LEN_MIDDLE_NAME,
@@ -163,46 +165,68 @@ class UserAccount(AbstractBaseUser, DateTimeMixin, PermissionsMixin):
     gender = models.CharField(
         max_length = LEN_GENDER,
         choices = Gender.choices,
-        verbose_name = 'Пол'
+        verbose_name = 'Пол',
+        blank = True,
+        null = True
     )
     date_of_birth = models.DateField(
         default = timezone.now,
-        verbose_name = 'Дата рождения'
+        verbose_name = 'Дата рождения',
+        blank = True,
+        null = True
     )
     phone_number = models.CharField(
         max_length = LEN_PHONE_NUMBER,
-        unique = True,
         validators = [validate_phone_number],
-        verbose_name = 'Телефон'
+        verbose_name = 'Телефон',
+        blank = True,
+        null = True
     )
     email = models.EmailField(unique = True, verbose_name = 'Электронная почта')
-    city = models.CharField(max_length = 20, verbose_name = 'Город')
+    city = models.CharField(
+        max_length = 20,
+        verbose_name = 'Город',
+        blank = True,
+        null = True
+    )
     passport_series = models.CharField(
         max_length = LEN_PASSPORT_SERIES,
         validators = [validate_passport_series],
-        verbose_name = 'Серия паспорта'
+        verbose_name = 'Серия паспорта',
+        blank = True,
+        null = True
     )
     passport_number = models.CharField(
         max_length = LEN_PASSPORT_NUMBER,
         validators = [validate_passport_number],
-        verbose_name = 'Номер паспорта'
+        verbose_name = 'Номер паспорта',
+        blank = True,
+        null = True
     )
     passport_issue_date = models.DateField(
         verbose_name = 'Дата выдачи паспорта',
-        default = timezone.now
+        default = timezone.now,
+        blank = True,
+        null = True
     )
     passport_issued_by = models.CharField(
         max_length = LEN_PASSPORT_ISSUED_BY,
-        verbose_name = 'Кем выдан паспорт'
+        verbose_name = 'Кем выдан паспорт',
+        blank = True,
+        null = True
     )
     consent_to_rights = models.BooleanField(
         verbose_name = 'Согласие с правилами',
-        default = False
+        default = False,
+        blank = True,
+        null = True
     )
 
     consent_to_processing = models.BooleanField(
         verbose_name = 'Согласие на обработку данных',
-        default = False
+        default = False,
+        blank = True,
+        null = True
     )
     is_staff = models.BooleanField(default = False)
     is_active = models.BooleanField(default = False)
