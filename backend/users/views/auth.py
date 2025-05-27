@@ -2,10 +2,19 @@ from rest_framework import status, generics, views, permissions
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.response import Response
-
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.views import TokenRefreshView
 from users.permissions import IsAdminOrCreateOnly
 from users.serializers.auth import UserRegistrationSerializer
 from users.services.auth import UserRegistrationService
+
+
+class AuthorizationAPI(TokenObtainPairView):
+    pass
+
+
+class RefreshTokenAPI(TokenRefreshView):
+    pass
 
 
 class UserRegistrationAPI(generics.CreateAPIView):
