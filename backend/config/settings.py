@@ -106,9 +106,6 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-    ),
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_THROTTLE_CLASSES': [
         'rest_framework.throttling.UserRateThrottle',
@@ -136,11 +133,12 @@ SPECTACULAR_SETTINGS = {
     'SERVE_INCLUDE_SCHEMA': False,
 }
 
-# SMTP YANDEX
+# SMTP
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = config('EMAIL_HOST', default = 'host@yandex.ru')
 EMAIL_PORT = config('EMAIL_PORT', default = '555')
-EMAIL_USE_SSL = config('EMAIL_USE_SSL', default = 'True')
+EMAIL_USE_SSL = config('EMAIL_USE_SSL', cast = bool, default = False)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast = bool, default = True)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', default = 'email@yandex.ru')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default = 'your_yandex_smtp_password')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
@@ -217,3 +215,7 @@ LOGGING = {
         },
     },
 }
+
+RESET_PASSWORD_PATH = config('RESET_PASSWORD_PATH', cast = str, default = 'auth/reset-password')
+PROTOCOL = config('PROTOCOL', cast = str, default = 'https')
+DOMAIN = config('DOMAIN', cast = str, default = 'street-russia')

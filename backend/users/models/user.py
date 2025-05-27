@@ -1,9 +1,7 @@
 from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
                                         PermissionsMixin)
 from django.db import models, transaction
-from django.template.loader import render_to_string
 from django.utils import timezone
-from django.utils.html import strip_tags
 
 from common.constants.user import (LEN_FIRST_NAME, LEN_GENDER, LEN_LAST_NAME,
                                    LEN_MIDDLE_NAME, LEN_PASSPORT_ISSUED_BY,
@@ -12,7 +10,6 @@ from common.constants.user import (LEN_FIRST_NAME, LEN_GENDER, LEN_LAST_NAME,
 from common.mixins import DateTimeMixin
 from common.validators import (validate_full_name, validate_passport_number,
                                validate_passport_series, validate_phone_number)
-from users.tasks.user import send_email_task
 
 
 class UserAccountManager(BaseUserManager):
@@ -69,7 +66,6 @@ class UserAccountManager(BaseUserManager):
             raise ValueError("Superuser must have is_superuser=True.")
 
         return self._create_user(email, password, **extra_fields)
-
 
     @transaction.atomic
     def approve_user(self, user):
