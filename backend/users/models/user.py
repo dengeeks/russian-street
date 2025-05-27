@@ -41,50 +41,35 @@ class UserAccountManager(BaseUserManager):
         электронное письмо с временным паролем.
     """
 
-    def create_superuser(self, email, password, **extra_fields):
+    def _create_user(self, email, password, **extra_fields):
+        if not password:
+            raise ValueError("The given password must be set")
+        if not email:
+            raise ValueError("The given email must be set")
 
-        extra_fields.setdefault('is_superuser', True)
-        extra_fields.setdefault('is_active', True)
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('role', UserAccount.Role.ADMIN)
+        email = self.normalize_email(email)
+        user = self.model(email = email, **extra_fields)
+        user.set_password(password)
+        user.save(using = self._db)
+
+        return user
+
+    def create(self, email = None, password = None, **extra_fields):
+        extra_fields.setdefault("is_staff", False)
+        extra_fields.setdefault("is_superuser", False)
+        return self._create_user(email, password, **extra_fields)
+
+    def create_superuser(self, email = None, password = None, **extra_fields):
+        extra_fields.setdefault("is_staff", True)
+        extra_fields.setdefault("is_superuser", True)
 
         if extra_fields.get("is_staff") is not True:
             raise ValueError("Superuser must have is_staff=True.")
         if extra_fields.get("is_superuser") is not True:
             raise ValueError("Superuser must have is_superuser=True.")
-        return self.create_user(email, password, **extra_fields)
 
-    def create_user(self, email, password = None, **extra_fields):
+        return self._create_user(email, password, **extra_fields)
 
-        if not email:
-            raise ValueError("The Email must be set")
-        email = self.normalize_email(email)
-        user = self.model(
-            email = email,
-            **extra_fields
-        )
-        if password:
-            user.set_password(password)
-        user.save()
-        return user
-
-    def generate_temporary_password(self):
-        return UserAccount.objects.make_random_password()
-
-    def send_temporary_password_email(self, email, temporary_password, name):
-        subject = 'Ваша заявка на вступление в организацию принята!'
-        context = {'temporary_password': temporary_password, 'name': name}
-        html_message = render_to_string(
-            'temporary_password.html',
-            context
-            )
-        plain_message = strip_tags(html_message)
-        send_email_task.delay(
-            subject,
-            plain_message,
-            [email],
-            html_message = html_message
-        )
 
     @transaction.atomic
     def approve_user(self, user):
@@ -228,9 +213,21 @@ class UserAccount(AbstractBaseUser, DateTimeMixin, PermissionsMixin):
         blank = True,
         null = True
     )
-    is_staff = models.BooleanField(default = False)
-    is_active = models.BooleanField(default = False)
-    is_superuser = models.BooleanField(default = False)
+    is_staff = models.BooleanField(
+        verbose_name = 'Статус персонала',
+        default = False,
+        help_text = 'Определяет имеет ли пользователь доступ к админ панели.',
+    )
+    is_active = models.BooleanField(
+        verbose_name = 'Активный',
+        default = True,
+        help_text = 'Определяет имеет ли пользователь доступ к сайту.'
+    )
+    is_superuser = models.BooleanField(
+        verbose_name = 'Администратор',
+        default = False,
+        help_text = 'Дает полный доступам к админ панели.'
+    )
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
