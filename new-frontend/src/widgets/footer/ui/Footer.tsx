@@ -18,18 +18,18 @@ const Footer = () => {
       </div>
       <div className={`${styles.menu} ${styles.container} container`}>
         <nav className={styles.nav}>
-          <Link href="/">Мероприятия</Link>
-          <Link href="/">О нас</Link>
-          <Link href="/">Направления</Link>
-          <Link href="/">Блог</Link>
-          <Link href="/">Контакты</Link>
+          <Link href="/events">Мероприятия</Link>
+          <Link href="/about-us">О нас</Link>
+          <Link href="/directions">Направления</Link>
+          <Link href="/blog">Блог</Link>
+          <Link href="/collaboration">Сотрудничество</Link>
           <Link href="/">Для СМИ</Link>
           <Link href="/">Документы</Link>
         </nav>
 
         <div className={styles.donation}>
           <Button type="button">Поддержать нас</Button>
-          <p className={`${styles.supportText} ${styles.hiddenMobile}`}>Служба поддержки <a className={styles.supportLink}>support@mail.ru</a></p>
+          <p className={`${styles.supportText} ${styles.hiddenMobile}`}>Служба поддержки &nbsp;<a href="mailto:support@mail.ru" className={styles.supportLink}>support@mail.ru</a></p>
         </div>
 
         <div className={styles.social}>
@@ -48,7 +48,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <p className={`${styles.supportText} ${styles.hiddenDesktop}`}>Служба поддержки <a className={styles.supportLink}>support@mail.ru</a></p>
+        <p className={`${styles.supportText} ${styles.hiddenDesktop}`}>Служба поддержки &nbsp;<a href="mailto:support@mail.ru" className={styles.supportLink}>support@mail.ru</a></p>
         <div className={`${styles.orgInfo} ${styles.hiddenDesktop}`}>
           <p className={styles.orgTitle}>
             Общероссийская общественная организация уличной культуры и спорта «Улицы России»

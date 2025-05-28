@@ -11,7 +11,7 @@ const ArticleCard = () => {
         </div>
         <div className="article-card-info">
           <span className="article-card-info-title">
-               Открытие скейтпарка в кемерово
+               Регулярно проводим силовые тренировки на свежем воздухе
           </span>
           <p>15 июня, г.Кемерово</p>
         </div>

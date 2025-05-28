@@ -13,4 +13,6 @@ export type IconName =
     | 'vk'
     | 'whatsapp'
     | 'close'
+    | 'zipper'
+    | 'eye'
     | 'youtube';

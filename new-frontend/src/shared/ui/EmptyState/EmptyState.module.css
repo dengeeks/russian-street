@@ -1,0 +1,27 @@
+.emptyStateWrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    gap: 40px;
+    padding: 0 20px;
+}
+
+.emptyStateDescription {
+    font-size: 20px;
+    font-stretch: semi-condensed;
+    line-height: 130%;
+    font-weight: 400;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .emptyStateWrapper {
+        gap: 20px;
+    }
+
+    .emptyStateDescription {
+        font-size: 15px;
+    }
+}
+

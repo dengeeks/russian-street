@@ -1,33 +1,35 @@
-import "./MediaSwitcher.css"
-import {IframeHTMLAttributes} from 'react';
-import Image, { ImageProps } from 'next/image';
+import './MediaSwitcher.css'
+import { IframeHTMLAttributes } from 'react'
+import Image, { ImageProps } from 'next/image'
 
-type MediaSwitcherProps = | ({
-  type: 'photo';
-  src: string;
-} & Omit<ImageProps, 'src'>)
+type MediaSwitcherProps =
   | ({
-  type: 'video';
-  src: string;
-} & IframeHTMLAttributes<HTMLIFrameElement>);
+      type: 'photo'
+      src: string
+      alt: string
+    } & Omit<ImageProps, 'src' | 'alt'>)
+  | ({
+      type: 'video'
+      src: string
+    } & IframeHTMLAttributes<HTMLIFrameElement>)
 
 const MediaSwitcher = (props: MediaSwitcherProps) => {
   if (props.type === 'video') {
-    const { src, ...iframeProps } = props;
+    const { src, ...iframeProps } = props
     return (
-      <iframe
-        src={src}
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerPolicy="strict-origin-when-cross-origin"
-        allowFullScreen
-        className="video"
-        {...iframeProps}
-      />
-    );
+        <iframe
+          src={src}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
+          className="video"
+          {...iframeProps}
+        />
+    )
   }
 
-  const { src, ...imageProps } = props;
-  return <Image src={src} {...imageProps} />;
-};
+  const { src, alt, ...imageProps } = props
+  return <Image src={src} alt={alt} {...imageProps} fill />
+}
 
-export default MediaSwitcher;
+export default MediaSwitcher

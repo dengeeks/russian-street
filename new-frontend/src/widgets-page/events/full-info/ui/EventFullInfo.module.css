@@ -1,0 +1,83 @@
+
+.eventFullInfoContainer {
+   display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.eventFullInfoContentWrapper {
+    display: flex;
+    gap: 26px;
+}
+
+.eventFullInfoDescriptionContent {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.eventFullInfoDescriptionBlock {
+    display: flex;
+    gap: 40px;
+    flex-direction: column;
+}
+
+.eventFullInfoDescriptionText, .eventFullInfoContactsLabel {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 130%;
+    font-stretch: semi-condensed;
+}
+
+
+.eventFullInfoContactsBlock {
+    display: flex;
+    gap: 12px;
+}
+
+.eventFullInfoSocialLinks {
+    display: flex;
+    gap: 8px;
+}
+
+.eventFullInfoActionsBlock {
+    display: flex;
+    gap: 10px;
+}
+
+
+@media (max-width: 768px) {
+
+    .eventFullInfoContainer {
+        gap: 40px;
+    }
+
+    .eventFullInfoContentWrapper {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .eventFullInfoDescriptionContent {
+        gap: 16px;
+    }
+
+    .eventFullInfoDescriptionBlock {
+        gap: 20px;
+    }
+
+    .eventFullInfoDescriptionText, .eventFullInfoContactsLabel {
+        font-size: 15px;
+    }
+
+    .eventFullInfoActionsBlock {
+        flex-direction: column;
+        gap: 15px;
+        width: max-content;
+    }
+
+    .eventFullInfoActionsBlock :global(.button){
+        max-width: 100%;
+
+    }
+
+}

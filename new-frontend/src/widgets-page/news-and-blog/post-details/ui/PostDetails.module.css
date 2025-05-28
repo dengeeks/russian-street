@@ -1,0 +1,24 @@
+.postDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 40px;
+}
+
+.postDetailsText, .postDetailsDate {
+    color: var(--grey);
+    font-size: 20px;
+    font-stretch: semi-condensed;
+    line-height: 130%;
+    font-weight: 400;
+}
+
+@media (max-width: 768px) {
+    .postDetails {
+        margin-top: 20px;
+    }
+
+    .postDetailsText, .postDetailsDate {
+        font-size: 15px;
+    }
+}

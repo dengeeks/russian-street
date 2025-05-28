@@ -1,7 +1,6 @@
 .select-menu {
     position: relative;
     width: max-content;
-    font-family: sans-serif;
 }
 
 
@@ -37,8 +36,30 @@
     list-style: none;
 }
 
-.select-menu__item:hover {
-    background-color: var(--hover);
+.select-menu.open .select-menu__selected {
+    background-color: var(--grey);
 }
 
+.select-menu__item--selected {
+    background-color: var(--black);
+    color: var(--white);
+    gap: 12px;
+    justify-content: space-between;
+}
+
+@media (hover: hover) and (pointer: fine) {
+
+    .select-menu__selected:hover {
+       background-color: var(--grey);
+    }
+
+    .select-menu__item:hover {
+        background-color: var(--hover);
+    }
+
+    .select-menu__item--selected:hover {
+        background-color: var(--black);
+        color: var(--white);
+    }
+}
 

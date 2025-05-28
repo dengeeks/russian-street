@@ -2,7 +2,7 @@
 import styles from './Header.module.css'
 import Link from 'next/link'
 import Icon from '@/shared/icon'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Logo from '@/shared/ui/Logo'
 import Button from '@/shared/ui/Button'
 import { useBodyScrollLock } from '@/shared/hooks/useBodyScrollLock'
@@ -17,6 +17,10 @@ const Header = () => {
   const parentPath = getParentPath(pathname)
 
   useBodyScrollLock(isMenuOpen)
+
+  useEffect(() => {
+    setIsMenuOpen(false)
+  }, [pathname])
 
   const toggleMenu = () => setIsMenuOpen(prev => !prev)
 
@@ -35,42 +39,42 @@ const Header = () => {
           </button>
         </div>
         <div className={styles.headerContent}>
-          <Logo onClick={toggleMenu} />
+          <Logo/>
           <nav className={styles.menu}>
-            <Link href="/events" className={styles.menuLink} onClick={toggleMenu}>
+            <Link href="/events" className={styles.menuLink}>
               Мероприятия
             </Link>
-            <Link href="/about-us" className={styles.menuLink} onClick={toggleMenu}>
+            <Link href="/about-us" className={styles.menuLink}>
               О нас
             </Link>
-            <Link href="/directions" className={styles.menuLink} onClick={toggleMenu}>
+            <Link href="/directions" className={styles.menuLink}>
               Направления
             </Link>
-            <Link href="/blog" className={styles.menuLink} onClick={toggleMenu}>
+            <Link href="/blog" className={styles.menuLink}>
               Блог
             </Link>
-            <Link href="/contacts" className={styles.menuLink} onClick={toggleMenu}>
+            <Link href="/collaboration" className={styles.menuLink}>
               Сотрудничество
             </Link>
-            <button type="button" className={`${styles.buttonAuth} ${styles.buttonMobile}`} onClick={toggleMenu}>
+            <button type="button" className={`${styles.buttonAuth} ${styles.buttonMobile}`}>
               Войти
             </button>
           </nav>
           <div className={styles.social}>
-            <Link href="/" onClick={toggleMenu}>
+            <Link href="/">
               <Icon icon="vk" />
             </Link>
-            <Link href="/" onClick={toggleMenu}>
+            <Link href="/">
               <Icon icon="telegram" />
             </Link>
           </div>
-          <Link href="/" className={styles.IconDesktop} onClick={toggleMenu}>
+          <Link href="/" className={styles.IconDesktop}>
             <Icon icon="donating" />
           </Link>
-          <Link href="/" className={styles.IconDesktop} onClick={toggleMenu}>
+          <Link href="/profile" className={styles.IconDesktop}>
             <Icon icon="profile" />
           </Link>
-          <Button type="button" className={`red ${styles.buttonMobile}`} onClick={toggleMenu}>поддержать нас</Button>
+          <Button type="button" className={`red ${styles.buttonMobile}`}>поддержать нас</Button>
         </div>
       </div>
     </header>

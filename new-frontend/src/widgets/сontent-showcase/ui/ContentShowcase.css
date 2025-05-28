@@ -7,6 +7,11 @@
     padding-bottom: 120px;
 }
 
+.content-showcase .ContentShowcase .swiper-slide{
+   max-width: 286px;
+}
+
+
 .content-showcase_hidden-desktop {
     display: none;
 }
