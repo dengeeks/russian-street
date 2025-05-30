@@ -1,19 +1,19 @@
-import "@/shared/styles/globals.css";
-import {ReactNode} from "react";
+import '@/shared/styles/globals.css'
+import { ReactNode } from 'react'
 import Header from '@/widgets/header'
 import { Bahnschrift, Inter, Benzin } from '@/shared/styles/fonts'
-import Footer from '@/widgets/footer/ui/Footer'
+import Footer from '@/widgets/footer'
+import ModalManager from '@/widgets/modal-manager'
 
-export default function RootLayout({ children, }: Readonly<{ children: ReactNode; }>) {
+export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="ru">
       <body className={`${Bahnschrift.variable} ${Inter.variable} ${Benzin.variable}`}>
-      <Header/>
-      <main className="background">
+        <Header />
+        <ModalManager />
         {children}
-      </main>
-      <Footer/>
+        <Footer />
       </body>
     </html>
-  );
+  )
 }

@@ -1,0 +1,22 @@
+.userEventsSection {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.userEventsList {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+@media (max-width: 768px) {
+    .userEventsSection {
+        gap: 40px;
+    }
+
+    .userEventsList {
+        gap: 20px;
+    }
+
+}

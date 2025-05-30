@@ -1,0 +1,18 @@
+.tag {
+    font-size: 16px;
+    color: var(--white);
+    background-color: var(--red);
+    padding: 4px 8px;
+    font-weight: 400;
+    line-height: 150%;
+    display: flex;
+    align-items: center;
+}
+
+.tag.location {
+    gap: 2px;
+    background-color: var(--white);
+    color: var(--dark-grey);
+}
+
+

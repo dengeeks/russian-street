@@ -1,0 +1,28 @@
+.userProfileImageWrapper {
+    position: relative;
+    width: 100%;
+    max-width: 427px;
+    max-height: 400px;
+    aspect-ratio: 427 / 400;
+}
+
+.userProfileImageEdit {
+    background-color: var(--red);
+    padding: 8px;
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    z-index: 1;
+    width: 49px;
+    height: 49px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.userProfileImage {
+    object-fit: cover;
+}
+

@@ -1,10 +1,10 @@
 import styles from './CheckBox.module.css';
 import Icon from '@/shared/icon';
-import { InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes, ReactNode } from 'react'
 
 interface CheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
-  children: string;
+  children: ReactNode;
   theme?: 'light' | 'dark';
   error?: string;
 }

@@ -4,7 +4,8 @@ import CheckBox from '@/shared/ui/CheckBox'
 import FormField from '@/shared/ui/FormField'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { FeedbackType } from '../model/type'
-import { phoneValidation, emailValidation, messageValidation } from '../model/validation'
+import {messageValidation } from '../model/validation'
+import {emailValidation, phoneValidation} from "@/shared/validation/validators"
 
 const FeedbackForm = () => {
   const {
@@ -40,7 +41,6 @@ const FeedbackForm = () => {
             error={errors.phone?.message}
             label="ТЕЛЕФОН"
             name="phone"
-            type="tel"
             placeholder="Телефон"
             hint="Только номера РФ"
           />
@@ -53,7 +53,6 @@ const FeedbackForm = () => {
             label="ПОЧТА"
             name="email"
             placeholder="user@mail.ru"
-            type="email"
             required
             hint="Пришлём код подтверждения"
           />

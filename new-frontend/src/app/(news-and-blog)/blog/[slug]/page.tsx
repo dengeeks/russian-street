@@ -1,6 +1,5 @@
 import PostCardLarge from '@/widgets-page/news-and-blog/post-card-large'
 
-
 import Breadcrumbs from '@/widgets/breadcrumbs'
 import MediaSliderTabs from '@/widgets/media-slider-tabs'
 import ContentShowcase from '@/widgets/сontent-showcase'
@@ -14,7 +13,7 @@ export default async function BlogDetailPage() {
       <PostCardLarge title="Как прошёл мастер-класс по граффити с детьми 7–10лет" city="г.Кемерово" date="16.05.2024" views={124}/>
       <MediaSliderTabs/>
       <PostDetails/>
-      <ContentShowcase title="другие блоги"/>
+      <ContentShowcase title="другие новости"/>
     </>
   )
 }

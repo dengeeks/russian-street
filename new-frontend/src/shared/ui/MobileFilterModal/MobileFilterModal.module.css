@@ -1,0 +1,63 @@
+.mobileFilterOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.mobileFilterContent {
+    background-color: var(--dark-grey);
+    padding: 20px;
+    position: relative;
+    overflow-y: auto;
+    display: flex;
+    gap: 40px;
+    flex-direction: column;
+
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.modalButton {
+    font-family: var(--font-Bahnschrift), sans-serif;
+   font-size: 15px;
+    font-stretch: semi-condensed;
+    font-weight: 400;
+    line-height: 130%;
+    color: var(--grey);
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.modalButton.filterButton {
+    color: var(--white);
+    font-weight: 700;
+}
+
+.modalBody {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+
+
+
+@media (max-width: 500px) {
+    .mobileFilterContent {
+        width: 100vh;
+        height: 100vh;
+    }
+
+}

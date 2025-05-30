@@ -1,12 +1,16 @@
+'use client'
 import styles from './Footer.module.css'
 import Button from '@/shared/ui/Button'
 import Link from 'next/link'
 import Logo from '@/shared/ui/Logo'
 import Icon from '@/shared/icon'
+import useModal from '@/shared/store/modal'
 
 const Footer = () => {
+  const {openModal} = useModal();
+
   return (
-    <footer className={styles.footer}>
+    <footer className={`${styles.footer} section-spacing-top`}>
       <div className={`${styles.container} container`}>
         <Logo />
         <div className={`${styles.orgInfo} ${styles.hiddenMobile}`}>
@@ -28,7 +32,7 @@ const Footer = () => {
         </nav>
 
         <div className={styles.donation}>
-          <Button type="button">Поддержать нас</Button>
+          <Button type="button" onClick={() => openModal('donating')}>Поддержать нас</Button>
           <p className={`${styles.supportText} ${styles.hiddenMobile}`}>Служба поддержки &nbsp;<a href="mailto:support@mail.ru" className={styles.supportLink}>support@mail.ru</a></p>
         </div>
 

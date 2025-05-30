@@ -2,7 +2,6 @@
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: 20px;
-    padding-bottom: 120px;
 }
 
 .postListGrid > * {
@@ -40,9 +39,6 @@
 }
 
 @media (max-width: 950px) {
-    .postListGrid{
-        padding-bottom: 40px;
-    }
    .postListGrid :global(.articleCardSkeleton) {
        display: none;
    }

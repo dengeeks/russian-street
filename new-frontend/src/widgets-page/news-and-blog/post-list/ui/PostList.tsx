@@ -3,7 +3,7 @@ import ArticleCard, { ArticleCardSkeleton } from '@/entities/article-card'
 
 const PostList = () => {
   return (
-    <section className={`container section-spacing-top ${styles.postListGrid}`}>
+    <section className={`container section-spacing-top section-spacing-bottom ${styles.postListGrid}`}>
       <ArticleCard />
       <ArticleCard />
       <ArticleCard />

@@ -15,4 +15,12 @@ export type IconName =
     | 'close'
     | 'zipper'
     | 'eye'
-    | 'youtube';
+    | 'youtube'
+    | 'edit'
+    | 'edit-avatar'
+    | 'check-circle'
+    | 'logout'
+    | 'reload'
+    | 'place'
+    | 'clock'
+    | 'step-check';
