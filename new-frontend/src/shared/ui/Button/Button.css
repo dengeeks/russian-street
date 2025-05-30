@@ -1,6 +1,7 @@
 .button {
+    height: 60px;
     display: flex;
-    padding: 18px 32px 16px;
+    padding: 0 32px;
     justify-content: center;
     align-items: center;
     border: none;
@@ -8,7 +9,6 @@
     font-family: var(--font-Bahnschrift), sans-serif;
     font-size: 20px;
     font-weight: 700;
-    line-height: 130%;
     text-transform: uppercase;
     cursor: pointer;
     text-align: center;
@@ -23,11 +23,21 @@
     background-color: var(--dark-grey);
 }
 
+.button.blue {
+    background-color: var(--blue);
+}
+
+.button.outlined {
+    background-color: transparent;
+    border: 3px solid var(--red);
+    color: var(--dark-grey);
+}
 
 
 @media (max-width: 768px) {
 
     .button {
+        height: 44px;
         font-size: 15px;
     }
 }

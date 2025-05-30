@@ -25,6 +25,16 @@ const Banner = () => {
             src="https://www.youtube.com/embed/Ks0eHBSNFwA?si=feeupCeDCfAKIX3p&autoplay=1&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1&loop=1&playlist=Ks0eHBSNFwA"
             title="YouTube video player"
           />
+       {/*   <MediaSwitcher*/}
+       {/*     type="photo"*/}
+       {/*     src="/test/events.png"*/}
+       {/*     alt="test photo"*/}
+       {/*     sizes="(min-width: 1200px) 800px,*/}
+       {/*(min-width: 1150px) 700px,*/}
+       {/*(min-width: 1100px) 650px,*/}
+       {/*(min-width: 1024px) 570px,*/}
+       {/*100vw"*/}
+       {/*   />*/}
         </div>
       </div>
       <EditableTextBlock

@@ -5,7 +5,7 @@ import ArticleCard from '@/entities/article-card'
 
 const OurProjects = () => {
   return (
-    <section className={`container ${styles.projectsSection}`}>
+    <section className={`container section-spacing-bottom ${styles.projectsSection}`}>
       <div className={styles.projectsHeader}>
         <SectionTitle>Наши проекты</SectionTitle>
           <SelectMenu options={['dawdaw', 'awdawdaw']} />

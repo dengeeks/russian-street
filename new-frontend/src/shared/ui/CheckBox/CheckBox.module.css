@@ -27,8 +27,8 @@
 }
 
 .customBox {
-    width: 24px;
-    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
     border: 2px solid var(--white);
     background-color: transparent;
     display: flex;
@@ -41,8 +41,8 @@
     border-color: var(--white);
 }
 
-.light .customBox svg  {
-    fill: var(--white);
+.light.label  {
+    color: var(--white);
 }
 
 .error {
@@ -53,8 +53,8 @@
     border-color: var(--dark-grey);
 }
 
-.dark .customBox svg  {
-    fill: var(--dark-grey);
+.dark.label  {
+    color: var(--dark-grey);
 }
 
 .input:checked + .customBox svg {

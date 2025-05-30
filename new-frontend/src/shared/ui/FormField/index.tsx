@@ -1,11 +1,11 @@
-import React, { InputHTMLAttributes, TextareaHTMLAttributes, FC } from 'react'
+import { InputHTMLAttributes, TextareaHTMLAttributes, FC, } from 'react'
 import styles from './FormField.module.css'
 
 interface BaseProps {
-  label: string
+  label?: string
   name: string
   placeholder?: string
-  theme?: 'light' | 'dark'
+  theme?: 'light' | 'dark' | 'grey'
   required?: boolean
   hint?: string
   textarea?: boolean
@@ -17,23 +17,15 @@ type TextareaProps = BaseProps & TextareaHTMLAttributes<HTMLTextAreaElement>
 
 type FormFieldProps = InputProps | TextareaProps
 
-const FormField: FC<FormFieldProps> = ({
-  label,
-  name,
-  placeholder,
-  theme = 'light',
-  required = false,
-  hint,
-  textarea = false,
-  error,
-  ...rest
-}) => {
+const FormField: FC<FormFieldProps> = ({ label, name, placeholder, theme = 'light', required = false, hint, textarea = false, error, ...rest }) => {
   return (
     <div className={`${styles.wrapper} ${styles[theme]} ${error ? styles.error : ''}`}>
-      <label htmlFor={name} className={styles.label}>
-        {label}
-        {required && '*'}
-      </label>
+      {label && (
+        <label htmlFor={name} className={styles.label}>
+          {label}
+          {required && '*'}
+        </label>
+      )}
 
       {textarea ? (
         <textarea
@@ -53,7 +45,9 @@ const FormField: FC<FormFieldProps> = ({
         />
       )}
 
-      {hint && <span className={styles.hint}>{error || hint}</span>}
+      {(error || hint) && (
+        <span className={styles.hint}>{error || hint}</span>
+      )}
     </div>
   )
 }

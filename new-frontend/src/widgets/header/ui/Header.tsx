@@ -8,11 +8,14 @@ import Button from '@/shared/ui/Button'
 import { useBodyScrollLock } from '@/shared/hooks/useBodyScrollLock'
 import { usePathname } from 'next/navigation'
 import { getParentPath } from '../utils/getParentPath'
+import useModal from '@/shared/store/modal'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
   const isRoot = pathname === '/'
+
+  const {openModal} = useModal()
 
   const parentPath = getParentPath(pathname)
 
@@ -56,7 +59,7 @@ const Header = () => {
             <Link href="/collaboration" className={styles.menuLink}>
               Сотрудничество
             </Link>
-            <button type="button" className={`${styles.buttonAuth} ${styles.buttonMobile}`}>
+            <button type="button" className={`${styles.buttonAuth} ${styles.buttonMobile} hoverEffect`} onClick={() => openModal('login-user')}>
               Войти
             </button>
           </nav>
@@ -67,14 +70,17 @@ const Header = () => {
             <Link href="/">
               <Icon icon="telegram" />
             </Link>
+            <Link href="/">
+              <Icon icon="youtube" />
+            </Link>
           </div>
-          <Link href="/" className={styles.IconDesktop}>
+          <button className={`${styles.IconDesktop} ${styles.buttonAuth} hoverEffect`} onClick={() => openModal('donating')}>
             <Icon icon="donating" />
-          </Link>
+          </button>
           <Link href="/profile" className={styles.IconDesktop}>
             <Icon icon="profile" />
           </Link>
-          <Button type="button" className={`red ${styles.buttonMobile}`}>поддержать нас</Button>
+          <Button type="button" className={`red ${styles.buttonMobile}`} onClick={() => openModal('donating')}>поддержать нас</Button>
         </div>
       </div>
     </header>

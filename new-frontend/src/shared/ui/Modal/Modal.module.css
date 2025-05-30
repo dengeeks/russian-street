@@ -12,29 +12,30 @@
 }
 
 .modalContent {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  min-width: 400px;
+  background-color: var(--white);
+  padding: 50px;
   position: relative;
+  max-width: 90%;
+  min-width: 320px;
+
+  max-height: 98vh;
+  overflow-y: auto;
 }
 
 .modalClose {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 20px;
+  right: 20px;
   background: none;
   border: none;
-  font-size: 1.5rem;
   cursor: pointer;
+  color: var(--divider-white);
 }
 
 
-@media (max-width: 600px) {
-  .modal-content {
-    padding: 10px;
-    min-width: 300px;
-    max-width: 90%;
+@media (max-width: 768px) {
+  .modalContent {
+    padding: 20px;
   }
 
 }

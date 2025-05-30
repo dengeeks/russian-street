@@ -72,7 +72,8 @@
     }
 
     .bannerAboutVideoWrapper :global(.video) {
-        width: 120vh;
+        width: 110vh;
+        height: 46vh;
     }
 }
 

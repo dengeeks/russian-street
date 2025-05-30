@@ -3,48 +3,81 @@
     width: max-content;
 }
 
-
-
-.select-menu__selected, .select-menu__item {
+.select-menu__selected, .select-menu__item, .select-search, .select-menu__empty, .select-menu__width-helper{
+    font-size: 20px;
     color: var(--dark-grey);
     cursor: pointer;
-    background: var(--white);
+    background-color: var(--white);
     display: flex;
     line-height: 130%;
     text-transform: uppercase;
-    font-weight: 700;
-    padding: 12px 24px 13px;
+    font-weight: 400;
+    min-height: 60px;
+    padding: 0 32px;
     align-items: center;
     font-stretch: semi-condensed;
+
+    white-space: nowrap;
 }
 
 .select-menu__selected {
     gap: 12px;
     justify-content: space-between;
-    fill: none;
 }
 
 .select-menu__list {
+    width: 100%;
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
-    background: white;
+    background-color: var(--white);
     z-index: 10;
     margin: 0;
     padding: 0;
     list-style: none;
+    min-width: 100%;
 }
 
-.select-menu.open .select-menu__selected {
-    background-color: var(--grey);
-}
 
 .select-menu__item--selected {
     background-color: var(--black);
     color: var(--white);
     gap: 12px;
     justify-content: space-between;
+    width: 100%;
+}
+
+.select-search {
+    background-color: var(--grey);
+    gap: 16px;
+}
+
+
+.select-search input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background-color: var(--grey);
+    color: var(--black);
+}
+
+.select-search input::placeholder {
+    color: var(--black);
+}
+
+.select-menu__empty {
+  color: var(--error);
+}
+
+.select-menu__width-helper {
+    visibility: hidden;
+    min-height: 0;
+    height: 0;
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+    margin: 0 14px;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -60,6 +93,14 @@
     .select-menu__item--selected:hover {
         background-color: var(--black);
         color: var(--white);
+    }
+}
+
+@media (max-width: 768px) {
+    .select-menu__selected, .select-menu__item, .select-search, .select-menu__empty{
+        font-size: 15px;
+        min-height: 44px;
+        padding: 0 24px;
     }
 }
 
