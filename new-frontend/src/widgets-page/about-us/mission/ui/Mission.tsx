@@ -16,7 +16,7 @@ const Mission = () => {
     (min-width: 500px) 525px,
     (min-width: 400px) 425px,
     (min-width: 300px) 350px,
-    100vw
+    calc(100vw - 32px)
   "/>
       </div>
       <div className={styles.missionInfo}>

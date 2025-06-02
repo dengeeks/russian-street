@@ -37,8 +37,7 @@ const SelectMenu = ({ options, onChange, searchable = false, placeholder }: Sele
   const longestOption = options.reduce((a, b) => (a.length > b.length ? a : b), '')
 
   return (
-    <div ref={menuRef}>
-      <div className={`select-menu ${isOpen ? 'open' : ''}`}>
+      <div className={`select-menu ${isOpen ? 'open' : ''}`} ref={menuRef}>
         <div className="select-menu__width-helper">{longestOption}</div>
         <div className="select-menu__selected" onClick={toggleOpen}>
           {selected ?? placeholder ?? options[0]}
@@ -73,7 +72,6 @@ const SelectMenu = ({ options, onChange, searchable = false, placeholder }: Sele
           </ul>
         )}
       </div>
-    </div>
   )
 }
 

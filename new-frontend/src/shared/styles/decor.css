@@ -9,3 +9,23 @@
     border-bottom: dashed 3px var(--dashed-color);
 }
 
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--white);
+    border: 1px solid var(--grey);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #363636;
+}
+
+@-moz-document url-prefix() {
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: #363636 var(--white);
+    }
+}

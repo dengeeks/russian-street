@@ -22,6 +22,6 @@
     }
 
     .content-showcase_hidden-desktop {
-        display: block;
+        display: flex;
     }
 }

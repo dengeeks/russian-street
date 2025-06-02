@@ -14,3 +14,9 @@
     z-index: 1;
 }
 
+
+@media (max-width: 768px) {
+    .map-region-filter {
+        display: none;
+    }
+}

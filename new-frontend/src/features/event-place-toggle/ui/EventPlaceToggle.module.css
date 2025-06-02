@@ -1,8 +1,8 @@
-.typeToggle {
+.eventPlaceToggle {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 14px 20px;
+    padding: 0 20px;
     background-color: var(--white);
     width: fit-content;
     font-size: 20px;
@@ -10,6 +10,7 @@
     font-stretch: semi-condensed;
     line-height: 130%;
     color: var(--dark-grey);
+    min-height: 60px;
 }
 
 .typeOption {
@@ -50,7 +51,20 @@
 
 
 @media (max-width: 768px) {
-    .typeToggle {
-        display: none;
+    .eventPlaceToggle {
+        font-size: 18px;
+        min-height: 50px;
     }
+
+    .typeIndicator {
+        width: 40px;
+        height: 24px;
+    }
+
+    .typeIndicatorEvent {
+        width: 18px;
+        height: 16px;
+        margin: 4px;
+    }
+
 }

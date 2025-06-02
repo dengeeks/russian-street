@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from './FilterBlock.module.css';
+import Icon from '@/shared/icon';
 
 type FilterItem = {
   label: string;
   checked: boolean;
-}
+};
 
 interface FilterBlockProps {
   title: string;
@@ -13,13 +14,8 @@ interface FilterBlockProps {
   showToggleAll?: boolean;
 }
 
-const FilterBlock: React.FC<FilterBlockProps> = ({
-                                                          title,
-                                                          items,
-                                                          onChange,
-                                                          showToggleAll = false,
-                                                        }) => {
-  const [isOpen, setIsOpen] = useState(true);
+const FilterBlock = ({ title, items, onChange, showToggleAll = false, }: FilterBlockProps) => {
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleItem = (index: number) => {
     const newItems = [...items];
@@ -28,30 +24,39 @@ const FilterBlock: React.FC<FilterBlockProps> = ({
   };
 
   return (
-    <div className={styles.block}>
-      <div className={styles.header} onClick={() => setIsOpen(!isOpen)}>
-        <span className={styles.toggleSymbol}>{isOpen ? '−' : '+'}</span>
-        <span className={styles.title}>{title}</span>
+    <div className={styles.FilterBlock}>
+      <div
+        className={styles.FilterBlockCheckboxRow}
+        onClick={() => setIsOpen(!isOpen)}
+        role="button"
+      >
+        <div className={styles.FilterBlockCustomBox}>
+          <Icon icon={isOpen ? 'plus' : 'minus'} width={14} height={14}/>
+        </div>
+        <span className={styles.FilterBlockLabel}>{title}</span>
       </div>
 
       {isOpen && (
-        <div className={styles.items}>
+        <div className={styles.FilterBlockItems}>
           {items.map((item, index) => (
-            <label key={index} className={styles.checkboxRow}>
+            <label key={index} className={styles.FilterBlockCheckboxRow}>
               <input
                 type="checkbox"
                 checked={item.checked}
                 onChange={() => toggleItem(index)}
-                className={styles.checkbox}
+                className={styles.FilterBlockCheckbox}
               />
-              <span className={styles.label}>{item.label}</span>
+              <div className={styles.FilterBlockCustomBox}>
+                {item.checked && <Icon icon="check" width={16} height={12} />}
+              </div>
+              <span className={styles.FilterBlockLabel}>{item.label}</span>
             </label>
           ))}
         </div>
       )}
 
       {showToggleAll && (
-        <div className={styles.toggleAll}>смотреть все</div>
+        <div className={styles.FilterBlockToggleAll}>смотреть все</div>
       )}
     </div>
   );

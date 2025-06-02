@@ -11,12 +11,12 @@ import Image from 'next/image'
 import { useState } from 'react'
 import {getYouTubeThumbnail} from "../utils/getYouTubeThumbnail"
 import {mediaList} from "../model/mock/mediaList"
-import { useIsMobile } from '@/shared/hooks/useIsMobile'
+import { useMobileDetection } from '@/shared/hooks/useIsMobile'
 
 const MediaSliderTabs = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null)
   const [activeIndex, setActiveIndex] = useState(0)
-  const isMobile = useIsMobile()
+  const isMobile = useMobileDetection()
 
   return (
     <section className={`container ${styles.mediaSlider}`}>
@@ -29,7 +29,7 @@ const MediaSliderTabs = () => {
       >
         {mediaList.map((media, index) => (
           <SwiperSlide className={styles.mediaSlider__main} key={index}>
-              <MediaSwitcher type={media.type} src={media.src} alt={media.alt || ''} />
+              <MediaSwitcher type={media.type} src={media.src} alt={media.alt || ''}  {...(media.type === 'photo' ? { sizes: "(min-width: 1240px) 1204px, calc(100vw - 32px)" } : {})}/>
           </SwiperSlide>
         ))}
       </Swiper>
@@ -51,9 +51,10 @@ const MediaSliderTabs = () => {
                   src={getYouTubeThumbnail(media.src) || '/icons/fallback.jpg'}
                   alt="Видео превью"
                   fill
+                  sizes="184px"
                 />
               ) : (
-                <Image src={media.src} alt={media.alt || ''} fill />
+                <Image src={media.src} alt={media.alt || ''} fill sizes="184px"/>
               )}
           </SwiperSlide>
         ))}

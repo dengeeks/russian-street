@@ -12,12 +12,12 @@ import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'swiper/css/thumbs'
 import 'swiper/css/pagination'
-import { useIsMobile } from '@/shared/hooks/useIsMobile'
+import { useMobileDetection } from '@/shared/hooks/useIsMobile'
 
 const TeamSection = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null)
   const [activeMemberIndex, setActiveMemberIndex] = useState(0)
-  const isMobile = useIsMobile()
+  const isMobile = useMobileDetection()
   const filteredList = teamList.filter(cat => cat.children?.length)
   const [selectedCategory, setSelectedCategory] = useState(filteredList[0]?.category || '')
   const currentCategory = filteredList.find(cat => cat.category === selectedCategory)
@@ -76,7 +76,12 @@ const TeamSection = () => {
                   <p className={styles.teamDescription}>{member.description}</p>
                 </div>
                 <div className={styles.teamImageWrapper}>
-                  <Image src={member.img} alt={member.fio} fill />
+                  <Image src={member.img} alt={member.fio} fill   sizes="
+    (min-width: 930px) 565px,
+    (min-width: 850px) 520px,
+    (min-width: 800px) 470px,
+    (min-width: 768px) 430px,
+    234px"/>
                 </div>
               </div>
             </SwiperSlide>

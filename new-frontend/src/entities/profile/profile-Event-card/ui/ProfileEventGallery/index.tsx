@@ -34,7 +34,7 @@ const ProfileEventGallery = () => {
                    sizes="(min-width: 1100px) 650px,
        (min-width: 950px) 500px,
        (min-width: 768px) 400px,
-       90vw"
+       calc(100vw - 32px)"
             />
           </SwiperSlide>
         ))}

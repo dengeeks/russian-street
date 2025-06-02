@@ -7,7 +7,7 @@ import Modal from '@/shared/ui/Modal'
 import useModal from '@/shared/store/modal'
 import ContactInfoForm from './ContactInfoForm'
 import PassportInfoForm from './PassportInfoForm'
-import { useIsMobile } from '@/shared/hooks/useIsMobile'
+import { useMobileDetection } from '@/shared/hooks/useIsMobile'
 import { useState } from 'react'
 import Icon from '@/shared/icon'
 
@@ -15,7 +15,7 @@ const JoinOrganizationModal = () => {
   const [step, setStep] = useState<1 | 2>(1)
   const [isStepOneValid, setIsStepOneValid] = useState(false)
   const { closeModal } = useModal()
-  const isMobile = useIsMobile(940)
+  const isMobile = useMobileDetection(940)
 
   const {
     register,

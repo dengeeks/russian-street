@@ -1,57 +1,77 @@
-.block {
-    background-color: #111;
-    color: white;
-    padding: 12px;
-    width: 240px;
-    border: 1px solid #444;
-    font-size: 14px;
-}
-
-.header {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    margin-bottom: 8px;
-}
-
-.toggleSymbol {
-    font-size: 18px;
-    margin-right: 8px;
-}
-
-.title {
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.items {
+.FilterBlock {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    padding-left: 18px;
+    gap: 16px;
 }
 
-.checkboxRow {
+
+.FilterBlockCheckboxRow {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.FilterBlockCheckbox {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+
+}
+
+.FilterBlockCustomBox {
     display: flex;
     align-items: center;
-    gap: 8px;
-    cursor: pointer;
+    justify-content: center;
+    min-width: 24px;
+    min-height: 24px;
+    border: 1px solid var(--white);
 }
 
-.checkbox {
-    width: 16px;
-    height: 16px;
-    accent-color: white;
-}
-
-.label {
+.FilterBlockLabel, .FilterBlockToggleAll {
+    font-size: 20px;
+    font-weight: 400;
     text-transform: uppercase;
+    line-height: 130%;
+    font-stretch: semi-condensed;
 }
 
-.toggleAll {
-    margin-top: 8px;
+.FilterBlockToggleAll {
     text-align: right;
-    font-size: 12px;
-    color: #aaa;
     cursor: pointer;
+    color: var(--grey);
+    text-transform: none;
 }
+
+.FilterBlockItems {
+    display: flex;
+    gap: 4px;
+    flex-direction: column;
+    padding-left: 24px;
+}
+
+.FilterBlockItems .FilterBlockCustomBox {
+    border-color: var(--grey);
+}
+
+.FilterBlockItems .FilterBlockLabel {
+    color: var(--grey);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .FilterBlockCheckboxRow:hover .FilterBlockCustomBox {
+        border-color: var(--blue-hover);
+    }
+
+    .FilterBlockCheckboxRow:hover, .FilterBlockCheckboxRow:hover .FilterBlockLabel {
+        color: var(--blue-hover);
+    }
+}
+
+@media (max-width: 768px) {
+    .FilterBlockToggleAll {
+        text-align: left;
+    }
+
+}
+

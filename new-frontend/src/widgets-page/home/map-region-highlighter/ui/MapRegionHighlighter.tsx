@@ -1,14 +1,14 @@
 'use client'
 import './MapRegionHighlighter.css'
 import Map from '@/features/home/map-region-highlighter'
-import TypeToggle from './TypeToggle'
+import TypeToggle from '@/features/event-place-toggle'
 import { regionOptions } from '../model/mock/regions'
 import SelectMenu from '@/shared/ui/SelectMenu'
 import FilterMapMobile from './FilterMapMobile'
-import { useIsMobile } from '@/shared/hooks/useIsMobile'
+import { useMobileDetection } from '@/shared/hooks/useIsMobile'
 
 const MapRegionHighlighter = () => {
-  const isMobile = useIsMobile()
+  const isMobile = useMobileDetection()
   return (
     <section className="container map-region-wrapper section-spacing-top">
       {isMobile ? (

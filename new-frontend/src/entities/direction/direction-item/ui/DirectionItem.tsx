@@ -19,7 +19,15 @@ const DirectionItem = ({title, img, description, sub_category}: DirectionType) =
         </div>
         <div className={styles.directionItem__imageAndSubcategories}>
           <div className={styles.directionItem__imageWrapper}>
-            <Image src={img} fill alt={title} />
+            <Image src={img} fill alt={title} sizes="
+    (min-width: 1240px) 590px,
+    (min-width: 1140px) 550px,
+    (min-width: 1080px) 520px,
+    (min-width: 1024px) 500px,
+    (min-width: 900px) 450px,
+    (min-width: 820px) 400px,
+    (min-width: 768px) 370px,
+    calc(100vw - 32px)" />
           </div>
           <div className={styles.directionItem__subcategories}>
             <DirectionSubcategories data={sub_category} />

@@ -63,6 +63,16 @@
     gap: 24px;
 }
 
+@media (max-width: 1024px) {
+    .regionLeader {
+        gap: 40px;
+    }
+
+    .regionLeaderWrapper {
+        gap: 40px;
+    }
+}
+
 @media (max-width: 768px) {
     .regionLeader {
         gap: 20px;

@@ -11,9 +11,9 @@ const Banner = () => {
       <div className={`section-spacing-bottom ${styles.bannerAbout}`}>
         <div className={styles.bannerAboutContent}>
           <div className={styles.bannerAboutArrows}>
-            <Image src="/png/about-us-arrow.png" alt="стрелки" width={74} height={68} />
-            <Image src="/png/about-us-arrow.png" alt="стрелки" width={74} height={68} />
-            <Image src="/png/about-us-arrow.png" alt="стрелки" width={74} height={68} />
+            <Image src="/png/about-us-arrow.png" alt="стрелки" width={74} height={68} priority />
+            <Image src="/png/about-us-arrow.png" alt="стрелки" width={74} height={68} priority />
+            <Image src="/png/about-us-arrow.png" alt="стрелки" width={74} height={68} priority />
           </div>
           <SectionTitle>СТАНЬ ЧАСТЬЮ УЛИЦ</SectionTitle>
           <Button type="button">Участвовать</Button>
@@ -33,7 +33,7 @@ const Banner = () => {
        {/*(min-width: 1150px) 700px,*/}
        {/*(min-width: 1100px) 650px,*/}
        {/*(min-width: 1024px) 570px,*/}
-       {/*100vw"*/}
+       {/*calc(100vw - 32px)"*/}
        {/*   />*/}
         </div>
       </div>

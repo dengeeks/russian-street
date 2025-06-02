@@ -102,5 +102,10 @@
         min-height: 44px;
         padding: 0 24px;
     }
+
+    .select-menu__width-helper {
+        font-size: 15px;
+        padding: 0 24px;
+    }
 }
 

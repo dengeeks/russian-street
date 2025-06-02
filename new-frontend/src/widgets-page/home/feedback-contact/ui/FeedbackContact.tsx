@@ -22,6 +22,7 @@ const FeedbackContact = () => {
               style={{ border: 0, display: "block" }}
               title={address}
               aria-label={address}
+              loading="lazy"
             ></iframe>
           </div>
 

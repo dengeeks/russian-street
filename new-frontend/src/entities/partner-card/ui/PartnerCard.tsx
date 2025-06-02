@@ -16,7 +16,13 @@ const PartnerCard = ({ isExpanded, onToggle, description, link, img, title }: Pa
          className={styles.partnerCard_imgWrapper}
          aria-label={`Переход на сайт партнёра: ${title}`}
       >
-        <Image src={img} alt={title} fill sizes="285px" overrideSrc={img} />
+        <Image src={img} alt={title} fill  sizes="
+    (min-width: 1100px) 285px,
+    (min-width: 1024px) 260px,
+    (min-width: 910px) 210px,
+    (min-width: 870px) 190px,
+    (min-width: 768px) 160px,
+    calc(100vw - 32px)" overrideSrc={img} />
       </a>
       <div className={styles.partnerCard_content}>
         <div className={styles.partnerCard_textWrapper}>

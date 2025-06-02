@@ -7,7 +7,13 @@ const ProfileParticipationCard = () => {
   return (
     <div className={styles.participationCard}>
       <div className={styles.participationCardImageWrapper}>
-        <Image src="/test/events.png" alt="" fill />
+        <Image src="/test/events.png" alt="" fill sizes="
+  (min-width: 1200px) 286px,
+  (min-width: 1100px) 260px,
+  (min-width: 1024px) 240px,
+  (max-width: 1023px) calc(50vw - 16px),
+  (max-width: 767px) calc(100vw - 32px),
+"/>
       </div>
       <div className={styles.participationCardContent}>
         <div className={styles.participationCardInfo}>

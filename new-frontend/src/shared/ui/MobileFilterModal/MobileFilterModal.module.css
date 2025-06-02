@@ -19,7 +19,13 @@
     display: flex;
     gap: 40px;
     flex-direction: column;
+    width: 100vh;
+    height: 100vh;
 
+}
+
+.mobileFilterContent :global(.select-menu) {
+    width: 100%;
 }
 
 .modalHeader {
@@ -43,6 +49,7 @@
 .modalButton.filterButton {
     color: var(--white);
     font-weight: 700;
+    cursor: default;
 }
 
 .modalBody {
@@ -52,12 +59,3 @@
 
 }
 
-
-
-@media (max-width: 500px) {
-    .mobileFilterContent {
-        width: 100vh;
-        height: 100vh;
-    }
-
-}

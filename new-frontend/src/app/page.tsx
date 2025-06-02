@@ -17,7 +17,7 @@ export default async function HomePage() {
   return (
     <>
       <BannerHome />
-      <MapRegionHighlighter />
+      <MapRegionHighlighter/>
       <Events />
       <StreetGallery />
       <Direction/>

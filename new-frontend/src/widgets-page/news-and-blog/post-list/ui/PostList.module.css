@@ -1,7 +1,7 @@
 .postListGrid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    gap: 20px;
+    gap: 40px 20px;
 }
 
 .postListGrid > * {
@@ -23,6 +23,7 @@
 @media (max-width: 1220px) {
     .postListGrid {
         grid-template-columns: repeat(auto-fill, minmax(286px, 1fr));
+        gap: 20px;
     }
 
     .postListGrid > * {

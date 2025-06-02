@@ -32,6 +32,7 @@ const StreetGalleryMobile = ({ images }: StreetGalleryMobileProps) => {
                 fill
                 className={styles.imageGallery}
                 alt={`image ${i + 1}`}
+                sizes="calc(100vw - 32px)"
               />
             </div>
           </SwiperSlide>
