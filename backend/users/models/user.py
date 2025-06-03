@@ -8,7 +8,7 @@ from common.constants.user import (LEN_FIRST_NAME, LEN_GENDER, LEN_LAST_NAME,
                                    LEN_PASSPORT_NUMBER, LEN_PASSPORT_SERIES,
                                    LEN_PHONE_NUMBER, LEN_ROLE)
 from common.mixins import DateTimeMixin
-from common.validators import (validate_full_name, validate_passport_number,
+from common.validators import (validate_passport_number,
                                validate_passport_series, validate_phone_number)
 
 
@@ -126,19 +126,16 @@ class UserAccount(AbstractBaseUser, DateTimeMixin, PermissionsMixin):
     )
     first_name = models.CharField(
         max_length = LEN_FIRST_NAME,
-        validators = [validate_full_name],
         verbose_name = 'Имя'
     )
     last_name = models.CharField(
         max_length = LEN_LAST_NAME,
-        validators = [validate_full_name],
         verbose_name = 'Фамилия',
         blank = True,
         null = True
     )
     middle_name = models.CharField(
         max_length = LEN_MIDDLE_NAME,
-        validators = [validate_full_name],
         verbose_name = 'Отчество',
         null = True,
         blank = True
