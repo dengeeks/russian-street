@@ -1,18 +1,12 @@
 import styles from './PostList.module.css'
-import ArticleCard, { ArticleCardSkeleton } from '@/entities/article-card'
+import ArticleCard from '@/entities/article-card'
 
 const PostList = () => {
   return (
     <section className={`container section-spacing-top section-spacing-bottom ${styles.postListGrid}`}>
-      <ArticleCard />
-      <ArticleCard />
-      <ArticleCard />
-      <ArticleCardSkeleton />
-      <ArticleCard />
-      <ArticleCard />
-      <ArticleCard />
-      <ArticleCard />
-      <ArticleCard />
+      {Array.from({ length: 9 }, (_, i) => (
+        <ArticleCard key={i} />
+      ))}
     </section>
   )
 }

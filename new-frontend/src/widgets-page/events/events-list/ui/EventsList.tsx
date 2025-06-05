@@ -4,16 +4,9 @@ import ArticleCard from '@/entities/article-card'
 const EventsList = () => {
   return (
     <div className={styles.eventsListGrid}>
-      <ArticleCard/>
-      <ArticleCard/>
-      <ArticleCard/>
-      <ArticleCard/>
-      <ArticleCard/>
-      <ArticleCard/>
-      <ArticleCard/>
-      <ArticleCard/>
-      <ArticleCard/>
-
+      {Array.from({ length: 9 }, (_, i) => (
+        <ArticleCard key={i} />
+      ))}
     </div>
   )
 }

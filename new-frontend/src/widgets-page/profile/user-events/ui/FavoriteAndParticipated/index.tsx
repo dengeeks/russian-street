@@ -10,11 +10,9 @@ const FavoriteAndParticipated = () => {
       </div>
 
       <div className={styles.favPartCards}>
-        <ProfileParticipationCard />
-        <ProfileParticipationCard />
-        <ProfileParticipationCard />
-        <ProfileParticipationCard />
-        <ProfileParticipationCard />
+        {Array.from({ length: 5 }, (_, i) => (
+          <ProfileParticipationCard key={i} />
+        ))}
       </div>
     </div>
   )

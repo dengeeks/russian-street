@@ -3,7 +3,7 @@ import {
   useRef,
   useEffect,
   forwardRef,
-  useImperativeHandle
+  useImperativeHandle, useCallback
 } from 'react'
 import styles from './FormField.module.css'
 import Icon from '@/shared/icon'
@@ -33,17 +33,19 @@ const FormSelectField = forwardRef<HTMLDivElement, BaseProps>(({ label, name, pl
     setOpen(false)
   }
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
-        setOpen(false)
-        onBlur?.()
-      }
+  const handleClickOutside = useCallback((event: MouseEvent) => {
+    if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+      setOpen(false)
+      onBlur?.()
     }
-
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [onBlur])
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [handleClickOutside])
 
   return (
     <div
