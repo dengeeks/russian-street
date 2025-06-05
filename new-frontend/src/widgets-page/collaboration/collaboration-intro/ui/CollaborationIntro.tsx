@@ -30,7 +30,7 @@ const CollaborationIntro = () => {
     (min-width: 600px) 370px,
     (min-width: 500px) 270px,
     (min-width: 400px) 170px,
-    100vw
+       calc(100vw - 32px)
   "
             />
           </div>
@@ -39,17 +39,19 @@ const CollaborationIntro = () => {
           <div className={styles.collaborationIntro__imageWrapper}>
             <Image src="/test/directions/2.png" alt="более 50 реализованных проектов" fill priority
                    sizes="
-    (min-width: 1200px) 650px,
-    (min-width: 1100px) 516px,
-    (min-width: 1000px) 416px,
-    (min-width: 900px) 316px,
-    (min-width: 800px) 216px,
-    (min-width: 700px) 650px,
-    (min-width: 600px) 550px,
-    (min-width: 500px) 450px,
-    (min-width: 400px) 350px,
-    100vw
-  "
+  (min-width: 1240px) 658px,
+  (min-width: 1200px) 600px,
+  (min-width: 1150px) 560px,
+  (min-width: 1100px) 510px,
+  (min-width: 1050px) 460px,
+  (min-width: 1000px) 410px,
+  (min-width: 950px) 360px,
+  (min-width: 900px) 310px,
+  (min-width: 850px) 260px,
+    (min-width: 768px) 200px,
+  (max-width: 767px) calc(100vw - 32px),
+  calc(100vw - 32px)
+"
             />
           </div>
           <Link href="/" className={styles.collaborationIntro__link}>

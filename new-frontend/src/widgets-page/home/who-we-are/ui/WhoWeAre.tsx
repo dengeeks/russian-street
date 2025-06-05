@@ -36,16 +36,16 @@ const WhoWeAre = () => {
 
         <div className={styles.whoWeAre__photoGrid}>
           <div className={`${styles.imgWrapper} ${styles.img1}`}>
-            <Image src="/test/whoweare1.png" fill alt="" className={styles.imgWrapperImg} />
+            <Image src="/test/whoweare1.png" fill alt="" className={styles.imgWrapperImg} sizes="(min-width: 1024px) 286px, (min-width: 900px) 240px, (min-width: 800px) 200px, (min-width: 768px) 180px, calc(50vw - 16px)"/>
           </div>
           <div className={`${styles.imgWrapper} ${styles.img2}`}>
-            <Image src="/test/whoweare2.png" fill alt="" className={styles.imgWrapperImg} />
+            <Image src="/test/whoweare2.png" fill alt="" className={styles.imgWrapperImg} sizes="(min-width: 1024px) 286px, (min-width: 900px) 240px, (min-width: 800px) 200px, (min-width: 768px) 180px, calc(50vw - 16px)"/>
           </div>
           <div className={`${styles.imgWrapper} ${styles.img3}`}>
-            <Image src="/test/whoweare3.png" fill alt="" className={styles.imgWrapperImg} />
+            <Image src="/test/whoweare3.png" fill alt="" className={styles.imgWrapperImg} sizes="(min-width: 1024px) 286px, (min-width: 900px) 240px, (min-width: 800px) 200px, (min-width: 768px) 180px, calc(50vw - 16px)" />
           </div>
           <div className={`${styles.imgWrapper} ${styles.img4}`}>
-            <Image src="/test/whoweare4.png" fill alt="" className={styles.imgWrapperImg} />
+            <Image src="/test/whoweare4.png" fill alt="" className={styles.imgWrapperImg} sizes="(min-width: 1024px) 286px, (min-width: 900px) 240px, (min-width: 800px) 200px, (min-width: 768px) 180px, calc(50vw - 16px)" />
           </div>
         </div>
       </div>

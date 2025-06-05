@@ -5,7 +5,7 @@ import { SubCategory } from '../../model/type'
 import 'swiper/css'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { useState } from 'react'
-import { chunkArray } from '@/entities/direction/direction-item/utils/chunkArray'
+import { chunkArray } from '@/shared/utils/chunkArray'
 import { getAdditionalSubcategories } from '@/entities/direction/direction-item/utils/getAdditionalSubcategories'
 
 interface DirectionSubcategoriesProps {

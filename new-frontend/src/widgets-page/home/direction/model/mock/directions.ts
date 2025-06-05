@@ -9,5 +9,10 @@ export const directions = [
   { title: 'BREAKING', img: '/test/events.png' },
   { title: 'BMX', img: '/test/events.png' },
   { title: 'SKATEBOARDING', img: '/test/events.png' },
+  { title: 'SCOOT', img: '/test/events.png' },
+  { title: 'RAP', img: '/test/events.png' },
+  { title: 'BREAKING', img: '/test/events.png' },
+  { title: 'BMX', img: '/test/events.png' },
+  { title: 'SKATEBOARDING', img: '/test/events.png' },
   { title: 'SCOOT', img: '/test/events.png' }
 ]

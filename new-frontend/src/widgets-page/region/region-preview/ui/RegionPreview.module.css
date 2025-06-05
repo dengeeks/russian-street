@@ -31,6 +31,17 @@
 
 }
 
+@media (max-width: 1024px) {
+    .regionPreview {
+        gap: 40px;
+    }
+
+    .regionPreviewContent {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
 @media (max-width: 768px) {
     .regionPreview {
         gap: 20px;

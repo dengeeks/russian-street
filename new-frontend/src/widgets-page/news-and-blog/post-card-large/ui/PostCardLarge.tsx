@@ -31,7 +31,7 @@ const PostCardLarge = ({ city, title, date, media, views }: PostCardLargeProps) 
       </div>
       {media && (
         <div className={styles.postCardLargeImageWrapper}>
-          <MediaSwitcher type="photo" src={media} alt={title} />
+          <MediaSwitcher type="photo" src={media} alt={title} sizes="(min-width: 1240px) 1204px, calc(100vw - 32px)" />
         </div>
       )}
     </section>

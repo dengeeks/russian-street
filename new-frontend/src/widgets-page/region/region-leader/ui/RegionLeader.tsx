@@ -10,7 +10,15 @@ const RegionLeader = () => {
       <SectionTitle>Руководитель</SectionTitle>
       <div className={styles.regionLeaderWrapper}>
         <div className={styles.regionLeaderImageWrapper}>
-          <Image src="/test/events.png" fill alt="Фото руководителя" />
+          <Image src="/test/events.png" fill alt="Фото руководителя"
+                 sizes="
+    (min-width: 880px) 427px,
+    (min-width: 850px) 400px,
+    (min-width: 820px) 370px,
+    (min-width: 768px) 350px,
+    (min-width: 470px) 427px
+    (max-width: 469px) calc(100vw - 32px)"
+          />
         </div>
         <div className={styles.regionLeaderContent}>
           <div className={styles.regionLeaderName}>

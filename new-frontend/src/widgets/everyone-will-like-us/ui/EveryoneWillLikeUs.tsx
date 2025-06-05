@@ -4,12 +4,12 @@ import SectionTitle from '@/shared/ui/SectionTitle'
 import Button from '@/shared/ui/Button'
 import { blockData } from '../model/mock/blockData'
 import { useState } from 'react'
-import { useIsMobile } from '@/shared/hooks/useIsMobile'
+import { useMobileDetection } from '@/shared/hooks/useIsMobile'
 
 
 const EveryoneWillLikeUs = () => {
   const [activeBlock, setActiveBlock] = useState<string | null>(null)
-  const isMobile = useIsMobile()
+  const isMobile = useMobileDetection()
 
   // Обработчик клика (мобильная версия)
   const handleClick = (id: string) => {

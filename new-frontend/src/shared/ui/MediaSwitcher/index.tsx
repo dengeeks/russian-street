@@ -29,7 +29,7 @@ const MediaSwitcher = (props: MediaSwitcherProps) => {
   }
 
   const { src, alt, ...imageProps } = props
-  return <Image src={src} alt={alt} {...imageProps} fill />
+  return <Image src={src} alt={alt} {...imageProps} fill priority/>
 }
 
 export default MediaSwitcher

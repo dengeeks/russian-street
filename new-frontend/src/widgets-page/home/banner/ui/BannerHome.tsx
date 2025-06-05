@@ -15,7 +15,7 @@ const BannerHome = () => {
       <div className={`container ${styles.bannerWrapperContent}`}>
         <div className={styles.bannerContent}>
           <div className={styles.bannerLogoWrapper}>
-            <Image src="/logo-banner.png" className={styles.bannerLogo} fill alt="Улица России" />
+            <Image src="/logo-banner.png" className={styles.bannerLogo} fill alt="Улица России" priority sizes="(min-width: 768px) 576px, 320px" />
           </div>
           <h1>общероссийская общественная организация уличной культуры и спорта</h1>
           <div className={styles.bannerWrapperButton}>

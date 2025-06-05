@@ -1,0 +1,111 @@
+.eventsDateFilterWrapper {
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+}
+
+.eventsDateFilterHeading {
+   display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.eventsDateFilterTitle {
+    font-size: 32px;
+    line-height: 130%;
+    font-stretch: semi-condensed;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.eventsDateFilterTitle span {
+    white-space: nowrap;
+}
+
+.eventsDateFilterSlider {
+    display: flex;
+    align-items: center;
+}
+
+.eventsDateFilterChevron {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--blue);
+    min-width: 44px;
+    min-height: 36px;
+    cursor: pointer;
+}
+
+.eventsDateFilterDays {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.eventsDateFilterDay:global(.swiper-slide) {
+    text-align: center;
+    cursor: pointer;
+    width: 28px;
+}
+
+.eventsDateFilterDayActive {
+    background-color: var(--blue);
+}
+
+.eventsDateFilterDayActive .eventsDateFilterDayNumber {
+    color: var(--grey);
+}
+
+.eventsDateFilterDayNumber {
+    font-size: 20px;
+    line-height: 130%;
+    font-stretch: semi-condensed;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.eventsDateFilterWeekday {
+    font-size: 13px;
+    line-height: 130%;
+    font-stretch: semi-condensed;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: var(--grey);
+}
+
+@media (max-width: 768px) {
+
+    .eventsDateFilterWrapper {
+        gap: 20px;
+    }
+
+    .eventsDateFilterTitle {
+        font-size: 20px;
+    }
+
+    .eventsDateFilterSlider {
+        gap: 8px;
+    }
+
+    .eventsDateFilterChevron {
+        min-width: 28px;
+        min-height: 28px;
+    }
+
+    .eventsDateFilterDays {
+        gap: 4px;
+    }
+
+    .eventsDateFilterDay:global(.swiper-slide) {
+        text-align: center;
+        cursor: pointer;
+        width: 18px;
+    }
+
+    .eventsDateFilterDayNumber {
+        font-size: 15px;
+    }
+}

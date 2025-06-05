@@ -1,18 +1,19 @@
 'use client'
 import dynamic from 'next/dynamic';
-import { useIsMobile } from '@/shared/hooks/useIsMobile'
+import { useMobileDetection } from '@/shared/hooks/useIsMobile'
 import { images } from '../model/mock/images'
+import Loader from '@/shared/ui/Loader'
 
 const StreetGalleryDesktop = dynamic(() => import('./desktop/StreetGalleryDesktop'), {
-  loading: () => (<></>),
+  loading: () => (<Loader/>),
 });
 
 const StreetGalleryMobile = dynamic(() => import('./mobile/StreetGalleryMobile'), {
-  loading: () => (<></>),
+  loading: () => (<Loader/>),
 });
 
 const StreetGallery = () => {
-  const isMobile = useIsMobile()
+  const isMobile = useMobileDetection()
   return (
     <section className="section-spacing-top">
       {isMobile ? (

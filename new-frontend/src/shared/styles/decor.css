@@ -9,26 +9,23 @@
     border-bottom: dashed 3px var(--dashed-color);
 }
 
-
-/*скрол*/
-
-/* WebKit-браузеры: Chrome, Safari, Edge */
 ::-webkit-scrollbar {
     width: 8px;
-    height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--grey);
+    background-color: var(--white);
+    border: 1px solid var(--grey);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--dark-grey);
-    border: none;
+    background-color: #363636;
 }
 
-@media (hover: hover) and (pointer: fine) {
-    ::-webkit-scrollbar-thumb:hover {
-        background-color: var(--black);
+@-moz-document url-prefix() {
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: #363636 var(--white);
     }
 }

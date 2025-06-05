@@ -4,15 +4,19 @@
 
 .map-region-filter {
     position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0 16px;
+    right: 0;
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    box-sizing: border-box;
+    z-index: 1;
 }
 
-@media (max-width: 768px) {
 
+@media (max-width: 768px) {
     .map-region-filter {
         display: none;
     }
-
 }

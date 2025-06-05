@@ -1,7 +1,7 @@
 'use client';
 import styles from './FeedbackContact.module.css';
 import SectionTitle from '@/shared/ui/SectionTitle';
-import FeedbackForm from '@/features/home/feedback-form/ui/FeedbackForm';
+import FeedbackForm from '@/features/home/feedback-form';
 import Link from 'next/link';
 import Icon from '@/shared/icon';
 
@@ -9,7 +9,7 @@ const FeedbackContact = () => {
   const address = "улица Сергея Макеева, 1, Москва, 123100";
 
   return (
-    <section className={`container ${styles.feedbackContact}`}>
+    <section className={`container section-spacing-top ${styles.feedbackContact}`}>
       <SectionTitle>ВОЗНИКЛИ ВОПРОСЫ?</SectionTitle>
       <div className={styles.wrapper}>
         <div className={styles.infoBlock}>
@@ -22,6 +22,7 @@ const FeedbackContact = () => {
               style={{ border: 0, display: "block" }}
               title={address}
               aria-label={address}
+              loading="lazy"
             ></iframe>
           </div>
 

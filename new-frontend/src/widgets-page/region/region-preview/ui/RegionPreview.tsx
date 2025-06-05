@@ -8,7 +8,13 @@ const RegionPreview = () => {
       <SectionTitle>Республика Коми</SectionTitle>
       <div className={styles.regionPreviewContent}>
         <div className={styles.regionPreviewImageWrapper}>
-          <Image src="/test/events.png" alt="Республика Коми" fill />
+          <Image src="/test/events.png" alt="Республика Коми" fill priority sizes="
+    (min-width: 1180px) 600px,
+    (min-width: 1080px) 550px,
+    (min-width: 1025px) 500px,
+    (min-width: 1024px) 650px,
+    (min-width: 690px) 650px,
+    (max-width: 689px) calc(100vw - 32px)" />
         </div>
         <p className={styles.regionPreviewDescription}>
           Республика Коми — край несметных природных богатств и территория самобытной культуры
