@@ -8,6 +8,7 @@ import Partners from '@/widgets/partners'
 import Breadcrumbs from '@/widgets/breadcrumbs'
 
 export default async function AboutUsPage() {
+
   return (
     <>
       <Breadcrumbs items={[{ label: 'Главная', href: '/' }, { label: 'О нас' }]} />

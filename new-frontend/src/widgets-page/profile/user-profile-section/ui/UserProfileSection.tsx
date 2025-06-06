@@ -2,27 +2,24 @@
 import styles from './UserProfileSection.module.css'
 import RegionalLeaderCard from '@/entities/regional-leader-card'
 import SectionTitle from '@/shared/ui/SectionTitle'
-import Button from '@/shared/ui/Button'
 import { UserAvatar, UserAccountInfo, Logout, DonationHistory } from '@/features/profile'
-import useModal from '@/shared/store/modal'
+import JoinOrganizationButton from '@/features/join-organization-button'
 
 const UserProfileSection = () => {
-  const {openModal} = useModal();
+
   return (
     <section className={`container ${styles.userProfileSection}`}>
       <Logout />
       <div className={styles.userProfileWrapper}>
         <div className={styles.userProfileHeader}>
           <SectionTitle>Личный кабинет</SectionTitle>
-          <Button type="button" className="red" onClick={() => openModal('join-organization')}>
-            вступить в организацию
-          </Button>
+          <JoinOrganizationButton>вступить в организацию</JoinOrganizationButton>
         </div>
         <div className={styles.userProfileInfo}>
           <div className={styles.userProfileContainer}>
             <UserAvatar />
             <div className={styles.userProfileDetailsWrapper}>
-              <UserAccountInfo />
+              <UserAccountInfo/>
               <DonationHistory />
             </div>
           </div>

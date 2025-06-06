@@ -1,8 +1,18 @@
+'use client'
 import styles from './UserAvatar.module.css'
 import Image from 'next/image'
 import Icon from '@/shared/icon'
+import {ChangeEvent } from 'react'
 
 const UserAvatar = () => {
+
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (file) {
+      console.log('Выбран файл:', file)
+    }
+  }
+
   return (
     <div className={styles.userProfileImageWrapper}>
       <Image
@@ -18,9 +28,16 @@ const UserAvatar = () => {
   (max-width: 460px) calc(100vw - 32px),
 "
       />
-      <div className={styles.userProfileImageEdit}>
+      <label htmlFor="avatar-upload" className={styles.userProfileImageEdit}>
         <Icon icon="edit-avatar" width={33} height={33} />
-      </div>
+      </label>
+      <input
+        id="avatar-upload"
+        type="file"
+        accept="image/*"
+        onChange={handleFileChange}
+        style={{ display: 'none' }}
+      />
     </div>
   )
 }

@@ -1,25 +1,58 @@
+'use client'
 import Button from '@/shared/ui/Button'
 import FormField from '@/shared/ui/FormField'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import {RegisterUserType} from "../model/type"
-import { emailValidation, passwordValidation } from '@/shared/validation/validators'
+import { emailValidation, first_nameValidation, passwordValidation } from '@/shared/validation/validators'
 import CheckBox from '@/shared/ui/CheckBox'
 import useModal from '@/shared/store/modal'
 import Link from 'next/link'
 import Modal from '@/shared/ui/Modal'
+import { postRegister } from '@/shared/api/user/postRegister'
+import { useToast } from '@/shared/context/toast/useToastContext'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 
 const RegisterModal = () => {
+  const [hasManualEmailError, setHasManualEmailError] = useState(false);
   const {
     register,
     handleSubmit,
-    formState: { errors }
-  } = useForm<RegisterUserType>()
+    formState: { errors, isSubmitting },
+    setError
+  } = useForm<RegisterUserType>({
+    mode: 'onChange',
+  });
 
   const {openModal, closeModal} = useModal();
+  const {showToast} = useToast()
+  const router = useRouter()
 
   const onSubmit: SubmitHandler<RegisterUserType> = async data => {
-    console.log(data)
-  }
+    setHasManualEmailError(false);
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { agreement, memberRightsAgreement, ...formData } = data;
+      const response = await postRegister(formData);
+      if (response?.email && response.email.length > 0) {
+        // Проверка на ошибку с email
+        setError('email', {
+          type: 'manual',
+          message: response.email[0],
+        });
+        setHasManualEmailError(true);
+        showToast(response.email[0], 'invalid');
+        return;
+      }
+      // Если регистрация прошла успешно, перенаправляем пользователя
+      router.push("/profile");
+      closeModal()
+      showToast('Вы успешно зарегистрированы!', 'success');
+    } catch {
+      showToast('Произошла ошибка при регистрации.', 'error');
+    }
+  };
+
 
   return (
     <Modal onClose={closeModal}>
@@ -27,10 +60,10 @@ const RegisterModal = () => {
       <h2 className="form--modal__title">Зарегистрироваться</h2>
       <div className="form--modal__body">
           <FormField
-            {...register('firstName', {required: 'Обязательное поле'})}
-            error={errors.firstName?.message}
+            {...register('first_name', first_nameValidation)}
+            error={errors.first_name?.message}
             label="Имя"
-            name="firstName"
+            name="first_name"
             type="text"
             required
             placeholder="Ваше имя"
@@ -38,7 +71,11 @@ const RegisterModal = () => {
             theme="dark"
           />
           <FormField
-            {...register('email', { ...emailValidation })}
+            {...register('email', {
+              required: 'Обязательное поле',
+              ...emailValidation,
+              onChange: () => setHasManualEmailError(false),
+            })}
             error={errors.email?.message}
             label="Email"
             name="email"
@@ -59,7 +96,7 @@ const RegisterModal = () => {
             theme="dark"
           />
         <CheckBox
-          id="member-rights-agreement"
+          id="member-rights-agreement-register"
           {...register('memberRightsAgreement', {
             required: 'Необходимо согласие с правами и обязанностями'
           })}
@@ -69,7 +106,7 @@ const RegisterModal = () => {
           Я согласен с <Link href="/" className="modal--form__link">правами и обязанностями члена ООО УКС «Улицы России»</Link>
         </CheckBox>
         <CheckBox
-          id="agreement-with-personal-info"
+          id="agreement-with-personal-info-register"
           {...register('agreement', {
             required: 'Необходимо согласие на обработку персональных данных'
           })}
@@ -82,7 +119,7 @@ const RegisterModal = () => {
       </div>
 
       <div className="form--modal__actions form--modal__actions--column">
-        <Button type="submit" className="red">
+        <Button type="submit" className="red" disabled={hasManualEmailError || isSubmitting}>
           зарегистрироваться
         </Button>
         <Button className="outlined" onClick={() => openModal('login-user')}>

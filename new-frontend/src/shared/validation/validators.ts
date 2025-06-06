@@ -18,14 +18,12 @@ export const passwordValidation = {
     value: 8,
     message: 'Минимальная длина пароля — 8 символов',
   },
-  validate: (value: string) => {
-    const hasUpper = /[A-ZА-Я]/.test(value)
-    const hasLower = /[a-zа-я]/.test(value)
-    const hasDigit = /\d/.test(value)
-
-    if (!hasUpper) return 'Добавьте хотя бы одну заглавную букву'
-    if (!hasLower) return 'Добавьте хотя бы одну строчную букву'
-    if (!hasDigit) return 'Добавьте хотя бы одну цифру'
-    return true
-  }
 }
+
+export const first_nameValidation = {
+  required: 'Имя обязательно',
+  maxLength: {
+    value: 25,
+    message: 'Максимальная длина имени — 25 символов',
+  },
+};

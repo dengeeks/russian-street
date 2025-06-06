@@ -3,14 +3,14 @@ import './Partners.css'
 import SectionTitle from '@/shared/ui/SectionTitle'
 import { useMobileDetection } from '@/shared/hooks/useIsMobile'
 import dynamic from 'next/dynamic'
-import Loading from '@/app/loading'
+import Loader from '@/shared/ui/Loader'
 
 const PartnersDesktop = dynamic(() => import('./desktop/PartnersDesktop'), {
-  loading: () => (<Loading/>),
+  loading: () => (<Loader/>),
 });
 
 const PartnersMobile = dynamic(() => import('./mobile/PartnersMobile'), {
-  loading: () => (<Loading/>),
+  loading: () => (<Loader/>),
 });
 
 
