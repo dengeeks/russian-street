@@ -72,17 +72,10 @@ def validate_passport_number(value):
         raise ValidationError('Номер паспорта должен содержать 6 цифр.')
 
 
-def validate_full_name(value):
+def validate_iframe(value):
     """
-    Проверяет правильность введенного полного имени.
-
-    Параметры:
-    value (str) - Полное имя
-
-    Исключения:
-    ValidationError: Возникает в случае, если имя не
-    соответствует заданному формату.
+    Валидатор, проверяющий, что строка содержит тег <iframe>.
+    Не проверяет содержимое атрибутов, только наличие самого iframe.
     """
-    pattern = re.compile(r'^([А-Я]{1}[а-яё]{1,23}|[A-Z]{1}[a-z]{1,23})$')
-    if not pattern.match(value):
-        raise ValidationError('Ошибка при вводе имени.')
+    if not re.search(r'<iframe[^>]*>', value, re.IGNORECASE):
+        raise ValidationError('Строка должна содержать HTML-тег <iframe>.')
