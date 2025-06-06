@@ -4,13 +4,37 @@ from pathlib import Path
 
 from decouple import config
 from django.core.management.utils import get_random_secret_key
+from django.templatetags.static import static
+from django.urls import reverse_lazy
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# секретные ключи, настройки
 SECRET_KEY = config('SECRET_KEY', cast = str, default = get_random_secret_key())
 DEBUG = config('DEBUG', cast = bool, default = False)
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast = list, default = ['*'])
 DB_ENGINE = config('DB_ENGINE', cast = str, default = 'postgresql')
+
+# настройки сайта
+RESET_PASSWORD_PATH = config('RESET_PASSWORD_PATH', cast = str, default = 'auth/reset-password')
+PROTOCOL = config('PROTOCOL', cast = str, default = 'https')
+DOMAIN = config('DOMAIN', cast = str, default = 'street-russia')
+
+# ключи кеширования
+CACHE_HOMEPAGE_KEY = config('CACHE_HOMEPAGE_KEY', cast = str, default = 'CACHE_HOMEPAGE_KEY')
+CACHE_HOMEPAGE_TIMEOUT = config('CACHE_HOMEPAGE_TIMEOUT', cast = int, default = 60 * 60 * 24)
+
+CACHE_ABOUTUS_KEY = config('CACHE_ABOUTUS_KEY', cast = str, default = 'CACHE_ABOUTUS_KEY')
+CACHE_ABOUTUS_TIMEOUT = config('CACHE_ABOUTUS_TIMEOUT', cast = int, default = 60 * 60 * 24)
+
+CACHE_CONTACT_KEY = config('CACHE_CONTACT_KEY', cast = str, default = 'CACHE_CONTACT_KEY')
+CACHE_CONTACT_TIMEOUT = config('CACHE_CONTACT_TIMEOUT', cast = int, default = 60 * 60 * 24)
+
+CACHE_COOPERATION_KEY = config('CACHE_COOPERATION_KEY', cast = str, default = 'CACHE_COOPERATION_KEY')
+CACHE_COOPERATION_TIMEOUT = config('CACHE_COOPERATION_TIMEOUT', cast = int, default = 60 * 60 * 24)
+
+CACHE_EVERYONELIKES_KEY = config('CACHE_EVERYONELIKES_KEY', cast = str, default = 'CACHE_EVERYONELIKES_KEY')
+CACHE_EVERYONELIKES_TIMEOUT = config('CACHE_EVERYONELIKES_TIMEOUT', cast = int, default = 60 * 60 * 24)
 
 INSTALLED_APPS = [
     'unfold',
@@ -27,6 +51,7 @@ INSTALLED_APPS = [
     'users',
     'partners',
     'feedbacks',
+    'contents'
 ]
 
 # сторонние приложения
@@ -36,6 +61,7 @@ EXTERNAL_APPS = [
     'corsheaders',
     'django_filters',
     'drf_spectacular',
+    'ckeditor',
     'django_cleanup.apps.CleanupConfig',
 ]
 
@@ -96,10 +122,13 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = 'back_static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'back_static')
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
 
-MEDIA_URL = 'media/'
+MEDIA_URL = 'back_media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 REST_FRAMEWORK = {
@@ -216,6 +245,140 @@ LOGGING = {
     },
 }
 
-RESET_PASSWORD_PATH = config('RESET_PASSWORD_PATH', cast = str, default = 'auth/reset-password')
-PROTOCOL = config('PROTOCOL', cast = str, default = 'https')
-DOMAIN = config('DOMAIN', cast = str, default = 'street-russia')
+# Настройки админ панели
+UNFOLD = {
+
+    "SITE_TITLE": "Добро пожаловать!",
+    "SITE_HEADER": "Административная панель",
+    "SITE_SYMBOL": "speed",
+    "show_all_applications": False,
+    "SCRIPTS": [
+        lambda request: static("js/join_street_form.js"),
+    ],
+    "SIDEBAR": {
+        "show_search": True,
+        "show_all_applications": True,
+        "navigation": [
+            {
+                "title": "Главная страница",
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": "Промо-видео",
+                        "icon": "globe",
+                        "link": reverse_lazy("admin:contents_promotionalvideo_changelist"),
+                    },
+                    {
+                        "title": "Улица это мы",
+                        "icon": "house",
+                        "link": reverse_lazy("admin:contents_streetisusimage_changelist"),
+                    },
+                    {
+                        "title": "О нас",
+                        "icon": "currency_exchange",
+                        "link": reverse_lazy("admin:contents_aboutus_changelist"),
+                    },
+                    {
+                        "title": "Миссия и цель (текст)",
+                        "icon": "currency_exchange",
+                        "link": reverse_lazy("admin:contents_missionandgoalstext_changelist"),
+                    },
+                    {
+                        "title": "Миссия и цель (изображения)",
+                        "icon": "currency_exchange",
+                        "link": reverse_lazy("admin:contents_missionandgoalsimage_changelist"),
+                    },
+                    {
+                        "title": "Об организации",
+                        "icon": "currency_exchange",
+                        "link": reverse_lazy("admin:contents_organizationinfo_changelist"),
+                    },
+                ],
+
+            },
+            {
+                "title": "О нас",
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": "Стань частью улиц",
+                        "icon": "currency_exchange",
+                        "link": reverse_lazy("admin:contents_joinstreet_changelist"),
+                    },
+                    {
+                        "title": "Миссия",
+                        "icon": "currency_exchange",
+                        "link": reverse_lazy("admin:contents_mission_changelist"),
+                    },
+                    {
+                        "title": "Информация",
+                        "icon": "currency_exchange",
+                        "link": reverse_lazy("admin:contents_information_changelist"),
+                    },
+                ]
+            },
+            {
+                "title": "Контакты",
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": "Соцсети (Header)",
+                        "icon": "currency_exchange",
+                        "link": reverse_lazy("admin:contents_contactheader_changelist"),
+                    },
+                    {
+                        "title": "Соцсети (Footer)",
+                        "icon": "currency_exchange",
+                        "link": reverse_lazy("admin:contents_contactfooter_changelist"),
+                    },
+                    {
+                        "title": "Почта (Footer)",
+                        "icon": "currency_exchange",
+                        "link": reverse_lazy("admin:contents_emailfooter_changelist"),
+                    },
+                ]
+            },
+            {
+                "title": "Страница сотрудничество",
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": "Блок сотрудничество",
+                        "icon": "currency_exchange",
+                        "link": reverse_lazy("admin:contents_cooperation_changelist"),
+                    }
+                ]
+            },
+            {
+                "title": "У нас понравится всем",
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": "Блок 'У нас понравится всем'",
+                        "icon": "currency_exchange",
+                        "link": reverse_lazy("admin:contents_everyonelikes_changelist"),
+                    }
+                ]
+            }
+
+        ],
+    },
+}
+
+# Ckeditor
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = "pillow"
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+
+CKEDITOR_CONFIGS = {
+    'default':
+        {
+            'toolbar': 'full',
+            'width': 'auto',
+            'extraPlugins': ','.join(
+                [
+                    'codesnippet', 'colorbutton', 'font', 'justify',
+                ]
+            ),
+        },
+}
