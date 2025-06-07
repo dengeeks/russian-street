@@ -1,7 +1,7 @@
+import { cookies } from 'next/headers'
 import { USER_GET } from '@/shared/api/endpoints'
-import { getAccessAction} from '@/shared/server-action/getTokenAction'
 import {postTokenRefresh} from '@/shared/api/user/postTokenRefresh'
-import { saveTokenAction } from '@/shared/server-action/saveTokenAction'
+import { ACCESS_TOKEN } from '@/shared/settings'
 
 export type UserType = {
   email: string;
@@ -11,7 +11,8 @@ export type UserType = {
 
 
 export async function getUser(): Promise<UserType> {
-  const accessToken = await getAccessAction()
+  const cookieStore = await cookies();
+  const accessToken =  cookieStore.get(ACCESS_TOKEN)?.value;
 
   const fetchUser = async (token: string) => {
     const res = await fetch(USER_GET(), {
@@ -35,7 +36,6 @@ export async function getUser(): Promise<UserType> {
     const newAccessToken = await postTokenRefresh()
     if (!newAccessToken) return null
 
-    await saveTokenAction({ access: newAccessToken })
     user = await fetchUser(newAccessToken)
   }
 

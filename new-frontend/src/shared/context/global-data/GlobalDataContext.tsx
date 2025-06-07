@@ -1,7 +1,6 @@
 'use client';
-import { createContext, ReactNode, useCallback, useEffect, useState } from 'react'
-import { UserType, getUser } from '@/shared/api/user/getUser'
-import { usePathname } from 'next/navigation'
+import { createContext, ReactNode } from 'react'
+import { UserType} from '@/shared/api/user/getUser'
 
 type GlobalDataContextType = {
   serverIsMobile: boolean;
@@ -13,21 +12,10 @@ export const GlobalDataContext = createContext<GlobalDataContextType | undefined
 type AuthProviderProps = {
   children: ReactNode;
   serverIsMobile: boolean;
-
+  userData: UserType;
 };
 
-export const GlobalDataProvider = ({ children, serverIsMobile}: AuthProviderProps) => {
-  const [userData, setUserData] = useState<UserType | null>(null);
-  const pathname = usePathname();
-
-  const fetchUser = useCallback(async () => {
-    const user = await getUser();
-    setUserData(user);
-  }, []);
-
-  useEffect(() => {
-    fetchUser();
-  }, [pathname, fetchUser]);
+export const GlobalDataProvider = ({ children, serverIsMobile, userData}: AuthProviderProps) => {
 
   return (
     <GlobalDataContext.Provider

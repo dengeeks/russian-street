@@ -1,13 +1,12 @@
 import { USER_TOKEN_REFRESH } from '@/shared/api/endpoints';
-import { getRefreshAction } from '@/shared/server-action/getTokenAction'
-import { saveTokenAction } from '@/shared/server-action/saveTokenAction'
-import { removeTokens } from '@/shared/server-action/removeTokens'
+import { cookies } from 'next/headers'
+import { ACCESS_TOKEN } from '@/shared/settings'
 
 export async function postTokenRefresh(): Promise<string | null> {
-  const refreshToken = await getRefreshAction()
+  const cookieStore = await cookies();
+  const refreshToken =  cookieStore.get(ACCESS_TOKEN)?.value;
 
   if (!refreshToken) {
-      await removeTokens()
       return null
   }
 
@@ -25,7 +24,13 @@ export async function postTokenRefresh(): Promise<string | null> {
   const { access } = json;
 
   if (access) {
-    await saveTokenAction({ access: access });
+    await fetch('/api/save-token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ access: access }),
+    });
   }
   return access;
 }
