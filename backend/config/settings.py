@@ -129,7 +129,7 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_URL = 'back_media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'back_media')
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
