@@ -1,6 +1,6 @@
 export type FeedbackType = {
   name: string;
-  email: string;
+  email_feed: string;
   phone?: string;
   message?: string;
   agreement: boolean;

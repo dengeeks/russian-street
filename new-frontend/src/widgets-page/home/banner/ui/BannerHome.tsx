@@ -2,6 +2,7 @@ import styles from './BannerHome.module.css'
 import Image from 'next/image'
 import Button from '@/shared/ui/Button'
 import MediaSwitcher from '@/shared/ui/MediaSwitcher'
+import JoinOrganizationButton from '@/features/join-organization-button'
 
 const BannerHome = () => {
   return (
@@ -19,7 +20,7 @@ const BannerHome = () => {
           </div>
           <h1>общероссийская общественная организация уличной культуры и спорта</h1>
           <div className={styles.bannerWrapperButton}>
-            <Button type="button">Участвовать</Button>
+            <JoinOrganizationButton>Участвовать</JoinOrganizationButton>
             <Button type="button" className={`gray ${styles.bannerWrapperButtonDesktop}`}>
               поддержать организацию
             </Button>

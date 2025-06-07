@@ -12,6 +12,6 @@ export const modalComponents: Record<string, DynamicWithPreload> = {
   'login-user': dynamic(() => import('@/features/modal/login-modal'), { ssr: false }),
   'donating': dynamic(() => import('@/features/modal/donation-modal'), { ssr: false }),
   'join-organization': dynamic(() => import('@/features/modal/join-organization-modal'), { ssr: false }),
-  'reset-password-request': dynamic(() => import('@/features/modal/reset-password-modal/ui/ResetPasswordForm'), { ssr: false }),
+  'reset-password-request': dynamic(() => import('@/features/modal/reset-password-modal/ui/ResetPasswordRequest'), { ssr: false }),
 };
 

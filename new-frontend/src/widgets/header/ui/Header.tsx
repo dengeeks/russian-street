@@ -9,6 +9,7 @@ import { useBodyScrollLock } from '@/shared/hooks/useBodyScrollLock'
 import { usePathname } from 'next/navigation'
 import { getParentPath } from '../utils/getParentPath'
 import useModal from '@/shared/store/modal'
+import { useGlobalData } from '@/shared/context/global-data/useGlobalDataContext'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -16,6 +17,7 @@ const Header = () => {
   const isRoot = pathname === '/'
 
   const {openModal} = useModal()
+  const { userData } = useGlobalData()
 
   const parentPath = getParentPath(pathname)
 
@@ -59,9 +61,15 @@ const Header = () => {
             <Link href="/collaboration" className={styles.menuLink}>
               Сотрудничество
             </Link>
-            <button type="button" className={`${styles.buttonAuth} ${styles.buttonMobile} hoverEffect`} onClick={() => openModal('login-user')}>
-              Войти
-            </button>
+            {userData?.email ? (
+              <Link href="/profile" className={`${styles.menuLink} ${styles.buttonMobile}`}>
+                Профиль
+              </Link>
+            ) : (
+              <button type="button" className={`${styles.buttonAuth} ${styles.buttonMobile} hoverEffect`} onClick={() => openModal('login-user')}>
+                Войти
+              </button>
+            )}
           </nav>
           <div className={styles.social}>
             <Link href="/">
@@ -77,9 +85,18 @@ const Header = () => {
           <button className={`${styles.IconDesktop} ${styles.buttonAuth} hoverEffect`} onClick={() => openModal('donating')}>
             <Icon icon="donating" />
           </button>
-          <Link href="/profile" className={styles.IconDesktop}>
-            <Icon icon="profile" />
-          </Link>
+          {userData?.email ? (
+            <Link href="/profile" className={styles.IconDesktop}>
+              <Icon icon="profile" />
+            </Link>
+          ) : (
+            <button
+              className={`${styles.IconDesktop} ${styles.buttonAuth} hoverEffect`}
+              onClick={() => openModal('login-user')}
+            >
+              <Icon icon="profile" />
+            </button>
+          )}
           <Button type="button" className={`red ${styles.buttonMobile}`} onClick={() => openModal('donating')}>поддержать нас</Button>
         </div>
       </div>

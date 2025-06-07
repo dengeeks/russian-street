@@ -1,3 +1,4 @@
+'use client'
 import styles from './UserEvents.module.css'
 import SectionTitle from '@/shared/ui/SectionTitle'
 import FavoriteAndParticipated from './FavoriteAndParticipated'

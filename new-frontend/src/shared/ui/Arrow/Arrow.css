@@ -1,6 +1,11 @@
-.ContentShowcase .swiper-button-next:after,
-.ContentShowcase .swiper-button-prev:after,
-.ContentShowcase .swiper-button-disabled {
+.arrow.swiper-button-next:after,
+.arrow.swiper-button-prev:after{
+  display: none;
+}
+
+.arrow.swiper-button-disabled {
+  cursor: default;
+  pointer-events: none;
   display: none;
 }
 
@@ -9,22 +14,28 @@
 }
 
 
-.swiper .arrow {
+.ContentShowcase .arrow {
   background-color: var(--white);
   border-radius: 50%;
   padding: 10px;
-  width: 40px;
-  height: 40px;
+  width: 49px;
+  height: 49px;
   top: 50%;
   transform: translateY(-50%);
   margin-top: 0;
   color: var(--dark-grey);
+  cursor: pointer;
+}
+@media (hover: hover) and (pointer: fine) {
+  .ContentShowcase .arrow:hover {
+    background-color: var(--blue);
+    color: var(--white);
+  }
 }
 
 @media (max-width: 768px) {
-  .swiper .arrow {
-    padding: 5px;
-    width: 30px;
-    height: 30px;
+  .ContentShowcase .arrow {
+    width: 49px;
+    height: 49px;
   }
 }

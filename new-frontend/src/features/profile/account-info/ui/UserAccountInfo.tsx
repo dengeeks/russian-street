@@ -26,7 +26,7 @@ const UserAccountInfo = () => {
         </div>
         <div className={styles.userProfileDetailItem}>
           <div className={styles.userProfileDetailLabel}>Имя</div>
-          <div className={styles.userProfileDetailValue}>Валерий</div>
+          <div className={styles.userProfileDetailValue}>Тут имя</div>
         </div>
         <div className={styles.userProfileDetailItem}>
           <div className={styles.userProfileDetailLabel}>Отчество</div>
@@ -42,7 +42,7 @@ const UserAccountInfo = () => {
 
         <div className={styles.userProfileDetailItem}>
           <div className={styles.userProfileDetailLabel}>Электронная почта</div>
-          <div className={styles.userProfileDetailValue}>pupkin.valera00@mail.ru</div>
+          <div className={styles.userProfileDetailValue}>Почта</div>
         </div>
 
         <div className={styles.userProfileDetailItem}>

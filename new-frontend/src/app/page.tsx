@@ -6,14 +6,19 @@ import Direction from '@/widgets-page/home/direction'
 import WhoWeAre from '@/widgets-page/home/who-we-are'
 import FeedbackContact from '@/widgets-page/home/feedback-contact'
 
-
 import MarqueeText from '@/widgets/marquee-text'
 import EveryoneWillLikeUs from '@/widgets/everyone-will-like-us'
 import Partners from '@/widgets/partners'
 import ContentShowcase from '@/widgets/сontent-showcase'
+import ResetPasswordForm from '@/features/modal/reset-password-modal/ui/ResetPasswordForm'
 
+type HomePageProps = {
+  searchParams: Promise<{ reset_password_uid: string; reset_password_token: string }>;
+}
 
-export default async function HomePage() {
+export default async function HomePage({ searchParams }: HomePageProps) {
+  const { reset_password_uid, reset_password_token } = await searchParams;
+
   return (
     <>
       <BannerHome />
@@ -27,6 +32,7 @@ export default async function HomePage() {
       <Partners/>
       <ContentShowcase title="Блог"/>
       <FeedbackContact/>
+      {reset_password_uid && reset_password_token && <ResetPasswordForm uid={reset_password_uid} token={reset_password_token} />}
     </>
   )
 }
