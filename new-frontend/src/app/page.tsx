@@ -1,38 +1,68 @@
+import dynamic from 'next/dynamic'
+import { Suspense } from 'react'
+import Loader from '@/shared/ui/Loader'
+
 import BannerHome from '@/widgets-page/home/banner'
 import MapRegionHighlighter from '@/widgets-page/home/map-region-highlighter'
 import Events from '@/widgets-page/home/events'
-import StreetGallery from '@/widgets-page/home/street-gallery'
-import Direction from '@/widgets-page/home/direction'
-import WhoWeAre from '@/widgets-page/home/who-we-are'
-import FeedbackContact from '@/widgets-page/home/feedback-contact'
+
+const StreetGallery = dynamic(() => import('@/widgets-page/home/street-gallery'))
+const WhoWeAre = dynamic(() => import('@/widgets-page/home/who-we-are'))
+const Direction = dynamic(() => import('@/widgets-page/home/direction'))
+const FeedbackContact = dynamic(() => import('@/widgets-page/home/feedback-contact'))
 
 import MarqueeText from '@/widgets/marquee-text'
 import EveryoneWillLikeUs from '@/widgets/everyone-will-like-us'
 import Partners from '@/widgets/partners'
 import ContentShowcase from '@/widgets/сontent-showcase'
-import ResetPasswordForm from '@/features/modal/reset-password-modal/ui/ResetPasswordForm'
 
-type HomePageProps = {
-  searchParams: Promise<{ reset_password_uid: string; reset_password_token: string }>;
+import ResetPasswordForm from '@/features/modal/reset-password-modal'
+import { getHome } from '@/shared/api/static/home/getHome'
+import { HomeDataProvider } from '@/shared/context/home-data/HomeDataContext'
+
+interface HomePageProps {
+  searchParams: Promise<{ reset_password_uid: string; reset_password_token: string }>
 }
 
 export default async function HomePage({ searchParams }: HomePageProps) {
   const { reset_password_uid, reset_password_token } = await searchParams;
 
+  const homeData = await getHome()
+
+  const { promotional_video, street_images, mission_and_goals_text } = homeData
+
   return (
-    <>
-      <BannerHome />
-      <MapRegionHighlighter/>
+    <HomeDataProvider homeData={homeData}>
+      <BannerHome promoVideo={promotional_video} />
+      <MapRegionHighlighter />
       <Events />
-      <StreetGallery />
-      <Direction/>
-      <WhoWeAre/>
-      <MarqueeText/>
-      <EveryoneWillLikeUs/>
-      <Partners/>
-      <ContentShowcase title="Блог"/>
-      <FeedbackContact/>
-      {reset_password_uid && reset_password_token && <ResetPasswordForm uid={reset_password_uid} token={reset_password_token} />}
-    </>
+      {street_images.length > 0 && (
+        <Suspense fallback={<Loader />}>
+          <StreetGallery />
+        </Suspense>
+      )}
+      <Direction />
+      {mission_and_goals_text && (
+        <Suspense fallback={<Loader />}>
+          <WhoWeAre />
+        </Suspense>
+      )}
+      <MarqueeText />
+      <Suspense fallback={<Loader />}>
+        <EveryoneWillLikeUs />
+      </Suspense>
+      <Suspense fallback={<Loader />}>
+        <Partners />
+      </Suspense>
+      <Suspense fallback={<Loader />}>
+        <ContentShowcase title="Блог" />
+      </Suspense>
+      <Suspense fallback={<Loader />}>
+        <FeedbackContact />
+      </Suspense>
+      {reset_password_uid && reset_password_token && (
+        <ResetPasswordForm uid={reset_password_uid} token={reset_password_token} />
+      )}
+    </HomeDataProvider>
   )
 }

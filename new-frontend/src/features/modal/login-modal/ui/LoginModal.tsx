@@ -1,61 +1,25 @@
+'use client'
 import Button from '@/shared/ui/Button'
 import FormField from '@/shared/ui/FormField'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { emailValidation, passwordValidation } from '@/shared/validation/validators'
 import useModal from '@/shared/store/modal'
 import Modal from '@/shared/ui/Modal'
-import { LoginType, postLogin } from '@/shared/api/user/postLogin'
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { useToast } from '@/shared/context/toast/useToastContext'
-import { RegisterUserType } from '@/features/modal/register-modal/model/type'
+import { LoginType} from '@/shared/api/user/postLogin'
+import { useLogin } from '../model/useLogin'
 
 const LoginModal = () => {
-  const [hasManualEmailError, setHasManualEmailError] = useState(false);
-  const {
-    register,
+  const { register,
     handleSubmit,
     formState: { errors, isSubmitting },
     setError
-  } = useForm<RegisterUserType>({
+  } = useForm<LoginType>({
     mode: 'onChange',
   });
 
-  const router = useRouter()
-  const {showToast} = useToast()
   const {openModal, closeModal} = useModal();
 
-  const onSubmit: SubmitHandler<LoginType> = async data => {
-    setHasManualEmailError(false);
-    try {
-      const response = await postLogin(data);
-      if (response?.email && response.email.length > 0) {
-        // Проверка на ошибку с email
-        setError('email', {
-          type: 'manual',
-          message: response.email[0],
-        });
-        setHasManualEmailError(true);
-        showToast(response.email[0], 'invalid');
-        return;
-      }
-      // Если авторизация прошла успешно, перенаправляем пользователя
-      router.push("/profile");
-      closeModal()
-      showToast('Вы успешно вошли в систему!', 'success');
-    } catch (error: unknown) {
-      const message =
-        error instanceof Error && error.message
-          ? error.message
-          : 'Произошла ошибка при авторизации.';
-
-      setError('email', { type: 'manual', message });
-      setError('password', { type: 'manual', message });
-      setHasManualEmailError(true);
-      showToast(message, 'invalid');
-    }
-
-  };
+  const { onSubmit, hasManualEmailError, setHasManualEmailError} = useLogin(setError);
 
   return (
     <Modal onClose={closeModal}>

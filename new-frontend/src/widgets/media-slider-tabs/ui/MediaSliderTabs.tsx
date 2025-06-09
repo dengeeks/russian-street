@@ -29,7 +29,7 @@ const MediaSliderTabs = () => {
       >
         {mediaList.map((media, index) => (
           <SwiperSlide className={styles.mediaSlider__main} key={index}>
-              <MediaSwitcher type={media.type} src={media.src} alt={media.alt || ''}  {...(media.type === 'photo' ? { sizes: "(min-width: 1240px) 1204px, calc(100vw - 32px)" } : {})}/>
+              <MediaSwitcher type={media.type} src={media.src} alt={media.alt || ''} source={{type: 'youtube', id: 'Ks0eHBSNFwA'}}  {...(media.type === 'photo' ? { sizes: "(min-width: 1240px) 1204px, calc(100vw - 32px)" } : {})}/>
           </SwiperSlide>
         ))}
       </Swiper>

@@ -7,10 +7,6 @@
 
 }
 
-.editableTextBlock span {
-    color: var(--red-hover);
-}
-
 @media (max-width: 768px) {
     .editableTextBlock {
         font-size: 20px;

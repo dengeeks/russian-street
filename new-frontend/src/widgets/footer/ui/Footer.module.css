@@ -96,8 +96,8 @@
 
 .socialIcons {
     display: flex;
+    flex-wrap: wrap;
     gap: 16px;
-    justify-content: space-between;
 }
 
 
@@ -169,7 +169,11 @@
         padding-top: 40px;
     }
 
-    .socialIcons svg{
+    .socialIcons {
+        gap: 24px;
+    }
+
+    .socialIcons .socialIcon img{
        width: 28px;
         height: 28px;
     }

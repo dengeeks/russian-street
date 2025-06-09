@@ -82,4 +82,8 @@
     .bannerAboutVideoWrapper :global(.video) {
         width: 85vh;
     }
+
+    .bannerAboutVideoWrapper {
+        width: 100vw;
+    }
 }

@@ -1,12 +1,18 @@
 import Image from 'next/image'
 import styles from './Mission.module.css'
+import { MissionType } from '@/shared/api/static/about-us/type'
+import { getImageUrl } from '@/shared/utils/getImageUrl'
 
-const Mission = () => {
+interface MissionProps {
+  missionImage: MissionType;
+}
+
+const Mission = ({missionImage}: MissionProps) => {
   return (
     <section className={`container section-spacing-top ${styles.missionSection}`}>
       <div className={styles.missionLine} />
       <div className={styles.missionImageWrapper}>
-        <Image src="/test/mission.png" alt="миссия" fill sizes="
+        <Image src={getImageUrl(missionImage?.image)} alt="миссия" fill sizes="
     (min-width: 1220px) 685px,
     (min-width: 1100px) 585px,
     (min-width: 1024px) 540px,

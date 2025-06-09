@@ -1,49 +1,29 @@
 'use client'
 import Button from '@/shared/ui/Button'
 import FormField from '@/shared/ui/FormField'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { emailValidation } from '@/shared/validation/validators'
 import useModal from '@/shared/store/modal'
 import Modal from '@/shared/ui/Modal'
-import { postResetPasswordRequest, ResetPasswordRequestType } from '@/shared/api/user/postResetPasswordRequest'
-import { RegisterUserType } from '@/features/modal/register-modal/model/type'
-import { useToast } from '@/shared/context/toast/useToastContext'
-import { useState } from 'react'
+import { ResetPasswordRequestType } from '@/shared/api/user/postResetPasswordRequest'
+import { useResetPasswordRequest } from '@/features/modal/reset-password-modal/model/useResetPasswordRequest'
+
 
 const ResetPasswordRequest = () => {
-  const [hasManualEmailError, setHasManualEmailError] = useState(false);
+
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
     setError
-  } = useForm<RegisterUserType>({
+  } = useForm<ResetPasswordRequestType>({
     mode: 'onChange',
   });
 
   const {closeModal} = useModal();
-  const {showToast} = useToast()
 
-  const onSubmit: SubmitHandler<ResetPasswordRequestType> = async data => {
-    setHasManualEmailError(false);
-    try {
-      const response = await postResetPasswordRequest(data);
-      if (response?.email && response.email.length > 0) {
-        // Проверка на ошибку с email
-        setError('email', {
-          type: 'manual',
-          message: response.email[0],
-        });
-        setHasManualEmailError(true);
-        showToast(response.email[0], 'invalid');
-        return;
-      }
-      closeModal()
-      showToast(response.message, 'success');
-    } catch {
-      showToast('Произошла ошибка при восстановлении пароля.', 'error');
-    }
-  };
+  const { onSubmit, hasManualEmailError, setHasManualEmailError } = useResetPasswordRequest(setError);
+
 
   return (
     <Modal onClose={closeModal}>

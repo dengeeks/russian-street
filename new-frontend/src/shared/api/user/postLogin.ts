@@ -7,7 +7,7 @@ export type LoginType = {
 }
 
 export async function postLogin(data: LoginType) {
-  const res = await fetch(USER_LOGIN(), {
+  const res = await fetch(USER_LOGIN, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),

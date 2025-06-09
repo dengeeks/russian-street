@@ -3,3 +3,5 @@ export const DOCKER_API_BASE_URL = process.env.INTERNAL_DOCKER_API_URL || 'http:
 
 export const ACCESS_TOKEN= process.env.NEXT_PUBLIC_ACCESS_TOKEN || 'access'
 export const REFRESH_TOKEN= process.env.NEXT_PUBLIC_REFRESH_TOKEN || 'refresh'
+
+

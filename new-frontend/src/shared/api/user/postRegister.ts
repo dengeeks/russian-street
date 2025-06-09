@@ -8,7 +8,7 @@ export type RegisterType = {
 }
 
 export async function postRegister(data: RegisterType) {
-  const res = await fetch(USER_REGISTRATION(), {
+  const res = await fetch(USER_REGISTRATION, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),

@@ -1,13 +1,11 @@
 'use client'
 import Button from '@/shared/ui/Button'
 import FormField from '@/shared/ui/FormField'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import {useForm } from 'react-hook-form'
 import {ResetPasswordFormType} from "../model/type"
 import Modal from '@/shared/ui/Modal'
 import { passwordValidation } from '@/shared/validation/validators'
-import { useToast } from '@/shared/context/toast/useToastContext'
-import { useRouter } from 'next/navigation'
-import { postResetPasswordConfirm } from '@/shared/api/user/postResetPasswordConfirm'
+import { useResetPasswordForm } from '../model/useResetPasswordForm'
 
 interface ResetPasswordFormProps {
   uid: string;
@@ -22,27 +20,8 @@ const ResetPasswordForm = ({uid, token}:ResetPasswordFormProps) => {
     watch
   } = useForm<ResetPasswordFormType>()
 
-  const {showToast} = useToast()
-  const router = useRouter()
 
-  const close = () => {
-    router.push('/')
-  }
-
-  const onSubmit: SubmitHandler<ResetPasswordFormType> = async data => {
-
-    try {
-      const response = await postResetPasswordConfirm({ uid, token, new_password: data.password, });
-      close()
-      showToast(response.message, 'success');
-    } catch (error: unknown) {
-      const message = error instanceof Error && error.message
-          ? error.message
-          : 'Произошла ошибка при восстановлении пароля.';
-      showToast(message, 'error');
-    }
-  }
-
+  const { onSubmit, close } = useResetPasswordForm({ uid, token });
 
   return (
     <Modal onClose={close}>

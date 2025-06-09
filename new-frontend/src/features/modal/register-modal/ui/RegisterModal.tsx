@@ -1,20 +1,16 @@
 'use client'
 import Button from '@/shared/ui/Button'
 import FormField from '@/shared/ui/FormField'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import {RegisterUserType} from "../model/type"
 import { emailValidation, first_nameValidation, passwordValidation } from '@/shared/validation/validators'
 import CheckBox from '@/shared/ui/CheckBox'
 import useModal from '@/shared/store/modal'
 import Link from 'next/link'
 import Modal from '@/shared/ui/Modal'
-import { postRegister } from '@/shared/api/user/postRegister'
-import { useToast } from '@/shared/context/toast/useToastContext'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useRegister } from '@/features/modal/register-modal/model/useRegister'
 
 const RegisterModal = () => {
-  const [hasManualEmailError, setHasManualEmailError] = useState(false);
   const {
     register,
     handleSubmit,
@@ -25,34 +21,8 @@ const RegisterModal = () => {
   });
 
   const {openModal, closeModal} = useModal();
-  const {showToast} = useToast()
-  const router = useRouter()
 
-  const onSubmit: SubmitHandler<RegisterUserType> = async data => {
-    setHasManualEmailError(false);
-    try {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { agreement, memberRightsAgreement, ...formData } = data;
-      const response = await postRegister(formData);
-      if (response?.email && response.email.length > 0) {
-        // Проверка на ошибку с email
-        setError('email', {
-          type: 'manual',
-          message: response.email[0],
-        });
-        setHasManualEmailError(true);
-        showToast(response.email[0], 'invalid');
-        return;
-      }
-      // Если регистрация прошла успешно, перенаправляем пользователя
-      router.push("/profile");
-      closeModal()
-      showToast('Вы успешно зарегистрированы!', 'success');
-    } catch {
-      showToast('Произошла ошибка при регистрации.', 'error');
-    }
-  };
-
+  const { onSubmit, hasManualEmailError, setHasManualEmailError } = useRegister(setError);
 
   return (
     <Modal onClose={closeModal}>

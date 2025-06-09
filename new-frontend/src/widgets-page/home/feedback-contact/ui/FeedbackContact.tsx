@@ -3,11 +3,17 @@ import styles from './FeedbackContact.module.css';
 import SectionTitle from '@/shared/ui/SectionTitle';
 import FeedbackForm from '@/features/home/feedback-form';
 import Link from 'next/link';
-import Icon from '@/shared/icon';
+import { useHomeData } from '@/shared/context/home-data/useHomeDataContext'
+import { useGlobalData } from '@/shared/context/global-data/useGlobalDataContext'
+import Image from 'next/image'
+import { getImageUrl } from '@/shared/utils/getImageUrl'
+import { extractIframeSrc } from '@/shared/utils/extractIframeSrc'
 
 const FeedbackContact = () => {
-  const address = "улица Сергея Макеева, 1, Москва, 123100";
-
+  const {homeData: {organization_info}} = useHomeData()
+  const {staticContact: {contact_footer}} = useGlobalData()
+  
+  const iframeSrc = extractIframeSrc(organization_info?.iframe || '');
   return (
     <section className={`container section-spacing-top ${styles.feedbackContact}`}>
       <SectionTitle>ВОЗНИКЛИ ВОПРОСЫ?</SectionTitle>
@@ -15,41 +21,55 @@ const FeedbackContact = () => {
         <div className={styles.infoBlock}>
           <div className={styles.map}>
             <iframe
-              src="https://yandex.com/map-widget/v1/org/mon_plezir/1018167095/?ll=37.549935%2C55.756529&utm_source=share&z=20"
+              src={iframeSrc}
               width="100%"
               height="100%"
               allowFullScreen
-              style={{ border: 0, display: "block" }}
-              title={address}
-              aria-label={address}
-              loading="lazy"
-            ></iframe>
+              style={{ border: 0, display: 'block' }}
+              title={organization_info?.address}
+              aria-label={organization_info?.address}
+              loading="lazy">
+
+            </iframe>
           </div>
 
           <div className={styles.address}>
-            <span className={styles.addressItem}>Офис в Москве: Малая Москваская, 11, д. 5/4</span>
-            <span className={styles.addressItem}>ПН–ПТ с 09:00–18:00</span>
+            <span className={styles.addressItem}>{organization_info?.address || '...'}</span>
+            <span className={styles.addressItem}>{organization_info?.work_time || '...'}</span>
             <span className={styles.addressNumber}>8-800-550-5050</span>
           </div>
 
           <div className={styles.emailSocial}>
-            <span className={styles.email}>info@streetrussia.ru</span>
+            <a
+              href={`mailto:${organization_info?.email || ''}`}
+              className={styles.email}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Отправить письмо на ${organization_info?.email || 'email'}`}>
+              {organization_info?.email || '...'}
+            </a>
             <div className={styles.socialIcons}>
-              <Link href="/"><Icon icon="youtube" height={42} width={42} /></Link>
-              <Link href="/"><Icon icon="telegram" height={42} width={42} /></Link>
-              <Link href="/"><Icon icon="whatsapp" height={42} width={42} /></Link>
+              {contact_footer?.map((social, index) => (
+                <Link href={social?.url || '#'} target="_blank" rel="noopener noreferrer" key={index}>
+                  <Image src={getImageUrl(social?.image)} height={42} width={42} alt="Социальная сеть Улицы России" />
+                </Link>
+              ))}
             </div>
           </div>
 
-          <Link href="" className={styles.leadersLink}>
+          <a
+            href={`mailto:${organization_info?.email || ''}`}
+            className={styles.leadersLink}
+            target="_blank"
+            rel="noopener noreferrer">
             Связаться с руководителями
-          </Link>
+          </a>
         </div>
 
         <FeedbackForm />
       </div>
     </section>
-  );
+  )
 };
 
 export default FeedbackContact;

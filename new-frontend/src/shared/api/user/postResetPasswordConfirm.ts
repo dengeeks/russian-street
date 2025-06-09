@@ -7,7 +7,7 @@ export type ResetPasswordConfirmType = {
 }
 
 export async function postResetPasswordConfirm(data: ResetPasswordConfirmType) {
-  const res = await fetch(USER_RESET_PASSWORD_CONFIRM(), {
+  const res = await fetch(USER_RESET_PASSWORD_CONFIRM, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),

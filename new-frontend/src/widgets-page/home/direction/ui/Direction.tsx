@@ -28,7 +28,7 @@ const Direction = () => {
   const chunkedDirections = chunkArray(directions, 11)
 
   return (
-    <section className={`container ${styles.directionHomeSection} section-spacing-top`}>
+    <section className={`container ${styles.directionHomeSection} section-spacing-top section-spacing-bottom`}>
       <div className={styles.directionHeader}>
         <SectionTitle>направления</SectionTitle>
         <div className={`${styles.directionNavWrapper} ${styles.directionTopNav} ContentShowcase`}>

@@ -8,10 +8,13 @@ const Logout = () => {
   const router = useRouter()
 
   const handleLogout = async () => {
-    await removeTokens()
-    startTransition(() => {
-      router.push('/')
-    })
+    const result = await removeTokens()
+
+    if (result.success) {
+      startTransition(() => {
+        router.push('/')
+      })
+    }
   }
   return (
     <div className={styles.logoutWrapper}>

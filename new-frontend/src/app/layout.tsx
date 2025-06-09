@@ -8,6 +8,7 @@ import { GlobalDataProvider } from '@/shared/context/global-data/GlobalDataConte
 import { isMobileRequest } from '@/shared/hooks/server/isMobileRequest'
 import { ToastProvider } from '@/shared/context/toast/ToastContext'
 import { getUser } from '@/shared/api/user/getUser'
+import { getContact } from '@/shared/api/static/getContact'
 
 interface RootLayoutProps {
   children: ReactNode;
@@ -16,12 +17,13 @@ interface RootLayoutProps {
 export default async function RootLayout({ children}: RootLayoutProps) {
   const isMobile = await isMobileRequest()
   const user = await getUser()
+  const contact = await getContact()
 
   return (
     <html lang="ru">
       <body className={`${Bahnschrift.variable} ${Inter.variable} ${Benzin.variable}`}>
         <ToastProvider>
-          <GlobalDataProvider serverIsMobile={isMobile} userData={user}>
+          <GlobalDataProvider serverIsMobile={isMobile} userData={user} staticContact={contact}>
             <Header />
             <ModalManager />
             {children}

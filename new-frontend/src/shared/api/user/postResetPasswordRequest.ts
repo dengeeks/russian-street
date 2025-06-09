@@ -5,7 +5,7 @@ export type ResetPasswordRequestType = {
 }
 
 export async function postResetPasswordRequest(data: ResetPasswordRequestType) {
-  const res = await fetch(USER_RESET_PASSWORD(), {
+  const res = await fetch(USER_RESET_PASSWORD, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
