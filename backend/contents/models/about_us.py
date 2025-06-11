@@ -45,6 +45,13 @@ class JoinStreet(UUIDMixin, DateTimeMixin, SingleInstanceMixin):
         verbose_name = 'Текстовое описание'
     )
 
+    def __str__(self):
+        return 'Детали'
+
+    class Meta:
+        verbose_name = 'стань частью улицы'
+        verbose_name_plural = 'стань частью улицы'
+
 
 class Mission(UUIDMixin, DateTimeMixin, SingleInstanceMixin):
     image = models.ImageField(
@@ -57,12 +64,35 @@ class Mission(UUIDMixin, DateTimeMixin, SingleInstanceMixin):
                 allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg']
             )
         ],
-        blank = True,
-        null = True
     )
+
+    def __str__(self):
+        return 'Детали'
+
+    class Meta:
+        verbose_name = 'миссия'
+        verbose_name_plural = 'миссия'
 
 
 class Information(DateTimeMixin, SingleInstanceMixin):
+
+    """
+    Модель для информации об организации.
+
+    Наследует:
+        - DateTimeMixin: автоматические поля создания и обновления.
+        - SingleInstanceMixin: ограничение на один экземпляр.
+
+    Поля:
+        - person (PositiveIntegerField): количество человек.
+        - discipline (PositiveIntegerField): количество дисциплин.
+        - organization (PositiveIntegerField): количество организаций.
+        - event (PositiveIntegerField): количество мероприятий.
+
+    Meta:
+        verbose_name: 'Миссия и цели (текст)'
+        verbose_name_plural: 'Миссия и цели (текст)'
+    """
     person = models.PositiveIntegerField(
         verbose_name = 'Количество человек'
     )
@@ -75,3 +105,10 @@ class Information(DateTimeMixin, SingleInstanceMixin):
     event = models.PositiveIntegerField(
         verbose_name = 'Количество мероприятий'
     )
+
+    def __str__(self):
+        return 'Детали'
+
+    class Meta:
+        verbose_name = 'информация'
+        verbose_name_plural = 'информация'

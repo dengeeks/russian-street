@@ -5,7 +5,6 @@ from contents.models.about_us import JoinStreet, Mission, Information
 class JoinStreetSerializer(BaseExcludeSerializer):
     class Meta(BaseExcludeSerializer.Meta):
         model = JoinStreet
-        exclude = BaseExcludeSerializer.Meta.exclude + ['format_type']
 
 
 class MissionSerializer(BaseExcludeSerializer):
