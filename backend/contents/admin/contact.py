@@ -1,28 +1,35 @@
 from django.contrib import admin
 from unfold.admin import ModelAdmin
 
+from common.admin import LinkToDetailMixin, NoAddDeleteMixin, ImagePreviewMixin
 from contents.models.contact import ContactFooter, ContactHeader, EmailFooter
 
 
 @admin.register(ContactFooter)
-class ContactFooterAdmin(ModelAdmin):
+class ContactFooterAdmin(ImagePreviewMixin, LinkToDetailMixin, ModelAdmin):
     """
     Класс администратора для модели ContactFooter.
     """
-    pass
+    fields = ['url', 'image', 'created_at', 'updated_at']
+    list_display = ['link_to_detail', 'url', 'image_preview', 'created_at', 'updated_at']
+    readonly_fields = ['link_to_detail', 'image_preview', 'created_at', 'updated_at']
 
 
 @admin.register(ContactHeader)
-class ContactHeaderAdmin(ModelAdmin):
+class ContactHeaderAdmin(LinkToDetailMixin, NoAddDeleteMixin, ModelAdmin):
     """
     Класс администратора для модели ContactHeader.
     """
-    pass
+    fields = ['youtube', 'telegram', 'vkontakte', 'created_at', 'updated_at']
+    list_display = ['link_to_detail', 'youtube', 'telegram', 'vkontakte']
+    readonly_fields = ['link_to_detail', 'created_at', 'updated_at']
 
 
 @admin.register(EmailFooter)
-class EmailFooterAdmin(ModelAdmin):
+class EmailFooterAdmin(LinkToDetailMixin, NoAddDeleteMixin, ModelAdmin):
     """
     Класс администратора для модели EmailFooter.
     """
-    pass
+    fields = ['email', 'created_at', 'updated_at']
+    list_display = ['link_to_detail', 'email', 'created_at', 'updated_at']
+    readonly_fields = ['link_to_detail', 'created_at', 'updated_at']

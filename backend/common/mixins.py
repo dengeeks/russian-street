@@ -67,10 +67,14 @@ class SingleInstanceMixin(models.Model):
         """
         Проверяет, что можно создать только один экземпляр модели.
         """
-        if self.__class__.objects.exists() and not self.pk:
+        if self.__class__.objects.exists() and self._state.adding:
             raise ValidationError(
                 f'Можно создать только один объект {self.__class__.__name__}'
             )
+
+    def save(self, *args, **kwargs):
+        self.clean()
+        super().save(*args, **kwargs)
 
     class Meta:
         abstract = True
@@ -81,29 +85,37 @@ class MaxCountLimitedMixin(models.Model):
     Миксин для ограничения количества объектов модели.
 
     Требует определения свойства `max_count` в наследуемом классе.
-    Если количество объектов превышает `max_count`, будет вызван ValidationError.
+    Если количество объектов превышает `max_count`, будет вызван assert.
 
     Атрибуты:
         max_count (int): Максимально допустимое количество объектов модели.
 
     """
 
-    max_count: int  # должен быть определён в классе-наследнике
+    MAX_COUNT = None
+
+    def get_max_count(self):
+        """
+        Получает максимально допустимое количество объектов модели.
+
+        Этот метод проверяет, что атрибут MAX_COUNT переопределён в подклассе,
+        и возвращает его значение.
+
+        Returns:
+            int: Максимально допустимое количество объектов модели, определённое в подклассе.
+
+        Raises:
+            AssertionError: Если MAX_COUNT не переопределён в подклассе (равен None).
+        """
+        assert self.MAX_COUNT is not None, "MAX_COUNT должен быть переопределён в подклассе"
+        assert isinstance(self.MAX_COUNT, int) and self.MAX_COUNT > 0, "MAX_COUNT должен быть целым числом (int) и больше 0"
+        return self.MAX_COUNT
 
     def clean(self):
-        max_count = getattr(self.__class__, 'max_count', None)
-
-        if max_count is None:
-            raise TypeError(f'{self.__class__.__name__} должен определить атрибут `max_count`')
-
-        if not isinstance(max_count, int):
-            raise TypeError(f'{self.__class__.__name__}.max_count должен быть целым числом')
-
-        if max_count <= 0:
-            raise ValueError(f'{self.__class__.__name__}.max_count должен быть больше 0')
+        max_count = self.get_max_count()
 
         # Проверяем количество объектов только если это новый объект (pk ещё нет)
-        if self.__class__.objects.count() >= max_count and not self.pk:
+        if self.__class__.objects.count() >= max_count and self._state.adding:
             raise ValidationError(f'Нельзя создать более {max_count} объектов {self.__class__.__name__}')
 
     class Meta:
@@ -136,9 +148,11 @@ class CacheServiceMixin:
             str: Уникальный ключ кэша, включающий базовый CACHE_KEY и динамическую часть.
 
         Raises:
-            AssertionError: Если CACHE_KEY не переопределён в подклассе (равен None).
+            AssertionError: Если CACHE_KEY не переопределён в подклассе (равен None или не str).
         """
         assert cls.CACHE_KEY is not None, "CACHE_KEY должен быть переопределён в подклассе"
+        assert isinstance(cls.CACHE_KEY, str), "CACHE_KEY должен быть строкой"
+
         if suffix is None:
             return cls.CACHE_KEY
 
@@ -156,9 +170,11 @@ class CacheServiceMixin:
             int: Время жизни кэша в секундах, определённое в подклассе.
 
         Raises:
-            AssertionError: Если CACHE_TIMEOUT не переопределён в подклассе (равен None).
+            AssertionError: Если CACHE_TIMEOUT не переопределён в подклассе (равен None или не int).
         """
         assert cls.CACHE_TIMEOUT is not None, "CACHE_TIMEOUT должен быть переопределён в подклассе"
+        assert isinstance(cls.CACHE_TIMEOUT, int), "CACHE_TIMEOUT должен быть целым числом (int)"
+
         return cls.CACHE_TIMEOUT
 
     @classmethod

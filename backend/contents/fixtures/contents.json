@@ -1,0 +1,411 @@
+[
+{
+  "model": "contents.promotionalvideo",
+  "pk": 1,
+  "fields": {
+    "created_at": "2025-06-08T16:32:51.015Z",
+    "updated_at": "2025-06-11T08:41:34.302Z",
+    "video_url": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/Ks0eHBSNFwA?si=zoT0TqIJNl4IMOIU\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+  }
+},
+{
+  "model": "contents.streetisusimage",
+  "pk": "1fd038b2-fd98-423b-bdc6-46a79aa6e0eb",
+  "fields": {
+    "created_at": "2025-06-11T09:00:16.477Z",
+    "updated_at": "2025-06-11T09:00:16.479Z",
+    "image": "uploads/streetisusimage/1fd038b2-fd98-423b-bdc6-46a79aa6e0eb/Rectangle_69.jpg",
+    "order": 12
+  }
+},
+{
+  "model": "contents.streetisusimage",
+  "pk": "3acee205-9027-4733-b60d-ee0c8e5a4428",
+  "fields": {
+    "created_at": "2025-06-11T09:04:32.361Z",
+    "updated_at": "2025-06-11T09:04:32.363Z",
+    "image": "uploads/streetisusimage/3acee205-9027-4733-b60d-ee0c8e5a4428/Rectangle_77.jpg",
+    "order": 16
+  }
+},
+{
+  "model": "contents.streetisusimage",
+  "pk": "3ff979b5-c1a4-47de-b535-8114c8a1fbca",
+  "fields": {
+    "created_at": "2025-06-11T09:03:58.176Z",
+    "updated_at": "2025-06-11T09:04:46.905Z",
+    "image": "uploads/streetisusimage/3ff979b5-c1a4-47de-b535-8114c8a1fbca/Rectangle_76.jpg",
+    "order": 15
+  }
+},
+{
+  "model": "contents.streetisusimage",
+  "pk": "4f9de6d9-3408-4e46-afa0-822558aed9f6",
+  "fields": {
+    "created_at": "2025-06-11T09:05:03.640Z",
+    "updated_at": "2025-06-11T09:05:03.641Z",
+    "image": "uploads/streetisusimage/4f9de6d9-3408-4e46-afa0-822558aed9f6/Rectangle_78.jpg",
+    "order": 17
+  }
+},
+{
+  "model": "contents.streetisusimage",
+  "pk": "55d82441-3741-45b1-9b4c-dd4d06fa62aa",
+  "fields": {
+    "created_at": "2025-06-09T10:25:42.819Z",
+    "updated_at": "2025-06-11T08:51:24.723Z",
+    "image": "uploads/streetisusimage/55d82441-3741-45b1-9b4c-dd4d06fa62aa/Rectangle_57.jpg",
+    "order": 2
+  }
+},
+{
+  "model": "contents.streetisusimage",
+  "pk": "5f95c2c4-6a5e-4e10-94e6-8bacccb34b16",
+  "fields": {
+    "created_at": "2025-06-11T08:58:33.933Z",
+    "updated_at": "2025-06-11T08:58:44.303Z",
+    "image": "uploads/streetisusimage/5f95c2c4-6a5e-4e10-94e6-8bacccb34b16/Rectangle_81.jpg",
+    "order": 7
+  }
+},
+{
+  "model": "contents.streetisusimage",
+  "pk": "6144c5e2-33ac-4307-9ac3-8ba6b484e739",
+  "fields": {
+    "created_at": "2025-06-11T08:56:57.884Z",
+    "updated_at": "2025-06-11T08:56:57.945Z",
+    "image": "uploads/streetisusimage/6144c5e2-33ac-4307-9ac3-8ba6b484e739/Rectangle_58.jpg",
+    "order": 3
+  }
+},
+{
+  "model": "contents.streetisusimage",
+  "pk": "644e3ccf-05b0-4cc5-8cbf-3265280e2f48",
+  "fields": {
+    "created_at": "2025-06-11T08:57:54.440Z",
+    "updated_at": "2025-06-11T08:57:54.442Z",
+    "image": "uploads/streetisusimage/644e3ccf-05b0-4cc5-8cbf-3265280e2f48/Rectangle_79.jpg",
+    "order": 6
+  }
+},
+{
+  "model": "contents.streetisusimage",
+  "pk": "724bbe40-b129-4819-9bac-271faf406cc7",
+  "fields": {
+    "created_at": "2025-06-09T10:25:37.046Z",
+    "updated_at": "2025-06-11T08:51:42.919Z",
+    "image": "uploads/streetisusimage/724bbe40-b129-4819-9bac-271faf406cc7/Rectangle_831.jpg",
+    "order": 1
+  }
+},
+{
+  "model": "contents.streetisusimage",
+  "pk": "99d501f1-2077-4cb6-9bee-9e469add048e",
+  "fields": {
+    "created_at": "2025-06-11T08:58:54.584Z",
+    "updated_at": "2025-06-11T08:58:54.586Z",
+    "image": "uploads/streetisusimage/99d501f1-2077-4cb6-9bee-9e469add048e/Rectangle_61.jpg",
+    "order": 8
+  }
+},
+{
+  "model": "contents.streetisusimage",
+  "pk": "a30bec80-d90b-410f-a439-d668a1eea8c0",
+  "fields": {
+    "created_at": "2025-06-11T09:02:56.646Z",
+    "updated_at": "2025-06-11T09:02:56.648Z",
+    "image": "uploads/streetisusimage/a30bec80-d90b-410f-a439-d668a1eea8c0/Rectangle_70.jpg",
+    "order": 13
+  }
+},
+{
+  "model": "contents.streetisusimage",
+  "pk": "b474a637-b8b3-4295-8693-d885e70f23e5",
+  "fields": {
+    "created_at": "2025-06-11T08:59:55.696Z",
+    "updated_at": "2025-06-11T08:59:55.697Z",
+    "image": "uploads/streetisusimage/b474a637-b8b3-4295-8693-d885e70f23e5/Rectangle_67.jpg",
+    "order": 11
+  }
+},
+{
+  "model": "contents.streetisusimage",
+  "pk": "d6bbe8f9-5478-4ff8-8d51-d55b73a8c34d",
+  "fields": {
+    "created_at": "2025-06-11T08:59:41.630Z",
+    "updated_at": "2025-06-11T08:59:41.632Z",
+    "image": "uploads/streetisusimage/d6bbe8f9-5478-4ff8-8d51-d55b73a8c34d/Rectangle_82.jpg",
+    "order": 10
+  }
+},
+{
+  "model": "contents.streetisusimage",
+  "pk": "db972e36-a198-45bc-bbd1-161c00aedabe",
+  "fields": {
+    "created_at": "2025-06-11T08:57:34.272Z",
+    "updated_at": "2025-06-11T08:57:34.274Z",
+    "image": "uploads/streetisusimage/db972e36-a198-45bc-bbd1-161c00aedabe/Rectangle_60.jpg",
+    "order": 5
+  }
+},
+{
+  "model": "contents.streetisusimage",
+  "pk": "e936de4b-12a2-4298-88cd-4c1b160060f1",
+  "fields": {
+    "created_at": "2025-06-11T09:03:30.764Z",
+    "updated_at": "2025-06-11T09:03:30.765Z",
+    "image": "uploads/streetisusimage/e936de4b-12a2-4298-88cd-4c1b160060f1/Rectangle_71.jpg",
+    "order": 14
+  }
+},
+{
+  "model": "contents.streetisusimage",
+  "pk": "efb829e2-bd9e-415a-92b9-1ac6bef18f8a",
+  "fields": {
+    "created_at": "2025-06-11T08:57:12.035Z",
+    "updated_at": "2025-06-11T08:57:12.037Z",
+    "image": "uploads/streetisusimage/efb829e2-bd9e-415a-92b9-1ac6bef18f8a/Rectangle_59.jpg",
+    "order": 4
+  }
+},
+{
+  "model": "contents.streetisusimage",
+  "pk": "f94acad3-478f-4535-ab0c-61f21a3c716f",
+  "fields": {
+    "created_at": "2025-06-11T08:59:23.576Z",
+    "updated_at": "2025-06-11T08:59:23.578Z",
+    "image": "uploads/streetisusimage/f94acad3-478f-4535-ab0c-61f21a3c716f/Rectangle_80.jpg",
+    "order": 9
+  }
+},
+{
+  "model": "contents.aboutus",
+  "pk": 1,
+  "fields": {
+    "created_at": "2025-06-09T10:38:17.233Z",
+    "updated_at": "2025-06-11T09:05:54.663Z",
+    "discipline": 14,
+    "regions": 52,
+    "media_publications": 290,
+    "event": 197,
+    "person": 1187
+  }
+},
+{
+  "model": "contents.missionandgoalstext",
+  "pk": 1,
+  "fields": {
+    "created_at": "2025-06-09T10:46:23.683Z",
+    "updated_at": "2025-06-11T09:10:36.364Z",
+    "mission": "Создать условия для успешной реализации потенциала каждого ссвязанного с уличными дисциплинами и духовной профессиональный сфере",
+    "goal": "Комплексное развитие уличной культуры и спорта. Популяризация уличных дисциплин. Создание положительного образа в информационном пространстве у дисциплин, которые считаются травмоопасными и агрессивными."
+  }
+},
+{
+  "model": "contents.missionandgoalsimage",
+  "pk": "62e051d3-1e6b-4e53-bfe2-a8e382670f7b",
+  "fields": {
+    "created_at": "2025-06-09T10:48:24.550Z",
+    "updated_at": "2025-06-11T09:14:15.496Z",
+    "image": "uploads/missionandgoalsimage/62e051d3-1e6b-4e53-bfe2-a8e382670f7b/Text_input3.jpg",
+    "order": 4
+  }
+},
+{
+  "model": "contents.missionandgoalsimage",
+  "pk": "756970ea-3926-4bd0-82c0-f210f78c83c8",
+  "fields": {
+    "created_at": "2025-06-09T10:48:17.801Z",
+    "updated_at": "2025-06-11T09:13:46.314Z",
+    "image": "uploads/missionandgoalsimage/756970ea-3926-4bd0-82c0-f210f78c83c8/Text_input2.jpg",
+    "order": 3
+  }
+},
+{
+  "model": "contents.missionandgoalsimage",
+  "pk": "b462d005-40f6-4797-bce3-d3cdd12864b0",
+  "fields": {
+    "created_at": "2025-06-09T10:48:33.058Z",
+    "updated_at": "2025-06-11T09:13:17.990Z",
+    "image": "uploads/missionandgoalsimage/b462d005-40f6-4797-bce3-d3cdd12864b0/Text_input1.jpg",
+    "order": 2
+  }
+},
+{
+  "model": "contents.missionandgoalsimage",
+  "pk": "e4bf6ba9-f8ad-4a3f-8068-5fd6eee66566",
+  "fields": {
+    "created_at": "2025-06-09T10:47:59.912Z",
+    "updated_at": "2025-06-11T09:12:36.721Z",
+    "image": "uploads/missionandgoalsimage/e4bf6ba9-f8ad-4a3f-8068-5fd6eee66566/Text_input.jpg",
+    "order": 1
+  }
+},
+{
+  "model": "contents.organizationinfo",
+  "pk": 1,
+  "fields": {
+    "created_at": "2025-06-09T10:53:33.886Z",
+    "updated_at": "2025-06-11T11:43:11.986Z",
+    "iframe": "<iframe src=\"https://yandex.ru/map-widget/v1/?um=constructor%3Ad20795059cafbd4f592847b34c4754db84bbc1b8d9df5d0afba886a6cdaf994c&amp;source=constructor\" width=\"500\" height=\"400\" frameborder=\"0\"></iframe>",
+    "address": "Офис в Москве: Малая Москваская,11, д 5/4",
+    "work_time": "ПН-ПТ с 09.00-18.00",
+    "phone": "88005505050",
+    "email": "info@streetrussia.ru"
+  }
+},
+{
+  "model": "contents.everyonelikes",
+  "pk": 1,
+  "fields": {
+    "created_at": "2025-06-11T12:19:05.751Z",
+    "updated_at": "2025-06-11T12:19:05.752Z",
+    "title": "Организатор",
+    "description": "Возможность взаимодействовать с вузами, дополнительные ресурсы и гранты"
+  }
+},
+{
+  "model": "contents.everyonelikes",
+  "pk": 2,
+  "fields": {
+    "created_at": "2025-06-11T12:19:19.140Z",
+    "updated_at": "2025-06-11T12:19:19.141Z",
+    "title": "Предприниматель",
+    "description": "Возможность взаимодействовать с вузами, дополнительные ресурсы и гранты"
+  }
+},
+{
+  "model": "contents.everyonelikes",
+  "pk": 3,
+  "fields": {
+    "created_at": "2025-06-11T12:19:28.087Z",
+    "updated_at": "2025-06-11T12:19:28.089Z",
+    "title": "Общественный деятель",
+    "description": "Возможность взаимодействовать с вузами, дополнительные ресурсы и гранты"
+  }
+},
+{
+  "model": "contents.everyonelikes",
+  "pk": 4,
+  "fields": {
+    "created_at": "2025-06-11T12:19:54.269Z",
+    "updated_at": "2025-06-11T12:19:54.271Z",
+    "title": "Студент",
+    "description": "Возможность взаимодействовать с вузами, дополнительные ресурсы и гранты"
+  }
+},
+{
+  "model": "contents.everyonelikes",
+  "pk": 5,
+  "fields": {
+    "created_at": "2025-06-11T12:20:00.180Z",
+    "updated_at": "2025-06-11T12:20:00.182Z",
+    "title": "Родитель",
+    "description": "Возможность взаимодействовать с вузами, дополнительные ресурсы и гранты"
+  }
+},
+{
+  "model": "contents.everyonelikes",
+  "pk": 6,
+  "fields": {
+    "created_at": "2025-06-11T12:20:14.139Z",
+    "updated_at": "2025-06-11T12:20:14.140Z",
+    "title": "Деятель искусства, культуры и спорта",
+    "description": "Возможность взаимодействовать с вузами, дополнительные ресурсы и гранты"
+  }
+},
+{
+  "model": "contents.everyonelikes",
+  "pk": 7,
+  "fields": {
+    "created_at": "2025-06-11T12:20:25.889Z",
+    "updated_at": "2025-06-11T12:20:25.890Z",
+    "title": "Школьник",
+    "description": "Возможность взаимодействовать с вузами, дополнительные ресурсы и гранты"
+  }
+},
+{
+  "model": "contents.contactheader",
+  "pk": 1,
+  "fields": {
+    "created_at": "2025-06-10T20:34:12.488Z",
+    "updated_at": "2025-06-11T11:15:15.749Z",
+    "youtube": "https://www.youtube.com/@STREETRUSSIA",
+    "telegram": "https://vk.com/streetrf",
+    "vkontakte": "https://vk.com/streetrf"
+  }
+},
+{
+  "model": "contents.contactfooter",
+  "pk": "8dd5b256-71a7-41c4-a608-b36be1bddcca",
+  "fields": {
+    "created_at": "2025-06-11T11:37:22.851Z",
+    "updated_at": "2025-06-11T11:40:32.846Z",
+    "url": "https://www.youtube.com/@STREETRUSSIA",
+    "image": "uploads/contactfooter/8dd5b256-71a7-41c4-a608-b36be1bddcca/174883.png"
+  }
+},
+{
+  "model": "contents.contactfooter",
+  "pk": "b7e65774-a704-4804-863b-fb65b172f699",
+  "fields": {
+    "created_at": "2025-06-11T11:41:44.915Z",
+    "updated_at": "2025-06-11T11:41:44.917Z",
+    "url": "https://vk.com/streetrf",
+    "image": "uploads/contactfooter/b7e65774-a704-4804-863b-fb65b172f699/3670055.png"
+  }
+},
+{
+  "model": "contents.emailfooter",
+  "pk": 1,
+  "fields": {
+    "created_at": "2025-06-11T11:44:09.000Z",
+    "updated_at": "2025-06-11T11:44:09.001Z",
+    "email": "info@streetrussia.ru"
+  }
+},
+{
+  "model": "contents.joinstreet",
+  "pk": "a78cb3ca-b247-4cc8-a309-38ad2ad788d1",
+  "fields": {
+    "created_at": "2025-06-06T19:16:27.189Z",
+    "updated_at": "2025-06-11T09:51:02.671Z",
+    "format_type": "image",
+    "video_url": null,
+    "image": "uploads/joinstreet/a78cb3ca-b247-4cc8-a309-38ad2ad788d1/image_388.jpg",
+    "text": "<p>Мы родились из уличных дисциплин. Каждый, кто начинал тренироваться на улице, находил себе новые знакомства, дружбу, окружение, которое помогало развивать свои сильные стороны.<br />\r\nЭта история про пацанов и девчонок, которые воспринимают улицу как свой дом и находят там смысл жизни.</p>"
+  }
+},
+{
+  "model": "contents.mission",
+  "pk": "4b59604f-539b-4022-b43c-b2be17856cd0",
+  "fields": {
+    "created_at": "2025-06-09T09:36:21.718Z",
+    "updated_at": "2025-06-11T09:52:02.415Z",
+    "image": "uploads/mission/4b59604f-539b-4022-b43c-b2be17856cd0/image_394.jpg"
+  }
+},
+{
+  "model": "contents.information",
+  "pk": 2,
+  "fields": {
+    "created_at": "2025-06-09T09:36:00.528Z",
+    "updated_at": "2025-06-11T11:55:12.726Z",
+    "person": 1037000,
+    "discipline": 50,
+    "organization": 4678,
+    "event": 40800
+  }
+},
+{
+  "model": "contents.cooperation",
+  "pk": 1,
+  "fields": {
+    "created_at": "2025-06-11T11:58:10.451Z",
+    "updated_at": "2025-06-11T11:58:10.453Z",
+    "text": "<p>Мы всегда открыты к новым идеям, коллаборациям и сотрудничеству.<br />\r\nСамые амбициозные идеи и невероятный результат - гарантируем.</p>",
+    "partners_count": 7,
+    "projects_count": 50
+  }
+}
+]

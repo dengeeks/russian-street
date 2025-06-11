@@ -3,7 +3,7 @@ from django.db import models
 
 from common.mixins import DateTimeMixin, UUIDMixin, SingleInstanceMixin, MaxCountLimitedMixin
 from common.utils import setup_image_path
-from common.validators import validate_iframe
+from common.validators import validate_iframe, validate_phone_number
 
 
 class PromotionalVideo(DateTimeMixin, SingleInstanceMixin):
@@ -29,8 +29,11 @@ class PromotionalVideo(DateTimeMixin, SingleInstanceMixin):
         validators = [validate_iframe]
     )
 
+    def __str__(self):
+        return 'Детали'
+
     class Meta:
-        verbose_name = 'Промо-видео'
+        verbose_name = 'промо-видео'
         verbose_name_plural = 'Промо-видео'
 
 
@@ -48,14 +51,14 @@ class StreetIsUsImage(UUIDMixin, DateTimeMixin, MaxCountLimitedMixin):
         - order (PositiveIntegerField): Порядок отображения изображения.
 
     Атрибуты:
-        - max_count = 16
+        - MAX_COUNT = 17
 
     Meta:
         verbose_name: 'Изображение Street Is Us'
         verbose_name_plural: 'Изображения Street Is Us'
     """
 
-    max_count = 16
+    MAX_COUNT = 17
 
     image = models.ImageField(
         upload_to = setup_image_path,
@@ -74,9 +77,12 @@ class StreetIsUsImage(UUIDMixin, DateTimeMixin, MaxCountLimitedMixin):
         help_text = 'Определяет порядок отображения изображения.'
     )
 
+    def __str__(self):
+        return 'Детали'
+
     class Meta:
-        verbose_name = 'Изображение Street Is Us'
-        verbose_name_plural = 'Изображения Street Is Us'
+        verbose_name = 'улица это мы'
+        verbose_name_plural = 'улица это мы'
 
 
 class AboutUs(DateTimeMixin, SingleInstanceMixin):
@@ -111,12 +117,12 @@ class AboutUs(DateTimeMixin, SingleInstanceMixin):
         verbose_name = 'Количество членов организаций'
     )
 
+    def __str__(self):
+        return 'Детали'
+
     class Meta:
         verbose_name = 'О нас'
         verbose_name_plural = 'О нас'
-
-    def __str__(self):
-        return f"О нас ({self.media_publications} публикаций)"
 
 
 class MissionAndGoalsText(DateTimeMixin, SingleInstanceMixin):
@@ -128,22 +134,27 @@ class MissionAndGoalsText(DateTimeMixin, SingleInstanceMixin):
         - SingleInstanceMixin: ограничение на один экземпляр.
 
     Поля:
-        - mission (TextField): Текст миссии.
-        - goal (TextField): Текст цели.
+        - mission (CharField): Текст миссии.
+        - goal (CharField): Текст цели.
 
     Meta:
         verbose_name: 'Миссия и цели (текст)'
         verbose_name_plural: 'Миссия и цели (текст)'
     """
 
-    mission = models.TextField(
+    mission = models.CharField(
         verbose_name = 'Миссия',
-        help_text = 'Опишите миссию организации.'
+        help_text = 'Опишите миссию организации.',
+        max_length = 300
     )
-    goal = models.TextField(
+    goal = models.CharField(
         verbose_name = 'Цель',
-        help_text = 'Опишите цель организации.'
+        help_text = 'Опишите цель организации.',
+        max_length = 300
     )
+
+    def __str__(self):
+        return 'Детали'
 
     class Meta:
         verbose_name = 'Миссия и цели (текст)'
@@ -164,14 +175,14 @@ class MissionAndGoalsImage(UUIDMixin, DateTimeMixin, MaxCountLimitedMixin):
         - order (PositiveIntegerField): Порядок отображения.
 
     Атрибуты:
-        - max_count = 4
+        - MAX_COUNT = 4
 
     Meta:
         verbose_name: 'Изображение миссии и целей'
         verbose_name_plural: 'Изображения миссии и целей'
     """
 
-    max_count = 4
+    MAX_COUNT = 4
 
     image = models.ImageField(
         upload_to = setup_image_path,
@@ -190,6 +201,9 @@ class MissionAndGoalsImage(UUIDMixin, DateTimeMixin, MaxCountLimitedMixin):
         help_text = 'Определяет порядок отображения изображения.'
     )
 
+    def __str__(self):
+        return 'Детали'
+
     class Meta:
         verbose_name = 'Изображение миссии и целей'
         verbose_name_plural = 'Изображения миссии и целей'
@@ -207,6 +221,7 @@ class OrganizationInfo(DateTimeMixin, SingleInstanceMixin):
         - iframe (URLField): iframe с картой Яндекс.Карт.
         - address (CharField): Адрес организации.
         - work_time (CharField): Режим работы.
+        - phone (CharField): Номер телефона.
         - email (EmailField): Контактная почта.
 
     Meta:
@@ -220,9 +235,13 @@ class OrganizationInfo(DateTimeMixin, SingleInstanceMixin):
         help_text = 'Введите iframe Яндекс.Карт, начинающийся с <iframe>.',
         validators = [validate_iframe]
     )
-    address = models.CharField(max_length = 250, verbose_name = 'Адрес')
-    work_time = models.CharField(max_length = 125, verbose_name = 'Дни работы и время')
+    address = models.CharField(max_length = 65, verbose_name = 'Адрес')
+    work_time = models.CharField(max_length = 55, verbose_name = 'Дни работы и время')
+    phone = models.CharField(max_length = 25, verbose_name = 'Номер телефона', validators = [validate_phone_number])
     email = models.EmailField(verbose_name = 'Почта')
+
+    def __str__(self):
+        return 'Детали'
 
     class Meta:
         verbose_name = 'Контактная информация'

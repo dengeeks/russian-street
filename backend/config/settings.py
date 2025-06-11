@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'users',
     'partners',
     'feedbacks',
-    'contents'
+    'contents.apps.ContentsConfig'
 ]
 
 # сторонние приложения
@@ -116,7 +116,7 @@ AUTH_USER_MODEL = "users.UserAccount"
 
 LANGUAGE_CODE = 'ru-RU'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -265,32 +265,32 @@ UNFOLD = {
                 "items": [
                     {
                         "title": "Промо-видео",
-                        "icon": "globe",
+                        "icon": "iframe",
                         "link": reverse_lazy("admin:contents_promotionalvideo_changelist"),
                     },
                     {
                         "title": "Улица это мы",
-                        "icon": "house",
+                        "icon": "streetview",
                         "link": reverse_lazy("admin:contents_streetisusimage_changelist"),
                     },
                     {
                         "title": "О нас",
-                        "icon": "currency_exchange",
+                        "icon": "info",
                         "link": reverse_lazy("admin:contents_aboutus_changelist"),
                     },
                     {
                         "title": "Миссия и цель (текст)",
-                        "icon": "currency_exchange",
+                        "icon": "description",
                         "link": reverse_lazy("admin:contents_missionandgoalstext_changelist"),
                     },
                     {
                         "title": "Миссия и цель (изображения)",
-                        "icon": "currency_exchange",
+                        "icon": "image",
                         "link": reverse_lazy("admin:contents_missionandgoalsimage_changelist"),
                     },
                     {
                         "title": "Об организации",
-                        "icon": "currency_exchange",
+                        "icon": "business",
                         "link": reverse_lazy("admin:contents_organizationinfo_changelist"),
                     },
                 ],
@@ -302,17 +302,17 @@ UNFOLD = {
                 "items": [
                     {
                         "title": "Стань частью улиц",
-                        "icon": "currency_exchange",
+                        "icon": "people",
                         "link": reverse_lazy("admin:contents_joinstreet_changelist"),
                     },
                     {
                         "title": "Миссия",
-                        "icon": "currency_exchange",
+                        "icon": "flag",
                         "link": reverse_lazy("admin:contents_mission_changelist"),
                     },
                     {
                         "title": "Информация",
-                        "icon": "currency_exchange",
+                        "icon": "info",
                         "link": reverse_lazy("admin:contents_information_changelist"),
                     },
                 ]
@@ -323,17 +323,17 @@ UNFOLD = {
                 "items": [
                     {
                         "title": "Соцсети (Header)",
-                        "icon": "currency_exchange",
+                        "icon": "share",
                         "link": reverse_lazy("admin:contents_contactheader_changelist"),
                     },
                     {
                         "title": "Соцсети (Footer)",
-                        "icon": "currency_exchange",
+                        "icon": "public",
                         "link": reverse_lazy("admin:contents_contactfooter_changelist"),
                     },
                     {
                         "title": "Почта (Footer)",
-                        "icon": "currency_exchange",
+                        "icon": "email",
                         "link": reverse_lazy("admin:contents_emailfooter_changelist"),
                     },
                 ]
@@ -344,7 +344,7 @@ UNFOLD = {
                 "items": [
                     {
                         "title": "Блок сотрудничество",
-                        "icon": "currency_exchange",
+                        "icon": "handshake",
                         "link": reverse_lazy("admin:contents_cooperation_changelist"),
                     }
                 ]
@@ -355,7 +355,7 @@ UNFOLD = {
                 "items": [
                     {
                         "title": "Блок 'У нас понравится всем'",
-                        "icon": "currency_exchange",
+                        "icon": "favorite",
                         "link": reverse_lazy("admin:contents_everyonelikes_changelist"),
                     }
                 ]

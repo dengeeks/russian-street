@@ -10,10 +10,10 @@ def validate_size_file(value):
     Проверяет превышение размера файла.
 
     Параметры:
-    value (file) - Файл
+        value (file) - Файл
 
     Исключения:
-    ValidationError: Возникает в случае превышения размера файла.
+        ValidationError: Возникает в случае превышения размера файла.
     """
     filesize = value.size
 
@@ -29,11 +29,11 @@ def validate_phone_number(value):
     Проверяет правильность введенного номера телефона.
 
     Параметры:
-    value (str) - Номер телефона
+        value (str) - Номер телефона
 
     Исключения:
-    ValidationError: Возникает в случае, если номер
-    телефона не соответствует формату.
+        ValidationError: Возникает в случае, если номер
+        телефона не соответствует формату.
     """
     pattern = re.compile(r'^((\+7|7|8)+([0-9]){10})$')
     if not pattern.match(value):
@@ -61,11 +61,11 @@ def validate_passport_number(value):
     Проверяет правильность введенного номера паспорта.
 
     Параметры:
-    value (str) - Номер паспорта
+        value (str) - Номер паспорта
 
     Исключения:
-    ValidationError: Возникает в случае, если номер
-    паспорта не содержит 6 цифр.
+        ValidationError: Возникает в случае, если номер
+        паспорта не содержит 6 цифр.
     """
     pattern = re.compile(r'^\d{6}$')
     if not pattern.match(value):

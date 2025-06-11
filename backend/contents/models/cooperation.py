@@ -14,3 +14,10 @@ class Cooperation(DateTimeMixin, SingleInstanceMixin):
     projects_count = models.PositiveIntegerField(
         verbose_name = 'Количество реализованных проектов'
     )
+
+    def __str__(self):
+        return 'Детали'
+
+    class Meta:
+        verbose_name = 'сотрудничество'
+        verbose_name_plural = 'сотрудничество'
