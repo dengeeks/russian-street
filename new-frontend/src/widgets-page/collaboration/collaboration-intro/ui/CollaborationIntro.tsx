@@ -3,16 +3,20 @@ import SectionTitle from '@/shared/ui/SectionTitle'
 import EditableTextBlock from '@/shared/ui/EditableTextBlock'
 import Image from 'next/image'
 import Link from 'next/link'
+import { getCooperation } from '@/shared/api/static/getCooperation'
 
-const CollaborationIntro = () => {
+const CollaborationIntro = async () => {
+  const collaborationData = await getCooperation()
+  const { cooperation } = collaborationData
+
   return (
     <section className={`container section-spacing-bottom ${styles.collaborationIntro}`}>
       <SectionTitle>сотрудничество</SectionTitle>
-      <EditableTextBlock text="Мы всегда открыты к новым идеям, коллаборациям и сотрудничеству. Самые амбициозные идеи и невероятный результат — <span>гарантируем.</span>" />
+      <EditableTextBlock text={cooperation?.text || ''} />
       <div className={styles.collaborationIntro__content}>
         <div className={styles.collaborationIntro__item}>
           <Link href="/" className={styles.collaborationIntro__link}>
-            7 партнеров в России
+            {cooperation?.partners_count || 0} партнеров в России
           </Link>
           <div className={styles.collaborationIntro__imageWrapper}>
             <Image
@@ -37,8 +41,12 @@ const CollaborationIntro = () => {
         </div>
         <div className={styles.collaborationIntro__item}>
           <div className={styles.collaborationIntro__imageWrapper}>
-            <Image src="/test/directions/2.png" alt="более 50 реализованных проектов" fill priority
-                   sizes="
+            <Image
+              src="/test/directions/2.png"
+              alt="более 50 реализованных проектов"
+              fill
+              priority
+              sizes="
   (min-width: 1240px) 658px,
   (min-width: 1200px) 600px,
   (min-width: 1150px) 560px,
@@ -55,7 +63,7 @@ const CollaborationIntro = () => {
             />
           </div>
           <Link href="/" className={styles.collaborationIntro__link}>
-            более 50 реализованных проектов
+            более {cooperation?.projects_count || 0} реализованных проектов
           </Link>
         </div>
       </div>

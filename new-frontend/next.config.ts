@@ -7,11 +7,21 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'i.ytimg.com',
       },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        pathname: '/back_media/**',
+      },
     ],
     deviceSizes: [320, 400, 460, 500, 640, 750, 828, 959, 1080, 1200, 1920],
   },
   output: 'standalone',
   productionBrowserSourceMaps: true,
+  logging: {
+    fetches: {
+      hmrRefreshes: true,
+    },
+  },
 };
 
 export default nextConfig;

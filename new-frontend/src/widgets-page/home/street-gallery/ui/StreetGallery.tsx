@@ -1,15 +1,16 @@
 'use client'
 import dynamic from 'next/dynamic';
 import { useMobileDetection } from '@/shared/hooks/useIsMobile'
-import { images } from '../model/mock/images'
 import Loader from '@/shared/ui/Loader'
 
 const StreetGalleryDesktop = dynamic(() => import('./desktop/StreetGalleryDesktop'), {
   loading: () => (<Loader/>),
+  ssr: false
 });
 
 const StreetGalleryMobile = dynamic(() => import('./mobile/StreetGalleryMobile'), {
   loading: () => (<Loader/>),
+  ssr: false
 });
 
 const StreetGallery = () => {
@@ -17,9 +18,9 @@ const StreetGallery = () => {
   return (
     <section className="section-spacing-top">
       {isMobile ? (
-        <StreetGalleryMobile images={images} />
+        <StreetGalleryMobile />
       ) : (
-        <StreetGalleryDesktop images={images} />
+        <StreetGalleryDesktop />
       )}
     </section>
   )

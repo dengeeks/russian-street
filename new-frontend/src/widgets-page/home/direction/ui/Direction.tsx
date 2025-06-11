@@ -1,5 +1,5 @@
 'use client'
-import './Direction.css'
+import styles from  './Direction.module.css'
 import SectionTitle from '@/shared/ui/SectionTitle'
 import { useState, MouseEvent } from 'react'
 import DirectionCard from '@/entities/home/direction-card'
@@ -28,19 +28,25 @@ const Direction = () => {
   const chunkedDirections = chunkArray(directions, 11)
 
   return (
-    <section className="container direction__home-section section-spacing-top">
-      <SectionTitle>направления</SectionTitle>
+    <section className={`container ${styles.directionHomeSection} section-spacing-top section-spacing-bottom`}>
+      <div className={styles.directionHeader}>
+        <SectionTitle>направления</SectionTitle>
+        <div className={`${styles.directionNavWrapper} ${styles.directionTopNav} ContentShowcase`}>
+          <Arrow styleClass="direction__home-prev" icon="chevron" />
+          <Arrow styleClass="direction__home-next" icon="chevron" />
+        </div>
+      </div>
       <Swiper
         slidesPerView={1}
         modules={[Navigation]}
-        navigation = {{
+        navigation={{
           prevEl: '.direction__home-prev',
-          nextEl: '.direction__home-next',
+          nextEl: '.direction__home-next'
         }}
-        className="ContentShowcase">
+        >
         {chunkedDirections.map((chunk, slideIndex) => (
           <SwiperSlide key={slideIndex}>
-            <div className="direction__list">
+            <div className={styles.directionList}>
               {chunk.map((dir, i) => {
                 const globalIndex = slideIndex * 11 + i
                 return (
@@ -57,9 +63,11 @@ const Direction = () => {
             </div>
           </SwiperSlide>
         ))}
-        <Arrow styleClass="swiper-button-prev direction__home-prev" />
-        <Arrow styleClass="swiper-button-next direction__home-next" />
       </Swiper>
+      <div className={`${styles.directionNavWrapper} ${styles.directionBottomNav} ContentShowcase`}>
+        <Arrow styleClass="direction__home-prev" icon="chevron" />
+        <Arrow styleClass="direction__home-next" icon="chevron" />
+      </div>
     </section>
   )
 }

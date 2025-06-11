@@ -4,6 +4,7 @@
     width: 100%;
     position: relative;
     aspect-ratio: 1;
+    user-select: none;
 }
 
 @media (max-width: 1100px) {

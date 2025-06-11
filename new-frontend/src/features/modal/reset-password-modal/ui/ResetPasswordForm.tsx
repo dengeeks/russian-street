@@ -1,12 +1,18 @@
+'use client'
 import Button from '@/shared/ui/Button'
 import FormField from '@/shared/ui/FormField'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import {useForm } from 'react-hook-form'
 import {ResetPasswordFormType} from "../model/type"
-import useModal from '@/shared/store/modal'
 import Modal from '@/shared/ui/Modal'
 import { passwordValidation } from '@/shared/validation/validators'
+import { useResetPasswordForm } from '../model/useResetPasswordForm'
 
-const ResetPasswordForm = () => {
+interface ResetPasswordFormProps {
+  uid: string;
+  token: string;
+}
+
+const ResetPasswordForm = ({uid, token}:ResetPasswordFormProps) => {
   const {
     register,
     handleSubmit,
@@ -14,14 +20,11 @@ const ResetPasswordForm = () => {
     watch
   } = useForm<ResetPasswordFormType>()
 
-  const {closeModal} = useModal();
 
-  const onSubmit: SubmitHandler<ResetPasswordFormType> = async data => {
-    console.log(data)
-  }
+  const { onSubmit, close } = useResetPasswordForm({ uid, token });
 
   return (
-    <Modal onClose={closeModal}>
+    <Modal onClose={close}>
       <form onSubmit={handleSubmit(onSubmit)} className="form--modal">
         <h2 className="form--modal__title">Введите новый пароль</h2>
         <div className="form--modal__body">

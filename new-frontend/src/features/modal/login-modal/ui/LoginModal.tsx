@@ -1,23 +1,25 @@
+'use client'
 import Button from '@/shared/ui/Button'
 import FormField from '@/shared/ui/FormField'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import {LoginUserType} from "../model/type"
-import { emailValidation } from '@/shared/validation/validators'
+import { useForm } from 'react-hook-form'
+import { emailValidation, passwordValidation } from '@/shared/validation/validators'
 import useModal from '@/shared/store/modal'
 import Modal from '@/shared/ui/Modal'
+import { LoginType} from '@/shared/api/user/postLogin'
+import { useLogin } from '../model/useLogin'
 
 const LoginModal = () => {
-  const {
-    register,
+  const { register,
     handleSubmit,
-    formState: { errors }
-  } = useForm<LoginUserType>()
+    formState: { errors, isSubmitting },
+    setError
+  } = useForm<LoginType>({
+    mode: 'onChange',
+  });
 
   const {openModal, closeModal} = useModal();
 
-  const onSubmit: SubmitHandler<LoginUserType> = async data => {
-    console.log(data)
-  }
+  const { onSubmit, hasManualEmailError, setHasManualEmailError} = useLogin(setError);
 
   return (
     <Modal onClose={closeModal}>
@@ -25,7 +27,11 @@ const LoginModal = () => {
       <h2 className="form--modal__title">Войти</h2>
       <div className="form--modal__body">
         <FormField
-          {...register('email', {required: 'Обязательное поле', ...emailValidation })}
+          {...register('email', {
+            required: 'Обязательное поле',
+            ...emailValidation,
+            onChange: () => setHasManualEmailError(false),
+          })}
           error={errors.email?.message}
           label="Email"
           name="email"
@@ -36,7 +42,7 @@ const LoginModal = () => {
         />
 
         <FormField
-          {...register('password', { required: 'Пароль обязателен'})}
+          {...register('password', passwordValidation)}
           error={errors.password?.message}
           label="Пароль"
           required
@@ -49,7 +55,7 @@ const LoginModal = () => {
       </div>
 
       <div className="form--modal__actions form--modal__actions--column">
-        <Button type="submit" className="red">
+        <Button type="submit" className="red" disabled={hasManualEmailError || isSubmitting}>
           войти
         </Button>
         <Button className="outlined" onClick={() => openModal('register-user')}>

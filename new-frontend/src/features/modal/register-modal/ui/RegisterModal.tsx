@@ -1,25 +1,28 @@
+'use client'
 import Button from '@/shared/ui/Button'
 import FormField from '@/shared/ui/FormField'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import {RegisterUserType} from "../model/type"
-import { emailValidation, passwordValidation } from '@/shared/validation/validators'
+import { emailValidation, first_nameValidation, passwordValidation } from '@/shared/validation/validators'
 import CheckBox from '@/shared/ui/CheckBox'
 import useModal from '@/shared/store/modal'
 import Link from 'next/link'
 import Modal from '@/shared/ui/Modal'
+import { useRegister } from '@/features/modal/register-modal/model/useRegister'
 
 const RegisterModal = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors }
-  } = useForm<RegisterUserType>()
+    formState: { errors, isSubmitting },
+    setError
+  } = useForm<RegisterUserType>({
+    mode: 'onChange',
+  });
 
   const {openModal, closeModal} = useModal();
 
-  const onSubmit: SubmitHandler<RegisterUserType> = async data => {
-    console.log(data)
-  }
+  const { onSubmit, hasManualEmailError, setHasManualEmailError } = useRegister(setError);
 
   return (
     <Modal onClose={closeModal}>
@@ -27,10 +30,10 @@ const RegisterModal = () => {
       <h2 className="form--modal__title">Зарегистрироваться</h2>
       <div className="form--modal__body">
           <FormField
-            {...register('firstName', {required: 'Обязательное поле'})}
-            error={errors.firstName?.message}
+            {...register('first_name', first_nameValidation)}
+            error={errors.first_name?.message}
             label="Имя"
-            name="firstName"
+            name="first_name"
             type="text"
             required
             placeholder="Ваше имя"
@@ -38,7 +41,11 @@ const RegisterModal = () => {
             theme="dark"
           />
           <FormField
-            {...register('email', { ...emailValidation })}
+            {...register('email', {
+              required: 'Обязательное поле',
+              ...emailValidation,
+              onChange: () => setHasManualEmailError(false),
+            })}
             error={errors.email?.message}
             label="Email"
             name="email"
@@ -59,7 +66,7 @@ const RegisterModal = () => {
             theme="dark"
           />
         <CheckBox
-          id="member-rights-agreement"
+          id="member-rights-agreement-register"
           {...register('memberRightsAgreement', {
             required: 'Необходимо согласие с правами и обязанностями'
           })}
@@ -69,7 +76,7 @@ const RegisterModal = () => {
           Я согласен с <Link href="/" className="modal--form__link">правами и обязанностями члена ООО УКС «Улицы России»</Link>
         </CheckBox>
         <CheckBox
-          id="agreement-with-personal-info"
+          id="agreement-with-personal-info-register"
           {...register('agreement', {
             required: 'Необходимо согласие на обработку персональных данных'
           })}
@@ -82,7 +89,7 @@ const RegisterModal = () => {
       </div>
 
       <div className="form--modal__actions form--modal__actions--column">
-        <Button type="submit" className="red">
+        <Button type="submit" className="red" disabled={hasManualEmailError || isSubmitting}>
           зарегистрироваться
         </Button>
         <Button className="outlined" onClick={() => openModal('login-user')}>

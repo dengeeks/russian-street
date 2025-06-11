@@ -45,13 +45,13 @@ const FeedbackForm = () => {
             hint="Только номера РФ"
           />
           <FormField
-            {...register('email', {
+            {...register('email_feed', {
               required: 'Обязательное поле',
               ...emailValidation
             })}
-            error={errors.email?.message}
+            error={errors.email_feed?.message}
             label="ПОЧТА"
-            name="email"
+            name="email_feed"
             placeholder="user@mail.ru"
             required
             hint="Пришлём код подтверждения"

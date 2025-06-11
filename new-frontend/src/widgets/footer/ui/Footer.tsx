@@ -3,11 +3,17 @@ import styles from './Footer.module.css'
 import Button from '@/shared/ui/Button'
 import Link from 'next/link'
 import Logo from '@/shared/ui/Logo'
-import Icon from '@/shared/icon'
 import useModal from '@/shared/store/modal'
+import { useGlobalData } from '@/shared/context/global-data/useGlobalDataContext'
+import Image from 'next/image'
+import { getImageUrl } from '@/shared/utils/getImageUrl'
 
 const Footer = () => {
   const {openModal} = useModal();
+  
+  const {staticContact} = useGlobalData();
+  
+  const {contact_footer, email_footer} = staticContact;
 
   return (
     <footer className={`${styles.footer} section-spacing-top`}>
@@ -32,27 +38,35 @@ const Footer = () => {
         </nav>
 
         <div className={styles.donation}>
-          <Button type="button" onClick={() => openModal('donating')}>Поддержать нас</Button>
-          <p className={`${styles.supportText} ${styles.hiddenMobile}`}>Служба поддержки &nbsp;<a href="mailto:support@mail.ru" className={styles.supportLink}>support@mail.ru</a></p>
+          <Button type="button" onClick={() => openModal('donating')}>
+            Поддержать нас
+          </Button>
+          <p className={`${styles.supportText} ${styles.hiddenMobile}`}>
+            Служба поддержки &nbsp;
+            <a href={`mailto:${email_footer?.email || ''}`} className={styles.supportLink}>
+              {email_footer?.email || '...'}
+            </a>
+          </p>
         </div>
 
         <div className={styles.social}>
           <div>
             <p className={styles.socialTitle}>Мы в социальных сетях</p>
             <div className={styles.socialIcons}>
-              <Link href="#">
-                <Icon icon="youtube" width={42} height={42} />
-              </Link>
-              <Link href="#">
-                <Icon icon="telegram" width={42} height={42} />
-              </Link>
-              <Link href="#">
-                <Icon icon="vk" width={42} height={42} />
-              </Link>
+              {contact_footer?.map((social, index) => (
+                <Link href={social?.url || '#'} key={index} className={styles.socialIcon} target="_blank" rel="noopener noreferrer">
+                  <Image src={getImageUrl(social?.image)} width={42} height={42} alt="Социальная сеть Улицы России" />
+                </Link>
+              ))}
             </div>
           </div>
         </div>
-        <p className={`${styles.supportText} ${styles.hiddenDesktop}`}>Служба поддержки &nbsp;<a href="mailto:support@mail.ru" className={styles.supportLink}>support@mail.ru</a></p>
+        <p className={`${styles.supportText} ${styles.hiddenDesktop}`}>
+          Служба поддержки &nbsp;
+          <a href={`mailto:${email_footer?.email || ''}`} className={styles.supportLink} target="_blank" rel="noopener noreferrer" aria-label={`Отправить письмо на ${email_footer?.email || 'email'}`}>
+            {email_footer?.email || '...'}
+          </a>
+        </p>
         <div className={`${styles.orgInfo} ${styles.hiddenDesktop}`}>
           <p className={styles.orgTitle}>
             Общероссийская общественная организация уличной культуры и спорта «Улицы России»

@@ -6,12 +6,14 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import {Pagination } from 'swiper/modules'
 import Image from 'next/image'
+import { useHomeData } from '@/shared/context/home-data/useHomeDataContext'
+import { getImageUrl } from '@/shared/utils/getImageUrl'
 
-interface StreetGalleryMobileProps {
-  images: string[]
-}
+const StreetGalleryMobile = () => {
+  const { homeData: { street_images } } = useHomeData()
 
-const StreetGalleryMobile = ({ images }: StreetGalleryMobileProps) => {
+  const sortedImages = [...street_images].sort((a, b) => a.order - b.order)
+
   return (
     <div className={`container ${styles.galleryMobile}`}>
       <SectionTitle>Галерея</SectionTitle>
@@ -24,14 +26,14 @@ const StreetGalleryMobile = ({ images }: StreetGalleryMobileProps) => {
         }}
         className="SwiperPagination"
       >
-        {images.map((img, i) => (
+        {sortedImages.map((img, i) => (
           <SwiperSlide key={i}>
             <div className={styles.item}>
               <Image
-                src={`/${img}`}
+                src={getImageUrl(img.image)}
                 fill
                 className={styles.imageGallery}
-                alt={`image ${i + 1}`}
+                alt={`Улица — изображение  ${i + 1}`}
                 sizes="calc(100vw - 32px)"
               />
             </div>
