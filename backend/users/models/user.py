@@ -1,15 +1,13 @@
+import uuid as generate_uuid
+
 from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
                                         PermissionsMixin)
-from django.db import models, transaction
-from django.utils import timezone
+from django.core.validators import FileExtensionValidator
+from django.db import models
 
-from common.constants.user import (LEN_FIRST_NAME, LEN_GENDER, LEN_LAST_NAME,
-                                   LEN_MIDDLE_NAME, LEN_PASSPORT_ISSUED_BY,
-                                   LEN_PASSPORT_NUMBER, LEN_PASSPORT_SERIES,
-                                   LEN_PHONE_NUMBER, LEN_ROLE)
 from common.mixins import DateTimeMixin
-from common.validators import (validate_passport_number,
-                               validate_passport_series, validate_phone_number)
+from common.utils import setup_image_path
+from common.validators import (validate_phone_number)
 
 
 class UserAccountManager(BaseUserManager):
@@ -18,24 +16,17 @@ class UserAccountManager(BaseUserManager):
     чтобы обрабатывать создание и подтверждение пользователей.
 
     Методы:
-    create_superuser(email, password)
-        Создает и возвращает суперпользователя с указанными email и паролем.
+        create_superuser(email, password)
+            Создает и возвращает суперпользователя с указанными email и паролем.
 
-    create_user(email, password=None, **extra_fields)
-        Создает и возвращает пользователя с указанными email и паролем.
-        Дополнительные поля могут быть предоставлены через extra_fields.
+        create(email, password=None, **extra_fields)
+            Создает и возвращает пользователя с указанными email и паролем.
+            Дополнительные поля могут быть предоставлены через extra_fields.
 
-    generate_temporary_password()
-        Генерирует и возвращает случайный временный пароль для пользователя.
+        _create_user(email, password=None, **extra_fields)
+            Создает и возвращает пользователя с указанными email и паролем.
+            Дополнительные поля могут быть предоставлены через extra_fields.
 
-    send_temporary_password_email(email, temporary_password)
-        Отправляет электронное письмо пользователю с предоставленным
-        временным паролем.
-
-    approve_user(user)
-        Одобряет указанного пользователя, устанавливая временный пароль,
-        обновляя статус пользователя на подтвержденный и отправляя
-        электронное письмо с временным паролем.
     """
 
     def _create_user(self, email, password, **extra_fields):
@@ -67,41 +58,21 @@ class UserAccountManager(BaseUserManager):
 
         return self._create_user(email, password, **extra_fields)
 
-    @transaction.atomic
-    def approve_user(self, user):
-        temporary_password = self.generate_temporary_password()
-        user.set_password(temporary_password)
-        user.is_active = True
-        user.save()
-        self.send_temporary_password_email(
-            user.email,
-            temporary_password,
-            user.first_name
-        )
-
 
 class UserAccount(AbstractBaseUser, DateTimeMixin, PermissionsMixin):
     """
     Модель учетной записи пользователя.
 
-    Атрибуты:
+    Поля:
         role (CharField): Роль пользователя.
         first_name (CharField): Имя пользователя.
         last_name (CharField): Фамилия пользователя.
         middle_name (CharField): Отчество пользователя.
-        gender (CharField): Пол пользователя.
-        date_of_birth (Datetime): Дата рождения пользователя.
         phone_number (CharField): Номер телефона пользователя.
+        region (CharField): Регион пользователя
         email (EmailField): Электронная почта пользователя.
-        city (CharField): Город пользователя.
-        passport_series (CharField): Серия паспорта пользователя.
-        passport_number (CharField): Номер паспорта пользователя.
-        passport_issue_date (DateField): Дата выдачи паспорта.
-        passport_issued_by (CharField): Орган, выдавший паспорт.
-        consent_to_rights (CharField): Согласие пользователя на
-        права, по умолчанию False.
-        сonsent_to_processing (CharField): Согласие пользователя
-        на обработку данных.
+        status (BooleanField): Является ли членом организации?.
+
         USERNAME_FIELD (str): Поле, используемое для уникальной
         идентификации пользователя.
         REQUIRED_FIELDS (list): Дополнительные поля, обязательные
@@ -109,103 +80,79 @@ class UserAccount(AbstractBaseUser, DateTimeMixin, PermissionsMixin):
         objects (UserAccountManager): Менеджер модели UserAccount.
     """
 
+    def setup_avatar_path(self, filename: str):
+        filename = filename.replace(' ', '_')
+        return f'uploads/{self.__class__.__name__.lower()}/{self.uuid}/{filename}'
+
     class Role(models.TextChoices):
-        ADMIN = "ADMIN", "admin"
-        USER = "USER", "user"
-        REGIONAL_DIRECTOR = "REGIONAL_DIRECTOR", "regional_director"
+        ADMIN = 'admin', "Главный администратор"
+        USER = 'user', "Пользователь"
+        REGIONAL_DIRECTOR = 'regional_director', 'Региональный руководитель'
+        FEDERAL_DIRECTOR = 'federal_director', 'Федеральный руководитель'
 
-    class Gender(models.TextChoices):
-        MALE = "MALE", "male"
-        FEMALE = "FEMALE", "female"
-
+    uuid = models.UUIDField(
+        default = generate_uuid.uuid4,
+        editable = False,
+        unique = True
+    )
     role = models.CharField(
-        max_length = LEN_ROLE,
+        max_length = 55,
         choices = Role.choices,
         default = Role.USER,
         verbose_name = 'Роль'
     )
+
+    avatar = models.ImageField(
+        upload_to = setup_avatar_path,
+        verbose_name = 'Аватарка',
+        max_length = 1000,
+        validators = [
+            FileExtensionValidator(
+                allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg']
+            )
+        ],
+        blank = True,
+        null = True
+    )
+    email = models.EmailField(
+        unique = True,
+        verbose_name = 'Электронная почта'
+    )
     first_name = models.CharField(
-        max_length = LEN_FIRST_NAME,
+        max_length = 15,
         verbose_name = 'Имя'
     )
     last_name = models.CharField(
-        max_length = LEN_LAST_NAME,
+        max_length = 25,
         verbose_name = 'Фамилия',
         blank = True,
         null = True
     )
     middle_name = models.CharField(
-        max_length = LEN_MIDDLE_NAME,
+        max_length = 25,
         verbose_name = 'Отчество',
         null = True,
         blank = True
     )
-    gender = models.CharField(
-        max_length = LEN_GENDER,
-        choices = Gender.choices,
-        verbose_name = 'Пол',
-        blank = True,
-        null = True
-    )
-    date_of_birth = models.DateField(
-        default = timezone.now,
-        verbose_name = 'Дата рождения',
-        blank = True,
-        null = True
-    )
     phone_number = models.CharField(
-        max_length = LEN_PHONE_NUMBER,
+        max_length = 20,
         validators = [validate_phone_number],
         verbose_name = 'Телефон',
         blank = True,
         null = True
     )
-    email = models.EmailField(unique = True, verbose_name = 'Электронная почта')
-    city = models.CharField(
-        max_length = 20,
-        verbose_name = 'Город',
+    # пока как charfield  (после будет связь)
+    region = models.CharField(
+        max_length = 100,
+        verbose_name = 'Регион',
         blank = True,
         null = True
     )
-    passport_series = models.CharField(
-        max_length = LEN_PASSPORT_SERIES,
-        validators = [validate_passport_series],
-        verbose_name = 'Серия паспорта',
-        blank = True,
-        null = True
-    )
-    passport_number = models.CharField(
-        max_length = LEN_PASSPORT_NUMBER,
-        validators = [validate_passport_number],
-        verbose_name = 'Номер паспорта',
-        blank = True,
-        null = True
-    )
-    passport_issue_date = models.DateField(
-        verbose_name = 'Дата выдачи паспорта',
-        default = timezone.now,
-        blank = True,
-        null = True
-    )
-    passport_issued_by = models.CharField(
-        max_length = LEN_PASSPORT_ISSUED_BY,
-        verbose_name = 'Кем выдан паспорт',
-        blank = True,
-        null = True
-    )
-    consent_to_rights = models.BooleanField(
-        verbose_name = 'Согласие с правилами',
-        default = False,
-        blank = True,
-        null = True
+    status = models.BooleanField(
+        verbose_name = 'Является ли членом организации?',
+        default = False
     )
 
-    consent_to_processing = models.BooleanField(
-        verbose_name = 'Согласие на обработку данных',
-        default = False,
-        blank = True,
-        null = True
-    )
     is_staff = models.BooleanField(
         verbose_name = 'Статус персонала',
         default = False,
@@ -233,14 +180,3 @@ class UserAccount(AbstractBaseUser, DateTimeMixin, PermissionsMixin):
 
     def __str__(self):
         return f'{self.email}'
-
-    def has_perm(self, perm, obj = None):
-        return self.is_superuser
-
-    def has_module_perms(self, app_label):
-        return True
-
-    def save(self, *args, **kwargs):
-        if not self.role or self.role is None:
-            self.role = UserAccount.Role.USER
-        return super().save(*args, **kwargs)
