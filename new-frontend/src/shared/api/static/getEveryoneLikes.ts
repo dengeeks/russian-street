@@ -1,4 +1,5 @@
 import { STATIC_EVERYONE_LIKES } from '@/shared/api/endpoints'
+import { REVALIDATE_TIME } from '@/shared/settings'
 
 export type EveryoneLikesType = {
   everyone_likes: {
@@ -23,6 +24,7 @@ export async function getEveryoneLikes(): Promise<EveryoneLikesType> {
         'Content-Type': 'application/json',
       },
       cache: 'force-cache',
+      next: { revalidate: REVALIDATE_TIME },
     });
 
     if (!res.ok) {

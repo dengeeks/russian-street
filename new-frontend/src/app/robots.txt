@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://russian-street.ru/sitemap.xml

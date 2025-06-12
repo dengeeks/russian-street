@@ -1,4 +1,5 @@
 import { STATIC_CONTACT } from '@/shared/api/endpoints'
+import { REVALIDATE_TIME } from '@/shared/settings'
 
 export type ContactType = {
   contact_footer: {
@@ -30,6 +31,7 @@ export async function getContact(): Promise<ContactType> {
         'Content-Type': 'application/json',
       },
       cache: 'force-cache',
+      next: { revalidate: REVALIDATE_TIME },
     });
 
     if (!res.ok) {

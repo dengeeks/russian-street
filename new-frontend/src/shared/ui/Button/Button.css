@@ -33,6 +33,10 @@
     color: var(--dark-grey);
 }
 
+.button.white {
+    color: var(--white);
+}
+
 
 @media (max-width: 768px) {
 

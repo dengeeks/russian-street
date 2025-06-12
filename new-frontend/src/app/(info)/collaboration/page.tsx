@@ -1,9 +1,11 @@
+import Loader from '@/shared/ui/Loader'
+import { Suspense } from 'react'
+
 import CollaborationIntro from '@/widgets-page/collaboration/collaboration-intro'
 import OurProjects from '@/widgets-page/collaboration/our-projects'
 
 import Breadcrumbs from '@/widgets/breadcrumbs'
-import Loader from '@/shared/ui/Loader'
-import { Suspense } from 'react'
+
 
 export default async function CollaborationPage() {
 

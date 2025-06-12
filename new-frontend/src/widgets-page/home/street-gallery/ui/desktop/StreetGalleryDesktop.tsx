@@ -4,31 +4,25 @@ import Image from 'next/image'
 import SectionTitle from '@/shared/ui/SectionTitle'
 import { useHomeData } from '@/shared/context/home-data/useHomeDataContext'
 import { getImageUrl } from '@/shared/utils/getImageUrl'
+import { imageGallerySizes, gallerySizeByType } from '../../model/imageGallerySizes'
 
 const StreetGalleryDesktop = () => {
   const { homeData: { street_images } } = useHomeData()
 
   const sortedImages = [...street_images].sort((a, b) => a.order - b.order)
 
-  const fullImages = [
-    ...sortedImages,
-    ...Array.from({ length: Math.max(0, 17 - sortedImages.length) }, (_, i) => ({
-      image: undefined,
-      order: sortedImages.length + i,
-      isDefault: true,
-    })),
-  ]
-
   return (
     <div className={`${styles.galleryDesktop} background`}>
-      {fullImages.slice(0, 4).map((img, i) => (
-        <div className={`${styles[`item${i + 1}`]} ${styles.item}`} key={`top-${i}`}>
+      {sortedImages.slice(0, 4).map((img) => (
+        <div className={`${styles[`item${img.order}`]} ${styles.item}`} key={img.order}>
           <Image
             src={getImageUrl(img.image)}
             fill
             className={styles.imageGallery}
-            alt={`Улица — изображение ${i + 1}`}
+            alt={`Улица — изображение ${img.order}`}
+            sizes={gallerySizeByType[imageGallerySizes[img.order]]}
           />
+
         </div>
       ))}
 
@@ -36,13 +30,14 @@ const StreetGalleryDesktop = () => {
         <SectionTitle className={styles.titleGallery}>улица - ЭТО МЫ</SectionTitle>
       </div>
 
-      {fullImages.slice(4).map((img, i) => (
-        <div className={`${styles[`item${i + 5}`]} ${styles.item}`} key={`bottom-${i}`}>
+      {sortedImages.slice(4).map((img) => (
+        <div className={`${styles[`item${img.order}`]} ${styles.item}`} key={img.order}>
           <Image
             src={getImageUrl(img.image)}
             fill
             className={styles.imageGallery}
-            alt={`Улица — изображение ${i + 5}`}
+            alt={`Улица — изображение ${img.order}`}
+            sizes={gallerySizeByType[imageGallerySizes[img.order]]}
           />
         </div>
       ))}

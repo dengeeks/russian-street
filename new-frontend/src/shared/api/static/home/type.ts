@@ -20,6 +20,7 @@ export type OrganizationInfoType = {
   address: string;
   work_time: string;
   email: string;
+  phone: string,
 } | null
 
 type OrderedImage = {

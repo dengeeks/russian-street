@@ -1,5 +1,6 @@
 import { STATIC_HOME } from '@/shared/api/endpoints'
 import type { HomeType } from './type'
+import { REVALIDATE_TIME } from '@/shared/settings'
 
 // заглушка при ошибке
 const EMPTY_HOME: HomeType = {
@@ -20,6 +21,7 @@ export async function getHome(): Promise<HomeType> {
         'Content-Type': 'application/json',
       },
       cache: 'force-cache',
+      next: { revalidate: REVALIDATE_TIME },
     });
 
     if (!res.ok) {

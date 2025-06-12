@@ -1,11 +1,11 @@
 import styles from './Banner.module.css'
-import Button from '@/shared/ui/Button'
 import Image from 'next/image'
 import SectionTitle from '@/shared/ui/SectionTitle'
 import MediaSwitcher from '@/shared/ui/MediaSwitcher'
 import EditableTextBlock from '@/shared/ui/EditableTextBlock'
 import { JoinStreetType } from '@/shared/api/static/about-us/type'
 import { extractVideoId } from '@/shared/utils/extractVideoId'
+import ActionButton from '@/features/action-buttons'
 
 interface BannerProps {
   joinStreet: JoinStreetType;
@@ -22,7 +22,7 @@ const Banner = ({joinStreet}: BannerProps) => {
             <Image src="/png/about-us-arrow.png" alt="стрелки" width={74} height={68} priority />
           </div>
           <SectionTitle>СТАНЬ ЧАСТЬЮ УЛИЦ</SectionTitle>
-          <Button type="button">Участвовать</Button>
+          <ActionButton type="button" modalName="join-organization" requireAuth>Участвовать</ActionButton>
         </div>
 
         <div className={styles.bannerAboutVideoWrapper}>

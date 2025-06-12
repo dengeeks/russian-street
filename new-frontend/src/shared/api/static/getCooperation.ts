@@ -1,4 +1,5 @@
 import { STATIC_COOPERATION } from '@/shared/api/endpoints'
+import { REVALIDATE_TIME } from '@/shared/settings'
 
 export type CooperationType = {
   cooperation: {
@@ -23,6 +24,7 @@ export async function getCooperation(): Promise<CooperationType> {
         'Content-Type': 'application/json',
       },
       cache: 'force-cache',
+      next: { revalidate: REVALIDATE_TIME },
     });
 
     if (!res.ok) {
