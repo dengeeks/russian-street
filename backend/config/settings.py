@@ -132,6 +132,11 @@ MEDIA_URL = 'back_media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'back_media')
 
 REST_FRAMEWORK = {
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.MultiPartParser',  # Для обработки файлов
+        'rest_framework.parsers.FormParser',
+    ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
