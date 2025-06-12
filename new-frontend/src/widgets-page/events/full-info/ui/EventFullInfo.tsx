@@ -3,7 +3,7 @@ import SectionTitle from '@/shared/ui/SectionTitle'
 import RegionalLeaderCard from '@/entities/regional-leader-card'
 import Icon from '@/shared/icon'
 import Link from 'next/link'
-import Button from '@/shared/ui/Button'
+import ActionButton from '@/features/action-buttons'
 
 const EventFullInfo = () => {
   return (
@@ -28,8 +28,8 @@ const EventFullInfo = () => {
     </div>
 
     <div className={styles.eventFullInfoActionsBlock}>
-      <Link href="/" className="more-link">поддержать мероприятие</Link>
-      <Button className="red">Участвовать</Button>
+      <ActionButton type="button" modalName="donating" className="outlined white">поддержать мероприятие</ActionButton>
+      <ActionButton className="red" type="button" modalName="join-organization" requireAuth>Участвовать</ActionButton>
     </div>
   </section>
 

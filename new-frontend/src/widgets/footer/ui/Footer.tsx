@@ -1,16 +1,13 @@
 'use client'
 import styles from './Footer.module.css'
-import Button from '@/shared/ui/Button'
 import Link from 'next/link'
 import Logo from '@/shared/ui/Logo'
-import useModal from '@/shared/store/modal'
 import { useGlobalData } from '@/shared/context/global-data/useGlobalDataContext'
 import Image from 'next/image'
 import { getImageUrl } from '@/shared/utils/getImageUrl'
+import ActionButton from '@/features/action-buttons'
 
 const Footer = () => {
-  const {openModal} = useModal();
-  
   const {staticContact} = useGlobalData();
   
   const {contact_footer, email_footer} = staticContact;
@@ -38,9 +35,7 @@ const Footer = () => {
         </nav>
 
         <div className={styles.donation}>
-          <Button type="button" onClick={() => openModal('donating')}>
-            Поддержать нас
-          </Button>
+          <ActionButton type="button" modalName="donating">Поддержать нас</ActionButton>
           <p className={`${styles.supportText} ${styles.hiddenMobile}`}>
             Служба поддержки &nbsp;
             <a href={`mailto:${email_footer?.email || ''}`} className={styles.supportLink}>

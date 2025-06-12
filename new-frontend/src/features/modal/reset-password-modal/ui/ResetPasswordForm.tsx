@@ -6,6 +6,7 @@ import {ResetPasswordFormType} from "../model/type"
 import Modal from '@/shared/ui/Modal'
 import { passwordValidation } from '@/shared/validation/validators'
 import { useResetPasswordForm } from '../model/useResetPasswordForm'
+import { useBodyScrollLock } from '@/shared/hooks/useBodyScrollLock'
 
 interface ResetPasswordFormProps {
   uid: string;
@@ -20,6 +21,7 @@ const ResetPasswordForm = ({uid, token}:ResetPasswordFormProps) => {
     watch
   } = useForm<ResetPasswordFormType>()
 
+  useBodyScrollLock(true)
 
   const { onSubmit, close } = useResetPasswordForm({ uid, token });
 

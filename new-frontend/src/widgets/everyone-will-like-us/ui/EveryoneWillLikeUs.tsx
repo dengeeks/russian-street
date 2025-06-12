@@ -1,8 +1,8 @@
 import styles from './EveryoneWillLikeUs.module.css'
 import SectionTitle from '@/shared/ui/SectionTitle'
-import Button from '@/shared/ui/Button'
 import { getEveryoneLikes } from '@/shared/api/static/getEveryoneLikes'
 import LikeUsContent from './internal/LikeUsContent'
+import ActionButton from '@/features/action-buttons'
 
 
 const EveryoneWillLikeUs = async () => {
@@ -18,9 +18,9 @@ const EveryoneWillLikeUs = async () => {
 
       <LikeUsContent data={EveryoneLikes}/>
       <div className={styles.everyoneButton}>
-        <Button className="red" type="button">
+        <ActionButton className="red" type="button" modalName="join-organization" requireAuth>
           ВСТУПИТЬ
-        </Button>
+        </ActionButton>
       </div>
     </section>
   )

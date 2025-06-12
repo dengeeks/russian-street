@@ -1,10 +1,9 @@
 import styles from './BannerHome.module.css'
 import Image from 'next/image'
-import Button from '@/shared/ui/Button'
 import MediaSwitcher from '@/shared/ui/MediaSwitcher'
-import JoinOrganizationButton from '@/features/join-organization-button'
 import { extractVideoId } from '@/shared/utils/extractVideoId'
 import type { PromotionalVideoType } from '@/shared/api/static/home/type'
+import ActionButton from '@/features/action-buttons'
 
 interface BannerHomeProps {
   promoVideo: PromotionalVideoType;
@@ -30,10 +29,8 @@ const BannerHome = ({ promoVideo }: BannerHomeProps) => {
           </div>
           <h1>общероссийская общественная организация уличной культуры и спорта</h1>
           <div className={styles.bannerWrapperButton}>
-            <JoinOrganizationButton>Участвовать</JoinOrganizationButton>
-            <Button type="button" className={`gray ${styles.bannerWrapperButtonDesktop}`}>
-              поддержать организацию
-            </Button>
+            <ActionButton type="button" modalName="join-organization" requireAuth>Участвовать</ActionButton>
+            <ActionButton type="button" modalName="donating" className={`gray ${styles.bannerWrapperButtonDesktop}`}>поддержать организацию</ActionButton>
           </div>
         </div>
       </div>

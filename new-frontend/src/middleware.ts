@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '@/shared/settings';
 
-
 export function middleware(request: NextRequest) {
   const { pathname} = request.nextUrl
 
@@ -21,26 +20,11 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // Обработка reset-password маршрута
-  const match = pathname.match(/^\/reset-password\/([^\/]+)\/([^\/]+)/)
-  if (match) {
-    const uid = match[1]
-    const token = match[2]
-
-    const url = request.nextUrl.clone()
-    url.pathname = '/'
-    url.searchParams.set('reset_password_uid', uid)
-    url.searchParams.set('reset_password_token', token)
-
-    return NextResponse.rewrite(url)
-  }
-
   return NextResponse.next()
 }
 
 export const config = {
   matcher: [
     '/profile',
-    '/reset-password/:uid/:token',
   ],
 };

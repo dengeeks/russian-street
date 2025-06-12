@@ -33,7 +33,7 @@ const StreetGalleryMobile = () => {
                 src={getImageUrl(img.image)}
                 fill
                 className={styles.imageGallery}
-                alt={`Улица — изображение  ${i + 1}`}
+                alt={`Улица — изображение  ${img.order}`}
                 sizes="calc(100vw - 32px)"
               />
             </div>
