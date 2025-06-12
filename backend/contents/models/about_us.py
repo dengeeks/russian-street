@@ -8,6 +8,24 @@ from common.validators import validate_iframe
 
 
 class JoinStreet(UUIDMixin, DateTimeMixin, SingleInstanceMixin):
+    """
+    Модель для блока стань частью улицы.
+
+    Наследует:
+        - UUIDMixin: UUID primary key наследование.
+        - DateTimeMixin: автоматические поля создания и обновления.
+        - SingleInstanceMixin: ограничение до одного экземпляра.
+
+    Поля:
+        - format_type (CharField): тип (Изображение или видео).
+        - video_url (CharField): iframe video (необязательное поле).
+        - image (ImageField): изображение (необязательное поле).
+        - text (RichTextField): Текст с редактором.
+
+    Meta:
+        verbose_name: 'стань частью улицы'
+        verbose_name_plural: 'стань частью улицы'
+    """
     FORMAT_TYPE = [
         ('video_url', 'Видео'),
         ('image', 'Изображение'),
@@ -54,6 +72,21 @@ class JoinStreet(UUIDMixin, DateTimeMixin, SingleInstanceMixin):
 
 
 class Mission(UUIDMixin, DateTimeMixin, SingleInstanceMixin):
+    """
+    Модель для блока миссия.
+
+    Наследует:
+        - UUIDMixin: UUID primary key наследование.
+        - DateTimeMixin: автоматические поля создания и обновления.
+        - SingleInstanceMixin: ограничение до одного экземпляра.
+
+    Поля:
+        - image (ImageField): Изображение.
+
+    Meta:
+        verbose_name: 'миссия'
+        verbose_name_plural: 'миссия'
+    """
     image = models.ImageField(
         upload_to = setup_image_path,
         verbose_name = 'Изображение',
@@ -75,7 +108,6 @@ class Mission(UUIDMixin, DateTimeMixin, SingleInstanceMixin):
 
 
 class Information(DateTimeMixin, SingleInstanceMixin):
-
     """
     Модель для информации об организации.
 
@@ -90,8 +122,8 @@ class Information(DateTimeMixin, SingleInstanceMixin):
         - event (PositiveIntegerField): количество мероприятий.
 
     Meta:
-        verbose_name: 'Миссия и цели (текст)'
-        verbose_name_plural: 'Миссия и цели (текст)'
+        verbose_name: 'информация'
+        verbose_name_plural: 'информация'
     """
     person = models.PositiveIntegerField(
         verbose_name = 'Количество человек'

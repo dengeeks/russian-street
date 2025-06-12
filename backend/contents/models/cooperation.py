@@ -5,6 +5,22 @@ from common.mixins import DateTimeMixin, SingleInstanceMixin
 
 
 class Cooperation(DateTimeMixin, SingleInstanceMixin):
+    """
+    Модель для страницы сотрудничество.
+
+    Наследует:
+        - DateTimeMixin: автоматические поля создания и обновления.
+        - SingleInstanceMixin: ограничение на 1 обьект.
+
+    Поля:
+        - text (RichTextField): Текст с редактором.
+        - partners_count (PositiveIntegerField): Количество партнеров.
+        - projects_count (PositiveIntegerField): Количество реализованных проектов.
+
+    Meta:
+        verbose_name: 'Изображение миссии и целей'
+        verbose_name_plural: 'Изображения миссии и целей'
+    """
     text = RichTextField(
         verbose_name = 'Текстовое описание'
     )
