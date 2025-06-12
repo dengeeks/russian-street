@@ -9,6 +9,7 @@ class EveryoneLikes(DateTimeMixin, MaxCountLimitedMixin):
 
     Наследует:
         - DateTimeMixin: автоматические поля создания и обновления.
+        - MaxCountLimitedMixin: ограничение по количеству изображений (до 7).
 
     Поля:
         - title (CharField): Заголовок (студент, школьник).
