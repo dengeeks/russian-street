@@ -51,11 +51,13 @@ INSTALLED_APPS = [
     'users',
     'partners',
     'feedbacks',
+    'oauth2',
     'contents.apps.ContentsConfig'
 ]
 
 # сторонние приложения
 EXTERNAL_APPS = [
+    'oauth2_provider',
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
@@ -74,6 +76,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'oauth2_provider.middleware.OAuth2TokenMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -139,6 +142,7 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication'
     ),
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_THROTTLE_CLASSES': [
@@ -151,13 +155,47 @@ REST_FRAMEWORK = {
     }
 }
 
+OIDC_RSA_PRIVATE_KEY_PATH = config('OIDC_RSA_PRIVATE_KEY_PATH')
+OIDC_RSA_PRIVATE_KEY = Path(OIDC_RSA_PRIVATE_KEY_PATH).read_text()
+
+# OAUTH2
+OAUTH2_PROVIDER = {
+    'SCOPES': {
+        'openid': 'OpenID Connect scope'
+    },
+    'OIDC_ENABLED': True,
+    'OIDC_RP_INITIATED_LOGOUT_ENABLED': True,
+    'OIDC_RP_INITIATED_LOGOUT_ALWAYS_PROMPT': False,
+    'OIDC_RSA_PRIVATE_KEY': OIDC_RSA_PRIVATE_KEY,
+    "OAUTH2_VALIDATOR_CLASS": "oauth2.oauth2_validators.CustomOAuth2Validator",
+    'ACCESS_TOKEN_EXPIRE_SECONDS': 14400,
+    "REFRESH_TOKEN_EXPIRE_SECONDS": 2592000,
+    'AUTHORIZATION_CODE_EXPIRE_SECONDS': 600,
+
+}
+
+LOGIN_URL = config('LOGIN_URL', cast = str, default = '/login/')
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'oauth2_provider.backends.OAuth2Backend',
+]
+
 # JWT
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes = 15),
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours = 4),
     "REFRESH_TOKEN_LIFETIME": timedelta(days = 30),
     "SIGNING_KEY": SECRET_KEY,
-    "AUTH_HEADER_TYPES": ("JWT",)
+    "AUTH_HEADER_TYPES": ("JWT",),
+    'UPDATE_LAST_LOGIN': True
 }
+
+# CORS
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_ALL_ORIGINS = True
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:3000',
+]
 
 # SPECTACULAR
 SPECTACULAR_SETTINGS = {
@@ -264,6 +302,28 @@ UNFOLD = {
         "show_search": True,
         "show_all_applications": True,
         "navigation": [
+            {
+                "title": "OAuth2 приложения",
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": "OAuth2",
+                        "icon": "app_registration",
+                        "link": reverse_lazy("admin:oauth2_provider_application_changelist"),
+                    },
+                ],
+            },
+            {
+                "title": "Пользователи",
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": "Пользователи",
+                        "icon": "person",
+                        "link": reverse_lazy("admin:users_useraccount_changelist"),
+                    }
+                ],
+            },
             {
                 "title": "Главная страница",
                 "collapsible": True,
