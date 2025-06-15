@@ -5,6 +5,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from users.models.user import UserAccount
 from users.tasks.auth import reset_password_task
+from django.utils.timezone import now
 
 
 class UserRegistrationService:
@@ -39,7 +40,9 @@ class UserRegistrationService:
         password = result.validated_data['password']
 
         # создание пользователя
-        user = cls.__model_user.objects.create(first_name = first_name, email = email, password = password)
+        user = cls.__model_user.objects.create(
+            first_name = first_name, email = email, password = password, last_login = now()
+            )
 
         return cls.get_token(user)
 

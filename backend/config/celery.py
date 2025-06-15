@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 
 from celery import Celery
 
@@ -9,7 +10,9 @@ app.config_from_object('django.conf:settings', namespace = 'CELERY')
 app.autodiscover_tasks()
 app.conf.timezone = 'Europe/Moscow'
 
-
-@app.task(bind = True, ignore_result = True)
-def debug_task(self):
-    print(f'Request: {self.request!r}')
+app.conf.beat_schedule = {
+    'clear-tokens-daily': {
+        'task': 'oauth2.tasks.clear_tokens',
+        'schedule': timedelta(seconds = 24 * 60 * 60),
+    }
+}
