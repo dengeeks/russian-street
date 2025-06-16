@@ -1,5 +1,6 @@
 import { STATIC_ABOUT_US } from '@/shared/api/endpoints'
 import type { AboutUsType } from './type'
+import { REVALIDATE_TIME } from '@/shared/settings'
 
 // заглушка при ошибке
 const EMPTY_ABOUT_US: AboutUsType = {
@@ -16,6 +17,7 @@ export async function getAboutUs(): Promise<AboutUsType> {
         'Content-Type': 'application/json',
       },
       cache: 'force-cache',
+      next: { revalidate: REVALIDATE_TIME },
     });
 
     if (!res.ok) {

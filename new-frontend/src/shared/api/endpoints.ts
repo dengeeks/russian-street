@@ -15,7 +15,7 @@ export const USER_REGISTRATION = getApiUrl(`user/auth/registration/`, false);
 
 export const USER_LOGIN = getApiUrl(`user/auth/authorization/`, false);
 
-export const USER_GET = (ssr: boolean = true) =>
+export const USER_GET = (ssr: boolean = false) =>
   getApiUrl(`user/profile/`, ssr);
 
 export const USER_RESET_PASSWORD = getApiUrl(`user/auth/reset-password/`, false);

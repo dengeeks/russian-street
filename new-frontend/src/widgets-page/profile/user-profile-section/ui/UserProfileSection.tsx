@@ -1,9 +1,8 @@
-'use client'
 import styles from './UserProfileSection.module.css'
 import RegionalLeaderCard from '@/entities/regional-leader-card'
 import SectionTitle from '@/shared/ui/SectionTitle'
 import { UserAvatar, UserAccountInfo, Logout, DonationHistory } from '@/features/profile'
-import JoinOrganizationButton from '@/features/join-organization-button'
+import ActionButton from '@/features/action-buttons'
 
 const UserProfileSection = () => {
 
@@ -13,7 +12,7 @@ const UserProfileSection = () => {
       <div className={styles.userProfileWrapper}>
         <div className={styles.userProfileHeader}>
           <SectionTitle>Личный кабинет</SectionTitle>
-          <JoinOrganizationButton>вступить в организацию</JoinOrganizationButton>
+          <ActionButton type="button" modalName="join-organization" requireAuth>вступить в организацию</ActionButton>
         </div>
         <div className={styles.userProfileInfo}>
           <div className={styles.userProfileContainer}>

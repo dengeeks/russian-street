@@ -1,3 +1,4 @@
+'use client'
 import styles from './Logout.module.css'
 import Icon from '@/shared/icon'
 import { startTransition } from 'react'

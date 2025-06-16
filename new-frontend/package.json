@@ -11,12 +11,11 @@
   },
   "dependencies": {
     "isomorphic-dompurify": "^2.25.0",
-    "next": "15.1.2",
+    "next": "15.3.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.56.4",
     "swiper": "^11.2.6",
-    "ua-parser-js": "^2.0.3",
     "zustand": "^5.0.4"
   },
   "devDependencies": {
@@ -25,7 +24,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "^15.1.2",
+    "eslint-config-next": "^15.3.3",
     "prettier": "^3.5.3",
     "typescript": "^5"
   }

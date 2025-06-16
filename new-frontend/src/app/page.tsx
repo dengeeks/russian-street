@@ -1,4 +1,4 @@
-import dynamic from 'next/dynamic'
+import loadable from 'next/dynamic'
 import { Suspense } from 'react'
 import Loader from '@/shared/ui/Loader'
 
@@ -6,26 +6,19 @@ import BannerHome from '@/widgets-page/home/banner'
 import MapRegionHighlighter from '@/widgets-page/home/map-region-highlighter'
 import Events from '@/widgets-page/home/events'
 
-const StreetGallery = dynamic(() => import('@/widgets-page/home/street-gallery'))
-const WhoWeAre = dynamic(() => import('@/widgets-page/home/who-we-are'))
-const Direction = dynamic(() => import('@/widgets-page/home/direction'))
-const FeedbackContact = dynamic(() => import('@/widgets-page/home/feedback-contact'))
+const StreetGallery = loadable(() => import('@/widgets-page/home/street-gallery'))
+const WhoWeAre = loadable(() => import('@/widgets-page/home/who-we-are'))
+const Direction = loadable(() => import('@/widgets-page/home/direction'))
+const FeedbackContact = loadable(() => import('@/widgets-page/home/feedback-contact'))
 
 import MarqueeText from '@/widgets/marquee-text'
 import EveryoneWillLikeUs from '@/widgets/everyone-will-like-us'
 import Partners from '@/widgets/partners'
 import ContentShowcase from '@/widgets/сontent-showcase'
-
-import ResetPasswordForm from '@/features/modal/reset-password-modal'
 import { getHome } from '@/shared/api/static/home/getHome'
 import { HomeDataProvider } from '@/shared/context/home-data/HomeDataContext'
 
-interface HomePageProps {
-  searchParams: Promise<{ reset_password_uid: string; reset_password_token: string }>
-}
-
-export default async function HomePage({ searchParams }: HomePageProps) {
-  const { reset_password_uid, reset_password_token } = await searchParams;
+export default async function HomePage() {
 
   const homeData = await getHome()
 
@@ -60,9 +53,6 @@ export default async function HomePage({ searchParams }: HomePageProps) {
       <Suspense fallback={<Loader />}>
         <FeedbackContact />
       </Suspense>
-      {reset_password_uid && reset_password_token && (
-        <ResetPasswordForm uid={reset_password_uid} token={reset_password_token} />
-      )}
     </HomeDataProvider>
   )
 }

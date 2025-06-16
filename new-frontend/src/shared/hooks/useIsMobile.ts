@@ -1,22 +1,18 @@
 'use client'
 import { useCallback, useEffect, useState } from 'react'
-import { useGlobalData } from '@/shared/context/global-data/useGlobalDataContext'
 
 export function useMobileDetection(breakpoint = 768) {
-  const { serverIsMobile } = useGlobalData()
+  const [isMobile, setIsMobile] = useState(false)
 
-  // Инициализируем из serverIsMobile, но дальше слушаем только resize
-  const [isMobile, setIsMobile] = useState(serverIsMobile)
-
-  const handleResize = useCallback(() => {
-    const next = window.innerWidth <= breakpoint
-    setIsMobile(prev => (prev !== next ? next : prev))
+  const updateIsMobile = useCallback(() => {
+    setIsMobile(window.innerWidth <= breakpoint)
   }, [breakpoint])
 
   useEffect(() => {
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [handleResize])
+    updateIsMobile()
+    window.addEventListener('resize', updateIsMobile)
+    return () => window.removeEventListener('resize', updateIsMobile)
+  }, [updateIsMobile])
 
   return isMobile
 }

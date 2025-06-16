@@ -1,11 +1,24 @@
 'use client'
 import './MapRegionHighlighter.css'
-import Map from '@/features/home/map-region-highlighter'
+import dynamic from 'next/dynamic'
+import Loader from '@/shared/ui/Loader'
+
+const Map = dynamic(() => import('@/features/home/map-region-highlighter'), {
+  ssr: false,
+  loading: () => <Loader/>,
+})
+
+const FilterMapMobile = dynamic(() => import('./FilterMapMobile'), {
+  ssr: false,
+})
+
+
 import TypeToggle from '@/features/event-place-toggle'
-import { regionOptions } from '../model/mock/regions'
 import SelectMenu from '@/shared/ui/SelectMenu'
-import FilterMapMobile from './FilterMapMobile'
+
+import { regionOptions } from '../model/mock/regions'
 import { useMobileDetection } from '@/shared/hooks/useIsMobile'
+
 
 const MapRegionHighlighter = () => {
   const isMobile = useMobileDetection()

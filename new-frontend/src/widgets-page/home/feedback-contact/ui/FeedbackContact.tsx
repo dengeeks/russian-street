@@ -28,15 +28,13 @@ const FeedbackContact = () => {
               style={{ border: 0, display: 'block' }}
               title={organization_info?.address}
               aria-label={organization_info?.address}
-              loading="lazy">
-
-            </iframe>
+              loading="lazy"/>
           </div>
 
           <div className={styles.address}>
             <span className={styles.addressItem}>{organization_info?.address || '...'}</span>
             <span className={styles.addressItem}>{organization_info?.work_time || '...'}</span>
-            <span className={styles.addressNumber}>8-800-550-5050</span>
+            <span className={styles.addressNumber}>{organization_info?.phone || '...'}</span>
           </div>
 
           <div className={styles.emailSocial}>
