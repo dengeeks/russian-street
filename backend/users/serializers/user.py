@@ -79,9 +79,14 @@ class UserUpdateSerializer(serializers.Serializer):
 
 
 class UserRetrieveSerializer(serializers.ModelSerializer):
+    avatar = serializers.SerializerMethodField()
+
     class Meta:
         model = UserAccount
         fields = [
             'uuid', 'avatar', 'email', 'first_name', 'last_name',
             'middle_name', 'phone_number', 'region', 'status'
         ]
+
+    def get_avatar(self, obj):
+        return obj.avatar.url
