@@ -29,7 +29,7 @@ const OAuth2Client = (data: OAuth2Type) => {
       openModal('login-user')
     }
 
-    if (OAuth2Data.status === 400 && OAuth2Data.json?.url) {
+    if (OAuth2Data.json?.url) {
       router.push(OAuth2Data.json.url)
     }
 
