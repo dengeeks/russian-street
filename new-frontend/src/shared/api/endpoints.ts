@@ -48,4 +48,4 @@ export const USER_UPDATE = getApiUrl(`user/update/`, false);
     getApiUrl(`static/aboutus/`, ssr);
 
 
-export const O_AUTH_2 = getApiUrl(`/o/authorize/`, false);
+export const O_AUTH_2 = getApiUrl(`o/authorize/`, false);

@@ -12,4 +12,5 @@ export const remoteMediaPattern = {
   pathname: '/back_media/**',
 };
 
+
 export const REVALIDATE_TIME = parseInt(process.env.NEXT_PUBLIC_REVALIDATE_TIME || '86400', 10);
