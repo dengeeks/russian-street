@@ -1,0 +1,52 @@
+.favPartRoot {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.favPartTabs {
+    display: flex;
+    gap: 44px;
+}
+
+.favPartTab {
+    font-size: 32px;
+    font-stretch: semi-condensed;
+    line-height: 150%;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.favPartTab.favPartTabActive {
+    text-decoration: underline 1px;
+    text-underline-offset: 10px;
+}
+
+.favPartTab:hover {
+    text-decoration: underline 1px;
+    text-underline-offset: 10px;
+}
+
+.favPartCards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+
+@media (max-width: 768px) {
+    .favPartRoot {
+        gap: 40px;
+    }
+
+    .favPartTabs {
+        gap: 16px;
+    }
+
+    .favPartTab {
+        font-size: 15px;
+    }
+
+
+}

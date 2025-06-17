@@ -1,0 +1,6 @@
+.prettierignore
+.env.example
+.gitignore
+.next
+README.md
+node_modules

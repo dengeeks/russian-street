@@ -1,0 +1,41 @@
+.arrow.swiper-button-next:after,
+.arrow.swiper-button-prev:after{
+  display: none;
+}
+
+.arrow.swiper-button-disabled {
+  cursor: default;
+  pointer-events: none;
+  display: none;
+}
+
+.swiper-button-next.arrow svg {
+  transform: rotate(-180deg);
+}
+
+
+.ContentShowcase .arrow {
+  background-color: var(--white);
+  border-radius: 50%;
+  padding: 10px;
+  width: 49px;
+  height: 49px;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-top: 0;
+  color: var(--dark-grey);
+  cursor: pointer;
+}
+@media (hover: hover) and (pointer: fine) {
+  .ContentShowcase .arrow:hover {
+    background-color: var(--blue);
+    color: var(--white);
+  }
+}
+
+@media (max-width: 768px) {
+  .ContentShowcase .arrow {
+    width: 49px;
+    height: 49px;
+  }
+}

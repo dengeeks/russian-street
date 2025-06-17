@@ -1,0 +1,11 @@
+.eventsSidebarAside {
+    display: flex;
+    gap: 40px;
+    flex-direction: column;
+}
+
+.eventsSidebarFilters {
+    display: flex;
+    gap: 24px;
+    flex-direction: column;
+}

@@ -1,0 +1,62 @@
+.eventBanner {
+  position: relative;
+    overflow: hidden;
+    height: 600px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+
+.eventBannerContent {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    position: relative;
+    z-index: 1;
+}
+
+.eventBannerLocation {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 130%;
+    font-stretch: semi-condensed;
+}
+
+.eventBannerButton {
+    margin-top: 20px;
+}
+
+
+@media (max-width: 768px) {
+    .eventBanner {
+        flex-direction: column;
+        height: 100%;
+        gap: 20px;
+    }
+
+    .eventBannerWrapper {
+        position: relative;
+        overflow: hidden;
+        height: 360px;
+        aspect-ratio: 1200 / 600;
+    }
+
+    .eventBannerWrapper :global(.video){
+        width: 90vh;
+    }
+
+
+    .eventBannerContent {
+        gap: 8px;
+    }
+
+    .eventBannerLocation {
+        font-size: 15px;
+        color: var(--grey);
+    }
+
+    .eventBannerButton {
+        margin-top: 12px;
+    }
+}

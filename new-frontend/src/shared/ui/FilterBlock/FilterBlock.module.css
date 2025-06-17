@@ -1,0 +1,77 @@
+.FilterBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+.FilterBlockCheckboxRow {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.FilterBlockCheckbox {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+
+}
+
+.FilterBlockCustomBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    min-height: 24px;
+    border: 1px solid var(--white);
+}
+
+.FilterBlockLabel, .FilterBlockToggleAll {
+    font-size: 20px;
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: 130%;
+    font-stretch: semi-condensed;
+}
+
+.FilterBlockToggleAll {
+    text-align: right;
+    cursor: pointer;
+    color: var(--grey);
+    text-transform: none;
+}
+
+.FilterBlockItems {
+    display: flex;
+    gap: 4px;
+    flex-direction: column;
+    padding-left: 24px;
+}
+
+.FilterBlockItems .FilterBlockCustomBox {
+    border-color: var(--grey);
+}
+
+.FilterBlockItems .FilterBlockLabel {
+    color: var(--grey);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .FilterBlockCheckboxRow:hover .FilterBlockCustomBox {
+        border-color: var(--blue-hover);
+    }
+
+    .FilterBlockCheckboxRow:hover, .FilterBlockCheckboxRow:hover .FilterBlockLabel {
+        color: var(--blue-hover);
+    }
+}
+
+@media (max-width: 768px) {
+    .FilterBlockToggleAll {
+        text-align: left;
+    }
+
+}
+

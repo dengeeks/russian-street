@@ -1,0 +1,83 @@
+.donationHistory {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 414px;
+}
+
+.donationHistoryHeader {
+    color: var(--red);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+
+.donationHistoryList {
+    border: 1px solid var(--red);
+    padding: 30px 10px 30px 30px;
+    max-height: 340px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    overscroll-behavior: contain;
+}
+
+
+
+.donationHistoryItem {
+    min-height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-donation);
+}
+
+.donationHistoryDate,
+.donationHistoryAmount,
+.donationHistoryRepeatButton,
+.donationHistoryHeader {
+    font-size: 20px;
+    color: var(--red);
+    letter-spacing: 0.02rem;
+    line-height: 150%;
+    font-weight: 400;
+}
+
+.donationHistoryRepeatButton {
+    height: 40px;
+    background-color: var(--red);
+    color: var(--white);
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+@media (max-width: 768px) {
+    .donationHistoryList {
+        padding: 15px 10px 15px 15px;
+        max-height: 280px;
+    }
+
+    .donationHistoryItem {
+        min-height: 63px;
+    }
+
+    .donationHistoryDate,
+    .donationHistoryAmount,
+    .donationHistoryRepeatButton,
+    .donationHistoryHeader {
+        font-size: 15px;
+    }
+
+    .donationHistoryRepeatButton {
+        height: 33px;
+    }
+}
+
+

@@ -1,0 +1,27 @@
+.content-showcase {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    gap: 60px;
+    flex-direction: column;
+}
+
+.content-showcase .ContentShowcase .swiper-slide{
+   max-width: 286px;
+}
+
+
+.content-showcase_hidden-desktop {
+    display: none;
+}
+
+
+@media (max-width: 768px) {
+    .content-showcase {
+        gap: 20px;
+    }
+
+    .content-showcase_hidden-desktop {
+        display: flex;
+    }
+}

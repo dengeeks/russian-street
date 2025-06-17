@@ -1,0 +1,71 @@
+.userProfileImageWrapper {
+    position: relative;
+    width: 100%;
+    max-width: 427px;
+    max-height: 400px;
+    aspect-ratio: 427 / 400;
+}
+
+.userProfileImageEdit {
+    border: none;
+    background-color: var(--red);
+    padding: 8px;
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    z-index: 1;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+}
+
+.userProfileImage {
+    object-fit: cover;
+}
+
+.userProfileImageEdit.uploadLabel {
+
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: max-content;
+
+    border: 1px solid var(--black);
+    background-color: var(--white);
+    border-radius: 0;
+    padding: 13px 32px;
+    gap: 20px;
+}
+
+.uploadLabelText {
+    font-size: 20px;
+    line-height: 150%;
+    letter-spacing: 0.02rem;
+    font-weight: 400;
+    font-stretch: semi-condensed;
+    color: var(--black);
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+
+@media (max-width: 768px) {
+    .userProfileImageEdit.uploadLabel {
+        padding: 8px 16px;
+        gap: 8px;
+    }
+
+    .userProfileImageEdit.uploadLabel :global(.icon) {
+        width: 24px;
+        height: 24px;
+    }
+
+    .uploadLabelText {
+        font-size: 16px;
+    }
+
+}

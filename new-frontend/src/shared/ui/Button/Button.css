@@ -1,0 +1,47 @@
+.button {
+    height: 60px;
+    display: flex;
+    padding: 0 32px;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    color: var(--white);
+    font-family: var(--font-Bahnschrift), sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-align: center;
+    max-width: max-content;
+}
+
+.button.red {
+    background-color: var(--red);
+}
+
+.button.gray {
+    background-color: var(--dark-grey);
+}
+
+.button.blue {
+    background-color: var(--blue);
+}
+
+.button.outlined {
+    background-color: transparent;
+    border: 3px solid var(--red);
+    color: var(--dark-grey);
+}
+
+.button.white {
+    color: var(--white);
+}
+
+
+@media (max-width: 768px) {
+
+    .button {
+        height: 44px;
+        font-size: 15px;
+    }
+}

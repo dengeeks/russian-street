@@ -1,0 +1,118 @@
+.feedbackContact {
+    display: flex;
+    gap: 60px;
+    flex-direction: column;
+}
+
+.wrapper {
+    gap: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.infoBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 490px;
+    width: 100%;
+}
+
+.map {
+    height: 355px;
+    position: relative;
+}
+
+.address,
+.emailSocial {
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+}
+
+.addressItem {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 130%;
+    font-stretch: semi-condensed;
+}
+
+.addressNumber {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 130%;
+}
+
+.email {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 130%;
+    font-stretch: semi-condensed;
+}
+
+.socialIcons {
+    display: flex;
+    gap: 12px;
+}
+
+.leadersLink {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 130%;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+
+@media (max-width: 768px) {
+    .feedbackContact {
+        gap: 20px;
+    }
+
+    .wrapper {
+        flex-direction: column;
+    }
+
+    .infoBlock {
+        gap: 20px;
+        max-width: none;
+        order: 2;
+    }
+
+    .map {
+        aspect-ratio: 16 / 9;
+        height: auto;
+    }
+
+    .address{
+        gap: 4px;
+    }
+
+    .addressItem {
+        font-size: 15px;
+    }
+
+    .addressNumber {
+        font-size: 20px;
+    }
+
+    .email {
+        font-size: 15px;
+    }
+
+    .socialIcons {
+        display: flex;
+        gap: 12px;
+    }
+
+    .socialIcons svg {
+            width: 28px;
+            height: 28px;
+    }
+
+    .leadersLink {
+        display: none;
+    }
+
+}

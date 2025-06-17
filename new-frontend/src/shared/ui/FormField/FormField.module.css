@@ -1,0 +1,124 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: relative;
+}
+
+
+.label {
+    font-size: 13px;
+    font-weight: 700;
+    font-stretch: semi-condensed;
+    line-height: 130%;
+}
+
+.input, .option {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: 2px solid;
+    padding: 0 10px;
+    font-size: 16px;
+    line-height: 130%;
+    font-stretch: semi-condensed;
+    resize: vertical;
+    min-height: 40px;
+}
+
+.wrapper textarea.input {
+    padding-top: 12px;
+}
+
+
+.input:focus {
+    outline: none;
+    border-radius: 0;
+}
+
+.input::placeholder, .wrapper .select.placeholder {
+    color: var(--divider-white);
+    font-size: 15px;
+    font-weight: 400;
+    font-stretch: semi-condensed;
+    line-height: 130%;
+}
+
+.hint {
+    color: var(--divider-white);
+    font-size: 13px;
+    font-weight: 400;
+    font-stretch: semi-condensed;
+    line-height: 130%;
+}
+
+
+.light .label {
+    color: var(--white);
+}
+
+.light .input {
+    border-color: var(--white);
+    color: var(--white);
+}
+
+
+.dark .label {
+    color: var(--dark-grey);
+}
+
+.dark .input {
+    border-color: var(--dark-grey);
+    color: var(--dark-grey);
+}
+
+.grey .input{
+    border-color: var(--grey);
+}
+
+.error .hint{
+    color: var(--error);
+}
+
+.error .input {
+    border-color: var(--error);
+    color: var(--error);
+}
+
+
+
+
+
+/*select*/
+
+.select {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+
+.options {
+    position: absolute;
+    top: 80%;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    z-index: 10;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: var(--dark-grey);
+    border: 1px solid var(--grey);
+}
+
+.options .option {
+    cursor: pointer;
+    border: none;
+}
+
+.option:hover {
+    background-color: var(--grey);
+}
+

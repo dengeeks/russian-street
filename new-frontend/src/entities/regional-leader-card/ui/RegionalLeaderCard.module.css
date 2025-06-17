@@ -1,0 +1,57 @@
+.regionalLeaderCard {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--grey);
+    gap: 16px;
+    width: max-content;
+    height: max-content;
+}
+
+.regionalLeaderCardImage {
+    object-fit: cover;
+}
+
+.regionalLeaderCardInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    padding: 16px;
+}
+
+.regionalLeaderCardTitle {
+    font-size: 20px;
+    font-stretch: semi-condensed;
+    line-height: 130%;
+    font-weight: 700;
+}
+
+.regionalLeaderCardName {
+    font-size: 20px;
+    font-stretch: semi-condensed;
+    line-height: 130%;
+    font-weight: 400;
+}
+
+.regionalLeaderCardContacts {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.regionalLeaderCardEmail,
+.regionalLeaderCardPhone {
+    color: var(--grey);
+    font-stretch: semi-condensed;
+    line-height: 130%;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.regionalLeaderCardOffice {
+    color: var(--grey);
+    font-weight: 400;
+    font-size: 13px;
+    font-stretch: semi-condensed;
+    line-height: 130%;
+
+}

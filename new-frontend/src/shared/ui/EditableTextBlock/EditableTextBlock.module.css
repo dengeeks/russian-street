@@ -1,0 +1,15 @@
+.editableTextBlock {
+    font-size: 32px;
+    font-stretch: semi-condensed;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 130%;
+
+}
+
+@media (max-width: 768px) {
+    .editableTextBlock {
+        font-size: 20px;
+
+    }
+}

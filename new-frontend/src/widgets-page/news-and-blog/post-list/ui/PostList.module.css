@@ -1,0 +1,46 @@
+.postListGrid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 40px 20px;
+}
+
+.postListGrid > * {
+    grid-column: span 3;
+}
+
+.postListGrid :nth-child(1),
+.postListGrid :nth-child(7) {
+    grid-column: span 6;
+}
+
+.postListGrid :nth-child(4),
+.postListGrid :nth-child(5),
+.postListGrid :nth-child(6) {
+    grid-column: span 4;
+}
+
+
+@media (max-width: 1220px) {
+    .postListGrid {
+        grid-template-columns: repeat(auto-fill, minmax(286px, 1fr));
+        gap: 20px;
+    }
+
+    .postListGrid > * {
+        grid-column: span 1;
+    }
+
+    .postListGrid :nth-child(1),
+    .postListGrid :nth-child(4),
+    .postListGrid :nth-child(5),
+    .postListGrid :nth-child(6),
+    .postListGrid :nth-child(7) {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 950px) {
+   .postListGrid :global(.articleCardSkeleton) {
+       display: none;
+   }
+}
