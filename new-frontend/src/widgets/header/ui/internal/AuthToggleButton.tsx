@@ -3,6 +3,8 @@ import Link from 'next/link'
 import Icon from '@/shared/icon'
 import useModal from '@/shared/store/modal'
 import { useGlobalData } from '@/shared/context/global-data/useGlobalDataContext'
+import Image from 'next/image'
+import { getImageUrl } from '@/shared/utils/getImageUrl'
 
 interface AuthProfileButtonProps {
   mode: 'icon' | 'text'
@@ -16,7 +18,17 @@ export const AuthProfileButton = ({ mode, className = '' }: AuthProfileButtonPro
   if (userData?.email) {
     return mode === 'icon' ? (
       <Link href="/profile" className={className}>
-        <Icon icon="profile" />
+        {userData?.avatar ? (
+          <Image
+            src={getImageUrl(userData.avatar)}
+            alt={userData.first_name}
+            height={20}
+            width={20}
+            className="profileIcon"
+          />
+        ) : (
+          <Icon icon="profile" />
+        )}
       </Link>
     ) : (
       <Link href="/profile" className={className}>

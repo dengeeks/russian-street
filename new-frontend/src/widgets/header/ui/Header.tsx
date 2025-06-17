@@ -7,7 +7,8 @@ import Logo from '@/shared/ui/Logo'
 import { useBodyScrollLock } from '@/shared/hooks/useBodyScrollLock'
 import { usePathname } from 'next/navigation'
 import { getParentPath } from '../utils/getParentPath'
-import { MenuLinks, SocialLinks, AuthProfileButton, DonateButton } from '@/widgets/header/ui/internal'
+import { MenuLinks, SocialLinks, AuthProfileButton } from '@/widgets/header/ui/internal'
+import ActionButton from '@/features/action-buttons'
 
 
 const Header = () => {
@@ -47,9 +48,13 @@ const Header = () => {
           <Logo />
           <MenuLinks/>
           <SocialLinks/>
-          <DonateButton className="header-icon-desktop header-button-auth" iconOnly />
+          <ActionButton className="header-icon-desktop header-button-auth hoverEffect" modalName="donating" aria-label="Поддержать нас">
+            <Icon icon="donating" />
+          </ActionButton>
           <AuthProfileButton mode="icon" className="header-icon-desktop" />
-          <DonateButton className="header-button-mobile" />
+          <ActionButton className="red header-button-mobile" modalName="donating">
+            поддержать нас
+          </ActionButton>
         </div>
       </div>
     </header>

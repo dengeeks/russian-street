@@ -1,24 +1,41 @@
 import Button from '@/shared/ui/Button'
 import FormField from '@/shared/ui/FormField'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import useModal from '@/shared/store/modal'
-import { EditAccountType } from '@/features/modal/edit-account-info-modal/model/type'
-import { emailValidation, phoneValidation } from '@/shared/validation/validators'
+
+import {
+  emailValidation,
+  first_nameValidation, last_nameValidation,
+  middle_nameValidation,
+  phoneValidation
+} from '@/shared/validation/validators'
 import Modal from '@/shared/ui/Modal'
+import { UserUpdateType } from '@/shared/api/user/patchUserUpdate'
+import { useUpdateInfo } from '@/features/modal/edit-account-info-modal/model/useUpdateInfo'
+import { useGlobalData } from '@/shared/context/global-data/useGlobalDataContext'
 
 const EditAccountInfoModal = () => {
+  const {userData} = useGlobalData()
+
   const {
     register,
     handleSubmit,
-    reset,
-    formState: { errors }
-  } = useForm<EditAccountType>()
+    formState: { errors, isSubmitting },
+    setError,
+  } = useForm<UserUpdateType>({
+    mode: 'onChange',
+    defaultValues: {
+      first_name: userData?.first_name || '',
+      last_name: userData?.last_name || '',
+      middle_name: userData?.middle_name || '',
+      email: userData?.email || '',
+      phone_number: userData?.phone_number || '',
+    },
+  });
 
   const { closeModal } = useModal()
 
-  const onSubmit: SubmitHandler<EditAccountType> = async data => {
-    console.log(data)
-  }
+  const { onSubmit, hasManualError, setHasManualError } = useUpdateInfo(setError);
 
   return (
     <Modal onClose={closeModal}>
@@ -27,20 +44,20 @@ const EditAccountInfoModal = () => {
       <div className="form--modal__body">
         <div className="form--modal__row">
           <FormField
-            {...register('firstName')}
-            error={errors.firstName?.message}
+            {...register('first_name', {...first_nameValidation, onChange: () => setHasManualError(false)})}
+            error={errors.first_name?.message}
             label="Имя"
-            name="firstName"
+            name="first_name"
             placeholder="Иван"
             type="text"
             hint="Можно изменить в личном кабинете"
             theme="dark"
           />
           <FormField
-            {...register('lastName')}
-            error={errors.lastName?.message}
+            {...register('last_name', {...last_nameValidation, onChange: () => setHasManualError(false)})}
+            error={errors.last_name?.message}
             label="Фамилия"
-            name="lastName"
+            name="last_name"
             type="text"
             placeholder="Иванов"
             hint="Можно изменить в личном кабинете"
@@ -49,17 +66,17 @@ const EditAccountInfoModal = () => {
         </div>
         <div className="form--modal__row">
           <FormField
-            {...register('patronymic')}
-            error={errors.patronymic?.message}
+            {...register('middle_name', {...middle_nameValidation, onChange: () => setHasManualError(false)})}
+            error={errors.middle_name?.message}
             label="Отчество"
-            name="patronymic"
+            name="middle_name"
             type="text"
             placeholder="Иванович"
             hint="Можно изменить в личном кабинете"
             theme="dark"
           />
           <FormField
-            {...register('email', { ...emailValidation })}
+            {...register('email', { ...emailValidation, onChange: () => setHasManualError(false), } )}
             error={errors.email?.message}
             label="Email"
             name="email"
@@ -70,10 +87,10 @@ const EditAccountInfoModal = () => {
         </div>
         <div className="form--modal__row">
           <FormField
-            {...register('phone', { ...phoneValidation })}
-            error={errors.phone?.message}
+            {...register('phone_number', { ...phoneValidation, onChange: () => setHasManualError(false) })}
+            error={errors.phone_number?.message}
             label="Номер телефона"
-            name="phone"
+            name="phone_number"
             placeholder="+7 923 567-89-90"
             hint="Можно изменить в личном кабинете"
             theme="dark"
@@ -81,14 +98,13 @@ const EditAccountInfoModal = () => {
         </div>
       </div>
       <div className="form--modal__actions">
-        <Button type="submit" className="red">
+        <Button type="submit" className="red" disabled={hasManualError || isSubmitting}>
           Сохранить
         </Button>
         <Button
           type="reset"
           className="outlined"
           onClick={() => {
-            reset()
             closeModal()
           }}>
           Отменить

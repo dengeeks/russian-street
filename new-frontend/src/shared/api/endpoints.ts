@@ -25,6 +25,8 @@ export const USER_RESET_PASSWORD_CONFIRM = getApiUrl(`user/auth/reset-password/c
 export const USER_TOKEN_REFRESH = (ssr: boolean = true) =>
   getApiUrl(`user/auth/refresh-token/`, ssr);
 
+export const USER_UPDATE = getApiUrl(`user/update/`, false);
+
 
 // Статичные данные
 
@@ -44,3 +46,6 @@ export const USER_TOKEN_REFRESH = (ssr: boolean = true) =>
 
   export const STATIC_ABOUT_US = (ssr: boolean = true) =>
     getApiUrl(`static/aboutus/`, ssr);
+
+
+export const O_AUTH_2 = `${PUBLIC_API_BASE_URL}/o/authorize/`;

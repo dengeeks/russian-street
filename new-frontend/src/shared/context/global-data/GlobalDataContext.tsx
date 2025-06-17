@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation'
 type GlobalDataContextType = {
   userData: UserType;
   staticContact: ContactType;
+  updateUserData: (data: Partial<UserType>) => void;
 };
 
 export const GlobalDataContext = createContext<GlobalDataContextType | undefined>(undefined);
@@ -27,14 +28,19 @@ export const GlobalDataProvider = ({ children, staticContact}: GlobalDataProvide
   }, []);
 
   useEffect(() => {
-    fetchUser();
+    void fetchUser();
   }, [pathname, fetchUser]);
+
+  const updateUserData = useCallback((data: Partial<UserType>) => {
+    setUserData(prev => prev ? { ...prev, ...data } : prev);
+  }, []);
 
   return (
     <GlobalDataContext.Provider
       value={{
         userData,
-        staticContact
+        staticContact,
+        updateUserData,
       }}
     >
       {children}

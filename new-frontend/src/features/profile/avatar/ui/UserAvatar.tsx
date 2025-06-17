@@ -2,23 +2,21 @@
 import styles from './UserAvatar.module.css'
 import Image from 'next/image'
 import Icon from '@/shared/icon'
-import {ChangeEvent } from 'react'
+import { useGlobalData } from '@/shared/context/global-data/useGlobalDataContext'
+import { useUpdateAvatar } from '../model/updateAvatar'
+import { getImageUrl } from '@/shared/utils/getImageUrl'
 
 const UserAvatar = () => {
-
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]
-    if (file) {
-      console.log('Выбран файл:', file)
-    }
-  }
+  const {userData} = useGlobalData()
+  const { handleFileChange} = useUpdateAvatar()
+  const avatarSrc = userData?.avatar ? getImageUrl(userData.avatar) : '/png/default-avatar.png'
 
   return (
     <div className={styles.userProfileImageWrapper}>
       <Image
-        src="/test/whoweare2.png"
+        src={avatarSrc}
         fill
-        alt=""
+        alt={`${userData?.first_name} ${userData?.last_name || ''}`}
         className={styles.userProfileImage}
         sizes="
   (min-width: 1240px) 426px,
@@ -28,13 +26,16 @@ const UserAvatar = () => {
   (max-width: 460px) calc(100vw - 32px),
 "
       />
-      <label htmlFor="avatar-upload" className={styles.userProfileImageEdit}>
-        <Icon icon="edit-avatar" width={33} height={33} />
+      <label htmlFor="avatar-upload" className={`${styles.userProfileImageEdit} ${!userData?.avatar && styles.uploadLabel}`}>
+        <Icon icon={!userData?.avatar ? 'upload' : 'edit-avatar'}  width={33} height={33} />
+        {!userData?.avatar && (
+          <span className={styles.uploadLabelText}>Загрузить фото профиля</span>
+        )}
       </label>
       <input
         id="avatar-upload"
         type="file"
-        accept="image/*"
+        accept=".jpg,.jpeg,.png,.gif,.bmp,.webp,.svg"
         onChange={handleFileChange}
         style={{ display: 'none' }}
       />
@@ -43,3 +44,4 @@ const UserAvatar = () => {
 }
 
 export default UserAvatar
+

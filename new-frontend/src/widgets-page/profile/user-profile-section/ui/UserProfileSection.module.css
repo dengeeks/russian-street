@@ -20,29 +20,18 @@
 
 .userProfileInfo {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
     gap: 40px;
-}
+    justify-content: flex-start;
 
-.userProfileContainer {
-    display: flex;
-    gap: 24px;
-    width: 100%;
 }
 
 .userProfileDetailsWrapper {
     display: flex;
-    gap: 16px;
     flex-direction: column;
+    gap: 40px;
     width: 100%;
-}
-
-
-@media (max-width: 1024px) {
-    .userProfileInfo {
-        flex-direction: column;
-    }
-
+    max-width: 400px;
 }
 
 
@@ -56,13 +45,5 @@
         align-items: flex-start;
         gap: 16px;
     }
-
-
-    .userProfileContainer {
-        flex-direction: column;
-        gap: 40px;
-        width: 100%;
-    }
-
 
 }

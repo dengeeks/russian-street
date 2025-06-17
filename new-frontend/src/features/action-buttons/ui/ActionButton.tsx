@@ -5,14 +5,24 @@ import useModal from '@/shared/store/modal'
 
 interface ActionButtonProps extends ButtonProps {
   /** Требуется ли авторизация для открытия модалки */
-  requireAuth?: boolean;
+  requireAuth?: boolean
   /** Имя модалки, которую нужно открыть при действии */
-  modalName: 'join-organization' | 'donating';
+  modalName: 'join-organization' | 'donating'
 }
 
 const ActionButton = ({ children, requireAuth = false, modalName, ...rest }: ActionButtonProps) => {
   const { userData } = useGlobalData()
   const { openModal } = useModal()
+
+  if (!userData) {
+    return (
+      <Button {...rest}>{children}</Button>
+    )
+  }
+
+  if (modalName === 'join-organization' && userData?.status) {
+    return null
+  }
 
   const handleClick = () => {
     if (requireAuth && !userData?.email) {

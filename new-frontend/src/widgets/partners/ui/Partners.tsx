@@ -7,10 +7,12 @@ import Loader from '@/shared/ui/Loader'
 
 const PartnersDesktop = dynamic(() => import('./desktop/PartnersDesktop'), {
   loading: () => (<Loader/>),
+  ssr: false,
 });
 
 const PartnersMobile = dynamic(() => import('./mobile/PartnersMobile'), {
   loading: () => (<Loader/>),
+  ssr: false,
 });
 
 
