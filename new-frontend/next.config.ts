@@ -3,6 +3,7 @@ import {remoteMediaPattern } from "@/shared/settings"
 
 const nextConfig: NextConfig = {
   images: {
+    formats: ["image/avif", "image/webp"],
     remotePatterns: [
       remoteMediaPattern ,
       {
