@@ -1,4 +1,4 @@
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import { SubmitHandler, UseFormSetError } from 'react-hook-form'
 import { LoginType, postLogin } from '@/shared/api/user/postLogin'
 import { useToast } from '@/shared/context/toast/useToastContext'
@@ -18,6 +18,7 @@ export const useLogin = (setError: UseFormSetError<LoginType>): UseLoginReturn =
   const { showToast } = useToast()
   const { closeModal } = useModal()
   const { toggleTriggerOAuth2 } = useOAuth2()
+  const pathname = usePathname()
 
   const onSubmit: SubmitHandler<LoginType> = async formData => {
     setHasManualError(false)
@@ -25,10 +26,14 @@ export const useLogin = (setError: UseFormSetError<LoginType>): UseLoginReturn =
       const { data, status } = await postLogin(formData)
 
       if (status === 200) {
-        router.push('/profile')
-        closeModal()
-        toggleTriggerOAuth2()
-        showToast('Вы успешно вошли в систему!', 'success')
+        const isOAuth2 = pathname === '/o/authorize';
+        if (isOAuth2) {
+          toggleTriggerOAuth2()
+        } else {
+          router.push('/profile')
+          closeModal()
+          showToast('Вы успешно вошли в систему!', 'success')
+        }
       } else {
         if (handleServerError(data, setError)) {
           return

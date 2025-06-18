@@ -1,4 +1,4 @@
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation'
 import { SubmitHandler, UseFormSetError } from 'react-hook-form';
 import { RegisterUserType } from './type';
 import { postRegister } from '@/shared/api/user/postRegister';
@@ -19,6 +19,7 @@ export const useRegister = (setError: UseFormSetError<RegisterUserType>): UseReg
   const { showToast } = useToast();
   const { closeModal } = useModal();
   const {toggleTriggerOAuth2} = useOAuth2();
+  const pathname = usePathname()
 
   const onSubmit: SubmitHandler<RegisterUserType> = async (RegisterData) => {
     setHasManualError(false);
@@ -29,11 +30,14 @@ export const useRegister = (setError: UseFormSetError<RegisterUserType>): UseReg
       const { data, status } = await postRegister(formData);
 
       if (status === 201) {
-        router.push('/profile');
-        closeModal();
-        toggleTriggerOAuth2()
-        showToast('Вы успешно зарегистрированы!', 'success');
-
+        const isOAuth2 = pathname === '/o/authorize';
+        if (isOAuth2) {
+          toggleTriggerOAuth2()
+        } else {
+          router.push('/profile');
+          closeModal();
+          showToast('Вы успешно зарегистрированы!', 'success');
+        }
       } else {
         if (handleServerError(data, setError)) {
           return;
