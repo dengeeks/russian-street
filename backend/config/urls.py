@@ -1,9 +1,11 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
-from django.conf import settings
-from django.conf.urls.static import static
+
 import oauth2.urls
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 
@@ -16,7 +18,7 @@ urlpatterns = [
     path('api/v1/', include('contents.urls')),
 
     # API OAUTH2
-    path('o/', include((oauth2.urls.urlpatterns, 'oauth2_provider'),namespace='oauth2_provider')),
+    path('o/', include((oauth2.urls.urlpatterns, 'oauth2_provider'), namespace = 'oauth2_provider')),
 
     # DRF SPECTACULAR
     path('api/v1/schema/', SpectacularAPIView.as_view(), name = 'schema'),
@@ -25,5 +27,8 @@ urlpatterns = [
 
     # EDITOR
     path('ckeditor/', include('ckeditor_uploader.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
 
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+    urlpatterns += path('__debug__/', include('debug_toolbar.urls')),

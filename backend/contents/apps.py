@@ -8,4 +8,4 @@ class ContentsConfig(AppConfig):
 
     def ready(self):
         # подключение сигналов
-        import contents.signals
+        import contents.signals # noqa
