@@ -1,9 +1,8 @@
-from rest_framework import serializers
-
+from common.serializers import BaseExcludeSerializer
 from partners.models.partner import Partner
 
 
-class PartnerSerializer(serializers.ModelSerializer):
-    class Meta:
+class ListPartnerSerializer(BaseExcludeSerializer):
+    class Meta(BaseExcludeSerializer.Meta):
         model = Partner
-        fields = ('id', 'name', 'image', 'description', 'type')
+        exclude = BaseExcludeSerializer.Meta.exclude + ['type']

@@ -1,12 +1,38 @@
 from django.core.validators import FileExtensionValidator
 from django.db import models
 
-from common.constants.partners import (ALLOWED_EXTENSIONS_PART,
-                                     LEN_DESCRIPTION_PART, LEN_NAME_PARTNER,
-                                     LEN_TYPE_PARTNER, TYPE_PARTNER)
+from common.mixins import UUIDMixin, DateTimeMixin
+from common.utils import setup_image_path
 
 
-class Partner(models.Model):
+class PartnerType(DateTimeMixin):
+    """
+    Модель, представляющая Тип партнера.
+
+    Атрибуты:
+        name (CharField): Тип партнёра.
+
+    Мета:
+        verbose_name (str): Название модели в единственном числе.
+        verbose_name_plural (str): Название модели во множественном числе.
+
+    Методы:
+        __str__(): Возвращает строковое представление тип партнёра.
+    """
+    name = models.CharField(
+        verbose_name = 'Тип партнера',
+        max_length = 125
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'тип партнера'
+        verbose_name_plural = 'тип партнера'
+
+
+class Partner(UUIDMixin, DateTimeMixin):
     """
     Модель, представляющая партёра.
 
@@ -14,7 +40,8 @@ class Partner(models.Model):
         name (CharField): Название партнёра.
         image (ImageField): Изображение партнёра.
         description (TextField): Описание партёра.
-        type (CharField): Тип партнёра.
+        type (ForeignKey): Тип партнёра.
+        url (URLField): Ссылка на партнера.
 
     Мета:
         verbose_name (str): Название модели в единственном числе.
@@ -23,31 +50,46 @@ class Partner(models.Model):
     Методы:
         __str__(): Возвращает строковое представление партнёра.
     """
+
     name = models.CharField(
         'Название партнёра',
-        max_length=LEN_NAME_PARTNER,
-        unique=True,
+        max_length = 150,
+        unique = True,
     )
     image = models.ImageField(
-        'Изображение парнёра',
-        upload_to='partners_images/',
-        validators=[
-            FileExtensionValidator(ALLOWED_EXTENSIONS_PART),
+        upload_to = setup_image_path,
+        verbose_name = 'Изображение',
+        max_length = 1000,
+        help_text = 'Загрузите изображение',
+        validators = [
+            FileExtensionValidator(
+                allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg']
+            )
         ]
     )
     description = models.TextField(
-        'Описание партёра',
-        max_length=LEN_DESCRIPTION_PART,
+        verbose_name = 'Описание партёра'
     )
-    type = models.CharField(
-        'Тип партнёра',
-        max_length=LEN_TYPE_PARTNER,
-        choices=TYPE_PARTNER
+    type = models.ForeignKey(
+        to = PartnerType,
+        verbose_name = 'Тип партнера',
+        on_delete = models.RESTRICT,
+        related_name = 'partners'
+    )
+    url = models.URLField(
+        verbose_name = 'Ссылка на партнера',
+        max_length = 1000,
+        blank = True,
+        null = True
     )
 
     class Meta:
-        verbose_name = 'Партнёр'
-        verbose_name_plural = 'Партнёры'
+        verbose_name = 'партнёр'
+        verbose_name_plural = 'партнёры'
 
     def __str__(self):
-        return f'{self.name}'
+        return self.name
+
+    def save(self, *args, **kwargs):
+        print(f"🔄 Partner.save() вызван для ID={self.id}")  # Debug
+        super().save(*args, **kwargs)
