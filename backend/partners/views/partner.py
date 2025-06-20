@@ -1,14 +1,29 @@
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import viewsets
+import logging
 
-from partners.models.partner import Partner
-from partners.serializers.partner import PartnerSerializer
-from users.permissions import IsAdminOrReadOnly
+from rest_framework import views
+from rest_framework.response import Response
+
+from partners.serializers.partner import ListPartnerSerializer
+from partners.services.partner import PartnerService
+
+logger = logging.getLogger(__name__)
 
 
-class PartherViewSet(viewsets.ModelViewSet):
-    queryset = Partner.objects.all()
-    serializer_class = PartnerSerializer
-    permission_classes = (IsAdminOrReadOnly,)
-    filter_backends = (DjangoFilterBackend,)
-    filterset_fields = ('name',)
+class ListPartnerAPI(views.APIView):
+    serializer_class = ListPartnerSerializer
+
+    def get(self, request):
+        """
+            Извлечение статического контента контактов с помощью ContactService.
+        """
+        try:
+            data = PartnerService.get_content_data(
+                serializer_class = self.serializer_class
+            )
+            return Response(data)
+        except Exception as e:
+            logger.error(f"Ошибка при загрузке данных партнеров: {str(e)}")
+            return Response(
+                {'error': 'Ошибка при загрузке данных партнеров'},
+                status = 500
+            )
