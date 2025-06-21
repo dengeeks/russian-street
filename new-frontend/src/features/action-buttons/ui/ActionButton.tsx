@@ -14,7 +14,7 @@ const ActionButton = ({ children, requireAuth = false, modalName, ...rest }: Act
   const { userData } = useGlobalData()
   const { openModal } = useModal()
 
-  if (!userData) {
+  if (userData === undefined) {
     return (
       <Button {...rest}>{children}</Button>
     )

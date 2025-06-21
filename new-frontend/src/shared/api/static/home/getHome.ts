@@ -15,7 +15,7 @@ const EMPTY_HOME: HomeType = {
 
 export async function getHome(): Promise<HomeType> {
   try {
-    const res = await fetch(STATIC_HOME(), {
+    const res = await fetch(STATIC_HOME, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
