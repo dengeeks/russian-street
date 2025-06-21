@@ -22,7 +22,7 @@ const ResetPasswordRequest = () => {
 
   const {closeModal} = useModal();
 
-  const { onSubmit, hasManualEmailError, setHasManualEmailError } = useResetPasswordRequest(setError);
+  const { onSubmit, hasManualError, setHasManualError } = useResetPasswordRequest(setError);
 
 
   return (
@@ -34,7 +34,7 @@ const ResetPasswordRequest = () => {
             {...register('email', {
               required: 'Обязательное поле',
               ...emailValidation,
-              onChange: () => setHasManualEmailError(false),
+              onChange: () => setHasManualError(false),
             })}
             error={errors.email?.message}
             label="Email"
@@ -47,7 +47,7 @@ const ResetPasswordRequest = () => {
         </div>
 
         <div className="form--modal__actions form--modal__actions--column">
-          <Button type="submit" className="red" disabled={hasManualEmailError || isSubmitting}>
+          <Button type="submit" className="red" disabled={hasManualError || isSubmitting}>
             Сбросить пароль
           </Button>
         </div>

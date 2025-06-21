@@ -19,7 +19,7 @@ const LoginModal = () => {
 
   const {openModal, closeModal} = useModal();
 
-  const { onSubmit, hasManualEmailError, setHasManualEmailError} = useLogin(setError);
+  const { onSubmit, hasManualError, setHasManualError} = useLogin(setError);
 
   return (
     <Modal onClose={closeModal}>
@@ -30,7 +30,7 @@ const LoginModal = () => {
           {...register('email', {
             required: 'Обязательное поле',
             ...emailValidation,
-            onChange: () => setHasManualEmailError(false),
+            onChange: () => setHasManualError(false),
           })}
           error={errors.email?.message}
           label="Email"
@@ -55,7 +55,7 @@ const LoginModal = () => {
       </div>
 
       <div className="form--modal__actions form--modal__actions--column">
-        <Button type="submit" className="red" disabled={hasManualEmailError || isSubmitting}>
+        <Button type="submit" className="red" disabled={hasManualError || isSubmitting}>
           войти
         </Button>
         <Button className="outlined" onClick={() => openModal('register-user')}>

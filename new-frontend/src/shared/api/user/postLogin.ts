@@ -27,5 +27,8 @@ export async function postLogin(data: LoginType) {
     });
   }
 
-  return json;
+  return {
+    status: res.status,
+    data: json,
+  };
 }

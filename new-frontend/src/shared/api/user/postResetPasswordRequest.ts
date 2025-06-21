@@ -11,5 +11,8 @@ export async function postResetPasswordRequest(data: ResetPasswordRequestType) {
     body: JSON.stringify(data),
   });
 
-  return await res.json();
+  return {
+    status: res.status,
+    data: await res.json(),
+  }
 }

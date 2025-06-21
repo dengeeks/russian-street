@@ -22,7 +22,7 @@ const RegisterModal = () => {
 
   const {openModal, closeModal} = useModal();
 
-  const { onSubmit, hasManualEmailError, setHasManualEmailError } = useRegister(setError);
+  const { onSubmit, hasManualError, setHasManualError } = useRegister(setError);
 
   return (
     <Modal onClose={closeModal}>
@@ -30,7 +30,7 @@ const RegisterModal = () => {
       <h2 className="form--modal__title">Зарегистрироваться</h2>
       <div className="form--modal__body">
           <FormField
-            {...register('first_name', first_nameValidation)}
+            {...register('first_name', {required: 'Имя обязательно', ...first_nameValidation})}
             error={errors.first_name?.message}
             label="Имя"
             name="first_name"
@@ -44,7 +44,7 @@ const RegisterModal = () => {
             {...register('email', {
               required: 'Обязательное поле',
               ...emailValidation,
-              onChange: () => setHasManualEmailError(false),
+              onChange: () => setHasManualError(false),
             })}
             error={errors.email?.message}
             label="Email"
@@ -89,7 +89,7 @@ const RegisterModal = () => {
       </div>
 
       <div className="form--modal__actions form--modal__actions--column">
-        <Button type="submit" className="red" disabled={hasManualEmailError || isSubmitting}>
+        <Button type="submit" className="red" disabled={hasManualError || isSubmitting}>
           зарегистрироваться
         </Button>
         <Button className="outlined" onClick={() => openModal('login-user')}>

@@ -11,7 +11,7 @@ const EMPTY_ABOUT_US: AboutUsType = {
 
 export async function getAboutUs(): Promise<AboutUsType> {
   try {
-    const res = await fetch(STATIC_ABOUT_US(), {
+    const res = await fetch(STATIC_ABOUT_US, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

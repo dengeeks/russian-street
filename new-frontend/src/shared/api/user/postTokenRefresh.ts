@@ -3,10 +3,9 @@
 import { USER_TOKEN_REFRESH } from '@/shared/api/endpoints';
 import { removeTokens } from '@/shared/server-action/removeTokens'
 import { saveTokenAction } from '@/shared/server-action/saveTokenAction'
-import { getAccessAction, getRefreshAction } from '@/shared/server-action/getTokenAction'
+import {getRefreshAction } from '@/shared/server-action/getTokenAction'
 
-export async function postTokenRefresh(): Promise<string | null> {
-  const accessToken = await getAccessAction()
+export async function postTokenRefresh(accessToken: string | null): Promise<string | null> {
   const refreshToken = await getRefreshAction()
 
   if (!refreshToken && accessToken) {

@@ -46,7 +46,7 @@
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     gap: 32px;
-    align-items: start;
+    align-items: flex-start;
     padding-top: 40px;
 }
 

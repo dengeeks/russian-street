@@ -1,41 +1,29 @@
 import { USER_GET } from '@/shared/api/endpoints'
-import { postTokenRefresh } from '@/shared/api/user/postTokenRefresh'
-import { getAccessAction } from '@/shared/server-action/getTokenAction'
+import { fetchWithAuth } from '@/shared/api/fetchWithAuth'
 
 export type UserType = {
-  email: string
-  first_name: string
-  last_name: string
-} | null
+  email: string;
+  first_name: string;
+  last_name: string | null;
+  middle_name: string | null;
+  phone_number: string | null;
+  status: string | null;
+  region: string | null;
+  avatar: string | null;
+  uuid: string;
+} | null;
+
 
 export async function getUser(): Promise<UserType> {
-  const accessToken = await getAccessAction()
-
-  const fetchUser = async (token: string) => {
-    const res = await fetch(USER_GET(), {
+  try {
+    const res = await fetchWithAuth(USER_GET(), {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `JWT ${token}`
-      }
+      headers: { 'Content-Type': 'application/json' }
     })
 
-    if (res.status === 401) return null
-    if (!res.ok) throw new Error('Не удалось получить данные пользователя')
+    if (!res.ok) return null
 
     return res.json()
-  }
-  try {
-
-    let user = accessToken ? await fetchUser(accessToken) : null
-    // Если токен протух и вернулся 401 — пробуем обновить токен и повторить
-    if (!user) {
-      const newAccessToken = await postTokenRefresh()
-      if (!newAccessToken) return null
-
-      user = await fetchUser(newAccessToken)
-    }
-    return user
   } catch {
     return null
   }
