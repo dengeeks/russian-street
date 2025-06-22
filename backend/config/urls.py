@@ -18,7 +18,7 @@ urlpatterns = [
     path('api/v1/', include('contents.urls')),
 
     # API OAUTH2
-    path('o/', include((oauth2.urls.urlpatterns, 'oauth2_provider'), namespace = 'oauth2_provider')),
+    path('api/v1/o/', include((oauth2.urls.urlpatterns, 'oauth2_provider'), namespace = 'oauth2_provider')),
 
     # DRF SPECTACULAR
     path('api/v1/schema/', SpectacularAPIView.as_view(), name = 'schema'),

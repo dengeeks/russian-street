@@ -198,6 +198,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_ALL_ORIGINS = True
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:3000',
+    'https://street-russia.tati-b-n.ru'
 ]
 
 # SPECTACULAR
