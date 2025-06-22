@@ -25,7 +25,7 @@ const EMPTY_CONTACT: ContactType = {
 
 export async function getContact(): Promise<ContactType> {
   try {
-    const res = await fetch(STATIC_CONTACT(), {
+    const res = await fetch(STATIC_CONTACT, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

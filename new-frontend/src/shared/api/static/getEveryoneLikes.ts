@@ -18,7 +18,7 @@ const EMPTY_EVERYONE_LIKES: EveryoneLikesType = {
 
 export async function getEveryoneLikes(): Promise<EveryoneLikesType> {
   try {
-    const res = await fetch(STATIC_EVERYONE_LIKES(), {
+    const res = await fetch(STATIC_EVERYONE_LIKES, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
