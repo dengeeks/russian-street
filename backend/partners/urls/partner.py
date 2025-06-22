@@ -1,8 +1,8 @@
-from rest_framework.routers import SimpleRouter
+from django.urls import path
 
-from partners.views.partner import PartherViewSet
+from partners.views.partner import ListPartnerAPI
 
-router = SimpleRouter()
-router.register('partners', PartherViewSet, basename = 'parthers')
-
-urlpatterns = router.urls
+urlpatterns = [
+    # получение партнеров
+    path('list/partner/', ListPartnerAPI.as_view())
+]

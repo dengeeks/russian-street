@@ -89,4 +89,6 @@ class UserRetrieveSerializer(serializers.ModelSerializer):
         ]
 
     def get_avatar(self, obj):
-        return obj.avatar.url
+        if obj.avatar:
+            return obj.avatar.url
+        return None

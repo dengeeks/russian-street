@@ -36,6 +36,9 @@ CACHE_COOPERATION_TIMEOUT = config('CACHE_COOPERATION_TIMEOUT', cast = int, defa
 CACHE_EVERYONELIKES_KEY = config('CACHE_EVERYONELIKES_KEY', cast = str, default = 'CACHE_EVERYONELIKES_KEY')
 CACHE_EVERYONELIKES_TIMEOUT = config('CACHE_EVERYONELIKES_TIMEOUT', cast = int, default = 60 * 60 * 24)
 
+CACHE_PARTNERS_KEY = config('CACHE_PARTNERS_KEY', cast = str, default = 'CACHE_PARTNERS_KEY')
+CACHE_PARTNERS_TIMEOUT = config('CACHE_PARTNERS_TIMEOUT', cast = int, default = 60 * 60 * 24)
+
 INSTALLED_APPS = [
     'unfold',
     'django.contrib.admin',
@@ -49,9 +52,9 @@ INSTALLED_APPS = [
     'events',
     'news',
     'users',
-    'partners',
     'feedbacks',
     'oauth2',
+    'partners.apps.PartnersConfig',
     'contents.apps.ContentsConfig'
 ]
 
@@ -327,6 +330,22 @@ UNFOLD = {
                 ],
             },
             {
+                "title": "Партнеры",
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": "Партнеры",
+                        "icon": "partner_exchange",
+                        "link": reverse_lazy("admin:partners_partner_changelist"),
+                    },
+                    {
+                        "title": "Тип партнера",
+                        "icon": "format_ink_highlighter",
+                        "link": reverse_lazy("admin:partners_partnertype_changelist"),
+                    },
+                ],
+            },
+            {
                 "title": "Главная страница",
                 "collapsible": True,
                 "items": [
@@ -449,3 +468,11 @@ CKEDITOR_CONFIGS = {
             ),
         },
 }
+
+if DEBUG:
+    INTERNAL_IPS = ('127.0.0.1',)
+    MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware']
+    INSTALLED_APPS += ['debug_toolbar']
+    DEBUG_TOOLBAR_CONFIG = {
+        'SHOW_TOOLBAR_CALLBACK': lambda request: True
+    }

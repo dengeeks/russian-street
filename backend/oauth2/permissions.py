@@ -60,7 +60,6 @@ class LoginAccessMixin:
         ).url
 
         # Возвращаем ответ с кодом 401 и заголовком Location
-        print(redirect_url)
         return Response(
             {'url': redirect_url},
             status = status.HTTP_401_UNAUTHORIZED
