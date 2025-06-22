@@ -62,8 +62,7 @@ class BaseAuthorizationAPIView(LoginAccessMixin, OAuthLibMixin, APIView):
     def redirect(self, redirect_to):
         """Упрощенный метод для возврата редиректа"""
         return Response(
-            status = status.HTTP_302_FOUND,
-            headers = {'Location': redirect_to}
+            {'url': redirect_to}
         )
 
 
