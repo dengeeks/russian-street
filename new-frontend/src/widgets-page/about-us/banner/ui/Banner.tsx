@@ -17,9 +17,9 @@ const Banner = ({joinStreet}: BannerProps) => {
       <div className={`section-spacing-bottom ${styles.bannerAbout}`}>
         <div className={styles.bannerAboutContent}>
           <div className={styles.bannerAboutArrows}>
-            <Image src="/png/about-us-arrow.png" alt="стрелки" width={74} height={68} priority />
-            <Image src="/png/about-us-arrow.png" alt="стрелки" width={74} height={68} priority />
-            <Image src="/png/about-us-arrow.png" alt="стрелки" width={74} height={68} priority />
+            <Image src="/assets/webp/about-us-arrow.webp" alt="стрелки" width={74} height={68} priority />
+            <Image src="/assets/webp/about-us-arrow.webp" alt="стрелки" width={74} height={68} priority />
+            <Image src="/assets/webp/about-us-arrow.webp" alt="стрелки" width={74} height={68} priority />
           </div>
           <SectionTitle>СТАНЬ ЧАСТЬЮ УЛИЦ</SectionTitle>
           <ActionButton type="button" modalName="join-organization" requireAuth>Участвовать</ActionButton>

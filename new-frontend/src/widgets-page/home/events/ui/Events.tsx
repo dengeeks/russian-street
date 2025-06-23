@@ -20,7 +20,7 @@ const Events = () => {
 
             <div className={styles.imageWrapper}>
               <Image
-                src="/test/events.png"
+                src="/assets/test/events.png"
                 className={styles.image}
                 fill
                 alt="event"

@@ -9,7 +9,7 @@ import { getImageUrl } from '@/shared/utils/getImageUrl'
 const UserAvatar = () => {
   const {userData} = useGlobalData()
   const { handleFileChange} = useUpdateAvatar()
-  const avatarSrc = userData?.avatar ? getImageUrl(userData.avatar) : '/png/default-avatar.png'
+  const avatarSrc = userData?.avatar ? getImageUrl(userData.avatar) : '/assets/webp/default-avatar.webp'
 
   return (
     <div className={styles.userProfileImageWrapper}>

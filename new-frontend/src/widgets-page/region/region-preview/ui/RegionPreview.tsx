@@ -8,7 +8,7 @@ const RegionPreview = () => {
       <SectionTitle>Республика Коми</SectionTitle>
       <div className={styles.regionPreviewContent}>
         <div className={styles.regionPreviewImageWrapper}>
-          <Image src="/test/events.png" alt="Республика Коми" fill priority sizes="
+          <Image src="/assets/test/events.png" alt="Республика Коми" fill priority sizes="
     (min-width: 1180px) 600px,
     (min-width: 1080px) 550px,
     (min-width: 1025px) 500px,

@@ -19,7 +19,7 @@ const BannerHome = ({ promoVideo }: BannerHomeProps) => {
         <div className={styles.bannerContent}>
           <div className={styles.bannerLogoWrapper}>
             <Image
-              src="/logo-banner.png"
+              src="/assets/logo-banner.png"
               className={styles.bannerLogo}
               fill
               alt="Улица России"

@@ -12,7 +12,6 @@ export async function getPartners(): Promise<PartnerListType> {
       headers: {
         'Content-Type': 'application/json'
       },
-      cache: 'force-cache',
       next: { revalidate: REVALIDATE_TIME }
     })
 

@@ -6,7 +6,7 @@ import ProfileEventCard from '@/entities/profile/profile-Event-card'
 
 const UserEvents = () => {
   return (
-    <section className={`container section-spacing-top ${styles.userEventsSection}`}>
+    <section className={`container section-spacing-top section-spacing-bottom ${styles.userEventsSection}`}>
       <SectionTitle>Мероприятия</SectionTitle>
       <div className={styles.userEventsList}>
         <ProfileEventCard />
