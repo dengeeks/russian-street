@@ -8,7 +8,7 @@ export default async function BlogPage() {
   return (
     <>
       <Breadcrumbs items={[{ label: 'Главная', href: '/' }, { label: 'Блог' }]} />
-      <PostCardLarge title="Как прошёл мастер-класс по граффити с детьми 7–10лет" city="г.Кемерово" date="16.05.2024" media="/test/events.png"/>
+      <PostCardLarge title="Как прошёл мастер-класс по граффити с детьми 7–10лет" city="г.Кемерово" date="16.05.2024" media="/assets/test/events.png"/>
       <PostList/>
     </>
   )

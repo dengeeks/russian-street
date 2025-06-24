@@ -23,4 +23,5 @@ export type IconName =
     | 'reload'
     | 'place'
     | 'clock'
-    | 'step-check';
+    | 'step-check'
+    | 'upload';

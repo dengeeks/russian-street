@@ -25,22 +25,24 @@ export const USER_RESET_PASSWORD_CONFIRM = getApiUrl(`user/auth/reset-password/c
 export const USER_TOKEN_REFRESH = (ssr: boolean = true) =>
   getApiUrl(`user/auth/refresh-token/`, ssr);
 
+export const USER_UPDATE = getApiUrl(`user/update/`, false);
+
 
 // Статичные данные
 
   // Контактные данные
-  export const STATIC_CONTACT = (ssr: boolean = true) =>
-    getApiUrl(`static/contact/`, ssr);
+  export const STATIC_CONTACT = getApiUrl(`static/contact/`, true);
 
   // Контактные данные
-  export const STATIC_HOME = (ssr: boolean = true) =>
-    getApiUrl(`static/homepage/`, ssr);
+  export const STATIC_HOME = getApiUrl(`static/homepage/`, true);
 
-  export const STATIC_COOPERATION = (ssr: boolean = true) =>
-    getApiUrl(`static/cooperation/`, ssr);
+  export const STATIC_COOPERATION = getApiUrl(`static/cooperation/`, true);
 
-  export const STATIC_EVERYONE_LIKES = (ssr: boolean = true) =>
-    getApiUrl(`static/everyone-likes/`, ssr);
+  export const STATIC_EVERYONE_LIKES = getApiUrl(`static/everyone-likes/`, true);
 
-  export const STATIC_ABOUT_US = (ssr: boolean = true) =>
-    getApiUrl(`static/aboutus/`, ssr);
+  export const STATIC_ABOUT_US = getApiUrl(`static/aboutus/`, true);
+
+
+export const O_AUTH_2 = getApiUrl(`o/authorize/`, false);
+
+export const PARTNERS = getApiUrl('list/partner/', true);

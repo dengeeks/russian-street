@@ -9,7 +9,7 @@ interface LogoProps {
 const Logo = ({onClick}:LogoProps) => {
   return (
     <Link href="/" className="logo-wrapper" onClick={onClick}>
-      <Image src="/logo.png" className="logo" fill alt="Улица России" priority sizes="(min-width: 768px) 200px, 300px"/>
+      <Image src="/assets/logo.png" className="logo" fill alt="Улица России" priority sizes="(min-width: 768px) 200px, 300px"/>
     </Link>
   )
 }

@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
-    width: 100%;
     min-width: 320px;
 }
 
@@ -62,9 +61,6 @@
     padding: 4px 12px 4px 8px;
 }
 
-.userProfileRegionContact {
-    color: var(--grey);
-}
 
 @media (max-width: 768px) {
 

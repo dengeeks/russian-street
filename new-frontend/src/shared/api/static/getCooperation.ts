@@ -18,12 +18,11 @@ const EMPTY_COOPERATION: CooperationType = {
 
 export async function getCooperation(): Promise<CooperationType> {
   try {
-    const res = await fetch(STATIC_COOPERATION(), {
+    const res = await fetch(STATIC_COOPERATION, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
-      cache: 'force-cache',
       next: { revalidate: REVALIDATE_TIME },
     });
 

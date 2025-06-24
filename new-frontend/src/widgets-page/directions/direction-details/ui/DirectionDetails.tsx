@@ -4,7 +4,7 @@ import SectionTitle from '@/shared/ui/SectionTitle'
 
 const DirectionDetails = () => {
   return (
-    <section className={`container ${styles.directionDetails}`}>
+    <section className={`container section-spacing-bottom ${styles.directionDetails}`}>
       <div className={styles.directionDetails__content}>
         <SectionTitle>Паркур</SectionTitle>
         <p className={styles.directionDetails__description}>

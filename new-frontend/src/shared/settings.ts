@@ -9,7 +9,8 @@ const url = new URL(PUBLIC_API_BASE_URL);
 export const remoteMediaPattern = {
   protocol: url.protocol.slice(0, -1) as 'http' | 'https',
   hostname: url.hostname,
-  pathname: '/back_media/**',
+  pathname: '/back_media1/**',
 };
+
 
 export const REVALIDATE_TIME = parseInt(process.env.NEXT_PUBLIC_REVALIDATE_TIME || '86400', 10);

@@ -1,0 +1,45 @@
+.promoContainer {
+    background-color: var(--glass);
+    border: 1px solid var(--glass);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px 17px;
+    max-width: 427px;
+}
+
+.promoTitle {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: 0.02rem;
+    line-height: 150%;
+    font-stretch: semi-condensed;
+    text-transform: uppercase;
+}
+
+.promoDescription {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 150%;
+}
+
+.promoButtonWrapper {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.promoButton {
+   max-width: none;
+}
+
+@media (max-width: 768px) {
+    .promoContainer .promoButton {
+        font-size: 16px;
+        background-color: white;
+        border: none;
+        font-weight: 400;
+        color: var(--dark-grey);
+        letter-spacing: 0.04rem;
+    }
+}

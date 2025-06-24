@@ -1,10 +1,12 @@
-'use client';
+'use client'
 import styles from './UserAccountInfo.module.css'
 import Icon from '@/shared/icon'
 import useModal from '@/shared/store/modal'
+import { useGlobalData } from '@/shared/context/global-data/useGlobalDataContext'
 
 const UserAccountInfo = () => {
-  const {openModal} = useModal()
+  const { openModal } = useModal()
+  const { userData } = useGlobalData()
 
   return (
     <div className={styles.userProfileContent}>
@@ -22,46 +24,41 @@ const UserAccountInfo = () => {
       <div className={styles.userProfileDetails}>
         <div className={styles.userProfileDetailItem}>
           <div className={styles.userProfileDetailLabel}>Фамилия</div>
-          <div className={styles.userProfileDetailValue}>Пупкин</div>
+          <div className={styles.userProfileDetailValue}>{userData?.last_name || 'Нету'}</div>
         </div>
         <div className={styles.userProfileDetailItem}>
           <div className={styles.userProfileDetailLabel}>Имя</div>
-          <div className={styles.userProfileDetailValue}>Тут имя</div>
+          <div className={styles.userProfileDetailValue}>{userData?.first_name || 'Нету'}</div>
         </div>
         <div className={styles.userProfileDetailItem}>
           <div className={styles.userProfileDetailLabel}>Отчество</div>
-          <div className={styles.userProfileDetailValue}>Юрьевич</div>
+          <div className={styles.userProfileDetailValue}>{userData?.middle_name || 'Нету'}</div>
         </div>
-        <div className={styles.userProfileDetailItem}>
-          <div className={styles.userProfileDetailLabel}>Статус</div>
-          <div className={`${styles.userProfileDetailValue} ${styles.userProfileMember}`}>
-            <Icon icon="check-circle" width={24} height={24} />
-            <span>Участник</span>
+        {userData?.status && (
+          <div className={styles.userProfileDetailItem}>
+            <div className={styles.userProfileDetailLabel}>Статус</div>
+            <div className={`${styles.userProfileDetailValue} ${styles.userProfileMember}`}>
+              <Icon icon="check-circle" width={24} height={24} />
+              <span>Участник</span>
+            </div>
           </div>
-        </div>
+        )}
 
         <div className={styles.userProfileDetailItem}>
           <div className={styles.userProfileDetailLabel}>Электронная почта</div>
-          <div className={styles.userProfileDetailValue}>Почта</div>
+          <div className={styles.userProfileDetailValue}>{userData?.email || 'Нету'}</div>
         </div>
 
         <div className={styles.userProfileDetailItem}>
           <div className={styles.userProfileDetailLabel}>Номер телефона</div>
-          <div className={styles.userProfileDetailValue}>+7 983 456 15 27</div>
+          <div className={styles.userProfileDetailValue}>{userData?.phone_number || 'Нету'}</div>
         </div>
-
-        <div className={styles.userProfileDetailItem}>
-          <div className={styles.userProfileDetailLabel}>Регион</div>
-          <div className={styles.userProfileDetailValue}>
-            <span>г.Москва</span>
-            <br />
-            <span className={styles.userProfileRegionContact}>
-              (pupkin.valera00@mail.ru,
-              <br />
-              +7 983 456 15 27)
-            </span>
+        {userData?.region && (
+          <div className={styles.userProfileDetailItem}>
+            <div className={styles.userProfileDetailLabel}>Регион</div>
+            <div className={styles.userProfileDetailValue}>{userData?.region}</div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   )

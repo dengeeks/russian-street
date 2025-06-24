@@ -22,5 +22,8 @@ export async function postRegister(data: RegisterType) {
     await saveTokenAction({ access, refresh });
   }
 
-  return json;
+  return {
+    status: res.status,
+    data: json,
+  };
 }

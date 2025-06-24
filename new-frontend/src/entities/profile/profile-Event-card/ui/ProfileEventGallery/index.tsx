@@ -9,7 +9,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { FreeMode, Navigation, Pagination } from 'swiper/modules'
 import { Arrow } from '@/shared/ui/Arrow'
 
-const images = ['/test/events.png', '/test/whoweare2.png']
+const images = ['/assets/test/events.png', '/assets/test/whoweare2.png']
 
 const ProfileEventGallery = () => {
   return (

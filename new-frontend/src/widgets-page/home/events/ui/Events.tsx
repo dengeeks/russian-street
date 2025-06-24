@@ -2,8 +2,8 @@
 import styles from './Events.module.css'
 import Image from 'next/image'
 import SectionTitle from '@/shared/ui/SectionTitle'
-import Button from '@/shared/ui/Button'
 import EventCard from '@/entities/home/event-card'
+import ActionButton from '@/features/action-buttons'
 
 const Events = () => {
   return (
@@ -20,7 +20,7 @@ const Events = () => {
 
             <div className={styles.imageWrapper}>
               <Image
-                src="/test/events.png"
+                src="/assets/test/events.png"
                 className={styles.image}
                 fill
                 alt="event"
@@ -37,7 +37,7 @@ const Events = () => {
             </div>
           </div>
 
-          <Button type="button" className={`${styles.buttonEvent} red`}>Участвовать</Button>
+          <ActionButton className={`${styles.buttonEvent} red`} modalName="join-organization" requireAuth>Участвовать</ActionButton>
         </div>
     </section>
   )
