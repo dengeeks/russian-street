@@ -39,6 +39,9 @@ CACHE_EVERYONELIKES_TIMEOUT = config('CACHE_EVERYONELIKES_TIMEOUT', cast = int, 
 CACHE_PARTNERS_KEY = config('CACHE_PARTNERS_KEY', cast = str, default = 'CACHE_PARTNERS_KEY')
 CACHE_PARTNERS_TIMEOUT = config('CACHE_PARTNERS_TIMEOUT', cast = int, default = 60 * 60 * 24)
 
+CACHE_MANAGERS_KEY = config('CACHE_MANAGERS_KEY', cast = str, default = 'CACHE_MANAGERS_KEY')
+CACHE_MANAGERS_TIMEOUT = config('CACHE_MANAGERS_TIMEOUT', cast = int, default = 60 * 60 * 24)
+
 INSTALLED_APPS = [
     'unfold',
     'django.contrib.admin',
@@ -54,6 +57,8 @@ INSTALLED_APPS = [
     'users',
     'feedbacks',
     'oauth2',
+    'regions',
+    'managers.apps.ManagersConfig',
     'partners.apps.PartnersConfig',
     'contents.apps.ContentsConfig'
 ]
@@ -198,6 +203,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_ALL_ORIGINS = True
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:3000',
+    'https://street-russia.tati-b-n.ru'
 ]
 
 # SPECTACULAR
@@ -308,6 +314,7 @@ UNFOLD = {
             {
                 "title": "OAuth2 приложения",
                 "collapsible": True,
+                "separator": True,
                 "items": [
                     {
                         "title": "OAuth2",
@@ -319,6 +326,7 @@ UNFOLD = {
             {
                 "title": "Пользователи",
                 "collapsible": True,
+                "separator": True,
                 "items": [
                     {
                         "title": "Пользователи",
@@ -328,8 +336,43 @@ UNFOLD = {
                 ],
             },
             {
+                "title": "Регионы",
+                "collapsible": True,
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Регион",
+                        "icon": "partner_exchange",
+                        "link": reverse_lazy("admin:regions_region_changelist"),
+                    },
+                    {
+                        "title": "Город",
+                        "icon": "format_ink_highlighter",
+                        "link": reverse_lazy("admin:regions_city_changelist"),
+                    },
+                ],
+            },
+            {
+                "title": "Руководители",
+                "collapsible": True,
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Руководители",
+                        "icon": "partner_exchange",
+                        "link": reverse_lazy("admin:managers_manager_changelist"),
+                    },
+                    {
+                        "title": "Тип руководителя",
+                        "icon": "format_ink_highlighter",
+                        "link": reverse_lazy("admin:managers_managertype_changelist"),
+                    },
+                ],
+            },
+            {
                 "title": "Партнеры",
                 "collapsible": True,
+                "separator": True,
                 "items": [
                     {
                         "title": "Партнеры",
@@ -346,6 +389,7 @@ UNFOLD = {
             {
                 "title": "Главная страница",
                 "collapsible": True,
+                "separator": True,
                 "items": [
                     {
                         "title": "Промо-видео",
@@ -383,6 +427,7 @@ UNFOLD = {
             {
                 "title": "О нас",
                 "collapsible": True,
+                "separator": True,
                 "items": [
                     {
                         "title": "Стань частью улиц",
@@ -404,6 +449,7 @@ UNFOLD = {
             {
                 "title": "Контакты",
                 "collapsible": True,
+                "separator": True,
                 "items": [
                     {
                         "title": "Соцсети (Header)",
@@ -425,6 +471,7 @@ UNFOLD = {
             {
                 "title": "Страница сотрудничество",
                 "collapsible": True,
+                "separator": True,
                 "items": [
                     {
                         "title": "Блок сотрудничество",
@@ -436,6 +483,7 @@ UNFOLD = {
             {
                 "title": "У нас понравится всем",
                 "collapsible": True,
+                "separator": True,
                 "items": [
                     {
                         "title": "Блок 'У нас понравится всем'",
