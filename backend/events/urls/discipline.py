@@ -1,13 +1,9 @@
-from rest_framework.routers import SimpleRouter
+from django.urls import path
 
-from events.views.discipline import SubDisciplineViewSet, DisciplineViewSet
+from events.views.discipline import ListSubDisciplineAPI, SubDisciplineDetailAPI
 
-router = SimpleRouter()
-router.register('discipline', DisciplineViewSet, basename = 'discipline')
-router.register(
-    'sub-discipline',
-    SubDisciplineViewSet,
-    basename = 'sub discipline'
-)
-
-urlpatterns = router.urls
+urlpatterns = [
+    # получение направлений
+    path('list/subdiscipline/', ListSubDisciplineAPI.as_view()),
+    path('detail/subdiscipline/<uuid:pk>/', SubDisciplineDetailAPI.as_view()),
+]

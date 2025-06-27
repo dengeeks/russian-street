@@ -1,24 +1,27 @@
 from rest_framework import serializers
 
-from events.models.discipline import SubDiscipline, Discipline
+from events.models.discipline import SubDiscipline
 
 
-class DisciplineSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Discipline
-        fields = (
-            'id',
-            'name',
-        )
-
-
-class SubDisciplineSerializer(serializers.ModelSerializer):
-    discipline = DisciplineSerializer()
-
+class ListSubDisciplineSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubDiscipline
-        fields = (
+        fields = [
             'id',
             'name',
-            'discipline',
-        )
+            'second_image'
+        ]
+
+
+class SubDisciplineDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SubDiscipline
+        fields = [
+            'id',
+            'name',
+            'description',
+            'format_type',
+            'video_url',
+            'image',
+            'discipline'
+        ]

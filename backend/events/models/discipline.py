@@ -2,12 +2,11 @@ from ckeditor.fields import RichTextField
 from django.core.validators import FileExtensionValidator
 from django.db import models
 
-from common.mixins import DateTimeMixin
-from common.utils import setup_image_path
+from common.mixins import DateTimeMixin, UUIDMixin
 from common.validators import validate_iframe
 
 
-class Discipline(DateTimeMixin):
+class Discipline(UUIDMixin, DateTimeMixin):
     """
     Модель, представляющая дисциплину уличной культуры.
 
@@ -73,7 +72,7 @@ class Discipline(DateTimeMixin):
         return f'{self.name}'
 
 
-class SubDiscipline(DateTimeMixin):
+class SubDiscipline(UUIDMixin, DateTimeMixin):
     """
     Модель, подкатегорию дисциплин.
 

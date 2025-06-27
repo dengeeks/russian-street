@@ -7,7 +7,6 @@ from django.core.management.utils import get_random_secret_key
 from django.templatetags.static import static
 from django.urls import reverse_lazy
 
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # секретные ключи, настройки
@@ -43,6 +42,11 @@ CACHE_PARTNERS_TIMEOUT = config('CACHE_PARTNERS_TIMEOUT', cast = int, default = 
 CACHE_TEAM_KEY = config('CACHE_TEAM_KEY', cast = str, default = 'CACHE_TEAM_KEY')
 CACHE_TEAM_TIMEOUT = config('CACHE_TEAM_TIMEOUT', cast = int, default = 60 * 60 * 24)
 
+CACHE_LIST_SUBDISCIPLINE_KEY = config(
+    'CACHE_LIST_SUBDISCIPLINE_KEY', cast = str, default = 'CACHE_LIST_SUBDISCIPLINE_KEY'
+    )
+CACHE_LIST_SUBDISCIPLINE_TIMEOUT = config('CACHE_LIST_SUBDISCIPLINE_TIMEOUT', cast = int, default = 60 * 60 * 24)
+
 INSTALLED_APPS = [
     'unfold',
     'django.contrib.admin',
@@ -53,7 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # мои приложения
-    'events',
+    'events.apps.EventsConfig',
     # 'news',
     'users',
     'feedbacks',
