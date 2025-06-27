@@ -10,7 +10,7 @@ class RegionAdmin(ImagePreviewMixin, LinkToDetailMixin, ModelAdmin):
     """
     Класс администратора для модели Region.
     """
-    fields = ['name', 'image', 'info', 'code', 'created_at', 'updated_at']
+    fields = ['name', 'image', 'info', 'manager', 'code', 'created_at', 'updated_at']
     list_display = ['link_to_detail', 'name', 'image_preview']
     readonly_fields = ['link_to_detail', 'image_preview', 'created_at', 'updated_at']
     search_fields = ['name']

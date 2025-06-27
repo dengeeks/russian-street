@@ -10,12 +10,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # API ENDPOINTS
-    path('api/v1/', include('events.urls')),
+    # path('api/v1/', include('events.urls')),
     path('api/v1/', include('feedbacks.urls')),
-    path('api/v1/', include('news.urls')),
+    # path('api/v1/', include('news.urls')),
     path('api/v1/', include('partners.urls')),
     path('api/v1/', include('users.urls')),
-    path('api/v1/', include('managers.urls')),
+    path('api/v1/', include('teams.urls')),
     path('api/v1/', include('contents.urls')),
 
     # API OAUTH2
