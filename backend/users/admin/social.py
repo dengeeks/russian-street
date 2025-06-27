@@ -2,13 +2,13 @@ from django.contrib import admin
 from unfold.admin import TabularInline, ModelAdmin
 
 from common.admin import LinkToDetailMixin, ImagePreviewMixin
-from managers.models.social import SocialLinkManager, SocialMediaManager
+from users.models.social import SocialLinkManager, SocialMediaManager
 
 
 @admin.register(SocialMediaManager)
 class SocialMediaManagerAdmin(ImagePreviewMixin, LinkToDetailMixin, ModelAdmin):
     fields = ['name', 'image']
-    list_display = ['link_to_detail', 'image_preview', 'name', 'image']
+    list_display = ['link_to_detail', 'image_preview', 'name']
     readonly_fields = ['link_to_detail', 'image_preview', 'created_at', 'updated_at']
 
 

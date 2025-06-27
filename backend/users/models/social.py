@@ -3,7 +3,7 @@ from django.db import models
 
 from common.mixins import UUIDMixin, DateTimeMixin
 from common.utils import setup_image_path
-from managers.models.manager import Manager
+from users.models.user import UserAccount
 
 
 class SocialMediaManager(UUIDMixin, DateTimeMixin):
@@ -75,7 +75,7 @@ class SocialLinkManager(DateTimeMixin):
         related_name = 'social_links'
     )
     manager = models.ForeignKey(
-        to = Manager,
+        to = UserAccount,
         on_delete = models.CASCADE,
         verbose_name = 'Руководитель',
         related_name = 'social_links'

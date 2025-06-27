@@ -2,13 +2,13 @@ from django.contrib import admin
 from unfold.admin import ModelAdmin
 
 from common.admin import LinkToDetailMixin
-from managers.models.manager_type import ManagerType
+from teams.models.team_type import TeamType
 
 
-@admin.register(ManagerType)
-class ManagerTypeAdmin(LinkToDetailMixin, ModelAdmin):
+@admin.register(TeamType)
+class TeamTypeAdmin(LinkToDetailMixin, ModelAdmin):
     """
-    Класс администратора для модели ManagerType.
+    Класс администратора для модели TeamType.
     """
     fields = ['name', 'created_at', 'updated_at']
     list_display = ['name', 'name', 'updated_at']
