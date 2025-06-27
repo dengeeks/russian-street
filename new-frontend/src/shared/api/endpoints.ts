@@ -46,3 +46,5 @@ export const USER_UPDATE = getApiUrl(`user/update/`, false);
 export const O_AUTH_2 = getApiUrl(`o/authorize/`, false);
 
 export const PARTNERS = getApiUrl('list/partner/', true);
+
+export const TEAM = getApiUrl('list/team_member/', false);
