@@ -62,9 +62,6 @@ class FilterService:
         return result
 
 
-# api/services/discipline_service.py
-
-
 class SubDisciplineService:
     @staticmethod
     def get_subdisciplines_for_list():
@@ -80,3 +77,15 @@ class SubDisciplineService:
             .prefetch_related('gallery_items')
             .get(pk = pk)
         )
+
+
+class DisciplineService:
+    @staticmethod
+    def get_disciplines_with_subdisciplines():
+        """Получение всех дисциплин с предзагруженными субдисциплинами"""
+        return Discipline.objects.prefetch_related(
+            Prefetch(
+                'sub_disciplines',
+                queryset = SubDiscipline.objects.only('id', 'name')
+            )
+        ).all()
