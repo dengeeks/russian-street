@@ -1,7 +1,7 @@
 from django.core.validators import FileExtensionValidator
 from django.db import models
 
-from common.mixins import UUIDMixin, DateTimeMixin
+from common.models import UUIDMixin, DateTimeMixin
 from common.utils import setup_image_path
 from users.models.user import UserAccount
 

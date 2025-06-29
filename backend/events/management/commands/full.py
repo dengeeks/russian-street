@@ -47,7 +47,6 @@ class Command(BaseCommand):
                 city = choice(cities),
                 discipline = choice(disciplines),
                 sub_discipline = choice(sub_disciplines),
-                is_moderation = choice([True, False]),
                 is_our_project = choice([True, False]),
                 is_priority = choice([True, False]),
                 service_id = fake.slug()

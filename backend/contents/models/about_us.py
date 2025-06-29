@@ -2,12 +2,11 @@ from ckeditor.fields import RichTextField
 from django.core.validators import FileExtensionValidator
 from django.db import models
 
-from common.mixins import UUIDMixin, DateTimeMixin, SingleInstanceMixin
+from common.models import UUIDMixin, DateTimeMixin, SingleInstanceMixin, MediaContentMixin
 from common.utils import setup_image_path
-from common.validators import validate_iframe
 
 
-class JoinStreet(UUIDMixin, DateTimeMixin, SingleInstanceMixin):
+class JoinStreet(UUIDMixin, DateTimeMixin, MediaContentMixin, SingleInstanceMixin):
     """
     Модель для блока стань частью улицы.
 
@@ -15,6 +14,7 @@ class JoinStreet(UUIDMixin, DateTimeMixin, SingleInstanceMixin):
         - UUIDMixin: UUID primary key наследование.
         - DateTimeMixin: автоматические поля создания и обновления.
         - SingleInstanceMixin: ограничение до одного экземпляра.
+        - MediaContentMixin: Поля для медиа-контента.
 
     Поля:
         - format_type (CharField): тип (Изображение или видео).
@@ -26,38 +26,6 @@ class JoinStreet(UUIDMixin, DateTimeMixin, SingleInstanceMixin):
         verbose_name: 'стань частью улицы'
         verbose_name_plural: 'стань частью улицы'
     """
-    FORMAT_TYPE = [
-        ('video_url', 'Видео'),
-        ('image', 'Изображение'),
-    ]
-
-    format_type = models.CharField(
-        max_length = 25,
-        choices = FORMAT_TYPE,
-        verbose_name = 'Тип',
-        help_text = 'Выберите тип (Изображение или видео)'
-    )
-    video_url = models.CharField(
-        verbose_name = 'Ссылка на видео (iframe)',
-        help_text = 'Введите URL видео в формате iframe для отображения на сайте.',
-        validators = [validate_iframe],
-        blank = True,
-        null = True,
-        max_length = 1000
-    )
-    image = models.ImageField(
-        upload_to = setup_image_path,
-        verbose_name = 'Изображение',
-        max_length = 1000,
-        help_text = 'Загрузите изображение',
-        validators = [
-            FileExtensionValidator(
-                allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg']
-            )
-        ],
-        blank = True,
-        null = True
-    )
 
     text = RichTextField(
         verbose_name = 'Текстовое описание'

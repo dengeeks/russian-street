@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
 from django.db import models
 
-from common.mixins import DateTimeMixin
+from common.models import DateTimeMixin
 from common.validators import (validate_phone_number)
 from regions.models.region import Region
 
