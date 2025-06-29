@@ -6,7 +6,7 @@ const RegionalLeaderCard = () => {
     <article className={styles.regionalLeaderCard}>
       <Image
         className={styles.regionalLeaderCardImage}
-        src="/test/whoweare2.png"
+        src="/assets/test/team.png"
         alt="Фото представителя региона"
         width={286}
         height={249}

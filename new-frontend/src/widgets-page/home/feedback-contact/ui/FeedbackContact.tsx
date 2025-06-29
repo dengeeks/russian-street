@@ -15,7 +15,7 @@ const FeedbackContact = () => {
   
   const iframeSrc = extractIframeSrc(organization_info?.iframe || '');
   return (
-    <section className={`container section-spacing-top ${styles.feedbackContact}`}>
+    <section className={`container section-spacing-top section-spacing-bottom ${styles.feedbackContact}`}>
       <SectionTitle>ВОЗНИКЛИ ВОПРОСЫ?</SectionTitle>
       <div className={styles.wrapper}>
         <div className={styles.infoBlock}>

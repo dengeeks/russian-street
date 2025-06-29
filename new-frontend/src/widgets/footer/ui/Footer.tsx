@@ -13,7 +13,7 @@ const Footer = () => {
   const {contact_footer, email_footer} = staticContact;
 
   return (
-    <footer className={`${styles.footer} section-spacing-top`}>
+    <footer className={styles.footer}>
       <div className={`${styles.container} container`}>
         <Logo />
         <div className={`${styles.orgInfo} ${styles.hiddenMobile}`}>
@@ -31,7 +31,7 @@ const Footer = () => {
           <Link href="/blog">Блог</Link>
           <Link href="/collaboration">Сотрудничество</Link>
           <Link href="/">Для СМИ</Link>
-          <Link href="/">Документы</Link>
+          <Link href="/privacy">Документы</Link>
         </nav>
 
         <div className={styles.donation}>

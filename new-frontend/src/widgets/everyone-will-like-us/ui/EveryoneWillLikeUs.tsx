@@ -13,7 +13,7 @@ const EveryoneWillLikeUs = async () => {
   }
 
   return (
-    <section className={`container section-spacing-top ${styles.everyoneWillLike}`}>
+    <section className={`container section-spacing-top section-spacing-bottom ${styles.everyoneWillLike}`}>
       <SectionTitle>У нас понравится всем</SectionTitle>
 
       <LikeUsContent data={EveryoneLikes}/>

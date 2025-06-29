@@ -17,9 +17,9 @@ const Banner = ({joinStreet}: BannerProps) => {
       <div className={`section-spacing-bottom ${styles.bannerAbout}`}>
         <div className={styles.bannerAboutContent}>
           <div className={styles.bannerAboutArrows}>
-            <Image src="/png/about-us-arrow.png" alt="стрелки" width={74} height={68} priority />
-            <Image src="/png/about-us-arrow.png" alt="стрелки" width={74} height={68} priority />
-            <Image src="/png/about-us-arrow.png" alt="стрелки" width={74} height={68} priority />
+            <Image src="/assets/webp/about-us-arrow.webp" alt="стрелки" width={74} height={68} priority />
+            <Image src="/assets/webp/about-us-arrow.webp" alt="стрелки" width={74} height={68} priority />
+            <Image src="/assets/webp/about-us-arrow.webp" alt="стрелки" width={74} height={68} priority />
           </div>
           <SectionTitle>СТАНЬ ЧАСТЬЮ УЛИЦ</SectionTitle>
           <ActionButton type="button" modalName="join-organization" requireAuth>Участвовать</ActionButton>
@@ -29,12 +29,12 @@ const Banner = ({joinStreet}: BannerProps) => {
 
           {joinStreet?.video_url ? (
             <MediaSwitcher
-              type="video"
+              type="video_url"
               source={extractVideoId(joinStreet.video_url)}
             />
           ) : joinStreet?.image ? (
             <MediaSwitcher
-              type="photo"
+              type="image"
               src={joinStreet.image}
               alt="О нас"
               sizes="(min-width: 1200px) 800px,

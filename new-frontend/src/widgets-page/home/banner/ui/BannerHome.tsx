@@ -10,16 +10,15 @@ interface BannerHomeProps {
 }
 
 const BannerHome = ({ promoVideo }: BannerHomeProps) => {
-
   return (
     <section className={styles.bannerContainer}>
-      <MediaSwitcher type="video" source={extractVideoId(promoVideo?.video_url || 'Ks0eHBSNFwA')} />
+      <MediaSwitcher type="video_url" source={extractVideoId(promoVideo?.video_url || 'Ks0eHBSNFwA')} />
 
       <div className={`container ${styles.bannerWrapperContent}`}>
         <div className={styles.bannerContent}>
           <div className={styles.bannerLogoWrapper}>
             <Image
-              src="/logo-banner.png"
+              src="/assets/logo-banner.png"
               className={styles.bannerLogo}
               fill
               alt="Улица России"

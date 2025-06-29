@@ -12,13 +12,6 @@
     gap: 40px;
 }
 
-.directionDetails__description {
-    font-size: 20px;
-    font-weight: 400;
-    font-stretch: semi-condensed;
-    line-height: 130%;
-    text-transform: uppercase;
-}
 
 @media (max-width: 768px) {
 
@@ -32,8 +25,5 @@
         gap: 20px;
     }
 
-    .directionDetails__description {
-        font-size: 15px;
-    }
 
 }

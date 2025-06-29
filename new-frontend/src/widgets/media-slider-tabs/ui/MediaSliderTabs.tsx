@@ -9,11 +9,17 @@ import { FreeMode, Thumbs } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import Image from 'next/image'
 import { useState } from 'react'
-import {getYouTubeThumbnail} from "../utils/getYouTubeThumbnail"
-import {mediaList} from "../model/mock/mediaList"
+import {getVideoThumbnail} from "../utils/getVideoThumbnail"
 import { useMobileDetection } from '@/shared/hooks/useIsMobile'
+import type {GalleryItem} from "@/shared/api/direction/detail-discipline/type"
+import { extractVideoId } from '@/shared/utils/extractVideoId'
+import { getImageUrl } from '@/shared/utils/getImageUrl'
 
-const MediaSliderTabs = () => {
+interface MediaSliderTabsProps {
+  gallery_items: GalleryItem[];
+}
+
+const MediaSliderTabs = ({gallery_items}: MediaSliderTabsProps) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const isMobile = useMobileDetection()
@@ -27,9 +33,21 @@ const MediaSliderTabs = () => {
         modules={[FreeMode, Thumbs]}
         onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
       >
-        {mediaList.map((media, index) => (
+        {gallery_items.map((media, index) => (
           <SwiperSlide className={styles.mediaSlider__main} key={index}>
-              <MediaSwitcher type={media.type} src={media.src} alt={media.alt || ''} source={{type: 'youtube', id: 'Ks0eHBSNFwA'}}  {...(media.type === 'photo' ? { sizes: "(min-width: 1240px) 1204px, calc(100vw - 32px)" } : {})}/>
+            {media.format_type === 'image' ? (
+              <MediaSwitcher
+                type={media.format_type}
+                src={media.image}
+                alt={`Изображение направления №${index + 1}`}
+                sizes="(min-width: 1240px) 1204px, calc(100vw - 32px)"
+              />
+            ) : (
+              <MediaSwitcher
+                type="video_url"
+                source={extractVideoId(media.video_url || '')}
+              />
+            )}
           </SwiperSlide>
         ))}
       </Swiper>
@@ -44,17 +62,17 @@ const MediaSliderTabs = () => {
         modules={[FreeMode, Thumbs]}
         className={styles.mediaSlider__thumbnails}
       >
-        {mediaList.map((media, index) => (
+        {gallery_items.map((media, index) => (
           <SwiperSlide key={index} style={{ width: 'auto', height: 'auto' }} className={`${styles.mediaSlider__thumb} ${activeIndex === index ? styles.mediaSlider__thumbActive : ''}`}>
-              {media.type === 'video' ? (
+              {media.format_type === 'video_url' ? (
                 <Image
-                  src={getYouTubeThumbnail(media.src) || '/icons/fallback.jpg'}
-                  alt="Видео превью"
-                  fill
-                  sizes="184px"
+                  src={getVideoThumbnail(media.video_url) || '/assets/webp/mock/mock-admin.webp'}
+                  alt={`Превью видео направления №${index + 1}`}
+                  width={184}
+                  height={139}
                 />
               ) : (
-                <Image src={media.src} alt={media.alt || ''} fill sizes="184px"/>
+                <Image src={getImageUrl(media.image || undefined)} alt={`Миниатюра направления №${index + 1}`} width={184} height={139}/>
               )}
           </SwiperSlide>
         ))}

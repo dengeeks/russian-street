@@ -9,6 +9,7 @@
 
 .regionalLeaderCardImage {
     object-fit: cover;
+    background-color: var(--dark-grey);
 }
 
 .regionalLeaderCardInfo {

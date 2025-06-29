@@ -7,7 +7,7 @@ const Toast = memo(({ message, type }: ToastMessage) => {
   return (
     <div id="toastBox">
       <div className={`toast ${type}`}>
-        <Image src={`/toast/${type}.png`} alt={type} height={24} width={24} />
+        <Image src={`/assets/toast/${type}.webp`} alt={type} height={24} width={24} />
         {message}
       </div>
     </div>

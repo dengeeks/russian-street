@@ -23,7 +23,6 @@ export async function getEveryoneLikes(): Promise<EveryoneLikesType> {
       headers: {
         'Content-Type': 'application/json',
       },
-      cache: 'force-cache',
       next: { revalidate: REVALIDATE_TIME },
     });
 

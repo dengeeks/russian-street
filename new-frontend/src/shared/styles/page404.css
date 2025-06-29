@@ -1,8 +1,7 @@
 .notFoundContainer {
-    background-image: url('/png/background-404.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-image: url('/assets/webp/background-404.webp');
+    background-repeat: repeat;
+    background-size: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -20,6 +19,7 @@
     font-weight: 700;
     text-transform: uppercase;
     filter: blur(10px);
+    user-select: none;
 }
 
 .notFoundMessage {
@@ -29,6 +29,12 @@
     line-height: 130%;
     font-weight: 400;
     font-stretch: semi-condensed;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .notFoundContainer a:hover {
+        color: var(--white);
+    }
 }
 
 @media (max-width: 768px) {

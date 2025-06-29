@@ -16,7 +16,6 @@ export async function getAboutUs(): Promise<AboutUsType> {
       headers: {
         'Content-Type': 'application/json',
       },
-      cache: 'force-cache',
       next: { revalidate: REVALIDATE_TIME },
     });
 

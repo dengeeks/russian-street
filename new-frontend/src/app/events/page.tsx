@@ -13,7 +13,7 @@ export default async function EventsPage() {
       <BannerEvent/>
       <EventsDateFilter/>
       <EventsSelectFilters/>
-      <div className="container event-list-page">
+      <div className="container event-list-page section-spacing-bottom">
         <EventsSidebarFilters/>
         <EventsList/>
       </div>

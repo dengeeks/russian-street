@@ -1,38 +1,32 @@
 import './Banner.css'
 import SectionTitle from '@/shared/ui/SectionTitle'
 import Image from 'next/image'
+import type { DisciplinesType } from '@/shared/api/direction/disciplines/type'
+import { getImageUrl } from '@/shared/utils/getImageUrl'
 
-const Banner = () => {
+interface BannerProps {
+  data: DisciplinesType[];
+} 
+
+const Banner = ({data}: BannerProps) => {
   return (
     <section className="bannerDirections container section-spacing-bottom">
-      <div className="bannerDirectionsBlock">
-        <SectionTitle className="bannerDirectionsTitle">спорт</SectionTitle>
-        <div className="bannerDirectionsImage">
-          <Image src="/test/directions/1.png" alt="спорт" fill sizes="(max-width: 767px) calc(90vw - 32px), 100%" />
+      {data.map(discipline => (
+        <div className="bannerDirectionsBlock" key={discipline.id}>
+          <SectionTitle className="bannerDirectionsTitle">{discipline.name}</SectionTitle>
+          <div className="bannerDirectionsImage">
+            <Image
+              src={getImageUrl(discipline.first_image)}
+              alt={discipline.name}
+              fill
+              sizes="(max-width: 767px) calc(90vw - 32px), 100%"
+              priority
+            />
+          </div>
         </div>
-      </div>
-      <div className="bannerDirectionsBlock">
-        <SectionTitle className="bannerDirectionsTitle">искусство</SectionTitle>
-        <div className="bannerDirectionsImage">
-          <Image src="/test/directions/4.png" alt="искусство" fill sizes="(max-width: 767px) calc(90vw - 32px), 100%"/>
-        </div>
-      </div>
-      <div className="bannerDirectionsBlock">
-        <SectionTitle className="bannerDirectionsTitle">музыка</SectionTitle>
-        <div className="bannerDirectionsImage">
-          <Image src="/test/directions/2.png" alt="музыка" fill sizes="(max-width: 767px) calc(90vw - 32px), 100%"/>
-        </div>
-      </div>
-      <div className="bannerDirectionsBlock">
-        <SectionTitle className="bannerDirectionsTitle">танцы</SectionTitle>
-        <div className="bannerDirectionsImage">
-          <Image src="/test/directions/3.png" alt="танцы" fill sizes="(max-width: 767px) calc(90vw - 32px), 100%"/>
-        </div>
-      </div>
-
+      ))}
 
     </section>
-
   )
 }
 

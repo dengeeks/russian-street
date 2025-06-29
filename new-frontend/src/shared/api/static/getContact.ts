@@ -30,7 +30,6 @@ export async function getContact(): Promise<ContactType> {
       headers: {
         'Content-Type': 'application/json',
       },
-      cache: 'force-cache',
       next: { revalidate: REVALIDATE_TIME },
     });
 

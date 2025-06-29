@@ -6,11 +6,11 @@ import Icon from '@/shared/icon'
 
 const RegionLeader = () => {
   return (
-    <section className={`container section-spacing-top ${styles.regionLeader}`}>
+    <section className={`container section-spacing-top section-spacing-bottom ${styles.regionLeader}`}>
       <SectionTitle>Руководитель</SectionTitle>
       <div className={styles.regionLeaderWrapper}>
         <div className={styles.regionLeaderImageWrapper}>
-          <Image src="/test/events.png" fill alt="Фото руководителя"
+          <Image src="/assets/test/events.png" fill alt="Фото руководителя"
                  sizes="
     (min-width: 880px) 427px,
     (min-width: 850px) 400px,

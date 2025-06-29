@@ -16,7 +16,7 @@ interface ContentShowcaseProps {
 
 const ContentShowcase = ({ title }: ContentShowcaseProps) => {
   return (
-    <section className="container content-showcase section-spacing-top">
+    <section className="container content-showcase section-spacing-top section-spacing-bottom">
         <SectionTitle>{title}</SectionTitle>
         <Swiper
           modules={[FreeMode, Navigation]}
