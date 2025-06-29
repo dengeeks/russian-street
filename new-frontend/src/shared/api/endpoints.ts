@@ -49,9 +49,9 @@ export const PARTNERS = getApiUrl('list/partner/', true);
 export const TEAM = getApiUrl('list/team_member/', false);
 
 // направления
-  export const DISCIPLINES = getApiUrl('disciplines/', true)
+  export const DISCIPLINES = getApiUrl('info/disciplines/', true)
 
-  export const SUB_DISCIPLINES = getApiUrl('subdisciplines/', true);
+  export const SUB_DISCIPLINES = getApiUrl('list/subdiscipline/', true);
 
   // детали направлений
-  export const DETAIL_DISCIPLINE = (slug: string) => getApiUrl(`subdisciplines/${slug}`, true);
+  export const DETAIL_DISCIPLINE = (slug: string) => getApiUrl(`detail/subdiscipline/${slug}/`, true);
