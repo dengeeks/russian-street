@@ -8,7 +8,7 @@ const BannerEvent = () => {
     <section className={`section-spacing-bottom ${styles.eventBanner}`}>
       <div className={styles.eventBannerWrapper}>
         <MediaSwitcher
-          type="video"
+          type="video_url"
           source={{type: 'youtube', id: 'Ks0eHBSNFwA'}}
         />
       </div>

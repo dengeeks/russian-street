@@ -1,9 +1,9 @@
-import { SubCategory } from '../model/type'
+import { SubDiscipline } from '@/shared/api/direction/disciplines/type'
 
 export const getAdditionalSubcategories = (
-  all: SubCategory[],
-  current: SubCategory[]
-): SubCategory[] => {
-  const currentSlugs = new Set(current.map(item => item.slug))
-  return all.filter(item => !currentSlugs.has(item.slug))
+  all: SubDiscipline[],
+  current: SubDiscipline[]
+): SubDiscipline[] => {
+  const currentSlugs = new Set(current.map(item => item.id))
+  return all.filter(item => !currentSlugs.has(item.id))
 }

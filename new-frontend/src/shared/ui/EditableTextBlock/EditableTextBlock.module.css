@@ -7,9 +7,21 @@
 
 }
 
+.editableTextBlockCompact {
+    font-size: 20px;
+    font-weight: 400;
+    font-stretch: semi-condensed;
+    line-height: 130%;
+    text-transform: uppercase;
+}
+
 @media (max-width: 768px) {
     .editableTextBlock {
         font-size: 20px;
 
+    }
+
+    .editableTextBlockCompact {
+        font-size: 15px;
     }
 }

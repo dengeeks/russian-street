@@ -10,11 +10,11 @@ export type VideoSource = {
 
 export type MediaSwitcherProps =
   | ({
-  type: 'photo'
-  src: string
+  type: 'image'
+  src: string | null;
   alt: string
 } & Omit<ImageProps, 'src' | 'alt'>)
   | ({
-  type: 'video'
+  type: 'video_url'
   source: VideoSource;
 } & IframeHTMLAttributes<HTMLIFrameElement>)

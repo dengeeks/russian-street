@@ -1,4 +1,5 @@
 export type JoinStreetType = {
+  format_type: 'video_url' | 'image';
   video_url: string | null;
   image: string | null;
   text: string;

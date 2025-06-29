@@ -11,7 +11,6 @@ const Partners = loadable(() => import('@/widgets/partners'))
 import Breadcrumbs from '@/widgets/breadcrumbs'
 import { getAboutUs } from '@/shared/api/static/about-us/getAboutUs'
 
-
 export default async function AboutUsPage() {
   const about = await getAboutUs()
   const { join_street, info, mission } = about

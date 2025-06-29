@@ -1,15 +1,15 @@
 'use client'
 import styles from './DirectionSubcategories.module.css'
 import Link from 'next/link'
-import { SubCategory } from '../../model/type'
+import { SubDiscipline } from '@/shared/api/direction/disciplines/type'
 import 'swiper/css'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { useState } from 'react'
 import { chunkArray } from '@/shared/utils/chunkArray'
-import { getAdditionalSubcategories } from '@/entities/direction/direction-item/utils/getAdditionalSubcategories'
+import { getAdditionalSubcategories } from '../../utils/getAdditionalSubcategories'
 
 interface DirectionSubcategoriesProps {
-  data: SubCategory[]
+  data: SubDiscipline[]
 }
 
 const DirectionSubcategories = ({ data }: DirectionSubcategoriesProps) => {
@@ -33,10 +33,10 @@ const DirectionSubcategories = ({ data }: DirectionSubcategoriesProps) => {
               {chunk.map((sub, index) => (
                 <Link
                   key={index}
-                  href={`/directions/${sub.slug}`}
+                  href={`/directions/${sub.id}`}
                   className={`${styles.directionSubcategories__item} ${styles[`item${index + 1}`]} dashed-all`}
                 >
-                  <div className={styles.directionSubcategories__itemText}>{sub.title}</div>
+                  <div className={styles.directionSubcategories__itemText}>{sub.name}</div>
                 </Link>
               ))}
             </div>
@@ -47,7 +47,7 @@ const DirectionSubcategories = ({ data }: DirectionSubcategoriesProps) => {
       {additional.length > 0 && (
         <div className={styles.directionSubcategories__additional}>
           <div className={styles.directionSubcategories__additionalText}>
-            А также: {additional.map((item) => item.title).join(', ')}
+            А также: {additional.map((item) => item.name).join(', ')}
           </div>
         </div>
       )}

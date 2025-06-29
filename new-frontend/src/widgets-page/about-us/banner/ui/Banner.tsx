@@ -29,12 +29,12 @@ const Banner = ({joinStreet}: BannerProps) => {
 
           {joinStreet?.video_url ? (
             <MediaSwitcher
-              type="video"
+              type="video_url"
               source={extractVideoId(joinStreet.video_url)}
             />
           ) : joinStreet?.image ? (
             <MediaSwitcher
-              type="photo"
+              type="image"
               src={joinStreet.image}
               alt="О нас"
               sizes="(min-width: 1200px) 800px,

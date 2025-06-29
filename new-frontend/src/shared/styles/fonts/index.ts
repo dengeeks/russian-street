@@ -35,17 +35,7 @@ export const Inter = localFont({
       path: './Inter/Inter-Regular.woff2',
       weight: '400',
       style: 'normal',
-    },
-    {
-      path: './Inter/Inter-Medium.woff2',
-      weight: '500',
-      style: 'normal',
-    },
-    {
-      path: './Inter/Inter-Bold.woff2',
-      weight: '700',
-      style: 'normal',
-    },
+    }
   ],
   display: 'swap',
   variable: '--font-Inter',

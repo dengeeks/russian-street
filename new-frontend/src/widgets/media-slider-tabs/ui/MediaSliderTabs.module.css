@@ -19,12 +19,9 @@
     display: flex;
     gap: 20px;
     height: 139px;
-
 }
 
 .mediaSlider__thumb {
-    position: relative;
-    min-width: 184px;
     cursor: pointer;
     opacity: .5;
 }
