@@ -10,6 +10,7 @@ class GallerySubDisciplineSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
+        print(representation)
         if instance.image:
             representation['image'] = instance.image.url
         return representation

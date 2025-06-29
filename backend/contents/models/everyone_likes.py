@@ -1,6 +1,6 @@
 from django.db import models
 
-from common.mixins import DateTimeMixin, MaxCountLimitedMixin
+from common.models import DateTimeMixin, MaxCountLimitedMixin
 
 
 class EveryoneLikes(DateTimeMixin, MaxCountLimitedMixin):

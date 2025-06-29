@@ -4,7 +4,7 @@
 # from events.models.region import City
 #
 # from common.constants.news import LEN_TITLE
-# from common.mixins import DateTimeMixin
+# from  import DateTimeMixin
 #
 #
 # class News(DateTimeMixin):

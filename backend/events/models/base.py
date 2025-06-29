@@ -1,54 +1,37 @@
 from ckeditor.fields import RichTextField
-from django.core.validators import FileExtensionValidator
 from django.db import models
 
-from common.mixins import DateTimeMixin, UUIDMixin
-from common.utils import setup_image_path
+from common.models import DateTimeMixin, UUIDMixin, MediaContentMixin
 from common.validators import validate_iframe
 from events.models.discipline import Discipline, SubDiscipline
 from regions.models.region import Region, City
-from users.models.user import UserAccount
 
 
-class BaseEvent(UUIDMixin, DateTimeMixin):
-    FORMAT_TYPE = [
-        ('video_url', 'Видео'),
-        ('image', 'Изображение'),
-    ]
+class BaseEvent(UUIDMixin, DateTimeMixin, MediaContentMixin):
+    """
+    Абстрактная модель базового мероприятия.
 
+    Наследует:
+        - UUIDMixin: UUID в качестве первичного ключа.
+        - DateTimeMixin: Автоматические поля created_at и updated_at.
+        - MediaContentMixin: Поля для медиа-контента.
+
+    Поля:
+        - title (CharField): Название мероприятия.
+        - description (RichTextField): Полное описание с HTML-форматированием.
+        - address (CharField): Физический адрес проведения.
+        - yandex_address (CharField): Код iframe для Яндекс.Карт.
+        - region (ForeignKey): Регион проведения.
+        - city (ForeignKey): Город проведения.
+        - discipline (ForeignKey): Основная дисциплина.
+        - sub_discipline (ForeignKey): Поддисциплина.
+    """
     title = models.CharField(
         max_length = 255,
         verbose_name = 'Название'
     )
     description = RichTextField(
         verbose_name = 'Описание'
-    )
-    format_type = models.CharField(
-        max_length = 25,
-        choices = FORMAT_TYPE,
-        verbose_name = 'Тип',
-        help_text = 'Выберите тип (Изображение или видео)'
-    )
-    video_url = models.CharField(
-        verbose_name = 'Ссылка на видео (iframe)',
-        help_text = 'Введите URL видео в формате iframe для отображения на сайте.',
-        validators = [validate_iframe],
-        blank = True,
-        null = True,
-        max_length = 1000
-    )
-    image = models.ImageField(
-        upload_to = setup_image_path,
-        verbose_name = 'Изображение',
-        max_length = 1000,
-        help_text = 'Загрузите изображение',
-        validators = [
-            FileExtensionValidator(
-                allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg']
-            )
-        ],
-        blank = True,
-        null = True
     )
     address = models.CharField(
         max_length = 255,
@@ -83,10 +66,6 @@ class BaseEvent(UUIDMixin, DateTimeMixin):
         related_name = '%(class)s_sub_discipline',
         verbose_name = 'Субдисциплина уличного спорта',
         help_text = 'Выберите субдисциплину'
-    )
-    is_moderation = models.BooleanField(
-        default = False,
-        verbose_name = 'Черновик'
     )
 
     class Meta:

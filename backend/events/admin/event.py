@@ -56,11 +56,11 @@ class EventForm(forms.ModelForm):
 class EventAdmin(LinkToDetailMixin, ModelAdmin):
     form = EventForm
     list_display = [
-        'link_to_detail', 'title', 'region', 'city', 'discipline', 'is_moderation',
+        'link_to_detail', 'title', 'region', 'city', 'discipline',
         'is_our_project', 'is_priority', 'created_at'
     ]
     list_filter = [
-        'is_moderation', 'is_our_project', 'is_priority', 'region',
+        'is_our_project', 'is_priority', 'region',
         'city', 'discipline', 'sub_discipline', 'created_at'
     ]
     search_fields = ['title', 'description', 'address']
@@ -72,10 +72,11 @@ class EventAdmin(LinkToDetailMixin, ModelAdmin):
                 'description',
                 'discipline',
                 'sub_discipline',
-                'is_moderation',
                 'is_our_project',
                 'is_priority',
-                'service_id'
+                'service_id',
+                'starting_date',
+                'ending_date',
             )
         }),
         ('Местоположение', {

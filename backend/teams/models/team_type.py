@@ -1,6 +1,6 @@
 from django.db import models
 
-from common.mixins import DateTimeMixin
+from common.models import DateTimeMixin
 
 
 class TeamType(DateTimeMixin):

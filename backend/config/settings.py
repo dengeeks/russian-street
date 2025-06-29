@@ -42,10 +42,8 @@ CACHE_PARTNERS_TIMEOUT = config('CACHE_PARTNERS_TIMEOUT', cast = int, default = 
 CACHE_TEAM_KEY = config('CACHE_TEAM_KEY', cast = str, default = 'CACHE_TEAM_KEY')
 CACHE_TEAM_TIMEOUT = config('CACHE_TEAM_TIMEOUT', cast = int, default = 60 * 60 * 24)
 
-CACHE_LIST_SUBDISCIPLINE_KEY = config(
-    'CACHE_LIST_SUBDISCIPLINE_KEY', cast = str, default = 'CACHE_LIST_SUBDISCIPLINE_KEY'
-    )
-CACHE_LIST_SUBDISCIPLINE_TIMEOUT = config('CACHE_LIST_SUBDISCIPLINE_TIMEOUT', cast = int, default = 60 * 60 * 24)
+CACHE_SUBDISCIPLINE_KEY = config('CACHE_SUBDISCIPLINE_KEY', cast = str, default = 'CACHE_SUBDISCIPLINE_KEY')
+CACHE_SUBDISCIPLINE_TIMEOUT = config('CACHE_SUBDISCIPLINE_TIMEOUT', cast = int, default = 60 * 60 * 24)
 
 INSTALLED_APPS = [
     'unfold',
@@ -304,7 +302,6 @@ LOGGING = {
 
 # Настройки админ панели
 UNFOLD = {
-
     "SITE_TITLE": "Добро пожаловать!",
     "SITE_HEADER": "Административная панель",
     "SITE_SYMBOL": "speed",

@@ -2,7 +2,7 @@ from django.db import models
 
 from common.constants.feedback import (LEN_NAME_FEEDBACK, LEN_PHONE_NUMBER,
                                      LEN_STATUS, STATUS_FEEDBACK)
-from common.mixins import DateTimeMixin
+from common.models import DateTimeMixin
 from common.validators import validate_phone_number
 from users.models.user import UserAccount
 

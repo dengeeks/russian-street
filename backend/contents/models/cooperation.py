@@ -1,7 +1,7 @@
 from ckeditor.fields import RichTextField
 from django.db import models
 
-from common.mixins import DateTimeMixin, SingleInstanceMixin
+from common.models import DateTimeMixin, SingleInstanceMixin
 
 
 class Cooperation(DateTimeMixin, SingleInstanceMixin):

@@ -2,7 +2,7 @@ from django.core.validators import FileExtensionValidator
 from django.db import models
 #
 # from common.constants.news import ALLOWED_EXTENSIONS
-# from common.mixins import DateTimeMixin
+# from common.models import DateTimeMixin
 # from common.validators import validate_size_file
 # from news.models.new import News
 #

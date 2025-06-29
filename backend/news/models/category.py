@@ -1,7 +1,7 @@
 # from django.db import models
 #
 # from common.constants.news import LEN_CATEGORY_NAME
-# from common.mixins import DateTimeMixin
+# from common.models import DateTimeMixin
 #
 #
 # class Category(DateTimeMixin):

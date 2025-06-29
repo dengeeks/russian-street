@@ -1,70 +1,84 @@
-from rest_framework.exceptions import ValidationError
+import logging
+
+from rest_framework import generics
+from rest_framework.exceptions import NotFound, ValidationError
+from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from events.models.area import Area
-from events.models.event import Event
 from events.serializers.discipline import (SubDisciplineListSerializer, SubDisciplineDetailSerializer,
                                            DisciplineListSerializer)
 from events.services.discipline import FilterService, SubDisciplineService, DisciplineService
 
-MODEL_MAP = {
-    'event': Event,
-    'area': Area
-}
+logger = logging.getLogger(__name__)
 
 
-class StructuredFilterOptionsAPIView(APIView):
+class StructuredFilterOptionsAPI(APIView):
+    """
+    API для получения структурированных опций фильтрации дисциплин и поддисциплин.
+
+    Поддерживает фильтрацию по:
+    - Типу модели (event/area)
+    - Региону (region_id)
+    - Периоду (starting_date, ending_date)
+    """
 
     def get(self, request):
-        # Валидация параметров
-        model_type = request.query_params.get('type')
-        if model_type not in MODEL_MAP:
-            raise ValidationError("Parameter 'type' is required and must be 'event' or 'area'")
+        """
+        Обработка GET-запроса для получения фильтрованных опций.
 
+        Параметры:
+        - type (обязательный): Тип модели (event/area)
+        - region_id (опционально): UUID региона
+        - starting_date (опционально): Дата начала периода (YYYY-MM-DD)
+        - ending_date (опционально): Дата окончания периода (YYYY-MM-DD)
+        """
         try:
-            region_id = int(request.query_params.get('region_id')) if 'region_id' in request.query_params else None
-        except ValueError:
-            raise ValidationError("region_id must be integer")
+            data = FilterService.get_structured_options(request.query_params)
+            return Response(data)
 
-        # Получаем данные
-        model_class = MODEL_MAP[model_type]
-        data = FilterService.get_structured_options_for_model(
-            model_class = model_class,
-            region_id = region_id
-        )
+        except ValidationError as e:
+            logger.warning(f'Ошибка валидации: {str(e)}')
+            return Response(
+                {
+                    'ошибка': 'Неверные параметры запроса',
+                    'детали': e.detail
+                },
+                status = 400
+            )
 
-        return Response(data)
+        except Exception as e:
+            logger.error(f'Ошибка сервера: {str(e)}', exc_info = True)
+            return Response(
+                {
+                    'ошибка': 'Внутренняя ошибка сервера'
+                },
+                status = 500
+            )
 
 
-# api/views/discipline_views.py
-from rest_framework import generics
-from rest_framework.response import Response
-
-
-class SubDisciplineListView(generics.ListAPIView):
+class SubDisciplineListAPI(generics.ListAPIView):
     """API для получения списка поддисциплин"""
     serializer_class = SubDisciplineListSerializer
 
     def get_queryset(self):
-        return SubDisciplineService.get_subdisciplines_for_list()
+        return SubDisciplineService.get_subdisciplines_for_list(self.serializer_class)
 
 
-class SubDisciplineDetailView(generics.RetrieveAPIView):
+class SubDisciplineDetailAPI(generics.RetrieveAPIView):
     """API для получения детальной информации о поддисциплине"""
     serializer_class = SubDisciplineDetailSerializer
     lookup_field = 'pk'
+    lookup_url_kwarg = 'pk'
 
     def get_object(self):
-        pk = self.kwargs.get('pk')
-        return SubDisciplineService.get_subdiscipline_detail(pk)
-
-    def retrieve(self, request, *args, **kwargs):
-        instance = self.get_object()
-        serializer = self.get_serializer(instance)
-        return Response(serializer.data)
+        try:
+            pk = self.kwargs.get('pk')
+            return SubDisciplineService.get_subdiscipline_detail(pk)
+        except:
+            raise NotFound('Направление не найдено')
 
 
-class DisciplineListView(generics.ListAPIView):
+class DisciplineListAPI(generics.ListAPIView):
     """
     API для получения списка всех дисциплин с краткой информацией о субдисциплинах
     """
