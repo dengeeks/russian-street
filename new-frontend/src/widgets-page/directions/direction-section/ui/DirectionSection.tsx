@@ -1,11 +1,15 @@
 import './DirectionSection.css'
 import DirectionItem from '@/entities/direction/direction-item'
-import { directionList } from '../model/mock/directionList'
+import { DisciplinesType } from '@/shared/api/direction/disciplines/type'
 
-const DirectionSection = () => {
+interface DirectionSectionProps {
+  data: DisciplinesType[];
+}
+
+const DirectionSection = ({data}: DirectionSectionProps) => {
   return (
     <section className="container section-spacing-top direction__section">
-      {directionList.map((direction, index) => (
+      {data.map((direction, index) => (
         <DirectionItem key={index} {...direction} />
       ))}
     </section>

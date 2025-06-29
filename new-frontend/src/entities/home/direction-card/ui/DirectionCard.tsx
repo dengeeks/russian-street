@@ -3,28 +3,28 @@ import Image from 'next/image'
 import Icon from '@/shared/icon'
 import { MouseEvent } from 'react'
 import Link from 'next/link'
+import type {SubDisciplinesType} from "@/shared/api/direction/sub-disciplines/type"
+import { getImageUrl } from '@/shared/utils/getImageUrl'
 
-interface DirectionCardProps {
-  title: string
-  img: string
-  isActive: boolean
-  onClick: () => void
-  onClose: (e: MouseEvent) => void
+interface DirectionCardProps extends SubDisciplinesType{
+  isActive: boolean;
+  onClick: () => void;
+  onClose: (e: MouseEvent) => void;
 }
 
-const DirectionCard = ({ title, img, isActive, onClick, onClose }: DirectionCardProps) => {
+const DirectionCard = ({name, id, image, main_page_info, isActive, onClick, onClose }: DirectionCardProps) => {
   return (
     <div
       className={`${styles.directionItem} ${isActive ? styles.directionItemActive : ''}`}
       onClick={onClick}>
-      <Image src={img} alt={title} fill className={styles.directionImage} sizes="
+      <Image src={getImageUrl(image)} alt={name} fill className={styles.directionImage} sizes="
   (min-width: 1050px) 600px,
   (min-width: 768px) 350px,
   (max-width: 767px) calc(100vw - 32px)
 "/>
       <div className={styles.directionOverlay} />
       <div className={styles.directionMobile}>
-        <span className={styles.directionTitle}>{title}</span>
+        <span className={styles.directionTitle}>{name}</span>
         <Icon icon="chevron" />
       </div>
 
@@ -32,20 +32,15 @@ const DirectionCard = ({ title, img, isActive, onClick, onClose }: DirectionCard
         <div className={styles.directionDetails}>
           <div className={styles.directionInfo}>
             <Icon icon="close" className={styles.directionClose} onClick={onClose} />
-            <span className={styles.directionTitleInfo}>{title}</span>
+            <span className={styles.directionTitleInfo}>{name}</span>
             <div className={styles.directionContent}>
               <p>
-                Стрит-арт— это разновидность современного урбанистического искусства. Бытует широкое
-                заблуждение, что граффити является единственным проявлением стрит-арт. Однако, это нетак,
-                граффити является лишь одним извидов уличного искусства, нодалеко неединственным.Разделение
-                настили можно наблюдать, восновном, среди граффити: writing, bombing, tagging, bubble-letter,
-                throw-up, character, wild style, 3D-style.Стрит-арт своеобразный способ выразить себя исвое
-                творчество, атакже самоутвердиться вобществе.
+                {main_page_info}
               </p>
             </div>
           </div>
           <div className={styles.directionMore}>
-            <Link href="/directions/ss" className="more-link">
+            <Link href={`/directions/${id}`} className="more-link">
               Подробнее
             </Link>
         </div>
