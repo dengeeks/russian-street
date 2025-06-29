@@ -1,13 +1,14 @@
-import uuid as generate_uuid
+import uuid
 
 from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
                                         PermissionsMixin)
+from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
 from django.db import models
 
-from common.mixins import DateTimeMixin
-from common.utils import setup_image_path
+from common.models import DateTimeMixin
 from common.validators import (validate_phone_number)
+from regions.models.region import Region
 
 
 class UserAccountManager(BaseUserManager):
@@ -85,15 +86,15 @@ class UserAccount(AbstractBaseUser, DateTimeMixin, PermissionsMixin):
         return f'uploads/{self.__class__.__name__.lower()}/{self.uuid}/{filename}'
 
     class Role(models.TextChoices):
-        ADMIN = 'admin', "Главный администратор"
         USER = 'user', "Пользователь"
         REGIONAL_DIRECTOR = 'regional_director', 'Региональный руководитель'
         FEDERAL_DIRECTOR = 'federal_director', 'Федеральный руководитель'
 
     uuid = models.UUIDField(
-        default = generate_uuid.uuid4,
+        unique = True,
+        default = uuid.uuid4,
         editable = False,
-        unique = True
+        verbose_name = 'uuid'
     )
     role = models.CharField(
         max_length = 55,
@@ -141,13 +142,25 @@ class UserAccount(AbstractBaseUser, DateTimeMixin, PermissionsMixin):
         blank = True,
         null = True
     )
-    # пока как charfield  (после будет связь)
-    region = models.CharField(
-        max_length = 100,
+    region = models.ForeignKey(
+        to = Region,
         verbose_name = 'Регион',
+        on_delete = models.SET_NULL,
         blank = True,
         null = True
     )
+    info = models.TextField(
+        verbose_name = 'Описание',
+        blank = True,
+        null = True
+    )
+    address = models.CharField(
+        max_length = 125,
+        verbose_name = 'Адрес офиса',
+        blank = True,
+        null = True
+    )
+
     status = models.BooleanField(
         verbose_name = 'Является ли членом организации?',
         default = False
@@ -174,9 +187,35 @@ class UserAccount(AbstractBaseUser, DateTimeMixin, PermissionsMixin):
 
     objects = UserAccountManager()
 
+    def __str__(self):
+        return f'{self.email}'
+
+    def clean(self):
+        super().clean()
+
+        required_fields = {
+            'first_name': 'Имя',
+            'last_name': 'Фамилия',
+            'middle_name': 'Отчество',
+            'info': 'Описание',
+            'avatar': 'Аватар',
+            'address': 'Адрес',
+            'phone_number': 'Телефон',
+            'email': 'Email'
+        }
+
+        if self.role in [self.Role.REGIONAL_DIRECTOR, self.Role.FEDERAL_DIRECTOR]:
+            errors = {}
+
+            for field_name, field_label in required_fields.items():
+                field_value = getattr(self, field_name)
+
+                # Проверяем, пустое ли поле (None или пустая строка)
+                if field_value in (None, ''):
+                    errors[field_name] = f'{field_label} обязательно для региональных/федеральных руководителей'
+            if errors:
+                raise ValidationError(errors)
+
     class Meta:
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
-
-    def __str__(self):
-        return f'{self.email}'

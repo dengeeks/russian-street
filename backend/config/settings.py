@@ -39,6 +39,12 @@ CACHE_EVERYONELIKES_TIMEOUT = config('CACHE_EVERYONELIKES_TIMEOUT', cast = int, 
 CACHE_PARTNERS_KEY = config('CACHE_PARTNERS_KEY', cast = str, default = 'CACHE_PARTNERS_KEY')
 CACHE_PARTNERS_TIMEOUT = config('CACHE_PARTNERS_TIMEOUT', cast = int, default = 60 * 60 * 24)
 
+CACHE_TEAM_KEY = config('CACHE_TEAM_KEY', cast = str, default = 'CACHE_TEAM_KEY')
+CACHE_TEAM_TIMEOUT = config('CACHE_TEAM_TIMEOUT', cast = int, default = 60 * 60 * 24)
+
+CACHE_SUBDISCIPLINE_KEY = config('CACHE_SUBDISCIPLINE_KEY', cast = str, default = 'CACHE_SUBDISCIPLINE_KEY')
+CACHE_SUBDISCIPLINE_TIMEOUT = config('CACHE_SUBDISCIPLINE_TIMEOUT', cast = int, default = 60 * 60 * 24)
+
 INSTALLED_APPS = [
     'unfold',
     'django.contrib.admin',
@@ -49,11 +55,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # мои приложения
-    'events',
-    'news',
+    'events.apps.EventsConfig',
+    # 'news',
     'users',
     'feedbacks',
     'oauth2',
+    'regions',
+    'teams.apps.TeamsConfig',
     'partners.apps.PartnersConfig',
     'contents.apps.ContentsConfig'
 ]
@@ -295,7 +303,6 @@ LOGGING = {
 
 # Настройки админ панели
 UNFOLD = {
-
     "SITE_TITLE": "Добро пожаловать!",
     "SITE_HEADER": "Административная панель",
     "SITE_SYMBOL": "speed",
@@ -310,10 +317,12 @@ UNFOLD = {
             {
                 "title": "OAuth2 приложения",
                 "collapsible": True,
+                "separator": True,
                 "items": [
                     {
                         "title": "OAuth2",
                         "icon": "app_registration",
+                        "permission": lambda request: request.user.is_superuser,
                         "link": reverse_lazy("admin:oauth2_provider_application_changelist"),
                     },
                 ],
@@ -321,26 +330,103 @@ UNFOLD = {
             {
                 "title": "Пользователи",
                 "collapsible": True,
+                "separator": True,
                 "items": [
                     {
                         "title": "Пользователи",
                         "icon": "person",
+                        "permission": lambda request: request.user.is_superuser,
                         "link": reverse_lazy("admin:users_useraccount_changelist"),
+                    },
+                    {
+                        "title": "Соцсети руководителей",
+                        "icon": "communities",
+                        "permission": lambda request: request.user.is_superuser,
+                        "link": reverse_lazy("admin:users_socialmediamanager_changelist"),
                     }
+                ],
+            },
+            {
+                "title": "Мероприятия и Площадки",
+                "collapsible": True,
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Мероприятия",
+                        "icon": "person",
+                        "permission": lambda request: (
+                                request.user.is_superuser or
+                                request.user.role in ['regional_director', 'federal_director']
+                        ),
+                        "link": reverse_lazy("admin:events_event_changelist"),
+                    },
+                    {
+                        "title": "Дисциплина",
+                        "icon": "category",
+                        "permission": lambda request: request.user.is_superuser,
+                        "link": reverse_lazy("admin:events_discipline_changelist"),
+                    },
+                    {
+                        "title": "Направления",
+                        "icon": "extension",
+                        "permission": lambda request: request.user.is_superuser,
+                        "link": reverse_lazy("admin:events_subdiscipline_changelist"),
+                    }
+                ],
+            },
+            {
+                "title": "Регионы",
+                "collapsible": True,
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Регион",
+                        "icon": "globe_asia",
+                        "permission": lambda request: request.user.is_superuser,
+                        "link": reverse_lazy("admin:regions_region_changelist"),
+                    },
+                    {
+                        "title": "Город",
+                        "icon": "location_city",
+                        "permission": lambda request: request.user.is_superuser,
+                        "link": reverse_lazy("admin:regions_city_changelist"),
+                    },
+                ],
+            },
+            {
+                "title": "Команда",
+                "collapsible": True,
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Члены команды",
+                        "icon": "partner_exchange",
+                        "permission": lambda request: request.user.is_superuser,
+                        "link": reverse_lazy("admin:teams_teammember_changelist"),
+                    },
+                    {
+                        "title": "Тип команды",
+                        "icon": "format_ink_highlighter",
+                        "permission": lambda request: request.user.is_superuser,
+                        "link": reverse_lazy("admin:teams_teamtype_changelist"),
+                    },
                 ],
             },
             {
                 "title": "Партнеры",
                 "collapsible": True,
+                "separator": True,
                 "items": [
                     {
                         "title": "Партнеры",
                         "icon": "partner_exchange",
+                        "permission": lambda request: request.user.is_superuser,
                         "link": reverse_lazy("admin:partners_partner_changelist"),
                     },
                     {
                         "title": "Тип партнера",
                         "icon": "format_ink_highlighter",
+                        "permission": lambda request: request.user.is_superuser,
                         "link": reverse_lazy("admin:partners_partnertype_changelist"),
                     },
                 ],
@@ -348,35 +434,42 @@ UNFOLD = {
             {
                 "title": "Главная страница",
                 "collapsible": True,
+                "separator": True,
                 "items": [
                     {
                         "title": "Промо-видео",
                         "icon": "iframe",
+                        "permission": lambda request: request.user.is_superuser,
                         "link": reverse_lazy("admin:contents_promotionalvideo_changelist"),
                     },
                     {
                         "title": "Улица это мы",
                         "icon": "streetview",
+                        "permission": lambda request: request.user.is_superuser,
                         "link": reverse_lazy("admin:contents_streetisusimage_changelist"),
                     },
                     {
                         "title": "О нас",
                         "icon": "info",
+                        "permission": lambda request: request.user.is_superuser,
                         "link": reverse_lazy("admin:contents_aboutus_changelist"),
                     },
                     {
                         "title": "Миссия и цель (текст)",
                         "icon": "description",
+                        "permission": lambda request: request.user.is_superuser,
                         "link": reverse_lazy("admin:contents_missionandgoalstext_changelist"),
                     },
                     {
                         "title": "Миссия и цель (изображения)",
                         "icon": "image",
+                        "permission": lambda request: request.user.is_superuser,
                         "link": reverse_lazy("admin:contents_missionandgoalsimage_changelist"),
                     },
                     {
                         "title": "Об организации",
                         "icon": "business",
+                        "permission": lambda request: request.user.is_superuser,
                         "link": reverse_lazy("admin:contents_organizationinfo_changelist"),
                     },
                 ],
@@ -385,20 +478,24 @@ UNFOLD = {
             {
                 "title": "О нас",
                 "collapsible": True,
+                "separator": True,
                 "items": [
                     {
                         "title": "Стань частью улиц",
                         "icon": "people",
+                        "permission": lambda request: request.user.is_superuser,
                         "link": reverse_lazy("admin:contents_joinstreet_changelist"),
                     },
                     {
                         "title": "Миссия",
                         "icon": "flag",
+                        "permission": lambda request: request.user.is_superuser,
                         "link": reverse_lazy("admin:contents_mission_changelist"),
                     },
                     {
                         "title": "Информация",
                         "icon": "info",
+                        "permission": lambda request: request.user.is_superuser,
                         "link": reverse_lazy("admin:contents_information_changelist"),
                     },
                 ]
@@ -406,20 +503,24 @@ UNFOLD = {
             {
                 "title": "Контакты",
                 "collapsible": True,
+                "separator": True,
                 "items": [
                     {
                         "title": "Соцсети (Header)",
                         "icon": "share",
+                        "permission": lambda request: request.user.is_superuser,
                         "link": reverse_lazy("admin:contents_contactheader_changelist"),
                     },
                     {
                         "title": "Соцсети (Footer)",
                         "icon": "public",
+                        "permission": lambda request: request.user.is_superuser,
                         "link": reverse_lazy("admin:contents_contactfooter_changelist"),
                     },
                     {
                         "title": "Почта (Footer)",
                         "icon": "email",
+                        "permission": lambda request: request.user.is_superuser,
                         "link": reverse_lazy("admin:contents_emailfooter_changelist"),
                     },
                 ]
@@ -427,10 +528,12 @@ UNFOLD = {
             {
                 "title": "Страница сотрудничество",
                 "collapsible": True,
+                "separator": True,
                 "items": [
                     {
                         "title": "Блок сотрудничество",
                         "icon": "handshake",
+                        "permission": lambda request: request.user.is_superuser,
                         "link": reverse_lazy("admin:contents_cooperation_changelist"),
                     }
                 ]
@@ -438,10 +541,12 @@ UNFOLD = {
             {
                 "title": "У нас понравится всем",
                 "collapsible": True,
+                "separator": True,
                 "items": [
                     {
                         "title": "Блок 'У нас понравится всем'",
                         "icon": "favorite",
+                        "permission": lambda request: request.user.is_superuser,
                         "link": reverse_lazy("admin:contents_everyonelikes_changelist"),
                     }
                 ]

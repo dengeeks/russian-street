@@ -1,7 +1,7 @@
 from django.core.validators import FileExtensionValidator
 from django.db import models
 
-from common.mixins import DateTimeMixin, UUIDMixin, SingleInstanceMixin, MaxCountLimitedMixin
+from common.models import DateTimeMixin, UUIDMixin, SingleInstanceMixin, MaxCountLimitedMixin
 from common.utils import setup_image_path
 from common.validators import validate_iframe, validate_phone_number
 

@@ -1,13 +1,15 @@
-from rest_framework.routers import SimpleRouter
+from django.urls import path
 
-from events.views.discipline import SubDisciplineViewSet, DisciplineViewSet
+from events.views.discipline import (StructuredFilterOptionsAPI, SubDisciplineDetailAPI, DisciplineListAPI,
+                                     SubDisciplineListAPI)
 
-router = SimpleRouter()
-router.register('discipline', DisciplineViewSet, basename = 'discipline')
-router.register(
-    'sub-discipline',
-    SubDisciplineViewSet,
-    basename = 'sub discipline'
-)
-
-urlpatterns = router.urls
+urlpatterns = [
+    # получение дисциплин и субдисциплин (С фильтрацией)
+    path('filter/subdiscipline/', StructuredFilterOptionsAPI.as_view()),
+    # получение списка субдисциплин
+    path('list/subdiscipline/', SubDisciplineListAPI.as_view()),
+    # получение списка деталей субдисциплины
+    path('detail/subdiscipline/<uuid:pk>/', SubDisciplineDetailAPI.as_view()),
+    # получение информации о дисциплинах (страница направлений)
+    path('info/disciplines/', DisciplineListAPI.as_view()),
+]
