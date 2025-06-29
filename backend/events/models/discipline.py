@@ -2,12 +2,12 @@ from ckeditor.fields import RichTextField
 from django.core.validators import FileExtensionValidator
 from django.db import models
 
-from common.mixins import DateTimeMixin
+from common.mixins import DateTimeMixin, UUIDMixin
 from common.utils import setup_image_path
 from common.validators import validate_iframe
 
 
-class Discipline(DateTimeMixin):
+class Discipline(UUIDMixin, DateTimeMixin):
     """
     Модель, представляющая дисциплину уличной культуры.
 
@@ -73,7 +73,7 @@ class Discipline(DateTimeMixin):
         return f'{self.name}'
 
 
-class SubDiscipline(DateTimeMixin):
+class SubDiscipline(UUIDMixin, DateTimeMixin):
     """
     Модель, подкатегорию дисциплин.
 
@@ -89,18 +89,6 @@ class SubDiscipline(DateTimeMixin):
         __str__(): Возвращает строковое представление субдицлиплины.
     """
 
-    def setup_first_path(self, filename: str):
-        filename = filename.replace(' ', '_')
-        return f'uploads/{self.__class__.__name__.lower()}/first/{self.pk}/{filename}'
-
-    def setup_second_path(self, filename: str):
-        filename = filename.replace(' ', '_')
-        return f'uploads/{self.__class__.__name__.lower()}/second/{self.pk}/{filename}'
-
-    FORMAT_TYPE = [
-        ('video_url', 'Видео'),
-        ('image', 'Изображение'),
-    ]
     name = models.CharField(
         'Название подкатегории',
         max_length = 30
@@ -108,36 +96,8 @@ class SubDiscipline(DateTimeMixin):
     description = RichTextField(
         verbose_name = 'Описание'
     )
-    format_type = models.CharField(
-        max_length = 25,
-        choices = FORMAT_TYPE,
-        verbose_name = 'Тип',
-        help_text = 'Выберите тип (Изображение или видео)'
-    )
-    video_url = models.CharField(
-        verbose_name = 'Ссылка на видео (iframe)',
-        help_text = 'Введите URL видео в формате iframe для отображения на сайте.',
-        validators = [validate_iframe],
-        blank = True,
-        null = True,
-        max_length = 1000
-    )
     image = models.ImageField(
-        upload_to = setup_first_path,
-        verbose_name = 'Изображение',
-        max_length = 1000,
-        help_text = 'Загрузите изображение',
-        validators = [
-            FileExtensionValidator(
-                allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg']
-            )
-        ],
-        blank = True,
-        null = True
-    )
-
-    second_image = models.ImageField(
-        upload_to = setup_second_path,
+        upload_to = setup_image_path,
         verbose_name = 'Изображение',
         max_length = 1000,
         help_text = 'Загрузите изображение для главной страницы (отображение направлений)',
@@ -146,6 +106,11 @@ class SubDiscipline(DateTimeMixin):
                 allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg']
             )
         ],
+    )
+
+    main_page_info = models.TextField(
+        verbose_name = 'Описание карточки',
+        help_text = 'Описание карточки для главной страницы'
     )
     discipline = models.ForeignKey(
         Discipline,
@@ -160,3 +125,54 @@ class SubDiscipline(DateTimeMixin):
     class Meta:
         verbose_name = 'Подкатегория дисциплины'
         verbose_name_plural = 'Подкатегории дисциплин'
+
+
+class GallerySubDiscipline(UUIDMixin, DateTimeMixin):
+    """
+    Модель галереи для поддисциплин
+    """
+    FORMAT_TYPE = [
+        ('video_url', 'Видео'),
+        ('image', 'Изображение'),
+    ]
+    format_type = models.CharField(
+        max_length = 25,
+        choices = FORMAT_TYPE,
+        verbose_name = 'Тип',
+        help_text = 'Выберите тип (Изображение или видео)'
+    )
+
+    subdiscipline = models.ForeignKey(
+        SubDiscipline,
+        on_delete = models.CASCADE,
+        related_name = 'gallery_items',
+        verbose_name = 'Поддисциплина'
+    )
+    image = models.ImageField(
+        upload_to = setup_image_path,
+        verbose_name = 'Изображение',
+        blank = True,
+        null = True,
+        validators = [
+            FileExtensionValidator(
+                allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg']
+            )
+        ]
+    )
+    video_url = models.CharField(
+        verbose_name = 'Ссылка на видео (iframe)',
+        help_text = 'Введите URL видео в формате iframe для отображения на сайте.',
+        validators = [validate_iframe],
+        blank = True,
+        null = True,
+        max_length = 1000
+    )
+    is_main = models.BooleanField(
+        verbose_name = 'Главное фото',
+        default = False,
+        help_text = 'Использовать как основное изображение для заставки'
+    )
+
+    class Meta:
+        verbose_name = 'Элемент галереи'
+        verbose_name_plural = 'Элементы галереи'
