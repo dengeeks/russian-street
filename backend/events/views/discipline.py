@@ -1,63 +1,63 @@
-import logging
+from rest_framework.exceptions import ValidationError
+from rest_framework.views import APIView
 
-from rest_framework import views, status
-from rest_framework.response import Response
+from events.models.area import Area
+from events.models.event import Event
+from events.serializers.discipline import SubDisciplineListSerializer, SubDisciplineDetailSerializer
+from events.services.discipline import FilterService, SubDisciplineService
 
-from events.serializers.discipline import ListSubDisciplineSerializer, SubDisciplineDetailSerializer
-from events.services.discipline import ListSubDisciplineService, SubDisciplineDetailService
+MODEL_MAP = {
+    'event': Event,
+    'area': Area
+}
 
-logger = logging.getLogger(__name__)
 
-
-class ListSubDisciplineAPI(views.APIView):
-    """
-    API для получения списка поддисциплин с пагинацией.
-
-    Параметры:
-        - page: номер страницы (default: 1)
-        - per_page: элементов на странице (default: 11)
-        - discipline_id: фильтр по ID дисциплины (optional)
-    """
-    serializer_class = ListSubDisciplineSerializer
+class StructuredFilterOptionsAPIView(APIView):
 
     def get(self, request):
+        # Валидация параметров
+        model_type = request.query_params.get('type')
+        if model_type not in MODEL_MAP:
+            raise ValidationError("Parameter 'type' is required and must be 'event' or 'area'")
+
         try:
-            page = int(request.GET.get('page', 1))
-            per_page = int(request.GET.get('per_page', 11))
-            discipline_id = request.GET.get('discipline_id', None)
-            data = ListSubDisciplineService.get_by_discipline_paginated(
-                discipline_id = discipline_id,
-                page_number = page,
-                per_page = per_page,
-                serializer_class = self.serializer_class
+            region_id = int(request.query_params.get('region_id')) if 'region_id' in request.query_params else None
+        except ValueError:
+            raise ValidationError("region_id must be integer")
 
-            )
-            return Response(data)
-        except Exception as e:
-            logger.error(f"Ошибка при загрузке направлений: {str(e)}")
-            return Response(
-                {'error': 'Ошибка при загрузке направлений'},
-                status = 500
-            )
-
-
-class SubDisciplineDetailAPI(views.APIView):
-    """
-    API для получения поддисциплины по ID
-    """
-    serializer_class = SubDisciplineDetailSerializer
-
-    def get(self, request, pk):
-        subdiscipline = SubDisciplineDetailService.get_subdiscipline_by_id(pk)
-
-        if not subdiscipline:
-            return Response(
-                {'error': 'Направление не найдено'},
-                status = status.HTTP_404_NOT_FOUND
-            )
-
-        serializer = self.serializer_class(
-            subdiscipline,
+        # Получаем данные
+        model_class = MODEL_MAP[model_type]
+        data = FilterService.get_structured_options_for_model(
+            model_class = model_class,
+            region_id = region_id
         )
 
+        return Response(data)
+
+
+# api/views/discipline_views.py
+from rest_framework import generics
+from rest_framework.response import Response
+
+
+class SubDisciplineListView(generics.ListAPIView):
+    """API для получения списка поддисциплин"""
+    serializer_class = SubDisciplineListSerializer
+
+    def get_queryset(self):
+        return SubDisciplineService.get_subdisciplines_for_list()
+
+
+class SubDisciplineDetailView(generics.RetrieveAPIView):
+    """API для получения детальной информации о поддисциплине"""
+    serializer_class = SubDisciplineDetailSerializer
+    lookup_field = 'pk'
+
+    def get_object(self):
+        pk = self.kwargs.get('pk')
+        return SubDisciplineService.get_subdiscipline_detail(pk)
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
         return Response(serializer.data)

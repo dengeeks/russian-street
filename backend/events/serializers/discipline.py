@@ -1,27 +1,36 @@
 from rest_framework import serializers
 
-from events.models.discipline import SubDiscipline
+from events.models.discipline import GallerySubDiscipline, SubDiscipline
 
 
-class ListSubDisciplineSerializer(serializers.ModelSerializer):
+class GallerySubDisciplineSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GallerySubDiscipline
+        fields = ('id', 'format_type', 'image', 'video_url', 'is_main')
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        if instance.image:
+            representation['image'] = instance.image.url
+        return representation
+
+
+class SubDisciplineListSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
     class Meta:
         model = SubDiscipline
-        fields = [
-            'id',
-            'name',
-            'second_image'
-        ]
+        fields = ('id', 'name', 'image', 'main_page_info')
+
+    def get_image(self, obj):
+        if obj.image:
+            return obj.image.url
+        return None
 
 
 class SubDisciplineDetailSerializer(serializers.ModelSerializer):
+    gallery_items = GallerySubDisciplineSerializer(many = True)
+
     class Meta:
         model = SubDiscipline
-        fields = [
-            'id',
-            'name',
-            'description',
-            'format_type',
-            'video_url',
-            'image',
-            'discipline'
-        ]
+        fields = ('id', 'name', 'description', 'gallery_items', 'discipline')
