@@ -1,3 +1,6 @@
+from django.core.cache import cache
+
+
 class CacheServiceMixin:
     """
     Класс-миксин для кэширования и сериализации данных JSON.
