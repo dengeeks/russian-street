@@ -17,6 +17,9 @@ export default async function RootLayout({ children}: RootLayoutProps) {
 
   return (
     <html lang="ru">
+      <head>
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="64x64"/>
+      </head>
       <body className={`${Bahnschrift.variable} ${Inter.variable} ${Benzin.variable}`}>
         <ToastProvider>
           <GlobalDataProvider staticContact={contact}>

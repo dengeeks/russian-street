@@ -1,4 +1,5 @@
 'use client';
+import dynamic from 'next/dynamic';
 import styles from './FeedbackContact.module.css';
 import SectionTitle from '@/shared/ui/SectionTitle';
 import FeedbackForm from '@/features/home/feedback-form';
@@ -7,28 +8,24 @@ import { useHomeData } from '@/shared/context/home-data/useHomeDataContext'
 import { useGlobalData } from '@/shared/context/global-data/useGlobalDataContext'
 import Image from 'next/image'
 import { getImageUrl } from '@/shared/utils/getImageUrl'
-import { extractIframeSrc } from '@/shared/utils/extractIframeSrc'
+import Loader from '@/shared/ui/Loader'
+
+const MapIframe = dynamic(() => import('@/shared/ui/MapIframe'), { ssr: false, loading: () => <Loader/>, });
 
 const FeedbackContact = () => {
   const {homeData: {organization_info}} = useHomeData()
   const {staticContact: {contact_footer}} = useGlobalData()
-  
-  const iframeSrc = extractIframeSrc(organization_info?.iframe || '');
+
   return (
     <section className={`container section-spacing-top section-spacing-bottom ${styles.feedbackContact}`}>
       <SectionTitle>ВОЗНИКЛИ ВОПРОСЫ?</SectionTitle>
       <div className={styles.wrapper}>
         <div className={styles.infoBlock}>
           <div className={styles.map}>
-            <iframe
-              src={iframeSrc}
-              width="100%"
-              height="100%"
-              allowFullScreen
-              style={{ border: 0, display: 'block' }}
+            <MapIframe
+              src={organization_info?.iframe}
               title={organization_info?.address}
-              aria-label={organization_info?.address}
-              loading="lazy"/>
+            />
           </div>
 
           <div className={styles.address}>

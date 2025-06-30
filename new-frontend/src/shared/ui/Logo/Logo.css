@@ -1,24 +1,17 @@
 .logo-wrapper {
-    max-width: 321px;
-    max-height: 28px;
-    width: 100%;
-    position: relative;
-    aspect-ratio: 1;
     user-select: none;
 }
 
 @media (max-width: 1100px) {
-    .logo-wrapper {
-        max-width: 200px;
-        max-height: 20px;
+    .logo-wrapper .logo {
+        width: 200px;
+        height: 20px;
     }
-
 }
 
-
 @media (max-width: 768px) {
-    .logo-wrapper {
-        max-width: 298px;
-        max-height: 26px;
+    .logo-wrapper .logo{
+        width: 298px;
+        height: 26px;
     }
 }
