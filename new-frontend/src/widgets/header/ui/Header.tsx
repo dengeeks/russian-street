@@ -32,6 +32,8 @@ const Header = () => {
           <Link
             href={parentPath}
             className={`header-breadcrumbs ${isRoot ? 'hidden' : ''}`}
+            aria-label="Вернуться назад"
+            title="Вернуться назад"
           >
             <Icon icon="arrow" width={24} height={24} />
           </Link>

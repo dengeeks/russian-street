@@ -17,7 +17,7 @@ export const AuthProfileButton = ({ mode, className = '' }: AuthProfileButtonPro
 
   if (userData?.email) {
     return mode === 'icon' ? (
-      <Link href="/profile" className={className}>
+      <Link href="/profile" className={className} aria-label="Перейти в профиль" title="Профиль">
           {userData?.avatar ? (
             <Image
               src={getImageUrl(userData.avatar)}
@@ -31,7 +31,7 @@ export const AuthProfileButton = ({ mode, className = '' }: AuthProfileButtonPro
           )}
       </Link>
     ) : (
-      <Link href="/profile" className={className}>
+      <Link href="/profile" className={className} aria-label="Перейти в профиль">
         Профиль
       </Link>
     )
@@ -41,6 +41,8 @@ export const AuthProfileButton = ({ mode, className = '' }: AuthProfileButtonPro
     <button
       className={`hoverEffect header-button-auth ${className}`}
       onClick={() => openModal('login-user')}
+      aria-label="Открыть окно входа"
+      title="Войти"
     >
       <Icon icon="profile" />
     </button>
@@ -49,6 +51,7 @@ export const AuthProfileButton = ({ mode, className = '' }: AuthProfileButtonPro
       type="button"
       className={`hoverEffect header-button-auth ${className}`}
       onClick={() => openModal('login-user')}
+      aria-label="Открыть окно входа"
     >
       Войти
     </button>

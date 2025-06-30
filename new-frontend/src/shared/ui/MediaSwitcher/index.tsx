@@ -24,6 +24,7 @@ const MediaSwitcher = (props: MediaSwitcherProps) => {
     return (
       <iframe
         src={src}
+        title={`Видеоплеер ${type === 'youtube' ? 'YouTube' : type === 'vk' ? 'VK' : 'RuTube'}`}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerPolicy="strict-origin-when-cross-origin"
         allowFullScreen
