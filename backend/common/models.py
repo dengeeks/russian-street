@@ -31,8 +31,7 @@ class MediaContentMixin(models.Model):
     )
     video_url = models.CharField(
         verbose_name = 'Ссылка на видео',
-        help_text = 'URL видео в формате iframe',
-        validators = [validate_iframe],
+        help_text = 'URL видео',
         blank = True,
         null = True,
         max_length = 1000

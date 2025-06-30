@@ -360,6 +360,27 @@ UNFOLD = {
                         "link": reverse_lazy("admin:events_event_changelist"),
                     },
                     {
+                        "title": "Площадки",
+                        "icon": "person",
+                        "permission": lambda request: (
+                                request.user.is_superuser or
+                                request.user.role in ['regional_director', 'federal_director']
+                        ),
+                        "link": reverse_lazy("admin:events_area_changelist"),
+                    },
+                    {
+                        "title": "Тип мероприятия",
+                        "icon": "person",
+                        "permission": lambda request: request.user.is_superuser,
+                        "link": reverse_lazy("admin:events_eventactivitytype_changelist"),
+                    },
+                    {
+                        "title": "Тип Площадки",
+                        "icon": "person",
+                        "permission": lambda request: request.user.is_superuser,
+                        "link": reverse_lazy("admin:events_areatype_changelist"),
+                    },
+                    {
                         "title": "Дисциплина",
                         "icon": "category",
                         "permission": lambda request: request.user.is_superuser,
