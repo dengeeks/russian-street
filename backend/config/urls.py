@@ -14,6 +14,7 @@ urlpatterns = [
     path('api/v1/', include('feedbacks.urls')),
     # path('api/v1/', include('news.urls')),
     path('api/v1/', include('partners.urls')),
+    path('api/v1/', include('regions.urls')),
     path('api/v1/', include('users.urls')),
     path('api/v1/', include('teams.urls')),
     path('api/v1/', include('contents.urls')),
