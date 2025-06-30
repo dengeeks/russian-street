@@ -11,7 +11,7 @@ from common.mixins import CacheServiceMixin
 from events.models.area import Area
 from events.models.discipline import Discipline, SubDiscipline
 from events.models.event import Event
-
+from events.models.base import AreaType,EventActivityType
 
 class FilterService:
     """
@@ -21,6 +21,10 @@ class FilterService:
     __model_discipline = Discipline
     __model_subdiscipline = SubDiscipline
     MODEL_CHOICES = {'event': Event, 'area': Area}
+    TYPE_MODELS = {
+        'event': EventActivityType,
+        'area': AreaType
+    }
 
     @classmethod
     def validate_and_get_filters(cls, params):
@@ -36,6 +40,7 @@ class FilterService:
                 - region_id: UUID региона (опционально)
                 - starting_date: Дата начала (опционально)
                 - ending_date: Дата окончания (опционально)
+                - type_ids: Список UUID типов (опционально)
 
         Raises:
             ValidationError: При невалидных параметрах
@@ -44,7 +49,7 @@ class FilterService:
         if model_type not in cls.MODEL_CHOICES:
             raise ValidationError(
                 {
-                    'error': 'Invalid model type',
+                    'error': 'Невалидный тип модели',
                     'available_types': list(cls.MODEL_CHOICES.keys())
                 }
             )
@@ -52,16 +57,26 @@ class FilterService:
         try:
             region_id = uuid.UUID(params['region_id']) if params.get('region_id') else None
         except ValueError:
-            raise ValidationError({'region_id': 'Must be valid UUID'})
+            raise ValidationError({'region_id': 'Должен быть валидный тип UUID'})
 
         starting_date = cls._parse_date(params.get('starting_date'))
         ending_date = cls._parse_date(params.get('ending_date'))
+
+        # Обработка type_ids (может быть несколько через запятую)
+        type_ids = []
+        if params.get('type_ids'):
+            try:
+                type_ids = [uuid.UUID(tid.strip()) for tid in params['type_ids'].split(',')]
+            except ValueError:
+                raise ValidationError({'type_ids': 'Должен быть валидный тип UUID разделенные запятыми.'})
 
         return {
             'model_class': cls.MODEL_CHOICES[model_type],
             'region_id': region_id,
             'starting_date': starting_date,
-            'ending_date': ending_date
+            'ending_date': ending_date,
+            'type_ids': type_ids,
+            'model_type': model_type
         }
 
     @staticmethod
@@ -86,7 +101,8 @@ class FilterService:
         return datetime.combine(date, datetime.min.time())
 
     @classmethod
-    def _get_active_subdisciplines(cls, model_class, region_id = None, starting_date = None, ending_date = None):
+    def _get_active_subdisciplines(cls, model_class, region_id=None, starting_date=None,
+                                 ending_date=None, type_ids=None, model_type=None):
         """
         Получение ID активных поддисциплин с учетом фильтров.
 
@@ -95,6 +111,8 @@ class FilterService:
             region_id: UUID региона (опционально)
             starting_date: Дата начала периода (опционально)
             ending_date: Дата окончания периода (опционально)
+            type_ids: Список UUID типов (опционально)
+            model_type: Тип модели ('event' или 'area')
 
         Returns:
             QuerySet: Уникальные ID поддисциплин
@@ -104,16 +122,21 @@ class FilterService:
         # Специальная фильтрация для событий
         if model_class.__name__ == 'Event':
             if starting_date:
-                qs = qs.filter(starting_date__date__gte = starting_date)
+                qs = qs.filter(starting_date__date__gte=starting_date)
             if ending_date:
-                qs = qs.filter(ending_date__date__lte = ending_date)
+                qs = qs.filter(ending_date__date__lte=ending_date)
             else:
-                qs = qs.filter(ending_date__date__gte = timezone.localtime(timezone.now()))
+                qs = qs.filter(ending_date__date__gte=timezone.localtime(timezone.now()))
 
         if region_id:
-            qs = qs.filter(region_id = region_id)
+            qs = qs.filter(region_id=region_id)
 
-        return qs.values_list('sub_discipline_id', flat = True).distinct()
+        # Фильтрация по типам, если переданы
+        if type_ids and model_type in cls.TYPE_MODELS:
+            type_field = 'type_id'  # поле связи с типом
+            qs = qs.filter(**{f'{type_field}__in': type_ids})
+
+        return qs.values_list('sub_discipline_id', flat=True).distinct()
 
     @classmethod
     def get_structured_options(cls, params):
@@ -133,19 +156,21 @@ class FilterService:
         """
         validated = cls.validate_and_get_filters(params)
         subdiscipline_ids = cls._get_active_subdisciplines(
-            model_class = validated['model_class'],
-            region_id = validated['region_id'],
-            starting_date = validated['starting_date'],
-            ending_date = validated['ending_date']
+            model_class=validated['model_class'],
+            region_id=validated['region_id'],
+            starting_date=validated['starting_date'],
+            ending_date=validated['ending_date'],
+            type_ids=validated['type_ids'],
+            model_type=validated['model_type']
         )
 
         disciplines = cls.__model_discipline.objects.filter(
-            sub_disciplines__id__in = subdiscipline_ids
+            sub_disciplines__id__in=subdiscipline_ids
         ).prefetch_related(
             Prefetch(
                 'sub_disciplines',
-                queryset = cls.__model_subdiscipline.objects.filter(id__in = subdiscipline_ids),
-                to_attr = 'relevant_subdisciplines'
+                queryset=cls.__model_subdiscipline.objects.filter(id__in=subdiscipline_ids),
+                to_attr='relevant_subdisciplines'
             )
         ).distinct().only('id', 'name')
 

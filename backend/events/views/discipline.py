@@ -56,12 +56,13 @@ class StructuredFilterOptionsAPI(APIView):
             )
 
 
-class SubDisciplineListAPI(generics.ListAPIView):
+class SubDisciplineListAPI(APIView):
     """API для получения списка поддисциплин"""
     serializer_class = SubDisciplineListSerializer
 
-    def get_queryset(self):
-        return SubDisciplineService.get_subdisciplines_for_list(self.serializer_class)
+    def get(self, request):
+        data = SubDisciplineService.get_subdisciplines_for_list(serializer_class = self.serializer_class)
+        return Response(data)
 
 
 class SubDisciplineDetailAPI(generics.RetrieveAPIView):

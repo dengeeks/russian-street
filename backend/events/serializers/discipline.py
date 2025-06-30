@@ -60,8 +60,7 @@ class DisciplineListSerializer(serializers.ModelSerializer):
             'name',
             'first_image',
             'second_image',
-            'first_description',
-            'second_description',
+            'description',
             'sub_disciplines'
         )
 

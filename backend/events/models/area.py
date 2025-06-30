@@ -1,4 +1,6 @@
-from events.models.base import BaseEvent
+from django.db import models
+
+from events.models.base import BaseEvent, AreaType
 
 
 class Area(BaseEvent):
@@ -9,12 +11,13 @@ class Area(BaseEvent):
         - BaseEvent: Все поля базового мероприятия.
 
     Поля:
-        - type_area (CharField): Тип площадки (OPEN/CLOSED).
+        - type (ForeignKey): Тип площадки.
     """
-    TYPE_AREA = [
-        ('OPEN', 'Открытая'),
-        ('CLOSED', 'Закрытая'),
-    ]
+    type = models.ForeignKey(
+        AreaType,
+        on_delete = models.PROTECT,
+        verbose_name = 'Тип площадки'
+    )
 
     class Meta:
         verbose_name = 'Мероприятие'
