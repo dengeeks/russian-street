@@ -62,7 +62,7 @@ class Region(UUIDMixin, DateTimeMixin):
         verbose_name_plural = 'регионы'
 
 
-class City(DateTimeMixin):
+class City(UUIDMixin, DateTimeMixin):
     """
     Модель, представляющая город.
 

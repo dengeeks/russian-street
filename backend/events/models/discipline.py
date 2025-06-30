@@ -61,14 +61,11 @@ class Discipline(UUIDMixin, DateTimeMixin):
             )
         ],
     )
-    first_description = models.TextField(
-        verbose_name = 'Первое описание',
+    description = models.TextField(
+        verbose_name = 'Описание',
         help_text = 'Блок (страница направления)'
     )
-    second_description = models.TextField(
-        verbose_name = 'Второе описание',
-        help_text = 'Блок (страница направления)'
-    )
+
 
     class Meta:
         verbose_name = 'Дисциплина уличной культуры'

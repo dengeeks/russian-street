@@ -1,6 +1,6 @@
 from django.db import models
 
-from events.models.base import BaseEvent
+from events.models.base import BaseEvent, EventActivityType
 
 
 class Event(BaseEvent):
@@ -11,10 +11,17 @@ class Event(BaseEvent):
         - BaseEvent: Все поля базового мероприятия.
 
     Поля:
+        - type (ForeignKey): Тип мероприятия (связь с EventActivityType).
         - is_our_project (BooleanField): Флаг "Наш проект".
         - is_priority (BooleanField): Флаг приоритетного отображения.
         - service_id (CharField): Идентификатор внешнего сервиса.
     """
+
+    type = models.ForeignKey(
+        EventActivityType,
+        on_delete = models.PROTECT,
+        verbose_name = 'Тип мероприятия'
+    )
     is_our_project = models.BooleanField(
         verbose_name = 'Наш проект',
         default = False,
