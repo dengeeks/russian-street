@@ -136,14 +136,14 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = 'back_static1/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'back_static1')
+STATIC_URL = 'back_static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'back_static')
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
 
-MEDIA_URL = 'back_media1/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'back_media1')
+MEDIA_URL = 'back_media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'back_media')
 
 REST_FRAMEWORK = {
     'DEFAULT_PARSER_CLASSES': [
