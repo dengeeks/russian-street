@@ -28,12 +28,11 @@ class BaseEventSerializer(serializers.ModelSerializer):
 
     class Meta:
         fields = (
-            'id', 'title', 'card_image', 'city',
+            'id', 'title', 'card_image', 'city'
         )
 
 
 class EventSerializer(BaseEventSerializer):
-
     class Meta(BaseEventSerializer.Meta):
         model = Event
         fields = BaseEventSerializer.Meta.fields + (
@@ -42,7 +41,35 @@ class EventSerializer(BaseEventSerializer):
 
 
 class AreaSerializer(BaseEventSerializer):
-
     class Meta(BaseEventSerializer.Meta):
         model = Area
         fields = BaseEventSerializer.Meta.fields
+
+
+class EventDetailSerializer(BaseEventSerializer):
+    class Meta(BaseEventSerializer.Meta):
+        model = Event
+        fields = BaseEventSerializer.Meta.fields + (
+            'starting_date',
+            'ending_date',
+            'service_id',
+            'description',
+            'address',
+            'yandex_address',
+            'format_type',
+            'video_url',
+            'image'
+        )
+
+
+class AreaDetailSerializer(BaseEventSerializer):
+    class Meta(BaseEventSerializer.Meta):
+        model = Area
+        fields = BaseEventSerializer.Meta.fields + (
+            'description',
+            'address',
+            'yandex_address',
+            'format_type',
+            'video_url',
+            'image'
+        )
