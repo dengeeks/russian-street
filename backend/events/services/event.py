@@ -272,6 +272,6 @@ class EventAreaDetailService:
             config['model'].objects
             .select_related(
                 *config['select_related'],
-                id = object_id
-            )
+            ),
+            id = object_id
         )
