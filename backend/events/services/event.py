@@ -4,6 +4,7 @@ from datetime import datetime
 from django.db.models import Q
 from django.utils import timezone
 from rest_framework.exceptions import ValidationError
+from rest_framework.generics import get_object_or_404
 
 from events.models.area import Area
 from events.models.event import Event
@@ -37,7 +38,6 @@ class EventFilterService:
         'area': {
             'model': Area,
             'type_model': 'areatype',
-            'default_order': '-created_at',  # По умолчанию новые площадки сначала
             'date_filter': False,
             'sort_options': {
                 'recent': '-created_at',  # Новые площадки (по дате создания)
@@ -167,7 +167,6 @@ class EventFilterService:
             'city_id': cls._validate_uuid(params.get('city_id'), 'city_id'),
             'type_ids': cls._validate_uuid_list(params.get('type_ids'), 'type_ids'),
             'subdiscipline_ids': cls._validate_uuid_list(params.get('subdiscipline_ids'), 'subdiscipline_ids'),
-            'search': params.get('search')
         }
 
         # Валидация дат только для мероприятий
@@ -199,7 +198,6 @@ class EventFilterService:
         """
         config = cls.MODEL_MAPPING[validated_params['model_type']]
         qs = config['model'].objects.select_related('city')
-
 
         # Базовые фильтры
         filters = Q()
@@ -243,3 +241,37 @@ class EventFilterService:
             qs = qs.order_by(order)
 
         return qs
+
+
+class EventAreaDetailService:
+    """Сервис для работы с деталями объектов"""
+
+    MODEL_MAPPING = {
+        'event': {
+            'model': Event,
+            'select_related': ['city'],
+        },
+        'area': {
+            'model': Area,
+            'select_related': ['city'],
+        }
+    }
+
+    @classmethod
+    def validate_type(cls, model_type: str) -> None:
+        """Валидация типа объекта (event/area)"""
+        if model_type not in cls.MODEL_MAPPING:
+            raise ValidationError(
+                {'type': f"Допустимые значения: {', '.join(cls.MODEL_MAPPING.keys())}"}
+            )
+
+    @classmethod
+    def get_object(cls, model_type: str, object_id: str):
+        config = cls.MODEL_MAPPING[model_type]
+        return get_object_or_404(
+            config['model'].objects
+            .select_related(
+                *config['select_related'],
+                id = object_id
+            )
+        )

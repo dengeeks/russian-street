@@ -1,39 +1,18 @@
-from rest_framework import generics
-from rest_framework.exceptions import ValidationError
-from rest_framework.pagination import PageNumberPagination
-from rest_framework.response import Response
 import logging
 
-from events.serializers.event import EventSerializer, AreaSerializer
-from events.services.event import EventFilterService
+from rest_framework import generics
+from rest_framework.exceptions import ValidationError
+from rest_framework.generics import RetrieveAPIView
+from rest_framework.response import Response
+
+from events.pagination import EventPagination
+from events.serializers.event import EventSerializer, AreaSerializer, EventDetailSerializer, AreaDetailSerializer
+from events.services.event import EventFilterService, EventAreaDetailService
 
 logger = logging.getLogger(__name__)
 
 
-class EventPagination(PageNumberPagination):
-    """
-    Пагинация для списка мероприятий/площадок
-
-    Параметры:
-    - page: Номер страницы
-    - page_size: Количество элементов на странице (макс. 100)
-    """
-    page_size = 10
-    page_size_query_param = 'page_size'
-    max_page_size = 100
-
-    def get_paginated_response(self, data):
-        return Response(
-            {
-                'count': self.page.paginator.count,
-                'total_pages': self.page.paginator.num_pages,
-                'current_page': self.page.number,
-                'results': data
-            }
-        )
-
-
-class EventListAPI(generics.ListAPIView):
+class EventAreaListAPI(generics.ListAPIView):
     """
     API для получения отфильтрованного списка мероприятий/площадок
 
@@ -96,4 +75,39 @@ class EventListAPI(generics.ListAPIView):
             return Response(
                 {'error': 'Внутренняя ошибка сервера'},
                 status = 500
+            )
+
+
+class EvenAreaDetailAPI(RetrieveAPIView):
+    """API для получения деталей объекта"""
+    filter_service = EventAreaDetailService
+    serializer_class = EventDetailSerializer
+
+    def get_serializer_class(self):
+        """
+        Определяет сериализатор в зависимости от типа запрашиваемых данных
+        """
+        model_type = self.request.query_params.get('type', 'event')
+        return EventDetailSerializer if model_type == 'event' else AreaDetailSerializer
+
+    def get(self, request, *args, **kwargs):
+        """
+        Основной метод обработки GET-запроса
+        """
+        try:
+            # Валидация параметров
+            type = request.query_params.get('type')
+            self.filter_service.validate_type(request.query_params.get('type'))
+
+            # Получение обьекта
+            obj = EventAreaDetailService.get_object(type, kwargs['id'])
+
+            serializer = self.get_serializer(obj)
+            return Response(serializer.data, status = 200)
+
+        except ValidationError as e:
+            logger.warning(f"Ошибка: {e.detail}")
+            return Response(
+                {'error': e.detail},
+                status = 400
             )

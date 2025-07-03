@@ -25,7 +25,9 @@ class RegionManagerService:
 
         # Получаем регион с этим ID
         try:
-            region = Region.objects.get(id = region_uuid)
+            region = Region.objects.select_related('manager').prefetch_related(
+                'manager__social_links__social_media'
+                ).get(id = region_uuid)
         except Region.DoesNotExist:
             return None
 
