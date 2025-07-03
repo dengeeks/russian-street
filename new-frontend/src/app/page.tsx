@@ -19,7 +19,6 @@ import { getHome } from '@/shared/api/static/home/getHome'
 import { HomeDataProvider } from '@/shared/context/home-data/HomeDataContext'
 
 export default async function HomePage() {
-
   const homeData = await getHome()
 
   const { promotional_video, street_images, mission_and_goals_text } = homeData
@@ -34,7 +33,9 @@ export default async function HomePage() {
           <StreetGallery />
         </Suspense>
       )}
-      <Direction />
+      <Suspense fallback={<Loader />}>
+        <Direction />
+      </Suspense>
       {mission_and_goals_text && (
         <Suspense fallback={<Loader />}>
           <WhoWeAre />

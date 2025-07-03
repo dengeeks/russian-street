@@ -33,6 +33,8 @@ const FilterMapMobile = () => {
       <button
         className={styles.filterButton}
         onClick={() => setIsOpen(true)}
+        aria-label="Открыть фильтр"
+        title="Открыть фильтр"
       >
         <Icon icon="filter-mob" width={24} height={24} />
       </button>

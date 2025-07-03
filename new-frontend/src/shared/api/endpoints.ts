@@ -33,7 +33,6 @@ export const USER_UPDATE = getApiUrl(`user/update/`, false);
   // Контактные данные
   export const STATIC_CONTACT = getApiUrl(`static/contact/`, true);
 
-  // Контактные данные
   export const STATIC_HOME = getApiUrl(`static/homepage/`, true);
 
   export const STATIC_COOPERATION = getApiUrl(`static/cooperation/`, true);
@@ -46,3 +45,13 @@ export const USER_UPDATE = getApiUrl(`user/update/`, false);
 export const O_AUTH_2 = getApiUrl(`o/authorize/`, false);
 
 export const PARTNERS = getApiUrl('list/partner/', true);
+
+export const TEAM = getApiUrl('list/team_member/', false);
+
+// направления
+  export const DISCIPLINES = getApiUrl('disciplines/', true)
+
+  export const SUB_DISCIPLINES = getApiUrl('subdisciplines/', true);
+
+  // детали направлений
+  export const DETAIL_DISCIPLINE = (slug: string) => getApiUrl(`subdisciplines/${slug}`, true);

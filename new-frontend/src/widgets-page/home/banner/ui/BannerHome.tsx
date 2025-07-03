@@ -10,23 +10,22 @@ interface BannerHomeProps {
 }
 
 const BannerHome = ({ promoVideo }: BannerHomeProps) => {
-
   return (
     <section className={styles.bannerContainer}>
-      <MediaSwitcher type="video" source={extractVideoId(promoVideo?.video_url || 'Ks0eHBSNFwA')} />
+      <MediaSwitcher type="video_url" source={extractVideoId(promoVideo?.video_url || 'Ks0eHBSNFwA')} />
 
       <div className={`container ${styles.bannerWrapperContent}`}>
         <div className={styles.bannerContent}>
-          <div className={styles.bannerLogoWrapper}>
             <Image
-              src="/assets/logo-banner.png"
+              src="/assets/logo-banner.webp"
               className={styles.bannerLogo}
-              fill
+              width={573}
+              height={157}
               alt="Улица России"
               priority
-              sizes="(min-width: 768px) 576px, 320px"
+              sizes="(min-width: 768px) 573px, 320px"
             />
-          </div>
+
           <h1>общероссийская общественная организация уличной культуры и спорта</h1>
           <div className={styles.bannerWrapperButton}>
             <ActionButton type="button" modalName="join-organization" requireAuth>Участвовать</ActionButton>

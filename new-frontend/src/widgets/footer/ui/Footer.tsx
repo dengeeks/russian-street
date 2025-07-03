@@ -31,7 +31,7 @@ const Footer = () => {
           <Link href="/blog">Блог</Link>
           <Link href="/collaboration">Сотрудничество</Link>
           <Link href="/">Для СМИ</Link>
-          <Link href="/">Документы</Link>
+          <Link href="/privacy">Документы</Link>
         </nav>
 
         <div className={styles.donation}>
