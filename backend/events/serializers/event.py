@@ -65,7 +65,8 @@ class EventDetailSerializer(BaseEventSerializer):
             'yandex_address',
             'format_type',
             'video_url',
-            'image'
+            'image',
+            'region'
         )
 
     def get_image(self, obj):
@@ -84,7 +85,8 @@ class AreaDetailSerializer(BaseEventSerializer):
             'yandex_address',
             'format_type',
             'video_url',
-            'image'
+            'image',
+            'region'
         )
 
     def get_image(self, obj):
