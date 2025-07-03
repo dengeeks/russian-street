@@ -25,11 +25,17 @@ class AreaTypeSerializer(TypeSerializer):
 class BaseEventSerializer(serializers.ModelSerializer):
     """Базовый сериализатор для мероприятий и площадок"""
     city = serializers.StringRelatedField()
+    card_image = serializers.SerializerMethodField()
 
     class Meta:
         fields = (
             'id', 'title', 'card_image', 'city'
         )
+
+    def get_card_image(self, obj):
+        if obj.card_image:
+            return obj.card_image.url
+        return None
 
 
 class EventSerializer(BaseEventSerializer):
