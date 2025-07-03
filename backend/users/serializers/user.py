@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from common.constants.user import LEN_FIRST_NAME
 from common.validators import validate_phone_number
+from regions.serializers.region import RegionSerializer
 from users.models.user import UserAccount
 
 
@@ -80,6 +81,7 @@ class UserUpdateSerializer(serializers.Serializer):
 
 class UserRetrieveSerializer(serializers.ModelSerializer):
     avatar = serializers.SerializerMethodField()
+    region = RegionSerializer()
 
     class Meta:
         model = UserAccount
