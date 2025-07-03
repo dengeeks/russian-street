@@ -25,11 +25,17 @@ class AreaTypeSerializer(TypeSerializer):
 class BaseEventSerializer(serializers.ModelSerializer):
     """Базовый сериализатор для мероприятий и площадок"""
     city = serializers.StringRelatedField()
+    card_image = serializers.SerializerMethodField()
 
     class Meta:
         fields = (
             'id', 'title', 'card_image', 'city'
         )
+
+    def get_card_image(self, obj):
+        if obj.card_image:
+            return obj.card_image.url
+        return None
 
 
 class EventSerializer(BaseEventSerializer):
@@ -47,6 +53,7 @@ class AreaSerializer(BaseEventSerializer):
 
 
 class EventDetailSerializer(BaseEventSerializer):
+    image = serializers.SerializerMethodField()
     class Meta(BaseEventSerializer.Meta):
         model = Event
         fields = BaseEventSerializer.Meta.fields + (
@@ -61,8 +68,14 @@ class EventDetailSerializer(BaseEventSerializer):
             'image'
         )
 
+    def get_image(self, obj):
+        if obj.image:
+            return obj.image.url
+        return None
+
 
 class AreaDetailSerializer(BaseEventSerializer):
+    image = serializers.SerializerMethodField()
     class Meta(BaseEventSerializer.Meta):
         model = Area
         fields = BaseEventSerializer.Meta.fields + (
@@ -73,3 +86,8 @@ class AreaDetailSerializer(BaseEventSerializer):
             'video_url',
             'image'
         )
+
+    def get_image(self, obj):
+        if obj.image:
+            return obj.image.url
+        return None
