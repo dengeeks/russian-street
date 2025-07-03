@@ -38,6 +38,7 @@ class EventFilterService:
         'area': {
             'model': Area,
             'type_model': 'areatype',
+            'default_order': None,
             'date_filter': False,
             'sort_options': {
                 'recent': '-created_at',  # Новые площадки (по дате создания)
