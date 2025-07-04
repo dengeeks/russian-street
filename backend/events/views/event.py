@@ -7,8 +7,9 @@ from rest_framework.response import Response
 
 from events.pagination import EventPagination
 from events.serializers.event import (EventSerializer, AreaSerializer, EventDetailSerializer, AreaDetailSerializer,
-                                      EventActivityTypeSerializer, AreaTypeSerializer)
-from events.services.event import EventFilterService, EventAreaDetailService, EventTypeService
+                                      EventActivityTypeSerializer, AreaTypeSerializer, ShortEventSerializer,
+                                      ShortAreaSerializer)
+from events.services.event import EventFilterService, EventAreaDetailService, EventTypeService, ShortListService
 
 logger = logging.getLogger(__name__)
 
@@ -157,4 +158,57 @@ class EventTypeListAPI(generics.ListAPIView):
             return Response(
                 {'error': 'Внутренняя ошибка сервера'},
                 status = 500
+            )
+
+
+
+
+class ShortEventAreaListAPI(generics.ListAPIView):
+    """
+    API для получения краткого списка мероприятий или площадок.
+
+    Параметры запроса:
+    - type (обязательный): 'event' или 'area'
+    - region_id (опционально): UUID региона
+    - limit (опционально): Количество (по умолчанию 5, максимум 20)
+    """
+
+    def get_serializer_class(self):
+        model_type = self.request.query_params.get('type', 'event')
+        return ShortEventSerializer if model_type == 'event' else ShortAreaSerializer
+
+    def get_queryset(self):
+        model_type = self.request.query_params.get('type')
+        region_id = self.request.query_params.get('region_id')
+        limit = self.request.query_params.get('limit', 5)
+
+        try:
+            limit = int(limit)
+        except ValueError:
+            raise ValidationError({'limit': 'Параметр limit должен быть числом'})
+
+        return ShortListService.get_list(model_type, region_id, limit)
+
+    def list(self, request, *args, **kwargs):
+        model_type = request.query_params.get('type')
+
+        try:
+            if not model_type:
+                raise ValidationError({'type': 'Параметр type обязателен (event или area)'})
+
+            queryset = self.get_queryset()
+            serializer = self.get_serializer(queryset, many=True)
+            return Response(serializer.data)
+
+        except ValidationError as e:
+            logger.warning(f"Ошибка валидации параметров: {e.detail}")
+            return Response(
+                {'error': 'Неверные параметры запроса', 'details': e.detail},
+                status=400
+            )
+        except Exception as e:
+            logger.exception(f"Внутренняя ошибка сервера: {e}")
+            return Response(
+                {'error': 'Внутренняя ошибка сервера'},
+                status=500
             )
