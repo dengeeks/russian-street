@@ -6,8 +6,9 @@ from rest_framework.generics import RetrieveAPIView
 from rest_framework.response import Response
 
 from events.pagination import EventPagination
-from events.serializers.event import EventSerializer, AreaSerializer, EventDetailSerializer, AreaDetailSerializer
-from events.services.event import EventFilterService, EventAreaDetailService
+from events.serializers.event import (EventSerializer, AreaSerializer, EventDetailSerializer, AreaDetailSerializer,
+                                      EventActivityTypeSerializer, AreaTypeSerializer)
+from events.services.event import EventFilterService, EventAreaDetailService, EventTypeService
 
 logger = logging.getLogger(__name__)
 
@@ -90,7 +91,7 @@ class EvenAreaDetailAPI(RetrieveAPIView):
         model_type = self.request.query_params.get('type', 'event')
         return EventDetailSerializer if model_type == 'event' else AreaDetailSerializer
 
-    def get(self, request, *args, **kwargs):
+    def retrieve(self, request, *args, **kwargs):
         """
         Основной метод обработки GET-запроса
         """
@@ -110,4 +111,50 @@ class EvenAreaDetailAPI(RetrieveAPIView):
             return Response(
                 {'error': e.detail},
                 status = 400
+            )
+
+
+class EventTypeListAPI(generics.ListAPIView):
+    """
+    API для получения списка типов площадок или мероприятий.
+
+    Параметры запроса:
+    - type (обязательный): 'event' или 'area'
+    """
+
+    def get_serializer_class(self):
+        """
+        Определяет сериализатор в зависимости от типа запрашиваемых данных
+        """
+        model_type = self.request.query_params.get('type', 'event')
+        return EventActivityTypeSerializer if model_type == 'event' else AreaTypeSerializer
+
+    def get_queryset(self):
+        """
+        Возвращает базовый QuerySet в зависимости от типа
+        """
+        model_type = self.request.query_params.get('type', 'event')
+        queryset = EventTypeService.get_queryset(model_type)
+        return queryset
+
+    def list(self, request, *args, **kwargs):
+        model_type = request.query_params.get('type')
+
+        try:
+            EventTypeService.validate_type(model_type)
+            queryset = self.get_queryset()
+            serializer = self.get_serializer(queryset, many = True)
+            return Response(serializer.data)
+
+        except ValidationError as e:
+            logger.warning(f"Ошибка валидации параметров: {e.detail}")
+            return Response(
+                {'error': 'Неверные параметры запроса', 'details': e.detail},
+                status = 400
+            )
+        except Exception as e:
+            logger.exception(f"Внутренняя ошибка сервера: {e}")
+            return Response(
+                {'error': 'Внутренняя ошибка сервера'},
+                status = 500
             )

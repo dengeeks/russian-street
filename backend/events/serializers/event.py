@@ -54,6 +54,7 @@ class AreaSerializer(BaseEventSerializer):
 
 class EventDetailSerializer(BaseEventSerializer):
     image = serializers.SerializerMethodField()
+
     class Meta(BaseEventSerializer.Meta):
         model = Event
         fields = BaseEventSerializer.Meta.fields + (
@@ -77,6 +78,7 @@ class EventDetailSerializer(BaseEventSerializer):
 
 class AreaDetailSerializer(BaseEventSerializer):
     image = serializers.SerializerMethodField()
+
     class Meta(BaseEventSerializer.Meta):
         model = Area
         fields = BaseEventSerializer.Meta.fields + (
