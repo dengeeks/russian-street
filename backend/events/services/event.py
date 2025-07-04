@@ -3,7 +3,6 @@ from datetime import datetime
 
 from django.db.models import Q
 from django.utils import timezone
-from rest_framework.exceptions import ValidationError
 from rest_framework.generics import get_object_or_404
 
 from events.models.area import Area
@@ -307,3 +306,43 @@ class EventTypeService:
     def get_queryset(cls, model_type: str):
         cls.validate_type(model_type)
         return cls.MODEL_MAPPING[model_type].objects.all()
+
+
+from typing import Literal
+from django.utils.timezone import now
+from django.db.models import QuerySet
+
+from events.models.event import Event
+from events.models.area import Area
+
+
+class ShortListService:
+    """
+    Сервис для получения краткого списка мероприятий или площадок.
+    """
+
+    ModelType = Literal['event', 'area']
+
+    MODEL_MAPPING = {
+        'event': Event,
+        'area': Area,
+    }
+
+    @classmethod
+    def get_list(cls, model_type, region_id = None, limit = 5, ):
+        if model_type not in cls.MODEL_MAPPING:
+            raise ValueError('Допустимые значения: event, area')
+
+        limit = min(limit, 20)
+
+        model = cls.MODEL_MAPPING[model_type]
+        qs = model.objects.select_related('city')
+
+        if region_id:
+            qs = qs.filter(region_id = region_id)
+
+        if model_type == 'event':
+            qs = qs.filter(ending_date__gte = now())
+
+        # Общая сортировка: приоритетные сначала, потом по дате
+        return list(qs.order_by('-is_priority', '-created_at')[:limit])
