@@ -54,6 +54,7 @@ class AreaSerializer(BaseEventSerializer):
 
 class EventDetailSerializer(BaseEventSerializer):
     image = serializers.SerializerMethodField()
+
     class Meta(BaseEventSerializer.Meta):
         model = Event
         fields = BaseEventSerializer.Meta.fields + (
@@ -65,7 +66,8 @@ class EventDetailSerializer(BaseEventSerializer):
             'yandex_address',
             'format_type',
             'video_url',
-            'image'
+            'image',
+            'region'
         )
 
     def get_image(self, obj):
@@ -76,6 +78,7 @@ class EventDetailSerializer(BaseEventSerializer):
 
 class AreaDetailSerializer(BaseEventSerializer):
     image = serializers.SerializerMethodField()
+
     class Meta(BaseEventSerializer.Meta):
         model = Area
         fields = BaseEventSerializer.Meta.fields + (
@@ -84,7 +87,8 @@ class AreaDetailSerializer(BaseEventSerializer):
             'yandex_address',
             'format_type',
             'video_url',
-            'image'
+            'image',
+            'region'
         )
 
     def get_image(self, obj):

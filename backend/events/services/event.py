@@ -276,3 +276,34 @@ class EventAreaDetailService:
             ),
             id = object_id
         )
+
+
+from events.models.base import AreaType, EventActivityType
+from rest_framework.exceptions import ValidationError
+
+
+class EventTypeService:
+    """
+    Сервис для получения типов мероприятий и площадок.
+
+    Поддерживаемые типы:
+    - event: Типы мероприятий
+    - area: Типы площадок
+    """
+
+    MODEL_MAPPING = {
+        'event': EventActivityType,
+        'area': AreaType,
+    }
+
+    @classmethod
+    def validate_type(cls, model_type: str):
+        if model_type not in cls.MODEL_MAPPING:
+            raise ValidationError(
+                {'type': f"Недопустимое значение. Допустимые: {', '.join(cls.MODEL_MAPPING.keys())}"}
+            )
+
+    @classmethod
+    def get_queryset(cls, model_type: str):
+        cls.validate_type(model_type)
+        return cls.MODEL_MAPPING[model_type].objects.all()
