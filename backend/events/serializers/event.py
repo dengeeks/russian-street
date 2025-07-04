@@ -95,3 +95,21 @@ class AreaDetailSerializer(BaseEventSerializer):
         if obj.image:
             return obj.image.url
         return None
+
+
+class ShortEventSerializer(BaseEventSerializer):
+    class Meta(BaseEventSerializer.Meta):
+        model = Event
+        fields = BaseEventSerializer.Meta.fields + (
+            'address',
+            'starting_date'
+
+        )
+
+
+class ShortAreaSerializer(BaseEventSerializer):
+    class Meta(BaseEventSerializer.Meta):
+        model = Area
+        fields = BaseEventSerializer.Meta.fields + (
+            'address',
+        )
