@@ -2,8 +2,7 @@ import uuid
 from datetime import datetime
 
 from django.contrib.contenttypes.models import ContentType
-from django.db.models import Q, OuterRef, Value, Exists
-from django.forms import BooleanField
+from django.db.models import Q, OuterRef, Value, Exists, BooleanField
 from django.utils import timezone
 from rest_framework.generics import get_object_or_404
 
