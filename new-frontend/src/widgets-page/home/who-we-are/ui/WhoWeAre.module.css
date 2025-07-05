@@ -1,0 +1,146 @@
+.whoWeAre {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.whoWeAre__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.whoWeAre__text {
+    display: flex;
+    gap: 40px;
+    flex-direction: column;
+    max-width: 490px;
+    width: 100%;
+}
+
+.whoWeAre__textBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.whoWeAre__textBlock_h3 {
+    font-stretch: semi-condensed;
+    line-height: 130%;
+    font-weight: 700;
+    font-size: 32px;
+    text-transform: uppercase;
+}
+
+.whoWeAre__textBlock_p {
+    font-stretch: semi-condensed;
+    line-height: 130%;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.whoWeAre__photoGrid {
+    max-width: 592px;
+    display: grid;
+    grid-template-areas:
+    "one three"
+    "one four"
+    "one four"
+    "two four";
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+.imgWrapper {
+    position: relative;
+    max-width: 286px;
+    height: auto;
+    width: 100%;
+}
+
+.img1 {
+    aspect-ratio: 1 / 1.54;
+    grid-area: one;
+}
+
+.img2 {
+    aspect-ratio: 1 / 0.89;
+    grid-area: two;
+}
+
+.img3 {
+    aspect-ratio: 1 / 0.89;
+    grid-area: three;
+}
+
+.img4 {
+    aspect-ratio: 1 / 1.54;
+    grid-area: four;
+}
+
+.imgWrapperImg {
+    object-fit: cover;
+}
+
+
+@media (max-width: 1100px) {
+    .whoWeAre__textBlock_h3 {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .whoWeAre__textBlock_h3 {
+        font-size: 24px;
+    }
+
+    .whoWeAre__textBlock_p {
+        font-size: 18px;
+    }
+}
+
+
+
+
+@media (max-width: 768px) {
+
+    .whoWeAre {
+        gap: 20px;
+    }
+
+
+    .whoWeAre__content {
+        flex-direction: column-reverse;
+        gap: 20px;
+    }
+
+
+    .whoWeAre__textBlock_h3 {
+        font-size: 20px;
+        color: var(--red);
+    }
+
+    .whoWeAre__textBlock_p {
+        font-size: 15px;
+    }
+
+    .whoWeAre__photoGrid {
+        grid-template-areas:
+    "two three"
+    "two four"
+    "two four"
+    "one four";
+        gap: 0;
+        width: 100%;
+        height: 100%;
+        max-width: none;
+    }
+
+    .imgWrapper {
+        max-width: none;
+        max-height: 160px;
+    }
+
+
+}

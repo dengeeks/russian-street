@@ -1,0 +1,26 @@
+.legalNav {
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+    gap: 16px;
+    font-size: 16px;
+    font-weight: 400;
+    font-stretch: semi-condensed;
+    line-height: 130%;
+    color: var(--grey);
+    width: 100%;
+}
+
+
+
+@media (max-width: 768px) {
+
+    .legalNav {
+        display: none;
+    }
+}

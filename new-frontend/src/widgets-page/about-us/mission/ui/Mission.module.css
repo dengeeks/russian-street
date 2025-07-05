@@ -1,0 +1,246 @@
+.missionSection {
+    display: flex;
+    gap: 8px;
+    height: 600px;
+}
+
+.missionLine {
+    width: 12px;
+    background-color: var(--white);
+    flex-shrink: 0;
+}
+
+.missionImageWrapper {
+    max-width: 685px;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    aspect-ratio: 685 / 600;
+}
+
+.missionInfo {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.missionValues {
+    position: relative;
+    width: 100%;
+    height: 372px;
+    overflow: hidden;
+}
+
+.missionValue {
+    position: absolute;
+    display: flex;
+    padding: 0 26px;
+    align-items: center;
+    height: 76px;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 130%;
+    font-stretch: semi-condensed;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.missionBlue {
+    background-color: var(--blue);
+    top: 40px;
+    left: 10px;
+    transform: rotate(-9.687deg);
+    transform-origin: 0 0;
+}
+
+.missionWhite1 {
+    right: 0;
+    transform: rotate(1.751deg);
+    transform-origin: 0 0;
+}
+
+.missionWhite2 {
+    top: 120px;
+    right: 110px;
+    transform: rotate(1.751deg);
+    transform-origin: 0 0;
+}
+
+.missionRed {
+    background-color: var(--red);
+    bottom: 50px;
+    left: 0;
+    transform: rotate(-8.042deg);
+    transform-origin: 0 0;
+}
+
+.missionWhite3 {
+    bottom: 10px;
+    right: 0;
+    transform: rotate(1.751deg);
+    transform-origin: 0 0;
+}
+
+.missionDescriptionWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: var(--dark-grey);
+}
+
+.missionDescription {
+    max-width: 389px;
+    padding: 15px 0;
+    line-height: 130%;
+    font-size: 20px;
+    font-weight: 400;
+    font-stretch: semi-condensed;
+}
+
+
+@media (max-width: 1220px) {
+
+    .missionSection {
+        height: 500px;
+    }
+    .missionLine {
+        width: 8px;
+    }
+
+    .missionImageWrapper {
+        max-width: 585px;
+        aspect-ratio: 585 / 500;
+    }
+}
+
+@media (max-width: 1100px) {
+
+    .missionImageWrapper {
+        max-width: 540px;
+        aspect-ratio: 540 / 500;
+    }
+
+    .missionValues {
+        height: 300px;
+    }
+
+    .missionValue {
+        font-size: 28px;
+        height: 60px;
+    }
+
+    .missionWhite2 {
+        top: 80px;
+    }
+
+}
+
+@media (max-width: 1024px) {
+    .missionSection {
+        height: 400px;
+    }
+    .missionImageWrapper {
+        max-width: 440px;
+        aspect-ratio: 440 / 400;
+    }
+
+    .missionLine {
+        display: none;
+    }
+
+    .missionValue {
+        font-size: 24px;
+        height: 50px;
+    }
+
+    .missionWhite2 {
+        top: 80px;
+    }
+
+    .missionDescription {
+        padding: 15px 10px;
+    }
+
+
+}
+
+@media (max-width: 880px) {
+    .missionValues {
+        height: 242px;
+        max-width: 400px;
+    }
+
+    .missionValue {
+        height: 41px;
+        font-size: 15px;
+    }
+
+    .missionBlue {
+        top: 20px;
+        left: 10px;
+        border: dashed 3px var(--dashed-color);
+        transform: rotate(-8.936deg);
+    }
+
+    .missionWhite1 {
+        right: 0;
+        top: 20px;
+        transform: rotate(8.967deg);
+    }
+
+    .missionWhite2 {
+        top: 80px;
+        right: inherit;
+        left: 50px;
+        transform: none;
+    }
+
+    .missionRed {
+        background-color: var(--red);
+        bottom: 20px;
+        left: 0;
+        border: dashed 3px var(--dashed-color);
+        transform: rotate(3.981deg);
+        transform-origin: 0 0;
+    }
+
+    .missionWhite3 {
+        bottom: 60px;
+        right: 0;
+        background-color: var(--blue);
+        transform: rotate(-3.981deg);
+    }
+
+}
+
+@media (max-width: 768px) {
+    .missionSection {
+        height: 100%;
+        gap: 20px;
+        flex-direction: column;
+    }
+
+    .missionImageWrapper {
+        aspect-ratio: 320 / 239;
+        max-width: none;
+    }
+
+    .missionInfo {
+        gap: 20px;
+        align-items: center;
+    }
+
+    .missionDescriptionWrapper {
+        background-color: transparent;
+    }
+
+    .missionDescription {
+        max-width: none;
+        padding: 0;
+        font-size: 20px;
+        color: var(--grey);
+    }
+
+}

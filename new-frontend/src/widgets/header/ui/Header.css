@@ -1,0 +1,169 @@
+.header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background-color: var(--dark-grey);
+    min-height: 78px;
+}
+
+.header-content {
+    display: flex;
+    padding: 25px 0;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 587px;
+    width: 100%;
+}
+
+.header-social {
+    display: flex;
+    gap: 10px;
+}
+
+.header .header-button-mobile {
+    display: none;
+}
+
+.header-menu-link,
+.header-button-auth {
+    text-decoration: none;
+    color: var(--white);
+    font-family: var(--font-Bahnschrift), sans-serif;
+    font-size: 20px;
+    line-height: 130%;
+    font-weight: 400;
+    font-stretch: semi-condensed;
+}
+
+.header-button-auth.button {
+    padding: 0;
+}
+
+.header-burger {
+    display: none;
+    min-height: 50px;
+}
+
+.header-breadcrumbs {
+    display: flex;
+    align-items: center;
+    color: var(--white);
+}
+
+.header-breadcrumbs.hidden .icon {
+    display: none;
+}
+
+.header-burger-button {
+    width: 24px;
+    height: 24px;
+}
+
+.header-burger-button,
+.header-button-auth {
+    background: none;
+    color: var(--white);
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+.profileIcon {
+    border-radius: 50%;
+}
+
+.header .header-icon-desktop {
+    height: 100%;
+}
+
+@media (max-width: 1100px) {
+    .header-menu {
+        max-width: 460px;
+    }
+
+    .header-social {
+        gap: 6px;
+    }
+
+    .header-menu-link {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 850px) {
+    .header-menu {
+        max-width: 420px;
+    }
+
+}
+
+@media (max-width: 768px) {
+    .header {
+        min-height: 50px;
+    }
+
+    .header-burger {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .header-content {
+        display: none;
+    }
+
+    .header.active {
+        height: 100vh;
+        flex-direction: column;
+        padding-right: 8px;
+    }
+
+    .header.active .header-content {
+        display: flex;
+        flex-direction: column;
+        padding: 25px;
+        gap: 37px;
+    }
+
+    .header-menu {
+        flex-direction: column;
+        gap: 41px;
+        align-items: flex-start;
+        width: auto;
+    }
+
+    .header .header-button-mobile {
+        display: block;
+    }
+
+    .header-menu-link,
+    .header-button-auth {
+        font-size: 20px;
+    }
+
+    .header-social {
+        gap: 20px;
+    }
+
+    .header-social svg {
+        width: 40px;
+        height: 40px;
+    }
+
+    .header .header-icon-desktop {
+        display: none;
+    }
+}

@@ -1,0 +1,57 @@
+.metricsBlock {
+    --dashed-color: var(--blue);
+    background-color: var(--white);
+}
+
+.metricsList {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0 19px 0;
+    gap: 20px;
+    overflow-x: auto;
+}
+
+.metricsItem {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+
+}
+
+.count {
+    color: var(--red);
+    font-size: 60px;
+    line-height: 130%;
+    font-weight: 700;
+    font-stretch: semi-condensed;
+}
+
+.title {
+    color: var(--dark-grey);
+    font-size: 20px;
+    line-height: 130%;
+    font-weight: 400;
+    font-stretch: semi-condensed;
+}
+
+@media (max-width: 768px) {
+
+    .metricsBlock {
+        margin-left: 16px;
+    }
+
+
+    .metricsList {
+        padding: 1px 21px 12.5px;
+    }
+
+    .count {
+        font-size: 45px;
+    }
+
+    .title {
+        font-size: 15px;
+    }
+}

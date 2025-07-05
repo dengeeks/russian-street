@@ -1,0 +1,36 @@
+.projectsSection {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.projectsHeader {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.projectsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(286px, 1fr));
+    gap: 20px;
+}
+
+.projectsGrid :nth-child(1), .projectsGrid :nth-child(6)  {
+    grid-column: span 2;
+}
+
+
+@media (max-width: 768px) {
+    .projectsSection {
+        gap: 40px;
+    }
+
+    .projectsHeader {
+        flex-direction: column;
+    }
+
+    .projectsGrid :nth-child(1), .projectsGrid :nth-child(6)  {
+        grid-column: span 1;
+    }
+}

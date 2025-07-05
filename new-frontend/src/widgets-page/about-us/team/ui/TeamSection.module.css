@@ -1,0 +1,84 @@
+.teamSection {
+    background-color: var(--blue);
+}
+
+.teamTitle {
+    display: none;
+}
+
+.teamTabs:global(.swiper) {
+    display: flex;
+    gap: 20px;
+    padding: 20px 0 40px 0;
+}
+
+.teamTab {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 184px;
+    cursor: pointer;
+}
+
+.teamTabLine {
+    height: 3px;
+    width: 100%;
+    background-color: var(--grey);
+    transition: background-color 0.3s;
+}
+
+.teamTabActive .teamTabLine {
+    background-color: var(--red);
+}
+
+.teamTabName {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 130%;
+    font-stretch: semi-condensed;
+}
+
+.teamSection :global(.swiper-pagination) {
+    display: none;
+}
+
+
+@media (max-width: 768px) {
+
+    .teamSection {
+        background-color: transparent;
+    }
+
+    .teamContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .teamTitle {
+        display: block;
+    }
+
+    .teamTabs {
+        display: none;
+    }
+
+    .teamSection :global(.SwiperPagination) {
+        background-color: var(--blue);
+    }
+
+    .teamSection :global(.swiper-pagination) {
+        display: block;
+    }
+
+    .teamSection :global(.SwiperPagination.swiper-initialized.swiper-horizontal .swiper-pagination .swiper-pagination-bullet) {
+        background: var(--white);
+        opacity: .2;
+    }
+
+    .teamSection :global(.SwiperPagination.swiper-initialized.swiper-horizontal .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active) {
+        opacity: 1;
+    }
+
+
+}

@@ -1,0 +1,58 @@
+.item {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    padding: 16px 8px;
+    gap: 20px;
+    cursor: pointer;
+}
+@media (hover: hover) and (pointer: fine) {
+    .item:hover {
+        background-color: var(--blue);
+    }
+}
+.city {
+    font-family: var(--font-Bahnschrift), sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 130%;
+    font-stretch: semi-condensed;
+    text-align: left;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sponsors {
+    display: flex;
+    gap: 6px;
+}
+
+
+@media (max-width: 768px) {
+    .city {
+        font-size: 13px;
+    }
+
+    .details {
+        gap: 7px;
+    }
+
+}
+
+
+@media (max-width: 490px) {
+
+    .item {
+        padding: 8px 0;
+    }
+    .sponsors {
+        display: none;
+    }
+
+}

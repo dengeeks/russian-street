@@ -1,0 +1,193 @@
+.footer {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--blue);
+    padding: 100px 0 54px;
+    gap: 14px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
+.orgInfo {
+    display: flex;
+    flex-direction: column;
+    border-left: 3px solid var(--grey);
+    padding-left: 16px;
+    gap: 16px;
+    justify-content: space-between;
+}
+
+.footer .hiddenDesktop {
+    display: none;
+}
+
+.orgTitle {
+    color: var(--grey);
+    font-size: 20px;
+    line-height: 130%;
+    margin: 0;
+    max-width: 424px;
+}
+
+.orgSubtitle {
+    color: var(--grey);
+    font-size: 13px;
+    line-height: 130%;
+    margin: 0;
+}
+
+
+.menu {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 32px;
+    align-items: flex-start;
+    padding-top: 40px;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 20px;
+    font-weight: 400;
+    font-stretch: semi-condensed;
+    line-height: 130%;
+    color: var(--grey);
+}
+
+.donation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 110px;
+}
+
+.supportText {
+    color: var(--grey);
+    font-size: 20px;
+    line-height: 130%;
+    font-weight: 400;
+    font-stretch: semi-condensed;
+    text-align: center;
+}
+
+
+
+.social {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.socialTitle {
+    margin-bottom: 16px;
+    font-size: 20px;
+    font-weight: 700;
+    font-stretch: semi-condensed;
+    line-height: 130%;
+    color: var(--grey);
+}
+
+.socialIcons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+
+.copyright {
+    color: var(--grey);
+    font-size: 13px;
+    line-height: 130%;
+    text-align: center;
+    font-stretch: semi-condensed;
+}
+
+.supportLink {
+    cursor: pointer;
+}
+
+
+@media (max-width: 768px) {
+
+    .footer {
+        padding: 40px 0;
+        gap: 0;
+    }
+
+    .nav {
+        flex-direction: row;
+        gap: 10px;
+        font-size: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .container {
+        max-width: 320px;
+        gap: 10px;
+    }
+
+    .supportText {
+        font-size: 15px;
+        margin-top: 10px;
+    }
+
+    .socialTitle {
+        display: none;
+    }
+
+    .orgInfo {
+        border-left: none;
+        padding-left: 0;
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .orgTitle {
+        color: var(--grey);
+        font-size: 13px;
+        line-height: 130%;
+        margin-bottom: 10px;
+    }
+
+    .donation {
+        gap: 0;
+        margin-top: 30px;
+    }
+
+    .menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 40px;
+    }
+
+    .socialIcons {
+        gap: 24px;
+    }
+
+    .socialIcons .socialIcon img{
+       width: 28px;
+        height: 28px;
+    }
+
+    .copyright {
+        padding-top: 10px;
+    }
+
+    .footer .hiddenMobile {
+        display: none;
+    }
+
+    .footer .hiddenDesktop {
+        display: flex;
+    }
+
+}

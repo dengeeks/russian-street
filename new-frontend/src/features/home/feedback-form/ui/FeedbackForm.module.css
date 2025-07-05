@@ -1,0 +1,48 @@
+.FeedbackForm {
+    max-width: 644px;
+    width: 100%;
+    display: flex;
+    gap: 40px;
+    flex-direction: column;
+}
+
+.FeedbackFormBody {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%
+}
+
+.FeedbackFormDescription {
+    font-size: 20px;
+    font-stretch: semi-condensed;
+    line-height: 130%;
+    font-weight: 400;
+}
+
+.FeedbackFormBodyRow {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.FeedbackFormBodyRow > * {
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+    .FeedbackForm {
+        max-width: none;
+        gap: 20px;
+    }
+
+    .FeedbackFormDescription {
+        font-size: 15px;
+    }
+
+    .FeedbackFormBodyRow {
+        display: flex;
+        flex-direction: column;
+    }
+
+}

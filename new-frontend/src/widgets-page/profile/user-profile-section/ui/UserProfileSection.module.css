@@ -1,0 +1,49 @@
+.userProfileSection {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+}
+
+.userProfileWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+
+.userProfileHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userProfileInfo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: flex-start;
+
+}
+
+.userProfileDetailsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+    max-width: 400px;
+}
+
+
+@media (max-width: 768px) {
+    .userProfileWrapper {
+        gap: 40px;
+    }
+
+    .userProfileHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+}

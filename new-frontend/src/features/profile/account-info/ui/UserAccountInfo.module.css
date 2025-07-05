@@ -1,0 +1,91 @@
+.userProfileContent {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-width: 320px;
+}
+
+.userProfileTitle {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.userProfileSectionHeading {
+    font-weight: 700;
+    font-size: 32px;
+    font-stretch: semi-condensed;
+    line-height: 150%;
+    letter-spacing: 0.02rem;
+    text-transform: uppercase;
+}
+
+.userProfileEditIcon {
+    cursor: pointer;
+}
+
+.userProfileDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+.userProfileDetailItem {
+    display: flex;
+    gap: 8px;
+}
+
+.userProfileDetailLabel {
+    max-width: 168px;
+    width: 100%;
+    font-stretch: semi-condensed;
+    line-height: 150%;
+    letter-spacing: 0.02rem;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.userProfileDetailValue {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 150%;
+}
+
+.userProfileMember {
+    background-color: var(--blue);
+    gap: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 12px 4px 8px;
+}
+
+
+@media (max-width: 768px) {
+
+    .userProfileSectionHeading {
+        font-family: var(--font-Benzin), sans-serif;
+        font-size: 16px;
+    }
+
+    .userProfileDetails {
+        gap: 8px;
+    }
+
+    .userProfileDetailLabel {
+        font-size: 16px;
+    }
+
+}
+
+@media (max-width: 380px) {
+
+    .userProfileContent {
+        min-width: max-content;
+    }
+
+    .userProfileDetailLabel {
+        max-width: 100px;
+    }
+}

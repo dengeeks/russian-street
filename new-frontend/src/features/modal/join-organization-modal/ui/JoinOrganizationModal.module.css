@@ -1,0 +1,56 @@
+.formModalTabs {
+    display: flex;
+    padding-top: 40px;
+    justify-content: center;
+    width: 100%;
+}
+
+.formModalTab {
+    width: 110px;
+    height: 30px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 145%;
+    text-align: center;
+    color: var(--divider-white);
+    background-color: transparent;
+    border: none;
+    border-bottom: 4px solid var(--divider-white);
+    cursor: pointer;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    justify-content: center;
+}
+
+.formModalTab.active {
+    color: var(--red-hover);
+    border-bottom: 4px solid var(--red-hover);
+}
+
+.formModalDivider {
+    border: none;
+    height: 1px;
+    background-color: var(--grey);
+}
+
+.formModalStep {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+
+@media (max-width: 940px) {
+    .formModalDivider {
+        display: none;
+    }
+    .formModalStep.hidden {
+        display: none;
+    }
+
+    .formModalStep.active {
+        display: flex;
+    }
+
+}

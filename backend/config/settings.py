@@ -56,7 +56,7 @@ INSTALLED_APPS = [
 
     # мои приложения
     'events.apps.EventsConfig',
-    # 'news',
+    'news',
     'users',
     'feedbacks',
     'oauth2',
@@ -209,6 +209,7 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:3000',
     'https://street-russia.tati-b-n.ru'
 ]
+
 
 # SPECTACULAR
 SPECTACULAR_SETTINGS = {
@@ -393,6 +394,19 @@ UNFOLD = {
                         "permission": lambda request: request.user.is_superuser,
                         "link": reverse_lazy("admin:events_subdiscipline_changelist"),
                     }
+                ],
+            },
+            {
+                "title": "Новости",
+                "collapsible": True,
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Новости",
+                        "icon": "person",
+                        "permission": lambda request: request.user.is_superuser,
+                        "link": reverse_lazy("admin:news_new_changelist"),
+                    },
                 ],
             },
             {

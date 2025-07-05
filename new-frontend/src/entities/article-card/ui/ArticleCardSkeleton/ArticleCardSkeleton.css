@@ -1,0 +1,8 @@
+.articleCardSkeleton {
+    min-width: 286px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    aspect-ratio: 388 / 444;
+}
+

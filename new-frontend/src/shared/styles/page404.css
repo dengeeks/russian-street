@@ -1,0 +1,58 @@
+.notFoundContainer {
+    background-image: url('/assets/webp/background-404.webp');
+    background-repeat: repeat;
+    background-size: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 120px 0;
+}
+
+.notFoundCode {
+    text-align: center;
+    color: var(--dark-grey);
+    font-family: var(--font-Benzin), sans-serif;
+    font-size: 300px;
+    line-height: 130%;
+    font-weight: 700;
+    text-transform: uppercase;
+    filter: blur(10px);
+    user-select: none;
+}
+
+.notFoundMessage {
+    font-size: 20px;
+    text-align: center;
+    max-width: 441px;
+    line-height: 130%;
+    font-weight: 400;
+    font-stretch: semi-condensed;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .notFoundContainer a:hover {
+        color: var(--white);
+    }
+}
+
+@media (max-width: 768px) {
+
+    .notFoundContainer {
+        gap: 20px;
+        padding: 40px 0;
+    }
+
+
+    .notFoundCode {
+        font-size: 40px;
+        filter: blur(2px);
+    }
+
+    .notFoundMessage {
+        font-size: 15px;
+        padding: 0 20px;
+    }
+
+}

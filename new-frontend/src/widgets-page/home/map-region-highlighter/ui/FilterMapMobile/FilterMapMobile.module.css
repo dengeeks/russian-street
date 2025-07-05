@@ -1,0 +1,18 @@
+.filterMapMobileWrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.filterButton {
+    color: var(--white);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+
+@media (min-width: 769px) {
+    .filterMapMobileWrapper {
+        display: none;
+    }
+}
