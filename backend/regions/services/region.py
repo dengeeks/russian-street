@@ -41,7 +41,9 @@ class RegionStatsService:
         now = timezone.now().date()
 
         # Получаем все регионы заранее (1 запрос)
-        regions = Region.objects.all().only('id', 'name')
+        regions = Region.objects.select_related('manager').only(
+            'id', 'name', 'manager__id', 'manager__email', 'manager__phone_number', 'manager__address'
+        )
 
         # Получаем кол-во мероприятий по region_id (1 запрос)
         events_by_region = (
@@ -68,6 +70,7 @@ class RegionStatsService:
             count_events = events_map.get(region.id, 0)
             count_areas = areas_map.get(region.id, 0)
 
+            manager = region.manager
             data.append({
                 "id": region.id,
                 "name": region.name,
@@ -75,6 +78,12 @@ class RegionStatsService:
                 "have_areas": count_areas > 0,
                 "count_events": count_events,
                 "count_areas": count_areas,
+                "manager": {
+                    "id": manager.id,
+                    "email": manager.email,
+                    "phone": manager.phone_number,
+                    "address": manager.address,
+                } if manager else None,
             })
 
             total_events += count_events
