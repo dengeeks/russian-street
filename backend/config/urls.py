@@ -18,6 +18,7 @@ urlpatterns = [
     path('api/v1/', include('users.urls')),
     path('api/v1/', include('teams.urls')),
     path('api/v1/', include('contents.urls')),
+    path('api/v1/', include('favorites.urls')),
 
     # API OAUTH2
     path('api/v1/o/', include((oauth2.urls.urlpatterns, 'oauth2_provider'), namespace = 'oauth2_provider')),

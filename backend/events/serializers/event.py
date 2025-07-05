@@ -26,10 +26,11 @@ class BaseEventSerializer(serializers.ModelSerializer):
     """Базовый сериализатор для мероприятий и площадок"""
     city = serializers.StringRelatedField()
     card_image = serializers.SerializerMethodField()
+    is_favorite = serializers.BooleanField(read_only=True)
 
     class Meta:
         fields = (
-            'id', 'title', 'card_image', 'city'
+            'id', 'title', 'card_image', 'city', 'is_favorite'
         )
 
     def get_card_image(self, obj):
@@ -67,7 +68,8 @@ class EventDetailSerializer(BaseEventSerializer):
             'format_type',
             'video_url',
             'image',
-            'region'
+            'region',
+            'is_favorite'
         )
 
     def get_image(self, obj):
