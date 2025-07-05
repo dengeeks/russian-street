@@ -58,7 +58,7 @@ class EventAreaListAPI(generics.ListAPIView):
             validated_params = self.filter_service.validate_params(request.query_params)
 
             # Получение отфильтрованного QuerySet
-            queryset = self.filter_service.get_queryset(validated_params)
+            queryset = self.filter_service.get_queryset(validated_params, user = self.request.user)
 
             # Пагинация и сериализация
             page = self.paginate_queryset(queryset)
@@ -102,7 +102,7 @@ class EvenAreaDetailAPI(RetrieveAPIView):
             self.filter_service.validate_type(request.query_params.get('type'))
 
             # Получение обьекта
-            obj = EventAreaDetailService.get_object(type, kwargs['id'])
+            obj = EventAreaDetailService.get_object(type, kwargs['id'], self.request.user)
 
             serializer = self.get_serializer(obj)
             return Response(serializer.data, status = 200)
@@ -161,8 +161,6 @@ class EventTypeListAPI(generics.ListAPIView):
             )
 
 
-
-
 class ShortEventAreaListAPI(generics.ListAPIView):
     """
     API для получения краткого списка мероприятий или площадок.
@@ -187,7 +185,7 @@ class ShortEventAreaListAPI(generics.ListAPIView):
         except ValueError:
             raise ValidationError({'limit': 'Параметр limit должен быть числом'})
 
-        return ShortListService.get_list(model_type, region_id, limit)
+        return ShortListService.get_list(model_type, region_id, limit, self.request.user)
 
     def list(self, request, *args, **kwargs):
         model_type = request.query_params.get('type')
@@ -197,18 +195,18 @@ class ShortEventAreaListAPI(generics.ListAPIView):
                 raise ValidationError({'type': 'Параметр type обязателен (event или area)'})
 
             queryset = self.get_queryset()
-            serializer = self.get_serializer(queryset, many=True)
+            serializer = self.get_serializer(queryset, many = True)
             return Response(serializer.data)
 
         except ValidationError as e:
             logger.warning(f"Ошибка валидации параметров: {e.detail}")
             return Response(
                 {'error': 'Неверные параметры запроса', 'details': e.detail},
-                status=400
+                status = 400
             )
         except Exception as e:
             logger.exception(f"Внутренняя ошибка сервера: {e}")
             return Response(
                 {'error': 'Внутренняя ошибка сервера'},
-                status=500
+                status = 500
             )

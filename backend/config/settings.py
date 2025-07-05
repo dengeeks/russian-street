@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'feedbacks',
     'oauth2',
     'regions',
+    'favorites',
     'teams.apps.TeamsConfig',
     'partners.apps.PartnersConfig',
     'contents.apps.ContentsConfig'

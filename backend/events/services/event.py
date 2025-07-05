@@ -1,12 +1,44 @@
 import uuid
 from datetime import datetime
 
-from django.db.models import Q
+from django.contrib.contenttypes.models import ContentType
+from django.db.models import Q, OuterRef, Value, Exists
+from django.forms import BooleanField
 from django.utils import timezone
 from rest_framework.generics import get_object_or_404
 
 from events.models.area import Area
 from events.models.event import Event
+from favorites.models.favorite import FavoriteObject
+
+
+class FavoriteService:
+    """
+    Сервис для работы с избранным (универсально для event и area через contenttypes).
+    """
+
+    @staticmethod
+    def annotate_is_favorite(queryset, user):
+        if not user or not user.is_authenticated:
+            return queryset.annotate(is_favorite = Value(False, output_field = BooleanField()))
+        content_type = ContentType.objects.get_for_model(queryset.model)
+        favorite_qs = FavoriteObject.objects.filter(
+            user = user,
+            content_type = content_type,
+            object_id = OuterRef('pk')
+        )
+        return queryset.annotate(is_favorite = Exists(favorite_qs))
+
+    @staticmethod
+    def is_favorite(obj, user):
+        if not user or not user.is_authenticated:
+            return False
+        content_type = ContentType.objects.get_for_model(obj.__class__)
+        return FavoriteObject.objects.filter(
+            user = user,
+            content_type = content_type,
+            object_id = obj.pk
+        ).exists()
 
 
 class EventFilterService:
@@ -186,7 +218,7 @@ class EventFilterService:
         return validated_data
 
     @classmethod
-    def get_queryset(cls, validated_params):
+    def get_queryset(cls, validated_params, user = None):
         """
         Получение отфильтрованного QuerySet
 
@@ -240,6 +272,7 @@ class EventFilterService:
         if order:
             qs = qs.order_by(order)
 
+        qs = FavoriteService.annotate_is_favorite(qs, user)
         return qs
 
 
@@ -266,15 +299,17 @@ class EventAreaDetailService:
             )
 
     @classmethod
-    def get_object(cls, model_type: str, object_id: str):
+    def get_object(cls, model_type, object_id, user = None):
         config = cls.MODEL_MAPPING[model_type]
-        return get_object_or_404(
+        obj = get_object_or_404(
             config['model'].objects
             .select_related(
                 *config['select_related'],
             ),
             id = object_id
         )
+        obj.is_favorite = FavoriteService.is_favorite(obj, user)
+        return obj
 
 
 from events.models.base import AreaType, EventActivityType
@@ -329,7 +364,7 @@ class ShortListService:
     }
 
     @classmethod
-    def get_list(cls, model_type, region_id = None, limit = 5, ):
+    def get_list(cls, model_type, region_id = None, limit = 5, user = None):
         if model_type not in cls.MODEL_MAPPING:
             raise ValueError('Допустимые значения: event, area')
 
@@ -343,6 +378,9 @@ class ShortListService:
 
         if model_type == 'event':
             qs = qs.filter(ending_date__gte = now())
+            qs = qs.order_by('-is_priority', '-created_at')
+        else:
+            qs = qs.order_by('-created_at')
 
-        # Общая сортировка: приоритетные сначала, потом по дате
-        return list(qs.order_by('-is_priority', '-created_at')[:limit])
+        qs = FavoriteService.annotate_is_favorite(qs, user)
+        return qs[:limit]
