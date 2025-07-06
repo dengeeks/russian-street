@@ -1,3 +1,4 @@
+from regions.models.region import Region
 from users.models.user import UserAccount
 
 
@@ -19,7 +20,15 @@ class UserUpdateService:
 
         # Обновляем только переданные поля
         for attr, value in result.items():
-            setattr(user, attr, value)
+            if attr == 'region':
+                # Fetch the Region instance for the given UUID
+                try:
+                    region_instance = Region.objects.get(id = value)
+                    setattr(user, attr, region_instance)
+                except Region.DoesNotExist:
+                    return {'error': 'Регион с указанным ID не найден.'}, 400
+            else:
+                setattr(user, attr, value)
 
         user.save()
         return {'message': 'Данные успешно обновлены'}, 200
