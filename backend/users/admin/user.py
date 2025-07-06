@@ -169,3 +169,4 @@ class UserAccountAdmin(BaseUserAdmin, LinkToDetailMixin, ModelAdmin):
     change_password_form = AdminPasswordChangeForm
     add_form = CustomUserCreationForm
     inlines = [SocialLinkManagerInline]
+    search_fields = ['first_name', 'last_name', 'email']

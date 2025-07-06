@@ -48,7 +48,9 @@ class Region(UUIDMixin, DateTimeMixin):
         to = 'users.UserAccount',
         verbose_name = 'Руководитель региона',
         related_name = 'regions',
-        on_delete = models.CASCADE
+        on_delete = models.CASCADE,
+        blank = True,
+        null = True
     )
     info = models.TextField(
         verbose_name = 'Описание региона'
@@ -81,7 +83,6 @@ class City(UUIDMixin, DateTimeMixin):
         'Название города',
         max_length = 25,
         db_index = True,
-        unique = True
     )
     region = models.ForeignKey(
         to = Region,

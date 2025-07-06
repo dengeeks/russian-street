@@ -1,29 +1,23 @@
 import json
 import os
-import random
-import tempfile
-import urllib.request
 
 from django.core.files import File
 from django.core.management.base import BaseCommand
 
-from regions.models.region import Region
-from users.models.user import UserAccount
+from regions.models.region import Region, City
 
 
 class Command(BaseCommand):
-    help = "Импортирует регионы из JSON-файла (regions.json)"
+    help = "Импортирует регионы и города из JSON-файла (regions.json)"
 
-    DEFAULT_IMAGE_URLS = [
-        "https://images.unsplash.com/photo-1749909902516-786d8d846193?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxODY2Nzh8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NTE2MjIyNTd8&ixlib=rb-4.1.0&q=80&w=1080",
-    ]
+    DEFAULT_IMAGE_PATH = 'back_media/default_region/Yakutia-3.jpg'
 
     def add_arguments(self, parser):
         parser.add_argument(
             '--json',
             type = str,
             default = 'regions.json',
-            help = 'Путь до JSON-файла со списком регионов',
+            help = 'Путь до JSON-файла со списком регионов и городов',
         )
 
     def handle(self, *args, **options):
@@ -33,44 +27,51 @@ class Command(BaseCommand):
             self.stderr.write(f"❌ Файл {json_path} не найден.")
             return
 
-        try:
-            manager = UserAccount.objects.first()
-        except UserAccount.DoesNotExist:
-            self.stderr.write(f"❌ Менеджер с id={manager_id} не найден.")
+        if not os.path.exists(self.DEFAULT_IMAGE_PATH):
+            self.stderr.write(f"❌ Файл изображения {self.DEFAULT_IMAGE_PATH} не найден.")
             return
 
         with open(json_path, encoding = 'utf-8') as f:
             regions = json.load(f)
 
-        created = 0
-        skipped = 0
+        created_regions = 0
+        created_cities = 0
+        skipped_regions = 0
 
         for region_data in regions:
             code = str(region_data["code"]).strip()
             name = region_data["name"].strip()
+            cities = region_data.get("cities", [])
 
             if Region.objects.filter(code = code).exists():
-                skipped += 1
+                skipped_regions += 1
                 continue
 
-            image_url = random.choice(self.DEFAULT_IMAGE_URLS)
-            tmp_file = tempfile.NamedTemporaryFile(delete = True)
-
             try:
-                with urllib.request.urlopen(image_url) as response:
-                    tmp_file.write(response.read())
-                    tmp_file.flush()
+                with open(self.DEFAULT_IMAGE_PATH, 'rb') as image_file:
+                    region = Region(
+                        name = name,
+                        code = code,
+                        info = f"Республика Коми — край несметных природных богатств и территория самобытной культуры северных народов. В недрах региона хранятся все элементы таблицы Менделеева. Отсюда берет начало российская нефтяная промышленность. Здесь огромные лесные просторы пересечены сетью полноводных хрустальных рек. \nРеспублику по праву называют родиной лыж. Фрагмент древнейшей лыжи с головой лося можно увидеть в отделе этнографии Национального музея Республики Коми, ее возраст — более 8 тысяч лет.",
+                    )
+                    region.image.save(f"{code}.jpg", File(image_file), save = True)
+                    created_regions += 1
+                    self.stdout.write(f"✅ Добавлен регион: {name}")
 
-                region = Region(
-                    name = name,
-                    code = code,
-                    manager = manager,
-                    info = f"Регион {name}"
-                )
-                region.image.save(f"{code}.png", File(tmp_file), save = True)
-                created += 1
-                self.stdout.write(f"✅ Добавлен регион: {name}")
+                for city_name in cities:
+                    city_name = city_name.strip()
+                    if not City.objects.filter(name = city_name, region = region).exists():
+                        City.objects.create(name = city_name, region = region)
+                        created_cities += 1
+                        self.stdout.write(f"  🏙️  Добавлен город: {city_name}")
+                    else:
+                        self.stdout.write(f"  ⚠️  Город уже существует: {city_name}")
+
             except Exception as e:
                 self.stderr.write(f"⚠️ Ошибка при создании региона {name}: {e}")
 
-        self.stdout.write(self.style.SUCCESS(f"\nГотово. Добавлено: {created}, пропущено: {skipped}"))
+        self.stdout.write(
+            self.style.SUCCESS(
+                f"\nГотово. Добавлено регионов: {created_regions}, городов: {created_cities}, пропущено регионов: {skipped_regions}"
+            )
+        )
