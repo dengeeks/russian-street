@@ -162,8 +162,9 @@ REST_FRAMEWORK = {
         'rest_framework.throttling.ScopedRateThrottle',
     ],
     'DEFAULT_THROTTLE_RATES': {
-        'user': '10000/day',  # Лимит для UserRateThrottle
-        'feedback_request': '10/hour'  # Лимит на POST запрос в feedback
+        'user': '10000/hour',
+        'feedback_create': '5/hour',
+        'feedback_org_create': '5/hour',
     }
 }
 
@@ -209,7 +210,6 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:3000',
     'https://street-russia.tati-b-n.ru'
 ]
-
 
 # SPECTACULAR
 SPECTACULAR_SETTINGS = {
@@ -463,6 +463,25 @@ UNFOLD = {
                         "icon": "format_ink_highlighter",
                         "permission": lambda request: request.user.is_superuser,
                         "link": reverse_lazy("admin:partners_partnertype_changelist"),
+                    },
+                ],
+            },
+            {
+                "title": "Заявки",
+                "collapsible": True,
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Вопросы",
+                        "icon": "person",
+                        "permission": lambda request: request.user.is_superuser,
+                        "link": reverse_lazy("admin:feedbacks_feedback_changelist"),
+                    },
+                    {
+                        "title": "Вступление в организацию",
+                        "icon": "person",
+                        "permission": lambda request: request.user.is_superuser,
+                        "link": reverse_lazy("admin:feedbacks_feedbackorganization_changelist"),
                     },
                 ],
             },
