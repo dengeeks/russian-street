@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from common.validators import validate_phone_number
+from regions.models.region import Region
 from regions.serializers.region import RegionSerializer
 from users.models.user import UserAccount
 
@@ -57,8 +58,13 @@ class UserUpdateSerializer(serializers.Serializer):
     last_name = serializers.CharField(max_length = 25, required = False)
     middle_name = serializers.CharField(max_length = 25, required = False)
     phone_number = serializers.CharField(max_length = 25, required = False, validators = [validate_phone_number])
-    region = serializers.CharField(max_length = 100, required = False)
+    region = serializers.UUIDField(required = False)
     avatar = serializers.ImageField(required = False)
+
+    def validate_region(self, value):
+        if not Region.objects.filter(id = value).exists():
+            raise serializers.ValidationError("Регион с указанным ID не найден.")
+        return value
 
     def validate_email(self, value):
         # Проверка уникальности email (если обновляется)
