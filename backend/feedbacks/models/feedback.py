@@ -1,9 +1,9 @@
 from django.db import models
 
-from common.constants.feedback import (LEN_NAME_FEEDBACK, LEN_PHONE_NUMBER,
-                                     LEN_STATUS, STATUS_FEEDBACK)
+from common.constants.feedback import (LEN_STATUS)
 from common.models import DateTimeMixin
 from common.validators import validate_phone_number
+from regions.models.region import Region, City
 from users.models.user import UserAccount
 
 
@@ -27,88 +27,140 @@ class Feedback(DateTimeMixin):
     Методы:
         __str__(): Возвращает строковое представление обратной связи.
     """
-    user = models.ForeignKey(
-        UserAccount,
-        verbose_name='Пользователь',
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-        related_name='feedback_user'
-    )
+    STATUS_FEEDBACK = [
+        ('PENDING', 'В ожидании'),
+        ('CLOSED', 'Закрыто'),
+    ]
     name = models.CharField(
-        'Имя отправителя',
-        max_length=LEN_NAME_FEEDBACK,
+        verbose_name = 'Имя отправителя',
+        max_length = 50,
     )
-    content = models.TextField(
-        'Содержимое письма'
+    phone = models.CharField(
+        verbose_name = 'Телефон',
+        validators = [validate_phone_number],
+        max_length = 12
+
     )
     email = models.EmailField(
-        'Электронный адрес'
+        verbose_name = 'Электронный адрес'
     )
-    phone_number = models.CharField(
-        'Номер телефона отправителя',
-        max_length=LEN_PHONE_NUMBER,
-        validators=[validate_phone_number],
-        null=True,
-        blank=True
-    )
-    consent_to_rights = models.BooleanField(
-        verbose_name='Согласие с правилами'
-    )
-    consent_to_processing = models.BooleanField(
-        verbose_name='Согласие на обработку данных'
+    text = models.TextField(
+        verbose_name = 'Сообщение'
     )
     status = models.CharField(
         'Статус заявки',
-        max_length=LEN_STATUS,
-        choices=STATUS_FEEDBACK,
-        default='PENDING'
+        max_length = LEN_STATUS,
+        choices = STATUS_FEEDBACK,
+        default = 'PENDING'
     )
 
     class Meta:
         verbose_name = 'Обратная связь'
         verbose_name_plural = 'Обратная связь'
-        ordering = ['-created_at']
 
     def __str__(self):
         return f'Письмо от {self.email}'
 
 
-class FeedbackProcessing(DateTimeMixin):
+class FeedbackOrganization(DateTimeMixin):
     """
-    Модель, представляющая обработку обратной связи.
+    Модель, представляющая обратную связь.
 
     Атрибуты:
-        - feedback (ForeignKey): Объект обратной связи.
-        - text (TextField): Ответ на обратную связь
-        - support_agent (ForeignKey): Объект агента поддержки.
-        (отвечающий на сообщение)
+        - user (ForeignKey): Пользователь отправивший запрос.
+        - name (CharField): Имя отправителя.
+        - content (TextField): Содержимое письма
+        - phone_number (BooleanField): Номер телефона
+        - consent_to_rights (BoolField): Согласие о правилах
+        - consent_to_processing (BoolField): Согласие на обработку данных
+        - status (CharField): Статус заявки.
 
-        Мета:
+    Мета:
         verbose_name (str): Название модели в единственном числе.
         verbose_name_plural (str): Название модели во множественном числе.
 
     Методы:
-        __str__(): Возвращает строковое представление обработки обратной связи.
-
+        __str__(): Возвращает строковое представление обратной связи.
     """
-    feedback = models.ForeignKey(
-        Feedback,
-        on_delete=models.CASCADE,
-        related_name='feedback_processing'
+    STATUS_FEEDBACK = [
+        ('PENDING', 'В ожидании'),
+        ('CLOSED', 'Закрыто'),
+    ]
+    first_name = models.CharField(
+        max_length = 15,
+        verbose_name = 'Имя'
     )
-    text = models.TextField(
-        'Текст ответа'
+    last_name = models.CharField(
+        max_length = 25,
+        verbose_name = 'Фамилия',
     )
-    support_agent = models.ForeignKey(
-        UserAccount,
-        verbose_name='Агент поддержки',
-        on_delete=models.CASCADE
+    middle_name = models.CharField(
+        max_length = 25,
+        verbose_name = 'Отчество',
+    )
+    gender = models.CharField(
+        max_length = 25,
+        verbose_name = 'Пол'
+    )
+    date_of_birth = models.DateField(
+        verbose_name = 'Дата рождения'
+    )
+    phone = models.CharField(
+        verbose_name = 'Телефон',
+        validators = [validate_phone_number],
+        max_length = 12
+
+    )
+    email = models.EmailField(
+        verbose_name = 'Электронный адрес'
+    )
+    region = models.ForeignKey(
+        to = Region,
+        verbose_name = 'Регион',
+        on_delete = models.CASCADE,
+        related_name = 'feedbacks_organizations'
+    )
+    city = models.ForeignKey(
+        to = City,
+        verbose_name = 'Город',
+        on_delete = models.CASCADE,
+        related_name = 'feedbacks_organizations'
+    )
+    social = models.CharField(
+        verbose_name = 'Соцсеть для связи',
+        max_length = 125
+    )
+    passport_series = models.CharField(
+        max_length = 4,
+        verbose_name = 'Серия паспорта'
+    )
+    passport_number = models.CharField(
+        max_length = 6,
+        verbose_name = 'Номер паспорта'
+    )
+    passport_issue_date = models.DateField(
+        verbose_name = 'Дата выдачи'
+    )
+    passport_issuer = models.CharField(
+        max_length = 255,
+        verbose_name = 'Кем выдан'
+    )
+    status = models.CharField(
+        'Статус заявки',
+        max_length = LEN_STATUS,
+        choices = STATUS_FEEDBACK,
+        default = 'PENDING'
+    )
+    user = models.ForeignKey(
+        to = UserAccount,
+        verbose_name = 'Пользователь',
+        on_delete = models.CASCADE,
+        related_name = 'feedback_organizations'
     )
 
     class Meta:
-        verbose_name = 'Ответ на заявку'
-        verbose_name_plural = 'Ответы на заявки'
+        verbose_name = 'Обратная связь'
+        verbose_name_plural = 'Обратная связь'
 
     def __str__(self):
-        return f'Ответ на заявку {self.feedback.email} ({self.feedback.name})'
+        return f'Письмо от {self.email}'

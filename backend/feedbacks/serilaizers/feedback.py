@@ -1,62 +1,60 @@
+from datetime import date
+
 from rest_framework import serializers
 
-from feedbacks.models.feedback import Feedback, FeedbackProcessing
+from common.validators import validate_phone_number
+from regions.models.region import Region, City
 
 
-class FeedbackSerializer(serializers.ModelSerializer):
-
-    def create(self, validated_data):
-        consent_to_rights = validated_data.get('consent_to_rights')
-        consent_to_processing = validated_data.get('consent_to_processing')
-        if not consent_to_rights:
-            raise serializers.ValidationError(
-                'Необходимо согласие на правила сообщества'
-            )
-        if not consent_to_processing:
-            raise serializers.ValidationError(
-                'Необходимо согласие на обработку персональных данных'
-            )
-        feedback = Feedback.objects.create(**validated_data)
-        return feedback
-
-    class Meta:
-        model = Feedback
-        fields = (
-            'id',
-            'user',
-            'name',
-            'content',
-            'email',
-            'phone_number',
-            'consent_to_rights',
-            'consent_to_processing',
-            'status',
-        )
-        read_only_fields = (
-            'user',
-            'status',
-        )
+class FeedbackCreateSerializer(serializers.Serializer):
+    name = serializers.CharField(max_length = 50)
+    phone = serializers.CharField(max_length = 12, validators = [validate_phone_number])
+    email = serializers.EmailField()
+    text = serializers.CharField()
 
 
-class FeedbackProcessingSerializer(serializers.ModelSerializer):
-    is_closed = serializers.BooleanField(write_only = True)
+class FeedbackOrganizationCreateSerializer(serializers.Serializer):
+    first_name = serializers.CharField(max_length = 15)
+    last_name = serializers.CharField(max_length = 25)
+    middle_name = serializers.CharField(max_length = 25)
+    gender = serializers.CharField(max_length = 25)
+    date_of_birth = serializers.DateField()
+    phone = serializers.CharField(max_length = 12, validators = [validate_phone_number])
+    email = serializers.EmailField()
+    region_id = serializers.UUIDField()
+    city_id = serializers.UUIDField()
+    social = serializers.CharField(max_length = 125)
+    passport_series = serializers.CharField(max_length = 4)
+    passport_number = serializers.CharField(max_length = 6)
+    passport_issue_date = serializers.DateField()
+    passport_issuer = serializers.CharField(max_length = 255)
 
-    def create(self, validated_data):
-        is_closed = validated_data.pop('is_closed')
-        feedback = validated_data.get('feedback')
-        feedback.status = 'CLOSED' if is_closed else 'PENDING'
-        feedback.save()
-        return FeedbackProcessing.objects.create(**validated_data)
+    def validate_region_id(self, value):
+        if not Region.objects.filter(id = value).exists():
+            raise serializers.ValidationError("Регион с указанным ID не найден.")
+        return value
 
-    class Meta:
-        model = FeedbackProcessing
-        fields = (
-            'id',
-            'feedback',
-            'text',
-            'support_agent',
-            'is_closed',
-        )
-        read_only_fields = (
-            'support_agent',
-        )
+    def validate_city_id(self, value):
+        if not City.objects.filter(id = value).exists():
+            raise serializers.ValidationError("Город с указанным ID не найден.")
+        return value
+
+    def validate_passport_series(self, value):
+        if not value.isdigit() or len(value) != 4:
+            raise serializers.ValidationError("Серия паспорта должна состоять из 4 цифр.")
+        return value
+
+    def validate_passport_number(self, value):
+        if not value.isdigit() or len(value) != 6:
+            raise serializers.ValidationError("Номер паспорта должен состоять из 6 цифр.")
+        return value
+
+    def validate_passport_issue_date(self, value):
+        if value > date.today():
+            raise serializers.ValidationError("Дата выдачи паспорта не может быть в будущем.")
+        if value < date(1997, 7, 1):
+            raise serializers.ValidationError("Дата выдачи паспорта не может быть раньше 01.07.1997.")
+        return value
+
+    def validate(self, data):
+        return data

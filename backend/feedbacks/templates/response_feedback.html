@@ -1,68 +1,237 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"   content="width=device-width, initial-scale=1.0">
-    <title>{{ subject }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            background-color: #f0f2f5;
             margin: 0;
             padding: 0;
+            color: #1a1a1a;
         }
         .container {
-            max-width: 600px;
-            margin: 20px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 650px;
+            margin: 30px auto;
+            background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
         }
         .header {
+            background: linear-gradient(90deg, #007bff, #00b7ff);
+            color: #ffffff;
+            padding: 30px;
             text-align: center;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 20px;
+            border-bottom: 4px solid #0056b3;
         }
         .header h1 {
             margin: 0;
-            font-size: 24px;
-            color: #007BFF;
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
         .content {
-            padding: 20px 0;
+            padding: 30px;
         }
         .content p {
-            line-height: 1.6;
-            margin: 0 0 10px;
+            margin: 12px 0;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+        .content strong {
+            color: #007bff;
+            font-weight: 600;
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 20px 0;
+            background: linear-gradient(90deg, #007bff, #00b7ff);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
         }
         .footer {
+            background-color: #f0f2f5;
+            padding: 15px;
             text-align: center;
-            border-top: 1px solid #ddd;
-            padding-top: 20px;
-            font-size: 12px;
-            color: #888;
+            font-size: 13px;
+            color: #555555;
+            border-top: 1px solid #e0e0e0;
+        }
+        .org-container {
+            max-width: 650px;
+            margin: 30px auto;
+            background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+        .org-header {
+            background: linear-gradient(90deg, #2e7d32, #4caf50);
+            color: #ffffff;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 4px solid #1b5e20;
+        }
+        .org-header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .org-content {
+            padding: 30px;
+        }
+        .org-content p {
+            margin: 12px 0;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+        .org-content strong {
+            color: #2e7d32;
+            font-weight: 600;
+        }
+        .org-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 15px;
+        }
+        .org-table th, .org-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e5e5e5;
+            text-align: left;
+        }
+        .org-table th {
+            background: linear-gradient(90deg, #e8f5e9, #f1f8e9);
+            color: #2e7d32;
+            font-weight: 600;
+        }
+        .org-table td {
+            color: #333333;
         }
     </style>
 </head>
 <body>
+    {% if feedback %}
+    <!-- Feedback Email Template -->
     <div class="container">
         <div class="header">
-            <h1>Ответ на ваша обращение</h1>
+            <h1>Новая заявка обратной связи</h1>
         </div>
         <div class="content">
-            <p>Здравствуйте, {{ obj.name }},</p>
-            <p>Спасибо за ваше обращение. Мы внимательно рассмотрели ваше сообщение и хотим сообщить вам следующее:</p>
-            <p>{{ text }}</p>
-            <p>Если у вас есть дополнительные вопросы или требуется дополнительная информация, пожалуйста, не стесняйтесь связаться с нами.</p>
-            <p>С уважением,</p>
-            <p>Администрация StreetRussia</p>
+            <p><strong>Имя:</strong> {{ feedback.name }}</p>
+            <p><strong>Телефон:</strong> {{ feedback.phone }}</p>
+            <p><strong>Электронный адрес:</strong> {{ feedback.email }}</p>
+            <p><strong>Сообщение:</strong> {{ feedback.text }}</p>
+            <p><strong>Статус заявки:</strong> {{ feedback.get_status_display }}</p>
+            <p><strong>Дата отправки:</strong> {{ feedback.created_at|date:"d.m.Y H:i" }}</p>
+            <p>
+                <a href="{{ protocol }}://{{ domain }}/admin/feedbacks/feedback/{{ feedback.id }}/change/" class="button">
+                    Посмотреть в админ-панели
+                </a>
+            </p>
         </div>
         <div class="footer">
-            <p>Это письмо было отправлено вам, потому что вы оставили обращение на нашем сайте.</p>
-            <p>&copy; 2024 StreetRussia. Все права защищены.</p>
+            <p>Это автоматическое сообщение. Пожалуйста, не отвечайте на него.</p>
         </div>
     </div>
+    {% elif feedback_organization %}
+    <!-- FeedbackOrganization Email Template -->
+    <div class="org-container">
+        <div class="org-header">
+            <h1>Новая заявка на вступление в организацию</h1>
+        </div>
+        <div class="org-content">
+            <table class="org-table">
+                <tr>
+                    <th>Поле</th>
+                    <th>Данные</th>
+                </tr>
+                <tr>
+                    <td><strong>Имя</strong></td>
+                    <td>{{ feedback_organization.first_name }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Фамилия</strong></td>
+                    <td>{{ feedback_organization.last_name }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Отчество</strong></td>
+                    <td>{{ feedback_organization.middle_name }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Пол</strong></td>
+                    <td>{{ feedback_organization.gender }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Дата рождения</strong></td>
+                    <td>{{ feedback_organization.date_of_birth|date:"d.m.Y" }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Телефон</strong></td>
+                    <td>{{ feedback_organization.phone }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Электронный адрес</strong></td>
+                    <td>{{ feedback_organization.email }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Регион</strong></td>
+                    <td>{{ feedback_organization.region }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Город</strong></td>
+                    <td>{{ feedback_organization.city }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Соцсеть для связи</strong></td>
+                    <td>{{ feedback_organization.social }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Серия паспорта</strong></td>
+                    <td>{{ feedback_organization.passport_series }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Номер паспорта</strong></td>
+                    <td>{{ feedback_organization.passport_number }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Дата выдачи паспорта</strong></td>
+                    <td>{{ feedback_organization.passport_issue_date|date:"d.m.Y" }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Кем выдан паспорт</strong></td>
+                    <td>{{ feedback_organization.passport_issuer }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Статус заявки</strong></td>
+                    <td>{{ feedback_organization.get_status_display }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Дата отправки</strong></td>
+                    <td>{{ feedback_organization.created_at|date:"d.m.Y H:i" }}</td>
+                </tr>
+            </table>
+            <p>
+                <a href="{{ protocol }}://{{ domain }}/admin/feedbacks/feedbackorganization/{{ feedback_organization.id }}/change/" class="button">
+                    Посмотреть в админ-панели
+                </a>
+            </p>
+        </div>
+        <div class="footer">
+            <p>Это автоматическое сообщение. Пожалуйста, не отвечайте на него.</p>
+        </div>
+    </div>
+    {% endif %}
 </body>
 </html>

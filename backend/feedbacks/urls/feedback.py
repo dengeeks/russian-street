@@ -1,11 +1,8 @@
 from django.urls import path
 
-from feedbacks.views.feedback import FeedbackView, FeedbackProcessingView
+from feedbacks.views.feedback import FeedbackCreateAPI, FeedbackOrganizationCreateAPI
 
 urlpatterns = [
-    path('feedback/', FeedbackView.as_view(), name = 'feedback'),
-    path(
-        'feedback-proc/', FeedbackProcessingView.as_view(),
-        name = 'feedback_processing'
-        ),
+    path('feedback/question/', FeedbackCreateAPI.as_view()),
+    path('feedback/organization/', FeedbackOrganizationCreateAPI.as_view()),
 ]
