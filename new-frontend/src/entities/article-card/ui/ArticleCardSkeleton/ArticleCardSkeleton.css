@@ -2,6 +2,7 @@
     min-width: 286px;
     width: 100%;
     height: 100%;
+    max-height: 389px;
     position: relative;
     aspect-ratio: 388 / 444;
 }

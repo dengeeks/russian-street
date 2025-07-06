@@ -27,10 +27,16 @@ const PartnersMobile = ({data}: PartnersMobileProps) => {
 
   if (!currentCategory || !currentCategory.partners) return null
 
+  const partnerTypes = filteredList.map(item => ({
+    id: item.partner_type,
+    name: item.partner_type
+  }))
+
   return (
     <div className="partners-mobile">
       <SelectMenu
-        options={filteredList.map(item => item.partner_type)}
+        value={filteredList[0]?.partner_type}
+        options={partnerTypes}
         onChange={handleCategoryChange}
       />
       <Swiper

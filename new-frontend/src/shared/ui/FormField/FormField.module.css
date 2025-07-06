@@ -111,6 +111,8 @@
     list-style: none;
     color: var(--dark-grey);
     border: 1px solid var(--grey);
+    max-height: 200px;
+    overflow-y: auto;
 }
 
 .options .option {
@@ -118,7 +120,8 @@
     border: none;
 }
 
-.option:hover {
-    background-color: var(--grey);
+@media (hover: hover) and (pointer: fine) {
+    .option:hover {
+        background-color: var(--grey);
+    }
 }
-

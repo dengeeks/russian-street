@@ -9,7 +9,7 @@ const url = new URL(PUBLIC_API_BASE_URL);
 export const remoteMediaPattern = {
   protocol: url.protocol.slice(0, -1) as 'http' | 'https',
   hostname: url.hostname,
-  pathname: '/back_media1/**',
+  pathname: '/back_media/**',
 };
 
 

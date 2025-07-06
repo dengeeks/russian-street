@@ -2,21 +2,24 @@ import styles from './FeedbackForm.module.css'
 import Button from '@/shared/ui/Button'
 import CheckBox from '@/shared/ui/CheckBox'
 import FormField from '@/shared/ui/FormField'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { FeedbackType } from '../model/type'
-import {messageValidation } from '../model/validation'
+import { messageValidation, nameValidation } from '../model/validation'
 import {emailValidation, phoneValidation} from "@/shared/validation/validators"
+import { useFeedback } from '@/features/home/feedback-form/model/useFeedback'
 
 const FeedbackForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors }
-  } = useForm<FeedbackType>()
+    formState: { errors, isSubmitting },
+    setError,
+    reset,
+  } = useForm<FeedbackType>({
+    mode: 'onChange',
+  });
 
-  const onSubmit: SubmitHandler<FeedbackType> = async data => {
-    console.log(data)
-  }
+  const { onSubmit, hasManualError, setHasManualError } = useFeedback(setError, reset);
 
   return (
     <form className={styles.FeedbackForm} onSubmit={handleSubmit(onSubmit)}>
@@ -25,8 +28,9 @@ const FeedbackForm = () => {
           Оставьте заявку, мы свяжемся с вами в ближайшее время
         </p>
         <FormField
-          {...register('name', { required: 'Обязательное поле' })}
+          {...register('name', { ...nameValidation, onChange: () => setHasManualError(false), })}
           error={errors.name?.message}
+
           label="ИМЯ"
           name="name"
           placeholder="Имя"
@@ -36,8 +40,11 @@ const FeedbackForm = () => {
         <div className={styles.FeedbackFormBodyRow}>
           <FormField
             {...register('phone', {
-              ...phoneValidation
+              required: 'Обязательное поле',
+              ...phoneValidation,
+              onChange: () => setHasManualError(false),
             })}
+            required
             error={errors.phone?.message}
             label="ТЕЛЕФОН"
             name="phone"
@@ -47,7 +54,8 @@ const FeedbackForm = () => {
           <FormField
             {...register('email_feed', {
               required: 'Обязательное поле',
-              ...emailValidation
+              ...emailValidation,
+              onChange: () => setHasManualError(false),
             })}
             error={errors.email_feed?.message}
             label="ПОЧТА"
@@ -58,12 +66,14 @@ const FeedbackForm = () => {
           />
         </div>
         <FormField
-          {...register('message', {
-            ...messageValidation
+          {...register('text', {
+            ...messageValidation,
+            onChange: () => setHasManualError(false),
           })}
-          error={errors.message?.message}
+          required
+          error={errors.text?.message}
           label="СООБЩЕНИЕ"
-          name="message"
+          name="text"
           placeholder="Напишите сообщение"
           textarea
           hint="Не более 500 символов"
@@ -78,7 +88,8 @@ const FeedbackForm = () => {
           Я согласен на обработку персональных данных
         </CheckBox>
       </div>
-      <Button type="submit">ОТПРАВИТЬ</Button>
+
+      <Button type="submit" className="red" disabled={hasManualError || isSubmitting}>ОТПРАВИТЬ</Button>
     </form>
   )
 }

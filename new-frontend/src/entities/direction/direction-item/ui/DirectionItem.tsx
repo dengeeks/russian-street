@@ -6,14 +6,14 @@ import Image from 'next/image'
 import type { DisciplinesType } from '@/shared/api/direction/disciplines/type'
 import { getImageUrl } from '@/shared/utils/getImageUrl'
 
-const DirectionItem = ({name, second_image, first_description, sub_disciplines}: DisciplinesType) => {
+const DirectionItem = ({name, second_image, description, sub_disciplines}: DisciplinesType) => {
   return (
     <div className={styles.directionItem}>
       <div className={styles.directionItem__content}>
         <div className={styles.directionItem__textBlock}>
           <SectionTitle>{name}</SectionTitle>
           <p className={`${styles.directionItem__description} ${styles.directionItem__hiddenDesktop}`}>
-            {first_description}
+            {description}
           </p>
         </div>
         <div className={styles.directionItem__imageAndSubcategories}>
@@ -34,9 +34,9 @@ const DirectionItem = ({name, second_image, first_description, sub_disciplines}:
         </div>
       </div>
       <p className={`${styles.directionItem__description} ${styles.directionItem__hiddenMobile}`}>
-        {first_description}
+        {description}
       </p>
-      <Link href="/" className="more-link">
+      <Link href={`/events?subdiscipline_ids=${sub_disciplines.map(sd => sd.id).join(',')}`}  className="more-link">
         Мероприятия
       </Link>
     </div>

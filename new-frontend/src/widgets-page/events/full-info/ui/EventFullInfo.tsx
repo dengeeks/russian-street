@@ -1,39 +1,39 @@
+'use client'
 import styles from './EventFullInfo.module.css'
 import SectionTitle from '@/shared/ui/SectionTitle'
-import RegionalLeaderCard from '@/entities/regional-leader-card'
-import Icon from '@/shared/icon'
-import Link from 'next/link'
 import ActionButton from '@/features/action-buttons'
+import EditableTextBlock from '@/shared/ui/EditableTextBlock'
+import RegionalLeaderCard from '@/entities/regional-leader-card'
 
-const EventFullInfo = () => {
+interface EventFullInfoProps {
+  description: string;
+  region_id: string;
+}
+
+const EventFullInfo = ({description, region_id}:EventFullInfoProps) => {
   return (
-  <section className={`container section-spacing-top ${styles.eventFullInfoContainer}`}>
-    <div className={styles.eventFullInfoContentWrapper}>
-      <div className={styles.eventFullInfoDescriptionBlock}>
-        <SectionTitle>Описание</SectionTitle>
-        <div className={styles.eventFullInfoDescriptionContent}>
-          <p className={styles.eventFullInfoDescriptionText}>—Экстремальные состязания пройдут в обычном зачёте для всех, а также выделена отдельно детская номинация; <br/> — Мастер-классы и показательные выступления от сборной России по скейтборду, Центра экстремального спорта «Спортэкс» г. Красноярск;<br/> — Крутые призы и подарки от партнёров.<br/><br/> И так, встречаемся:<br/>4 июня 2024 года;<br/> 12:00 часов;<br/> Скейт-парк «Дом на колёсах», (ул. Тухачевского 48Б). <br/><br/>Организаторы: Федерация скейтбординга Кузбасса и скейт-парк «Дом на колёсах».<br/><br/> С собой берём своё транспортное средство, заряд энергии и хорошее настроение</p>
-
-          <div className={styles.eventFullInfoContactsBlock}>
-            <span className={styles.eventFullInfoContactsLabel}>Задать вопрос организаторам:</span>
-            <div className={styles.eventFullInfoSocialLinks}>
-              <Link href=""><Icon icon="telegram" /></Link>
-              <Link href=""><Icon icon="whatsapp" /></Link>
-            </div>
+    <section className={`container section-spacing-top ${styles.eventFullInfoContainer}`}>
+      <div className={styles.eventFullInfoContentWrapper}>
+        <div className={styles.eventFullInfoDescriptionBlock}>
+          <SectionTitle>Описание</SectionTitle>
+          <div className={styles.eventFullInfoDescriptionContent}>
+            <EditableTextBlock text={description} variant="none" className={styles.eventFullInfoDescriptionText}/>
           </div>
         </div>
+
+        <RegionalLeaderCard region_id={region_id}/>
       </div>
 
-      <RegionalLeaderCard />
-    </div>
-
-    <div className={styles.eventFullInfoActionsBlock}>
-      <ActionButton type="button" modalName="donating" className="outlined white">поддержать мероприятие</ActionButton>
-      <ActionButton className="red" type="button" modalName="join-organization" requireAuth>Участвовать</ActionButton>
-    </div>
-  </section>
-
-)
+      <div className={styles.eventFullInfoActionsBlock}>
+        <ActionButton type="button" modalName="donating" className="outlined white">
+          поддержать мероприятие
+        </ActionButton>
+        <ActionButton className="red" type="button" modalName="join-organization" requireAuth>
+          Участвовать
+        </ActionButton>
+      </div>
+    </section>
+  )
 }
 
 export default EventFullInfo

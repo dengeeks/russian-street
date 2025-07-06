@@ -1,1 +1,1 @@
-export {default} from "./ui/Map"
+export {default} from "./ui/MapRegion"

@@ -1,59 +1,78 @@
-import { SubmitHandler, UseFormSetError } from 'react-hook-form';
-import { useToast } from '@/shared/context/toast/useToastContext';
-import useModal from '@/shared/store/modal';
+import { SubmitHandler, UseFormSetError } from 'react-hook-form'
+import { useToast } from '@/shared/context/toast/useToastContext'
+import useModal from '@/shared/store/modal'
 import { useServerFieldErrors } from '@/shared/hooks/useServerFieldErrors'
 import { patchUserUpdate, UserUpdateType } from '@/shared/api/user/patchUserUpdate'
 import { useGlobalData } from '@/shared/context/global-data/useGlobalDataContext'
+import { useRegionList } from '@/shared/hooks/filter/useRegionList'
 
 type UseLoginReturn = {
-  onSubmit: SubmitHandler<UserUpdateType>;
-  hasManualError: boolean;
-  setHasManualError: (val: boolean) => void;
-};
+  onSubmit: SubmitHandler<UserUpdateType>
+  hasManualError: boolean
+  setHasManualError: (val: boolean) => void
+}
 
 export const useUpdateInfo = (setError: UseFormSetError<UserUpdateType>): UseLoginReturn => {
-  const { hasManualError, setHasManualError, handleServerError } = useServerFieldErrors<UserUpdateType>();
+  const { hasManualError, setHasManualError, handleServerError } = useServerFieldErrors<UserUpdateType>()
   const { closeModal } = useModal()
-  const {showToast} = useToast()
-  const {updateUserData, userData} = useGlobalData()
+  const { showToast } = useToast()
+  const { updateUserData, userData } = useGlobalData()
+  const { regions } = useRegionList()
 
   const onSubmit: SubmitHandler<UserUpdateType> = async formData => {
-    setHasManualError(false);
+    setHasManualError(false)
 
     const filteredData = Object.fromEntries(
       Object.entries(formData).filter(([key, value]) => {
-        const currentValue = userData?.[key as keyof UserUpdateType];
-        return value !== '' && value !== currentValue;
+        if (key === 'region') {
+          return value !== '' && value !== userData?.region?.id
+        }
+
+        const currentValue = userData?.[key as keyof UserUpdateType]
+        return value !== '' && value !== currentValue
       })
-    ) as UserUpdateType;
+    ) as UserUpdateType
 
     if (Object.keys(filteredData).length === 0) {
-      showToast('Нет изменений для сохранения', 'invalid');
-      return;
+      showToast('Нет изменений для сохранения', 'invalid')
+      return
     }
 
-
     try {
-      const { status, data } = await patchUserUpdate(filteredData);
+      const { status, data } = await patchUserUpdate(filteredData)
 
+      // Если обновлялся регион, преобразуем region_id в объект региона
       if (status === 200) {
-        closeModal()
-        updateUserData(filteredData)
-        showToast(data.message, 'success');
+        if (!userData) {
+          return
+        }
+
+        const updatedUser = {
+          ...filteredData,
+          region: filteredData.region
+            ? regions.find(r => r.id === filteredData.region) ?? null
+            : undefined
+        }
+
+        console.log(updatedUser)
+          updateUserData(updatedUser);
+
+          showToast(data.message, 'success');
+          closeModal();
+
       } else {
         if (handleServerError(data, setError)) {
-          return;
+          return
         }
       }
-
     } catch {
-      showToast('Произошла ошибка при обновлений данных', 'error');
+      showToast('Произошла ошибка при обновлений данных', 'error')
     }
   }
 
   return {
     onSubmit,
     hasManualError,
-    setHasManualError,
-  };
-};
+    setHasManualError
+  }
+}

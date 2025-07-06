@@ -1,7 +1,4 @@
-export type FeedbackType = {
-  name: string;
-  email_feed: string;
-  phone?: string;
-  message?: string;
+import {FeedbackQuestionType} from "@/shared/api/feedback/postFeedbackQuestion"
+export type FeedbackType = FeedbackQuestionType & {
   agreement: boolean;
 }

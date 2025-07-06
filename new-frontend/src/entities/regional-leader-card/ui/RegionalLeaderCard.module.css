@@ -56,3 +56,9 @@
     line-height: 130%;
 
 }
+
+
+.regionalLeaderCardSocials {
+    display: flex;
+    gap: 24px;
+}

@@ -24,4 +24,5 @@ export type IconName =
     | 'place'
     | 'clock'
     | 'step-check'
-    | 'upload';
+    | 'upload'
+    | 'favorites';

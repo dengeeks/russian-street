@@ -23,11 +23,12 @@
     text-underline-offset: 10px;
 }
 
-.favPartTab:hover {
-    text-decoration: underline 1px;
-    text-underline-offset: 10px;
+@media (hover: hover) and (pointer: fine) {
+    .favPartTab:hover {
+        text-decoration: underline 1px;
+        text-underline-offset: 10px;
+    }
 }
-
 .favPartCards {
     display: flex;
     gap: 20px;

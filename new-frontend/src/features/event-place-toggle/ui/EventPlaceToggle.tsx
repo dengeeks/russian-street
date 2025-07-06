@@ -1,25 +1,34 @@
 'use client';
-import { useState } from 'react';
 import styles from './EventPlaceToggle.module.css';
 
-const EventPlaceToggle = () => {
-  const [active, setActive] = useState<'events' | 'places'>('events');
+interface EventPlaceToggleProps {
+  value: 'event' | 'area';
+  onChange?: (value: 'event' | 'area') => void;
+}
+
+const EventPlaceToggle = ({ onChange, value }: EventPlaceToggleProps) => {
 
   const toggle = () => {
-    setActive(prev => (prev === 'events' ? 'places' : 'events'));
+    const newValue = value === 'event' ? 'area' : 'event';
+    onChange?.(newValue);
   };
+
+  const handleClick = (value: 'event' | 'area') => {
+    onChange?.(value);
+  };
+
 
   return (
     <div className={styles.eventPlaceToggle}>
       <span
         className={styles.typeOption}
-        onClick={() => setActive('events')}
+        onClick={() => handleClick('event')}
       >
         МЕРОПРИЯТИЯ
       </span>
 
       <div
-        className={`${styles.typeIndicator} ${active === 'events' ? styles.red : styles.blue}`}
+        className={`${styles.typeIndicator} ${value === 'area' ? styles.red : styles.blue}`}
         onClick={toggle}
       >
         <div className={styles.typeIndicatorEvent}></div>
@@ -27,7 +36,7 @@ const EventPlaceToggle = () => {
 
       <span
         className={styles.typeOption}
-        onClick={() => setActive('places')}
+        onClick={() => handleClick('area')}
       >
         ПЛОЩАДКИ
       </span>

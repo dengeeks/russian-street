@@ -1,6 +1,5 @@
 .item {
     display: flex;
-    justify-content: space-between;
     width: 100%;
     border-top: 1px solid white;
     border-bottom: 1px solid white;
@@ -11,32 +10,46 @@
 @media (hover: hover) and (pointer: fine) {
     .item:hover {
         background-color: var(--blue);
+        color: var(--white);
     }
 }
-.city {
+
+.city, .detail {
     font-family: var(--font-Bahnschrift), sans-serif;
     font-size: 20px;
     font-weight: 600;
     line-height: 130%;
     font-stretch: semi-condensed;
     text-align: left;
+    width: 100%;
+    word-break: break-word;
+    overflow-wrap: anywhere;
 }
+
+.city {
+    max-width: max-content;
+    min-width: 120px;
+}
+
 
 .details {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    width: 100%;
 }
 
-.sponsors {
-    display: flex;
-    gap: 6px;
+.detail {
+    max-width: none;
 }
-
 
 @media (max-width: 768px) {
-    .city {
+    .city, .detail {
         font-size: 13px;
+    }
+
+    .city {
+        min-width: 80px;
     }
 
     .details {
@@ -51,8 +64,4 @@
     .item {
         padding: 8px 0;
     }
-    .sponsors {
-        display: none;
-    }
-
 }

@@ -1,0 +1,45 @@
+.postCardLargeLoader {
+    margin-bottom: 40px;
+}
+
+.postCardLargeLoader .imagePlaceholder {
+    max-height: 600px;
+    aspect-ratio: 1204 / 600;
+    margin-top: 40px;
+}
+
+.postCardLargeLoader .title {
+    width: 400px;
+    height: 30px;
+    margin: 16px 0 8px;
+}
+
+.postCardLargeLoader .date {
+    width: 80px;
+    height: 17px;
+}
+
+@media (max-width: 768px) {
+    .postCardLargeLoader .imagePlaceholder {
+        margin-top: 20px;
+        aspect-ratio: 12 / 9;
+    }
+
+    .postCardLargeLoader .title {
+        height: 24px;
+        width: 320px;
+    }
+
+    .postCardLargeLoader .date {
+        width: 60px;
+        height: 14px;
+    }
+}
+
+
+@media (max-width: 420px) {
+    .postCardLargeLoader .imagePlaceholder {
+        aspect-ratio: 320 / 360;
+    }
+
+}

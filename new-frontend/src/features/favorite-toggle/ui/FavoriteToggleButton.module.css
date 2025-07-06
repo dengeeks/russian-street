@@ -1,0 +1,18 @@
+.favoriteButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    transition: opacity 0.2s ease;
+    stroke: var(--white);
+    color: transparent;
+}
+
+.favoriteButton:hover {
+    opacity: 0.8;
+}
+
+.favoriteButton.active {
+    color: var(--red);
+    stroke: var(--red);
+}

@@ -9,7 +9,7 @@ export type DisciplinesType = {
   name: string;
   first_image: string;
   second_image: string;
-  first_description: string;
+  description: string;
   sub_disciplines: SubDiscipline[];
   main_page_info: string;
 }
