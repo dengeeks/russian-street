@@ -3,6 +3,7 @@ from rest_framework import serializers
 from events.models.area import Area
 from events.models.base import EventActivityType, AreaType
 from events.models.event import Event
+from events.serializers.discipline import SubDisciplineShortSerializer
 
 
 class TypeSerializer(serializers.ModelSerializer):
@@ -26,11 +27,12 @@ class BaseEventSerializer(serializers.ModelSerializer):
     """Базовый сериализатор для мероприятий и площадок"""
     city = serializers.StringRelatedField()
     card_image = serializers.SerializerMethodField()
-    is_favorite = serializers.BooleanField(read_only=True)
+    sub_discipline = SubDisciplineShortSerializer()
+    is_favorite = serializers.BooleanField(read_only = True)
 
     class Meta:
         fields = (
-            'id', 'title', 'card_image', 'city', 'is_favorite'
+            'id', 'title', 'card_image', 'city', 'is_favorite', 'sub_discipline',
         )
 
     def get_card_image(self, obj):
@@ -44,6 +46,7 @@ class EventSerializer(BaseEventSerializer):
         model = Event
         fields = BaseEventSerializer.Meta.fields + (
             'starting_date',
+            'address'
         )
 
 

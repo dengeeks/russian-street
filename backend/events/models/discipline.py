@@ -126,7 +126,7 @@ class SubDiscipline(UUIDMixin, DateTimeMixin):
     )
 
     def __str__(self):
-        return f'{self.discipline.name} - {self.name}'
+        return self.name
 
     class Meta:
         verbose_name = 'Подкатегория дисциплины'

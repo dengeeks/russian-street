@@ -228,7 +228,7 @@ class EventFilterService:
             QuerySet: Отфильтрованный и отсортированный QuerySet
         """
         config = cls.MODEL_MAPPING[validated_params['model_type']]
-        qs = config['model'].objects.select_related('city')
+        qs = config['model'].objects.select_related('city', 'sub_discipline')
 
         # Базовые фильтры
         filters = Q()
@@ -281,11 +281,11 @@ class EventAreaDetailService:
     MODEL_MAPPING = {
         'event': {
             'model': Event,
-            'select_related': ['city'],
+            'select_related': ['city', 'sub_discipline'],
         },
         'area': {
             'model': Area,
-            'select_related': ['city'],
+            'select_related': ['city', 'sub_discipline'],
         }
     }
 
@@ -343,8 +343,6 @@ class EventTypeService:
 
 
 from typing import Literal
-from django.utils.timezone import now
-from django.db.models import QuerySet
 
 from events.models.event import Event
 from events.models.area import Area
@@ -370,7 +368,7 @@ class ShortListService:
         limit = min(limit, 20)
 
         model = cls.MODEL_MAPPING[model_type]
-        qs = model.objects.select_related('city')
+        qs = model.objects.select_related('city', 'sub_discipline')
 
         if region_id:
             qs = qs.filter(region_id = region_id)
@@ -382,4 +380,43 @@ class ShortListService:
             qs = qs.order_by('-created_at')
 
         qs = FavoriteService.annotate_is_favorite(qs, user)
+        return qs[:limit]
+
+
+from django.db.models import QuerySet
+from events.models.event import Event
+from django.utils.timezone import now
+
+
+class SimilarEventService:
+    """
+    Сервис для получения похожих мероприятий по поддисциплине.
+    """
+
+    @classmethod
+    def get_similar_events(cls, subdiscipline_id, limit = 5):
+        """
+        Возвращает мероприятия с той же поддисциплиной. Если не найдено — любые другие.
+
+        :param subdiscipline_id: UUID поддисциплины
+        :param limit: ограничение количества
+        :param user: текущий пользователь
+        :return: QuerySet с аннотированным полем is_favorite
+        """
+        # Похожие мероприятия по поддисциплине
+        qs = (
+            Event.objects
+            .filter(sub_discipline_id = subdiscipline_id, ending_date__gte = now())
+            .select_related('city', 'sub_discipline')
+            .order_by('-is_priority', '-created_at')
+        )
+
+        if not qs.exists():
+            qs = (
+                Event.objects
+                .filter(ending_date__gte = now())
+                .select_related('city', 'sub_discipline')
+                .order_by('-is_priority', '-created_at')
+            )
+
         return qs[:limit]
