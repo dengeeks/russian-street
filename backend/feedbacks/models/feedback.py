@@ -1,6 +1,5 @@
 from django.db import models
 
-from common.constants.feedback import (LEN_STATUS)
 from common.models import DateTimeMixin
 from common.validators import validate_phone_number
 from regions.models.region import Region, City
@@ -49,7 +48,7 @@ class Feedback(DateTimeMixin):
     )
     status = models.CharField(
         'Статус заявки',
-        max_length = LEN_STATUS,
+        max_length = 50,
         choices = STATUS_FEEDBACK,
         default = 'PENDING'
     )
@@ -147,7 +146,7 @@ class FeedbackOrganization(DateTimeMixin):
     )
     status = models.CharField(
         'Статус заявки',
-        max_length = LEN_STATUS,
+        max_length = 50,
         choices = STATUS_FEEDBACK,
         default = 'PENDING'
     )
