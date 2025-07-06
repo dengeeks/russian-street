@@ -9,7 +9,7 @@ interface MissionProps {
 
 const Mission = ({missionImage}: MissionProps) => {
   return (
-    <section className={`container section-spacing-top ${styles.missionSection}`}>
+    <section className={`container section-spacing-top section-spacing-bottom ${styles.missionSection}`}>
       <div className={styles.missionLine} />
       <div className={styles.missionImageWrapper}>
         <Image src={getImageUrl(missionImage?.image)} alt="миссия" fill sizes="

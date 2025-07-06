@@ -39,8 +39,12 @@
     }
 }
 
-@media (max-width: 950px) {
-   .postListGrid :global(.articleCardSkeleton) {
-       display: none;
-   }
+@media (max-width: 632px) {
+    .postListGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .postListGrid > * {
+        grid-column: span 1;
+    }
 }

@@ -23,6 +23,7 @@ const MediaSliderTabs = ({gallery_items}: MediaSliderTabsProps) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const isMobile = useMobileDetection()
+  const sortedItems = [...gallery_items].sort((a, b) => Number(b.is_main) - Number(a.is_main))
 
   return (
     <section className={`container ${styles.mediaSlider}`}>
@@ -33,7 +34,7 @@ const MediaSliderTabs = ({gallery_items}: MediaSliderTabsProps) => {
         modules={[FreeMode, Thumbs]}
         onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
       >
-        {gallery_items.map((media, index) => (
+        {sortedItems.map((media, index) => (
           <SwiperSlide className={styles.mediaSlider__main} key={index}>
             {media.format_type === 'image' ? (
               <MediaSwitcher
@@ -62,7 +63,7 @@ const MediaSliderTabs = ({gallery_items}: MediaSliderTabsProps) => {
         modules={[FreeMode, Thumbs]}
         className={styles.mediaSlider__thumbnails}
       >
-        {gallery_items.map((media, index) => (
+        {sortedItems.map((media, index) => (
           <SwiperSlide key={index} style={{ width: 'auto', height: 'auto' }} className={`${styles.mediaSlider__thumb} ${activeIndex === index ? styles.mediaSlider__thumbActive : ''}`}>
               {media.format_type === 'video_url' ? (
                 <Image

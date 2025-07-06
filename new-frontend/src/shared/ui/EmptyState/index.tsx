@@ -14,7 +14,7 @@ const EmptyState = ({title, description}:EmptyStateProps) => {
         <p className={styles.emptyStateDescription}>
           {description}
         </p>
-        <Link href="/" className="button red">
+        <Link href="/" className="button red white">
           на главную
         </Link>
     </div>

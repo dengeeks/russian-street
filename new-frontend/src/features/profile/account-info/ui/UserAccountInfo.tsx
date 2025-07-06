@@ -56,7 +56,7 @@ const UserAccountInfo = () => {
         {userData?.region && (
           <div className={styles.userProfileDetailItem}>
             <div className={styles.userProfileDetailLabel}>Регион</div>
-            <div className={styles.userProfileDetailValue}>{userData?.region}</div>
+            <div className={styles.userProfileDetailValue}>{userData?.region.name}</div>
           </div>
         )}
       </div>

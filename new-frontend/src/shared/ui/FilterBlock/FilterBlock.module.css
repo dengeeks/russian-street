@@ -63,7 +63,7 @@
         border-color: var(--blue-hover);
     }
 
-    .FilterBlockCheckboxRow:hover, .FilterBlockCheckboxRow:hover .FilterBlockLabel {
+    .FilterBlockCheckboxRow:hover, .FilterBlockCheckboxRow:hover .FilterBlockLabel, .FilterBlockToggleAll:hover {
         color: var(--blue-hover);
     }
 }

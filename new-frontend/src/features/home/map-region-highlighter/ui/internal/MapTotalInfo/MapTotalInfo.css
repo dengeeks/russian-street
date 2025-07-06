@@ -1,0 +1,42 @@
+.map-info-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 7px;
+}
+
+.map-total-item {
+    border-radius: 50%;
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 700;
+    font-stretch: semi-condensed;
+    font-size: 20px;
+    line-height: 130%;
+}
+
+@media (max-width: 1024px) {
+    .map-total-item {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .map-info-container {
+        gap: 4px;
+    }
+
+    .map-total-item {
+        width: 30px;
+        height: 30px;
+        font-size: 13px;
+    }
+}

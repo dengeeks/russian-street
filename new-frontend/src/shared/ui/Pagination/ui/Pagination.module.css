@@ -1,0 +1,45 @@
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.paginationList {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.paginationPage, .paginationEllipsis {
+    height: 26px;
+    color: var(--white);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 20px;
+    font-stretch: semi-condensed;
+    line-height: 130%;
+    font-weight: 400;
+    padding: 0 8px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .paginationPage:hover {
+        background-color: var(--blue-hover);
+    }
+}
+
+.paginationPageActive {
+    background-color: var(--blue);
+}
+
+.paginationEllipsis {
+    font-size: 13px;
+    align-self: flex-end;
+    height: 20px;
+    pointer-events: none;
+}
+
+

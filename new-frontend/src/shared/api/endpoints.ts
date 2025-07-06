@@ -51,7 +51,40 @@ export const TEAM = getApiUrl('list/team_member/', false);
 // направления
   export const DISCIPLINES = getApiUrl('info/disciplines/', true)
 
-  export const SUB_DISCIPLINES = getApiUrl('list/subdiscipline/', true);
+  export const SUB_DISCIPLINES = getApiUrl('list/subdiscipline/', false);
 
   // детали направлений
-  export const DETAIL_DISCIPLINE = (slug: string) => getApiUrl(`detail/subdiscipline/${slug}/`, true);
+  export const DETAIL_DISCIPLINE = (slug: string) => getApiUrl(`detail/subdiscipline/${slug}`, true);
+
+// мероприятия
+  export const EVENT_OR_AREA_LIST = getApiUrl('list/event-or-area/', false);
+  export const EVENT_OR_AREA_DETAIL = (id: string) => getApiUrl(`detail/event-or-area/${id}`, true);
+  export const EVENT_OR_AREA_TYPES_CATALOG = getApiUrl(`list/type/event-or-area`, false);
+
+  // короткий список мероприятий в главной странице
+  export const EVENT_OR_AREA_HOME_LIST = getApiUrl(`list/short/event-or-area/`, false);
+
+  // добавление и удаление избранные мероприятий
+  export const EVENT_ADD_DELETE_FAVORITE = getApiUrl('add-delete/events/', false);
+
+
+// фильтры
+  export const FILTER_REGION = getApiUrl('filter/region/', false);
+  export const FILTER_SUB_DISCIPLINES= getApiUrl('filter/subdiscipline/', false);
+
+// регион
+  export const REGION_MANAGER = getApiUrl('region-manager/card/', false);
+
+
+export const MAP_REGION_LIST = getApiUrl('list/map-region/', false);
+
+// блог - новости
+  export const BLOG_LIST = getApiUrl('list/new/', false);
+  export const BLOG_DETAIL = (id: string) => getApiUrl(`detail/new/${id}`, false);
+
+
+
+// заявка
+export const FEEDBACK_QUESTION = getApiUrl(`feedback/question/`, false);
+
+export const FEEDBACK_ORGANIZATION = getApiUrl(`feedback/organization/`, false);

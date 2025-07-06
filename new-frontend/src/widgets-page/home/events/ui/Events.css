@@ -1,0 +1,13 @@
+.home-events--section {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+
+@media (max-width: 1000px) {
+    .home-events--section {
+        gap: 40px;
+    }
+}
+

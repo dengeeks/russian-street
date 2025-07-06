@@ -8,7 +8,10 @@ export type UserType = {
   middle_name: string | null;
   phone_number: string | null;
   status: string | null;
-  region: string | null;
+  region: {
+    id: string;
+    name: string;
+  } | null;
   avatar: string | null;
   uuid: string;
 } | null;

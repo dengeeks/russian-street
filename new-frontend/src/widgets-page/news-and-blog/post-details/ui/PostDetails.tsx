@@ -1,12 +1,17 @@
 import styles from "./PostDetails.module.css"
+import EditableTextBlock from '@/shared/ui/EditableTextBlock'
+import { formatDateToDDMMYYYY } from '@/shared/utils/formatDate'
 
-const PostDetails = () => {
+interface PostDetailsProps {
+  description: string;
+  created_at: string;
+}
+
+const PostDetails = ({description, created_at}:PostDetailsProps) => {
   return (
     <section className={`container ${styles.postDetails}`}>
-      <p className={styles.postDetailsText}>
-        Мастер-класс по граффити прошёл очень увлекательно и познавательно. Участники изучали историю граффити, основные техники создания уличного искусства, а также пробовали свои силы в создании собственного граффити на специально подготовленных поверхностях. Все были очень заинтересованы и активно участвовали в занятиях. В конце мастер-класса каждый участник получил возможность показать свою работу и поделиться впечатлениями. В целом, мастер-класс оказался очень успешным и вдохновляющим для всех его участников.
-      </p>
-      <span className={styles.postDetailsDate}>Создано: 16.05.2024</span>
+      <EditableTextBlock text={description} className={styles.postDetailsText} variant="none"/>
+      <span className={styles.postDetailsDate}>Создано: {formatDateToDDMMYYYY(created_at)}</span>
     </section>
   )
 }

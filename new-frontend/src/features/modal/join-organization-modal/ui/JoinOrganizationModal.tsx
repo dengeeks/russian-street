@@ -1,8 +1,8 @@
 'use client'
 import styles from './JoinOrganizationModal.module.css'
 import Button from '@/shared/ui/Button'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { JoinOrganizationType } from '../model/type'
+import { useForm } from 'react-hook-form'
+import type { JoinOrganizationType } from '@/shared/api/feedback/postFeedbackOrganization';
 import Modal from '@/shared/ui/Modal'
 import useModal from '@/shared/store/modal'
 import ContactInfoForm from './ContactInfoForm'
@@ -10,6 +10,7 @@ import PassportInfoForm from './PassportInfoForm'
 import { useMobileDetection } from '@/shared/hooks/useIsMobile'
 import { useState } from 'react'
 import Icon from '@/shared/icon'
+import { useOrganization } from '@/features/modal/join-organization-modal/model/useOrganization'
 
 const JoinOrganizationModal = () => {
   const [step, setStep] = useState<1 | 2>(1)
@@ -20,27 +21,27 @@ const JoinOrganizationModal = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     control,
-    trigger
+    trigger,
+    setError,
   } = useForm<JoinOrganizationType>({
     mode: 'onChange'
   })
 
-  const onSubmit: SubmitHandler<JoinOrganizationType> = async data => {
-    console.log(data)
-  }
+  const {onSubmit, hasManualError, setHasManualError} = useOrganization(setError)
 
   const handleNextStep = async () => {
     const valid = await trigger([
-      'lastName',
-      'firstName',
-      'patronymic',
+      'last_name',
+      'first_name',
+      'middle_name',
       'gender',
-      'birthDate',
+      'date_of_birth',
       'phone',
       'email',
-      'city',
+      'region_id',
+      'city_id',
       'social'
     ])
 
@@ -76,13 +77,13 @@ const JoinOrganizationModal = () => {
           </div>
         )}
         <div className={`${styles.formModalStep} ${step === 1 ? styles.active : styles.hidden}`}>
-          <ContactInfoForm register={register} control={control} errors={errors} />
+          <ContactInfoForm register={register} control={control} errors={errors} setHasManualError={setHasManualError}/>
         </div>
 
         <hr className={styles.formModalDivider} />
 
         <div className={`${styles.formModalStep} ${step === 2 ? styles.active : styles.hidden}`}>
-          <PassportInfoForm register={register} errors={errors} />
+          <PassportInfoForm register={register} errors={errors} setHasManualError={setHasManualError} control={control}/>
         </div>
 
         <div className="form--modal__actions">
@@ -97,7 +98,7 @@ const JoinOrganizationModal = () => {
             style={{
               display: !isMobile || step === 2 ? 'block' : 'none'
             }}
-            disabled={isMobile && step !== 2}
+            disabled={isMobile && step !== 2 || hasManualError || isSubmitting}
           >
             Зарегистрироваться
           </Button>

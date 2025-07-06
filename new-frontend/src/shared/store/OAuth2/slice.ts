@@ -1,6 +1,6 @@
 import { StateCreator } from 'zustand/vanilla'
-import {StoreState} from "@/shared/store"
-import { OAuth2StateType } from '@/shared/store/OAuth2/type'
+import {StoreState} from "@/shared/store/type"
+import { OAuth2StateType } from './type'
 
 export const createOAuth2Slice: StateCreator<StoreState, [], [], OAuth2StateType> = (set) => ({
   triggerOAuth2: false,

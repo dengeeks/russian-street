@@ -13,7 +13,7 @@ import { getAboutUs } from '@/shared/api/static/about-us/getAboutUs'
 
 export default async function AboutUsPage() {
   const about = await getAboutUs()
-  const { join_street, info, mission } = about
+  const { join_street, info, mission } = about;
   return (
     <>
       <Breadcrumbs items={[{ label: 'Главная', href: '/' }, { label: 'О нас' }]} />
