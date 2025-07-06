@@ -41,7 +41,7 @@ class NewsFilterService:
         return {
             'region_id': cls._validate_uuid(params.get('region_id'), 'region_id'),
             'city_id': cls._validate_uuid(params.get('city_id'), 'city_id'),
-            'subdiscipline_id': cls._validate_uuid(params.get('subdiscipline_id'), 'subdiscipline_id'),
+            'subdiscipline_ids': cls._validate_uuid(params.get('subdiscipline_ids'), 'subdiscipline_ids'),
             'sort': cls._validate_sort(params.get('sort')),
         }
 
@@ -54,8 +54,8 @@ class NewsFilterService:
             filters &= Q(region_id = validated_params['region_id'])
         if validated_params['city_id']:
             filters &= Q(city_id = validated_params['city_id'])
-        if validated_params['subdiscipline_id']:
-            filters &= Q(subdiscipline_id = validated_params['subdiscipline_id'])
+        if validated_params['subdiscipline_ids']:
+            filters &= Q(subdiscipline_id = validated_params['subdiscipline_ids'])
 
         return qs.filter(filters).order_by(validated_params['sort'])
 
