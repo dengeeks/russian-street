@@ -87,7 +87,7 @@ class NewsDetailService:
             session.modified = True
 
         return get_object_or_404(
-            New.objects.select_related('city').prefetch_related('gallery_items'),
+            New.objects.select_related('city','subdiscipline').prefetch_related('gallery_items'),
             id = news_id
         )
 

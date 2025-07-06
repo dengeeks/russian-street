@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from events.models.discipline import GallerySubDiscipline
+from events.serializers.discipline import SubDisciplineShortSerializer
 from news.models.new import New
 
 
@@ -40,6 +41,7 @@ class NewListSerializer(serializers.ModelSerializer):
 class NewDetailSerializer(serializers.ModelSerializer):
     gallery_items = GalleryNewSerializer(many = True)
     city = serializers.StringRelatedField()
+    subdiscipline = SubDisciplineShortSerializer()
 
     class Meta:
         model = New
@@ -50,5 +52,6 @@ class NewDetailSerializer(serializers.ModelSerializer):
             'created_at',
             'city',
             'count_views',
-            'gallery_items'
+            'gallery_items',
+            'subdiscipline'
         )

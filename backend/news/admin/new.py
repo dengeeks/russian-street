@@ -66,17 +66,13 @@ class NewAdmin(LinkToDetailMixin, ModelAdmin):
         'title', 'description', 'card_image', 'subdiscipline',
         'region', 'city'
     ]
-    list_display = ['link_to_detail', 'title', 'created_at', 'updated_at']
+    list_display = ['link_to_detail', 'title', 'region', 'city', 'created_at', 'updated_at']
     readonly_fields = ['created_at', 'updated_at', 'link_to_detail']
     compressed_fields = True
     search_fields = ['name']
     inlines = [GalleryInline]
-
-    def get_queryset(self, request):
-        qs = super().get_queryset(request)
-        if not request.user.is_superuser:
-            return qs.filter(region__manager = request.user)
-        return qs
+    list_filter = ['subdiscipline', 'region']
+    autocomplete_fields = ['subdiscipline']
 
     def get_urls(self):
         urls = super().get_urls()
