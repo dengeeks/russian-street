@@ -16,7 +16,6 @@ class RegionAdmin(LinkToDetailMixin, NoAddDeleteMixin, ModelAdmin):
     readonly_fields = ['link_to_detail', 'created_at', 'updated_at', 'code']
     search_fields = ['name', 'code']
     compressed_fields = True
-    autocomplete_fields = ['manager']
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'manager':
