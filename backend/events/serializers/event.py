@@ -46,6 +46,7 @@ class EventSerializer(BaseEventSerializer):
         model = Event
         fields = BaseEventSerializer.Meta.fields + (
             'starting_date',
+            'ending_date',
             'address'
         )
 
@@ -107,8 +108,7 @@ class ShortEventSerializer(BaseEventSerializer):
         model = Event
         fields = BaseEventSerializer.Meta.fields + (
             'address',
-            'starting_date'
-
+            'starting_date',
         )
 
 
@@ -117,4 +117,22 @@ class ShortAreaSerializer(BaseEventSerializer):
         model = Area
         fields = BaseEventSerializer.Meta.fields + (
             'address',
+        )
+
+
+class EventExtendedSerializer(BaseEventSerializer):
+    class Meta(BaseEventSerializer.Meta):
+        model = Event
+        fields = BaseEventSerializer.Meta.fields + (
+            'starting_date',
+            'ending_date',
+            'description'
+        )
+
+
+class AreaExtendedSerializer(BaseEventSerializer):
+    class Meta(BaseEventSerializer.Meta):
+        model = Area
+        fields = BaseEventSerializer.Meta.fields + (
+            'description',
         )

@@ -1,9 +1,12 @@
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import permissions, status, generics
+from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 
+from events.serializers.event import AreaExtendedSerializer, EventExtendedSerializer
+from favorites.pagination import FavoritePagination
 from favorites.serializers.favorite import FavoriteCreateSerializer
-from favorites.services.favorite import FavoriteToggleService
+from favorites.services.favorite import FavoriteToggleService, FavoriteListService
 
 
 class FavoriteToggleAPI(generics.CreateAPIView):
@@ -40,3 +43,31 @@ class FavoriteToggleAPI(generics.CreateAPIView):
             except ValueError as e:
                 return Response({'detail': str(e)}, status = status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
+
+class FavoriteListAPI(generics.ListAPIView):
+    """
+    GET /api/favorites/?type=event|area
+
+    Возвращает список избранных объектов пользователя.
+    Поддерживает пагинацию.
+
+    Параметры запроса:
+    - type: "event" или "area" (обязательный)
+    """
+    permission_classes = [permissions.IsAuthenticated]
+    pagination_class = FavoritePagination
+
+    def get_serializer_class(self):
+        model_type = self.request.query_params.get('type')
+        if model_type == 'event':
+            return EventExtendedSerializer
+        elif model_type == 'area':
+            return AreaExtendedSerializer
+        raise ValidationError({'type': 'Допустимые значения: event, area'})
+
+    def get_queryset(self):
+        model_type = self.request.query_params.get('type')
+        if model_type not in ['event', 'area']:
+            raise ValidationError({'type': 'Допустимые значения: event, area'})
+        return FavoriteListService.get_favorites(self.request.user, model_type)

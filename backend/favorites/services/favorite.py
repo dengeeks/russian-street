@@ -1,9 +1,8 @@
-from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ObjectDoesNotExist
 
 from events.models.area import Area
 from events.models.event import Event
-from favorites.models.favorite import FavoriteObject
+from events.services.event import FavoriteService
 
 
 class FavoriteToggleService:
@@ -40,3 +39,37 @@ class FavoriteToggleService:
                 object_id = object_id
             )
             return {'is_favorite': True, 'message': 'Добавлено в избранное.'}
+
+
+from django.contrib.contenttypes.models import ContentType
+from favorites.models.favorite import FavoriteObject
+from events.models.event import Event
+from events.models.area import Area
+
+
+class FavoriteListService:
+    MODEL_MAPPING = {
+        'event': Event,
+        'area': Area,
+    }
+
+    @classmethod
+    def get_favorites(cls, user, model_type):
+        """
+        Быстрое получение избранных объектов без учета порядка.
+        """
+        if model_type not in cls.MODEL_MAPPING:
+            raise ValueError('Неверный тип объекта.')
+
+        model = cls.MODEL_MAPPING[model_type]
+        content_type = ContentType.objects.get_for_model(model)
+
+        object_ids = FavoriteObject.objects.filter(
+            user = user,
+            content_type = content_type
+        ).values_list('object_id', flat = True)
+
+        return FavoriteService.annotate_is_favorite(
+            model.objects.filter(id__in = object_ids).select_related('city', 'sub_discipline'),
+            user
+        )
