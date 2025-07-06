@@ -374,7 +374,7 @@ class ShortListService:
             qs = qs.filter(region_id = region_id)
 
         if model_type == 'event':
-            qs = qs.filter(ending_date__gte = now())
+            qs = qs.filter(ending_date__gte = timezone.now())
             qs = qs.order_by('-is_priority', '-created_at')
         else:
             qs = qs.order_by('-created_at')
@@ -382,41 +382,3 @@ class ShortListService:
         qs = FavoriteService.annotate_is_favorite(qs, user)
         return qs[:limit]
 
-
-from django.db.models import QuerySet
-from events.models.event import Event
-from django.utils.timezone import now
-
-
-class SimilarEventService:
-    """
-    Сервис для получения похожих мероприятий по поддисциплине.
-    """
-
-    @classmethod
-    def get_similar_events(cls, subdiscipline_id, limit = 5):
-        """
-        Возвращает мероприятия с той же поддисциплиной. Если не найдено — любые другие.
-
-        :param subdiscipline_id: UUID поддисциплины
-        :param limit: ограничение количества
-        :param user: текущий пользователь
-        :return: QuerySet с аннотированным полем is_favorite
-        """
-        # Похожие мероприятия по поддисциплине
-        qs = (
-            Event.objects
-            .filter(sub_discipline_id = subdiscipline_id, ending_date__gte = now())
-            .select_related('city', 'sub_discipline')
-            .order_by('-is_priority', '-created_at')
-        )
-
-        if not qs.exists():
-            qs = (
-                Event.objects
-                .filter(ending_date__gte = now())
-                .select_related('city', 'sub_discipline')
-                .order_by('-is_priority', '-created_at')
-            )
-
-        return qs[:limit]
