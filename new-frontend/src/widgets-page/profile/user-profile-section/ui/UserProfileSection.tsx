@@ -11,8 +11,6 @@ const JoinOrganizationPromo = loadable(() => import('./internal/JoinOrganization
 
 const UserProfileSection = () => {
   const {userData} = useGlobalData()
-  console.log(userData)
-
   return (
     <section className={`container ${styles.userProfileSection}`}>
       <Logout />

@@ -47,7 +47,11 @@ const TeamSection = () => {
           setThumbsSwiper={setThumbsSwiper}
         />
 
-        <SelectMenu value={teamList[0]?.team_type} options={teamTypes} onChange={setSelectedCategory} />
+        <SelectMenu value={teamList[0]?.team_type} options={teamTypes}  onChange={(val) => {
+          if (val !== undefined) {
+            setSelectedCategory(val);
+          }
+        }} />
 
         <TeamSwiper
           members={members}

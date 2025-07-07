@@ -7,20 +7,21 @@ import 'swiper/css/free-mode'
 import { Arrow } from '@/shared/ui/Arrow'
 import ArticleCard from '@/entities/article-card'
 import FavoriteToggleButton from '@/features/favorite-toggle'
+import { EventOrAreaType } from '@/shared/api/type'
 
 type ItemType = {
-  id: string
-  title: string
-  card_image: string
-  city: string
-  created_at?: string
-  starting_date?: string
-  is_favorite?: boolean
+  id: string;
+  title: string;
+  card_image: string;
+  city: string;
+  created_at?: string;
+  starting_date?: string;
+  is_favorite?: boolean;
 }
 
 interface ContentShowcaseSwiperProps {
-  data: ItemType[]
-  type?: 'event' | 'area'
+  data: ItemType[];
+  type?: EventOrAreaType;
 }
 
 const ContentShowcaseSwiper = ({ data, type }: ContentShowcaseSwiperProps) => {

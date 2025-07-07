@@ -17,7 +17,11 @@ const SelectMenu = ({ options, onChange, searchable = false, placeholder, value 
 
 
   const onOptionClick = (id: string) => {
-    onChange?.(id)
+    if (id === value) {
+      onChange?.(undefined)
+    } else {
+      onChange?.(id)
+    }
     setHoveredItem(null)
     setIsOpen(false)
   }

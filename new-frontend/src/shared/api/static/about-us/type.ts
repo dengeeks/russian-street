@@ -1,7 +1,6 @@
-export type JoinStreetType = {
-  format_type: 'video_url' | 'image';
-  video_url: string | null;
-  image: string | null;
+import { MediaFormatType } from '@/shared/api/type'
+
+export type JoinStreetType = MediaFormatType & {
   text: string;
 } | null
 

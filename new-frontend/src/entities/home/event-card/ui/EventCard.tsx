@@ -1,9 +1,11 @@
 import styles from './EventCard.module.css'
 import type { EventOrAreaHomeListType } from '@/shared/api/event-or-area/home-list/type'
 import Link from 'next/link'
+import { EventOrAreaType } from '@/shared/api/type'
+import { formatFullDateTime } from '@/shared/utils/formatDate'
 
 interface EventsCardProps extends EventOrAreaHomeListType{
-  type: 'event' | 'area'
+  type: EventOrAreaType;
 }
 
 const EventsCard = ({title, id, city, address, starting_date, type}: EventsCardProps) => {
@@ -12,7 +14,7 @@ const EventsCard = ({title, id, city, address, starting_date, type}: EventsCardP
         <span className={styles.city}>{city}</span>
         <div className={styles.details}>
           <p className={styles.detail}>{title}</p>
-          <p className={styles.detail}>{starting_date}</p>
+          {starting_date && (<p className={styles.detail}>{formatFullDateTime(starting_date)}</p>)}
           <p className={styles.detail}>{address}</p>
         </div>
       </Link>

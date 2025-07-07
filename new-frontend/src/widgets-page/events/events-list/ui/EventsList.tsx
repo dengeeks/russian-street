@@ -12,7 +12,7 @@ const EventsList = () => {
   const isMobile = useMobileDetection(632)
   const skeletonCount = eventFilter.page_size
   return (
-    <div className={styles.eventsListWrapper}>
+    <div className={styles.eventsListWrapper} id="pagination-scroll">
 
       {isLoading ? (
         <div className={styles.eventsListGrid}>
@@ -30,7 +30,7 @@ const EventsList = () => {
             >
               <FavoriteToggleButton
                 initial={event.is_favorite}
-                type="event"
+                type={eventFilter.type}
                 objectId={event.id}
               />
             </ArticleCard>
@@ -49,7 +49,9 @@ const EventsList = () => {
 
       {eventsData.total_pages > 1 && <Pagination  page={eventFilter.page}
                                                    total={eventsData.total_pages}
-                                                   onChange={(newPage) => onFilterChange('page', newPage)}/>}
+                                                  onChange={(newPage) => {
+                                                    onFilterChange('page', newPage);
+                                                  }}/>}
     </div>
   )
 }

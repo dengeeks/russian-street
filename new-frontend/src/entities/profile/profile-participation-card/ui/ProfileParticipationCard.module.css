@@ -17,10 +17,10 @@
     width: 50%;
 }
 
-
-.participationCardInfo {
+.participationCardInfo,
+.participationCardText {
     display: flex;
-   flex-direction: column;
+    flex-direction: column;
     gap: 8px;
 }
 
@@ -36,18 +36,18 @@
     line-height: 150%;
 }
 
-.participationCardText {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
 .participationCardTitle {
     font-family: var(--font-Benzin), sans-serif;
     font-size: 20px;
     font-weight: 500;
     line-height: 150%;
     letter-spacing: 0.02rem;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .participationCardDescription {
@@ -78,16 +78,16 @@
     line-height: 150%;
 }
 
+/* Tablet: 1024px ↓ */
 @media (max-width: 1024px) {
     .participationCard {
         flex: 0 0 100%;
     }
 }
 
+/* Mobile: 768px ↓ */
 @media (max-width: 768px) {
-
     .participationCard {
-        display: flex;
         flex-direction: column;
     }
 
@@ -97,37 +97,23 @@
     }
 
     .participationCardContent {
-        display: flex;
-        flex-direction: column;
-        padding: 12px 0;
-        gap: 16px;
         width: 100%;
     }
-
-
 
     .participationCardDate {
         font-size: 14px;
     }
 
-    .participationCardText {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .participationCardTitle {
+    .participationCardTitle,
+    .participationCardDescription {
         font-size: 16px;
     }
 
     .participationCardDescription {
-        font-size: 16px;
         -webkit-line-clamp: 3;
     }
-
 
     .participationCardButtonText {
         font-size: 14px;
     }
-
 }

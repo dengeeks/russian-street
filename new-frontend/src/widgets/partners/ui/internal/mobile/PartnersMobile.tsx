@@ -19,7 +19,8 @@ const PartnersMobile = ({data}: PartnersMobileProps) => {
 
   const [selectedCategory, setSelectedCategory] = useState(filteredList[0]?.partner_type || '')
 
-  const handleCategoryChange = (val: string) => {
+  const handleCategoryChange = (val: string | undefined) => {
+    if (!val) return
     setSelectedCategory(val)
   }
 

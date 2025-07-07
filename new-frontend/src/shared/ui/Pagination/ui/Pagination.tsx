@@ -14,6 +14,10 @@ const Pagination = ({ page = 1, total, onChange }: PaginationProps) => {
   const handleClick = (newPage: number) => {
     if (newPage !== currentPage && onChange) {
       onChange(newPage)
+      const anchor = document.getElementById('pagination-scroll');
+      if (anchor) {
+        anchor.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   }
 

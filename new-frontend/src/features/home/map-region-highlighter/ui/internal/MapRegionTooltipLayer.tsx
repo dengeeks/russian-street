@@ -22,7 +22,7 @@ const MapRegionTooltipLayer = ({ regions }: Props) => {
   const {selectedType, selectedRegionId} = useMapRegionData()
 
   const handleMouseEnter = (id: string, event: MouseEvent<SVGPathElement>) => {
-    const region = regions.find(r => r.id === id)
+    const region = regions.find(r => r.code === id)
     if (!region || !svgRef.current) return
 
     const pathRect = event.currentTarget.getBoundingClientRect()
@@ -45,12 +45,12 @@ const MapRegionTooltipLayer = ({ regions }: Props) => {
         viewBox="0 0 1196 797"
       >
         {regionsPath.map(({ id, d }, index) => {
-          const region = regions.find(r => r.id === id)
+          const region = regions.find(r => r.code === id)
 
           let additionalClass = ''
 
           if (selectedRegionId) {
-            if (id === selectedRegionId) {
+            if (region?.id === selectedRegionId) {
               const hasEvents = region?.have_events
               const hasAreas = region?.have_areas
 
@@ -70,7 +70,7 @@ const MapRegionTooltipLayer = ({ regions }: Props) => {
           }
 
           return (
-            <Link href={`/region/${id}`} key={`${id}-${index}`}>
+            <Link href={`/events/?type=${selectedType}&region_id=${region?.id}`} key={`${id}-${index}`}>
               <path
                 d={d}
                 id={id}

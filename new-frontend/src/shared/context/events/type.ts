@@ -6,5 +6,6 @@ export type EventsDataContextType = {
   eventFilter: EventFilterType;
   onFilterChange: <K extends keyof EventFilterType>(key: K, value: EventFilterType[K]) => void;
   directions: FilterSubDisciplinesType[];
-  isLoading: boolean
+  isLoading: boolean;
+  onFilterChangeMultiple: (values: Partial<EventFilterType>) => void;
 };

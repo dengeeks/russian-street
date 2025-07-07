@@ -20,11 +20,12 @@
     gap: 40px;
     flex-direction: column;
     width: 100vh;
-    height: 100vh;
+    height: 100dvh;
+    scroll-padding-top: 60px;
 
 }
 
-.mobileFilterContent :global(.select-menu) {
+.mobileFilterContent .modalBody :global(.select-menu) {
     width: 100%;
 }
 

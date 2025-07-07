@@ -13,28 +13,37 @@ import { updateSelectedDates, isDateSelected, buildTitle } from '../utils/events
 import { useEventsData } from '@/shared/context/events/useEventsDataContext'
 
 const EventsDateFilter = () => {
-  const { eventFilter, onFilterChange } = useEventsData()
-
+  const { eventFilter, onFilterChangeMultiple, onFilterChange } = useEventsData()
   const daysOfMonth = getMultiMonthDays([-1, 0, 1, 2, 3])
-
   const [selectedDates, setSelectedDates] = useState<Date[]>([])
 
   const handleSelect = (dateStr: string) => {
     const clickedDate = new Date(dateStr)
-    const updated = updateSelectedDates(selectedDates, clickedDate);
-    setSelectedDates(updated);
+    let updated = updateSelectedDates(selectedDates, clickedDate)
+
+    if (updated.length > 2) {
+      updated = [clickedDate]
+    }
+
+    setSelectedDates(updated)
 
     if (updated.length === 1) {
-      onFilterChange('starting_date', updated[0].toISOString().split('T')[0]);
-      onFilterChange('ending_date', undefined);
-    } else if (updated.length === 2) {
-      const [date1, date2] = updated;
-      const sorted = [date1, date2].sort((a, b) => a.getTime() - b.getTime());
+      const dateStr = updated[0].toISOString().split('T')[0]
+      onFilterChangeMultiple({
+        starting_date: dateStr,
+        ending_date: undefined
+      })
+    }
 
-      onFilterChange('starting_date', sorted[0].toISOString().split('T')[0]);
-      onFilterChange('ending_date', sorted[1].toISOString().split('T')[0]);
+    if (updated.length === 2) {
+      const [d1, d2] = updated.sort((a, b) => a.getTime() - b.getTime())
+      onFilterChangeMultiple({
+        starting_date: d1.toISOString().split('T')[0],
+        ending_date: d2.toISOString().split('T')[0]
+      })
     }
   }
+
 
   return (
     <div className={`container ${styles.eventsDateFilterWrapper}`}>

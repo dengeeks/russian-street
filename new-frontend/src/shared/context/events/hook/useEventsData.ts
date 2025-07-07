@@ -14,8 +14,6 @@ export function useEventsData(filter: EventFilterType) {
     } finally {
       setIsLoading(false)
     }
-    const data = await getEventOrAreaList(filter);
-    setEventsData(data);
   }, [filter]);
   
 

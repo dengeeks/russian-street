@@ -1,3 +1,5 @@
+import {monthNames, weekdayNames} from '@/shared/utils/formatDate'
+
 export function getDateKey(date: Date): string {
   return date.toISOString().split('T')[0]
 }
@@ -5,8 +7,6 @@ export function getDateKey(date: Date): string {
 
 export function getMultiMonthDays(monthOffsets: number[] = [-1, 0, 1, 2, 3]) {
   const result: [string, string, string][] = []
-  const monthNames = ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек']
-  const weekdayNames = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб']
 
   const today = new Date()
 

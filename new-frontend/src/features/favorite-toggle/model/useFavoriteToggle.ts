@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { postFavoriteAddDelete } from '@/shared/api/event-or-area/favorite/postFavoriteAddDelete'
+import { postFavoriteAddDelete } from '@/shared/api/favorite/add-delete/postFavoriteAddDelete'
 import { useToast } from '@/shared/context/toast/useToastContext'
+import { EventOrAreaType } from '@/shared/api/type'
 
-export function useFavoriteToggle(initial: boolean, type: 'event' | 'area', objectId: string) {
+export function useFavoriteToggle(initial: boolean, type: EventOrAreaType, objectId: string) {
   const [isFavorite, setIsFavorite] = useState(initial)
   const [loading, setLoading] = useState(false)
 
@@ -14,7 +15,6 @@ export function useFavoriteToggle(initial: boolean, type: 'event' | 'area', obje
       const res = await postFavoriteAddDelete(type, objectId)
       if (res.status === 200) {
         setIsFavorite(res.data.is_favorite)
-        showToast(res.data.detail, 'success')
       }
 
     } catch (error) {

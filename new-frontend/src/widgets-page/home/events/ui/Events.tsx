@@ -15,7 +15,7 @@ const Events = () => {
 
   return (
         <section className="home-events--section section-spacing-top container">
-          <SectionTitle>Мероприятия</SectionTitle>
+          <SectionTitle>{selectedType === 'event' ? 'Мероприятия' : 'Площадки'}</SectionTitle>
           <EventListWithImage homeEventsList={homeEventsList} type={selectedType}/>
           <ActionButton className="red" modalName="join-organization" requireAuth>Участвовать</ActionButton>
         </section>
