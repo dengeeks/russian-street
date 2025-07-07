@@ -28,7 +28,7 @@ class BaseEventAdmin(LinkToDetailMixin, ModelAdmin):
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
-        if not request.user.is_superuser:
+        if request.user.role == 'regional_director' and not request.user.is_superuser:
             return qs.filter(region__manager = request.user)
         return qs
 
