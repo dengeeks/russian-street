@@ -42,15 +42,15 @@ class RegionStatsService:
 
         # Получаем все регионы заранее (1 запрос)
         regions = Region.objects.select_related('manager').only(
-            'id', 'name', 'manager__id', 'manager__email', 'manager__phone_number', 'manager__address'
+            'id', 'name', 'code', 'manager__id', 'manager__email', 'manager__phone_number', 'manager__address'
         )
 
         # Получаем кол-во мероприятий по region_id (1 запрос)
         events_by_region = (
             Event.objects
-            .filter(ending_date__date__gte=now)
+            .filter(ending_date__date__gte = now)
             .values('region_id')
-            .annotate(count=Count('id'))
+            .annotate(count = Count('id'))
         )
         events_map = {e['region_id']: e['count'] for e in events_by_region}
 
@@ -58,7 +58,7 @@ class RegionStatsService:
         areas_by_region = (
             Area.objects
             .values('region_id')
-            .annotate(count=Count('id'))
+            .annotate(count = Count('id'))
         )
         areas_map = {a['region_id']: a['count'] for a in areas_by_region}
 
@@ -71,20 +71,23 @@ class RegionStatsService:
             count_areas = areas_map.get(region.id, 0)
 
             manager = region.manager
-            data.append({
-                "id": region.id,
-                "name": region.name,
-                "have_events": count_events > 0,
-                "have_areas": count_areas > 0,
-                "count_events": count_events,
-                "count_areas": count_areas,
-                "manager": {
-                    "id": manager.id,
-                    "email": manager.email,
-                    "phone": manager.phone_number,
-                    "address": manager.address,
-                } if manager else None,
-            })
+            data.append(
+                {
+                    "id": region.id,
+                    "name": region.name,
+                    "code": region.code,
+                    "have_events": count_events > 0,
+                    "have_areas": count_areas > 0,
+                    "count_events": count_events,
+                    "count_areas": count_areas,
+                    "manager": {
+                        "id": manager.id,
+                        "email": manager.email,
+                        "phone": manager.phone_number,
+                        "address": manager.address,
+                    } if manager else None,
+                }
+            )
 
             total_events += count_events
             total_areas += count_areas
