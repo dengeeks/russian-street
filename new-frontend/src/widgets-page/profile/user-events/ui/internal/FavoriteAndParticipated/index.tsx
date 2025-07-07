@@ -50,7 +50,7 @@ const FavoriteAndParticipated = () => {
       </div>
       <div className={styles.favPartCards}>
         {favoriteList.results.length === 0 ? (
-          <EmptyFavoritesAndParticipated text={"добавил мероприятия в избранное"}/>
+          <EmptyFavoritesAndParticipated type={favoriteFilter.type} text={`добавил ${favoriteFilter.type === 'event' ? 'мероприятия' : 'площадки'} в избранное`} />
         ) : (
           favoriteList.results.map(favorite => (
             <ProfileParticipationCard key={favorite.id} {...favorite} type={favoriteFilter.type} />

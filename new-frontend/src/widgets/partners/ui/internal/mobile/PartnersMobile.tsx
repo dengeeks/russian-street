@@ -19,11 +19,6 @@ const PartnersMobile = ({data}: PartnersMobileProps) => {
 
   const [selectedCategory, setSelectedCategory] = useState(filteredList[0]?.partner_type || '')
 
-  const handleCategoryChange = (val: string | undefined) => {
-    if (!val) return
-    setSelectedCategory(val)
-  }
-
   const currentCategory = filteredList.find(cat => cat.partner_type === selectedCategory)
 
   if (!currentCategory || !currentCategory.partners) return null
@@ -36,10 +31,14 @@ const PartnersMobile = ({data}: PartnersMobileProps) => {
   return (
     <div className="partners-mobile">
       <SelectMenu
-        value={filteredList[0]?.partner_type}
+        value={selectedCategory}
         options={partnerTypes}
-        onChange={handleCategoryChange}
+        onChange={(val) => {
+          if (val !== undefined && val !== selectedCategory) {
+            setSelectedCategory(val)
+          }}}
       />
+
       <Swiper
         modules={[Pagination]}
         slidesPerView="auto"

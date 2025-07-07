@@ -59,7 +59,7 @@ const BannerEvent = ({
             modalName="join-organization"
             className={`red ${styles.eventBannerButton}`}
             requireAuth>
-            Участвовать
+            вступить в организацию
           </ActionButton>
         </div>
       </div>

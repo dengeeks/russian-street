@@ -21,7 +21,7 @@ const CollaborationIntro = async () => {
           <div className={styles.collaborationIntro__imageWrapper}>
             <Image
               src="/assets/test/directions/1.png"
-              alt="7 партнеров в России"
+              alt={`${cooperation?.partners_count || 0} партнеров в России`}
               fill
               priority
               sizes="
@@ -43,7 +43,7 @@ const CollaborationIntro = async () => {
           <div className={styles.collaborationIntro__imageWrapper}>
             <Image
               src="/assets/test/directions/2.png"
-              alt="более 50 реализованных проектов"
+              alt={`${cooperation?.projects_count || 0} реализованных проектов`}
               fill
               priority
               sizes="

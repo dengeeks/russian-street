@@ -14,10 +14,20 @@ interface ContentShowcaseProps {
 
 const ContentShowcase = async ({ title, type, subdiscipline_ids }: ContentShowcaseProps) => {
   let data
+
+  // Первый запрос с фильтрами
   if (!type) {
-    data = await getBlogList({page_size: 8, subdiscipline_ids})
+    data = await getBlogList({ page_size: 8, subdiscipline_ids })
+    // Если пусто — пробуем без фильтра
+    if (!data?.results.length) {
+      data = await getBlogList({ page_size: 8 })
+    }
   } else {
-    data = await getEventOrAreaList({page_size: 8, subdiscipline_ids, type})
+    data = await getEventOrAreaList({ page_size: 8, subdiscipline_ids, type })
+    // Если пусто — пробуем без фильтра
+    if (!data?.results.length) {
+      data = await getEventOrAreaList({ page_size: 8, type })
+    }
   }
 
   if (!data?.results.length) {

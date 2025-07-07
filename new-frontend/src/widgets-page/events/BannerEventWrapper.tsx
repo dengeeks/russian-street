@@ -3,8 +3,9 @@
 import BannerEvent from './banner'
 import { useEventsData } from '@/shared/context/events/useEventsDataContext'
 import type { EventAreaBannerType } from '@/shared/api/static/getEventAreaBanner'
+import Breadcrumbs from '@/widgets/breadcrumbs'
 
-const BannerEventWrapper = ({event}: EventAreaBannerType ) => {
+const BannerEventWrapper = ({ event }: EventAreaBannerType) => {
   const { eventFilter } = useEventsData()
 
   // Фильтруем по типу (event/area) в зависимости от выбранного фильтра
@@ -12,7 +13,15 @@ const BannerEventWrapper = ({event}: EventAreaBannerType ) => {
 
   if (!bannerItem) return null
   return (
-      <BannerEvent title={bannerItem.title} format_type={bannerItem.format_type} image={bannerItem.image} video_url={bannerItem.video_url} />
+    <>
+      <Breadcrumbs items={[{ label: 'Главная', href: '/' }, { label: eventFilter.type === 'event' ? 'Мероприятия' : 'Площадки' }]} />
+      <BannerEvent
+        title={bannerItem.title}
+        format_type={bannerItem.format_type}
+        image={bannerItem.image}
+        video_url={bannerItem.video_url}
+      />
+    </>
   )
 }
 

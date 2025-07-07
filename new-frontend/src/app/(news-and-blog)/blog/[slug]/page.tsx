@@ -26,7 +26,7 @@ export default async function BlogDetailPage({params}: BlogDetailPageProps) {
   return (
     <>
       <Breadcrumbs
-        items={[{ label: 'Главная', href: '/' }, { label: 'Блог', href: '/news' }, { label: blogDetail.title }]}
+        items={[{ label: 'Главная', href: '/' }, { label: 'Блог', href: '/blog' }, { label: blogDetail.title }]}
       />
       <PostCardLarge title={blogDetail.title} city={blogDetail.city} date={blogDetail.created_at} views={blogDetail.count_views} />
       <MediaSliderTabs gallery_items={blogDetail.gallery_items}/>

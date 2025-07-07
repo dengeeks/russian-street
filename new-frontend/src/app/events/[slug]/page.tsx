@@ -23,7 +23,7 @@ export default async function EventDetailPage(props: EventDetailPageProps) {
 
   return (
     <>
-      <Breadcrumbs items={[{ label: 'Главная', href: '/' }, { label: 'Мероприятия', href: '/events' }, {label: eventDetail.title}]} />
+      <Breadcrumbs items={[{ label: 'Главная', href: '/' }, { label: type === 'event' ? 'Мероприятия' : 'Площадки', href: `/events?type=${type}` }, {label: eventDetail.title}]} />
       <BannerEvent id={eventDetail.id} title={eventDetail.title} image={eventDetail.image} format_type={eventDetail.format_type} video_url={eventDetail.video_url} city={eventDetail.city} type={type} is_favorite={eventDetail.is_favorite}/>
       <MarqueeText grayText="ул. Тухачевского 48Б кемерово "/>
       <EventFullInfo description={eventDetail.description} region_id={eventDetail.region}/>
