@@ -9,7 +9,7 @@ from events.pagination import EventPagination
 from events.serializers.event import (EventSerializer, AreaSerializer, EventDetailSerializer, AreaDetailSerializer,
                                       EventActivityTypeSerializer, AreaTypeSerializer, ShortEventSerializer,
                                       ShortAreaSerializer)
-from events.services.event import EventFilterService, EventAreaDetailService, EventTypeService, ShortListService
+from events.services.event import (EventFilterService, EventAreaDetailService, EventTypeService, ShortListService)
 
 logger = logging.getLogger(__name__)
 
@@ -27,6 +27,7 @@ class EventAreaListAPI(generics.ListAPIView):
     - starting_date: Дата начала (YYYY-MM-DD, только для мероприятий)
     - ending_date: Дата окончания (YYYY-MM-DD, только для мероприятий)
     - sort: Вариант сортировки ('recent')
+    - only_our_projects: true/false — фильтр "только наши мероприятия" (только для type=event)
     - page: Номер страницы
     - page_size: Размер страницы (по умолчанию 10, максимум 100)
     """
