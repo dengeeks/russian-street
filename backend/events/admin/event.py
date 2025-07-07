@@ -71,7 +71,7 @@ class EventAdmin(BaseEventAdmin):
     ]
     list_filter = [
         'is_our_project', 'is_priority', 'region',
-        'city', 'discipline', 'sub_discipline', 'type', 'created_at'
+        'discipline', 'sub_discipline', 'type', 'created_at'
     ]
     ordering = ['-created_at']
     search_fields = ['title', 'description', 'address']
@@ -125,7 +125,7 @@ class AreaAdmin(BaseEventAdmin):
         'link_to_detail', 'title', 'region', 'city', 'discipline', 'created_at'
     ]
     list_filter = [
-        'region', 'city', 'discipline', 'sub_discipline', 'type', 'created_at',
+        'region', 'discipline', 'sub_discipline', 'type', 'created_at',
         'updated_at',
     ]
     search_fields = ['title', 'description', 'address']
@@ -169,20 +169,20 @@ class AreaAdmin(BaseEventAdmin):
 
 
 @admin.register(AreaType)
-class AreaTypeAdmin(ModelAdmin):
+class AreaTypeAdmin(LinkToDetailMixin, ModelAdmin):
     """Админ-панель для типов площадок"""
     fields = ['name', 'created_at', 'updated_at']
-    list_display = ['name', 'created_at', 'updated_at']
+    list_display = ['link_to_detail', 'name', 'created_at', 'updated_at']
     search_fields = ['name']
     list_filter = ['created_at', 'updated_at']
-    readonly_fields = ['created_at', 'updated_at']
+    readonly_fields = ['link_to_detail', 'created_at', 'updated_at']
 
 
 @admin.register(EventActivityType)
-class EventActivityTypeAdmin(ModelAdmin):
+class EventActivityTypeAdmin(LinkToDetailMixin, ModelAdmin):
     """Админ-панель для типов мероприятий"""
     fields = ['name', 'created_at', 'updated_at']
-    list_display = ['name', 'created_at', 'updated_at']
+    list_display = ['link_to_detail', 'name', 'created_at', 'updated_at']
     search_fields = ['name']
     list_filter = ['created_at', 'updated_at']
-    readonly_fields = ['created_at', 'updated_at']
+    readonly_fields = ['link_to_detail', 'created_at', 'updated_at']

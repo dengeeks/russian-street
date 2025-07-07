@@ -66,7 +66,7 @@ class NewAdmin(LinkToDetailMixin, ModelAdmin):
         'title', 'description', 'card_image', 'subdiscipline',
         'region', 'city'
     ]
-    list_display = ['link_to_detail', 'title', 'region', 'city', 'created_at', 'updated_at']
+    list_display = ['link_to_detail', 'title', 'region', 'city','subdiscipline', 'created_at', 'updated_at']
     readonly_fields = ['created_at', 'updated_at', 'link_to_detail']
     compressed_fields = True
     search_fields = ['name']

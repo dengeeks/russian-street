@@ -11,5 +11,5 @@ class TeamTypeAdmin(LinkToDetailMixin, ModelAdmin):
     Класс администратора для модели TeamType.
     """
     fields = ['name', 'created_at', 'updated_at']
-    list_display = ['name', 'name', 'updated_at']
+    list_display = ['link_to_detail', 'name', 'name', 'updated_at']
     readonly_fields = ['link_to_detail', 'created_at', 'updated_at']

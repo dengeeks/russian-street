@@ -107,8 +107,6 @@ class UserAccountAdmin(BaseUserAdmin, LinkToDetailMixin, ModelAdmin):
                 'is_active',
                 'is_staff',
                 'is_superuser',
-                'groups',
-                'user_permissions'
             )
         }),
         ('Системная информация', {
@@ -170,3 +168,4 @@ class UserAccountAdmin(BaseUserAdmin, LinkToDetailMixin, ModelAdmin):
     add_form = CustomUserCreationForm
     inlines = [SocialLinkManagerInline]
     search_fields = ['first_name', 'last_name', 'email']
+    compressed_fields = True

@@ -36,7 +36,8 @@ class ApplicationAdmin(LinkToDetailMixin, ModelAdmin):
         'authorization_grant_type': admin.VERTICAL,
     }
     search_fields = ['name', 'user__email']
-    raw_id_fields = ['user']
+    autocomplete_fields = ['user']
+    compressed_fields = True
     readonly_fields = ['link_to_detail', 'created', 'updated', 'client_id', 'client_secret']
 
 
