@@ -30,6 +30,19 @@ class CustomUserCreationForm(forms.ModelForm):
         self.fields["password2"].widget = UnfoldAdminPasswordInput(
             attrs = {"autocomplete": "new-password"}
         )
+        required_fields = [
+            'email',
+            'role',
+            'first_name',
+            'last_name',
+            'middle_name',
+            'phone_number',
+            'address',
+            'info',
+            'avatar',
+        ]
+        for field in required_fields:
+            self.fields[field].required = True
 
     class Meta:
         model = UserAccount
@@ -107,6 +120,7 @@ class UserAccountAdmin(BaseUserAdmin, LinkToDetailMixin, ModelAdmin):
                 'is_active',
                 'is_staff',
                 'is_superuser',
+                'user_permissions'
             )
         }),
         ('Системная информация', {
