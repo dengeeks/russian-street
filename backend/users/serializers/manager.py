@@ -27,3 +27,9 @@ class RegionManagerSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserAccount
         fields = ['uuid', 'email', 'first_name', 'last_name', 'phone_number', 'avatar', 'address', 'social_links']
+
+
+class ExtendedRegionManagerSerializer(RegionManagerSerializer):
+    class Meta(RegionManagerSerializer.Meta):
+        model = UserAccount
+        fields = RegionManagerSerializer.Meta.fields + ['info']

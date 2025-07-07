@@ -1,6 +1,7 @@
 import logging
 
 from django.core.exceptions import ValidationError
+from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from regions.serializers.region import RegionSerializer, CitySerializer
@@ -41,7 +42,6 @@ class StructuredRegionCityAPI(APIView):
 
 
 from rest_framework.views import APIView
-from rest_framework.response import Response
 
 
 class RegionStatsAPI(APIView):
