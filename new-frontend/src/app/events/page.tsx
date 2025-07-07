@@ -1,4 +1,3 @@
-import Breadcrumbs from '@/widgets/breadcrumbs'
 import EventsList from '@/widgets-page/events/events-list'
 import { EventsDateFilter, EventsSelectFilters, EventsSidebarFilters } from '@/features/events'
 import { EventsDataProvider } from '@/shared/context/events/EventsDataContext'
@@ -9,7 +8,6 @@ export default async function EventsPage() {
   const eventBanner = await getEventAreaBanner()
   return (
     <>
-      <Breadcrumbs items={[{ label: 'Главная', href: '/' }, { label: 'Мероприятия' }]} />
       <EventsDataProvider>
         <BannerEventWrapper event={eventBanner.event}/>
         <EventsDateFilter />

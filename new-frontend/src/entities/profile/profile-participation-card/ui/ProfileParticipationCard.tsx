@@ -16,7 +16,7 @@ interface ProfileParticipationCardProps extends FavoriteItemType{
 const ProfileParticipationCard = ({ card_image, title, description, type, id, sub_discipline, city, ending_date, starting_date }: ProfileParticipationCardProps) => {
   return (
     <div className={styles.participationCard}>
-      <Link href={`/events/${id}?=${type}`} className={styles.participationCardImageWrapper}>
+      <Link href={`/events/${id}?type=${type}`} className={styles.participationCardImageWrapper}>
         <Image
           src={getImageUrl(card_image)}
           alt={title}
@@ -44,7 +44,7 @@ const ProfileParticipationCard = ({ card_image, title, description, type, id, su
 
         </div>
         <div className={styles.participationCardText}>
-          <Link href={`/events/${id}?=${type}`} className={styles.participationCardTitle} title={title}>
+          <Link href={`/events/${id}?type=${type}`} className={styles.participationCardTitle} title={title}>
             {title}
           </Link>
           <EditableTextBlock
@@ -53,7 +53,7 @@ const ProfileParticipationCard = ({ card_image, title, description, type, id, su
             variant="none"
           />
         </div>
-        <Link href={`/events/${id}?=${type}`} className={styles.participationCardButton}>
+        <Link href={`/events/${id}?type=${type}`} className={styles.participationCardButton}>
           <div className={styles.participationCardButtonText}>Подробнее</div>
           <Icon icon="chevron" width={24} height={24} className="right" />
         </Link>

@@ -34,5 +34,6 @@ export function useTeam() {
     setSelectedCategory,
     activeMemberIndex,
     setActiveMemberIndex,
+    selectedCategory
   }
 }

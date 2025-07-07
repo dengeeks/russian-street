@@ -1,12 +1,14 @@
 import styles from './EmptyFavoritesAndParticipated.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
+import type { EventOrAreaType } from '@/shared/api/type'
 
 interface EmptyFavoritesAndParticipatedProps {
   text: string;
+  type: EventOrAreaType;
 }
 
-const EmptyFavoritesAndParticipated = ({text}: EmptyFavoritesAndParticipatedProps) => {
+const EmptyFavoritesAndParticipated = ({text, type}: EmptyFavoritesAndParticipatedProps) => {
   return (
     <div className={styles.emptyWrapper}>
       <Image
@@ -20,8 +22,8 @@ const EmptyFavoritesAndParticipated = ({text}: EmptyFavoritesAndParticipatedProp
       <p className={styles.emptyText}>
         Ты пока не {text}, переходи в раздел мероприятий и найди, что тебе нравится.
       </p>
-      <Link href="/events" className={`red button white ${styles.emptyLink}`}>
-        Перейти в мероприятия
+      <Link href={`/events?type=${type}`} className={`red button white ${styles.emptyLink}`}>
+        Перейти в {type === 'event' ? 'мероприятия' : 'площадки'}
       </Link>
     </div>
   )

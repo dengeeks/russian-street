@@ -25,6 +25,7 @@ const TeamSection = () => {
     setSelectedCategory,
     activeMemberIndex,
     setActiveMemberIndex,
+    selectedCategory,
   } = useTeam()
 
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null)
@@ -47,9 +48,9 @@ const TeamSection = () => {
           setThumbsSwiper={setThumbsSwiper}
         />
 
-        <SelectMenu value={teamList[0]?.team_type} options={teamTypes}  onChange={(val) => {
-          if (val !== undefined) {
-            setSelectedCategory(val);
+        <SelectMenu value={selectedCategory} options={teamTypes} onChange={(val) => {
+          if (val !== undefined && val !== selectedCategory) {
+            setSelectedCategory(val)
           }
         }} />
 
