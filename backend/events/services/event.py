@@ -214,6 +214,7 @@ class EventFilterService:
                     }
                 )
 
+        validated_data['only_our_projects'] = params.get('only_our_projects') == 'true'
         return validated_data
 
     @classmethod
@@ -245,19 +246,26 @@ class EventFilterService:
         if validated_params['subdiscipline_ids']:
             filters &= Q(sub_discipline_id__in = validated_params['subdiscipline_ids'])
 
+        # Только наши проекты (только для мероприятий)
+        if validated_params.get('only_our_projects') and validated_params['model_type'] == 'event':
+            filters &= Q(is_our_project = True)
+
         # Фильтрация по датам (только для мероприятий)
         if config['date_filter']:
-            date_filters = Q()
+            if not validated_params.get('only_our_projects'):
+                date_filters = Q()
 
-            if validated_params['starting_date']:
-                date_filters &= Q(starting_date__date__gte = validated_params['starting_date'])
+                if validated_params['starting_date']:
+                    date_filters &= Q(starting_date__date__gte = validated_params['starting_date'])
 
-            if validated_params['ending_date']:
-                date_filters &= Q(ending_date__date__lte = validated_params['ending_date'])
-            else:
-                date_filters &= Q(ending_date__date__gte = timezone.now().date())
+                if validated_params['ending_date']:
+                    date_filters &= Q(ending_date__date__lte = validated_params['ending_date'])
+                if validated_params.get('only_our_projects'):
+                    filters &= Q(is_our_project = True)
+                else:
+                    date_filters &= Q(ending_date__date__gte = timezone.now().date())
 
-            filters &= date_filters
+                filters &= date_filters
 
         qs = qs.filter(filters)
 
@@ -381,4 +389,3 @@ class ShortListService:
 
         qs = FavoriteService.annotate_is_favorite(qs, user)
         return qs[:limit]
-

@@ -1,6 +1,6 @@
 from django.urls import path
 
-from events.views.event import EventAreaListAPI, EvenAreaDetailAPI, EventTypeListAPI, ShortEventAreaListAPI
+from events.views.event import (EventAreaListAPI, EvenAreaDetailAPI, EventTypeListAPI, ShortEventAreaListAPI)
 
 urlpatterns = [
     # получение мероприятий и площадок
