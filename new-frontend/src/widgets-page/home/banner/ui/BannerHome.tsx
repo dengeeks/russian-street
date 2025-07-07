@@ -28,7 +28,7 @@ const BannerHome = ({ promoVideo }: BannerHomeProps) => {
 
           <h1>общероссийская общественная организация уличной культуры и спорта</h1>
           <div className={styles.bannerWrapperButton}>
-            <ActionButton type="button" modalName="join-organization" requireAuth>Участвовать</ActionButton>
+            <ActionButton type="button" modalName="join-organization" requireAuth>вступить</ActionButton>
             <ActionButton type="button" modalName="donating" className={`gray ${styles.bannerWrapperButtonDesktop}`}>поддержать организацию</ActionButton>
           </div>
         </div>

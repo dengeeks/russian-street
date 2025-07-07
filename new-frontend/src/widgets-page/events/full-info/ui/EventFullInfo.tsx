@@ -29,7 +29,7 @@ const EventFullInfo = ({description, region_id}:EventFullInfoProps) => {
           поддержать мероприятие
         </ActionButton>
         <ActionButton className="red" type="button" modalName="join-organization" requireAuth>
-          Участвовать
+          вступить в организацию
         </ActionButton>
       </div>
     </section>

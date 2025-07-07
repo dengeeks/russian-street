@@ -55,7 +55,7 @@ const OurProjects = () => {
             {eventList.results.length > 0 ? (
               <div className={styles.projectsGrid}>
                 {eventList.results.map(project => (
-                  <ArticleCard key={project.id} {...project}>
+                  <ArticleCard key={project.id} {...project} linkPath={`/events/${project.id}?type=event`}>
                     <FavoriteToggleButton initial={project.is_favorite} type="event" objectId={project.id} />
                   </ArticleCard>
                 ))}

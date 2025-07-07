@@ -1,7 +1,7 @@
 import styles from './DirectionCard.module.css'
 import Image from 'next/image'
 import Icon from '@/shared/icon'
-import { MouseEvent } from 'react'
+import type { MouseEvent } from 'react'
 import Link from 'next/link'
 import type {SubDisciplinesType} from "@/shared/api/direction/sub-disciplines/type"
 import { getImageUrl } from '@/shared/utils/getImageUrl'
