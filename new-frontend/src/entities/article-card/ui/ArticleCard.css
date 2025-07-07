@@ -1,10 +1,28 @@
-
+.article-card {
+    position: relative;
+}
 .article-card, .article-card-link {
     height: 100%;
     width: 100%;
 }
 
+.article-img-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color 0.3s ease;
+    pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .article-card:hover .article-img-wrapper::after {
+        background-color: #B73A344D;
+    }
+}
+
 .article-img-wrapper {
+    display: block;
     min-width: 286px;
     max-height: 389px;
     width: 100%;
@@ -15,7 +33,11 @@
 }
 .article-img-wrapper img{
     object-fit: cover;
+    display: block;
+    width: 100%;
+    transition: transform 0.3s ease;
 }
+
 
 .article-card-info {
     display: flex;
@@ -35,6 +57,13 @@
     line-height: 130%;
     font-weight: 400;
     font-stretch: semi-condensed;
+}
+
+.article-card-favorite-toggle {
+    position: absolute;
+    bottom: 8px;
+    right: 16px;
+    z-index: 20;
 }
 
 @media (max-width: 768px) {

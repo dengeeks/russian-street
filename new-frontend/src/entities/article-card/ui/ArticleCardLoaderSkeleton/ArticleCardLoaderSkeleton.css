@@ -1,0 +1,26 @@
+.articleCardLoader {
+    width: 100%;
+}
+
+.articleCardLoader .imagePlaceholder {
+    height: 389px;
+    margin-bottom: 8px;
+}
+
+.articleCardLoader .title {
+    width: 100%;
+    margin-bottom: 4px;
+    height: 26px;
+}
+
+.articleCardLoader .date {
+    width: 40%;
+    height: 17px;
+}
+
+@media (max-width: 768px) {
+    .articleCardLoader .title {
+        height: 17px;
+    }
+}
+

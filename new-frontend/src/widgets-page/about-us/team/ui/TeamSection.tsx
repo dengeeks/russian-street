@@ -31,6 +31,10 @@ const TeamSection = () => {
 
   if (!members.length) return null
 
+  const teamTypes = teamList.map(item => ({
+    id: item.team_type,
+    name: item.team_type
+  }))
   return (
     <section className={`section-spacing-top ${styles.teamSection}`}>
       <div className={`container ${styles.teamContainer}`}>
@@ -43,7 +47,7 @@ const TeamSection = () => {
           setThumbsSwiper={setThumbsSwiper}
         />
 
-        <SelectMenu options={teamList.map(item => item.team_type)} onChange={setSelectedCategory} />
+        <SelectMenu value={teamList[0]?.team_type} options={teamTypes} onChange={setSelectedCategory} />
 
         <TeamSwiper
           members={members}

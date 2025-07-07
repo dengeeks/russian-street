@@ -3,7 +3,7 @@ import { REVALIDATE_TIME } from '@/shared/settings'
 import type { SubDisciplinesType } from './type'
 
 // заглушка при ошибке
-const EMPTY_SUB_DISCIPLINES: SubDisciplinesType[] = []
+export const EMPTY_SUB_DISCIPLINES: SubDisciplinesType[] = []
 
 export async function getSubDisciplines(): Promise<SubDisciplinesType[]> {
   try {

@@ -8,7 +8,7 @@ interface DirectionSectionProps {
 
 const DirectionSection = ({data}: DirectionSectionProps) => {
   return (
-    <section className="container section-spacing-top direction__section">
+    <section className="container section-spacing-top section-spacing-bottom direction__section">
       {data.map((direction, index) => (
         <DirectionItem key={index} {...direction} />
       ))}

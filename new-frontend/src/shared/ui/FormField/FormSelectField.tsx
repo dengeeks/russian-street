@@ -8,6 +8,11 @@ import {
 import styles from './FormField.module.css'
 import Icon from '@/shared/icon'
 
+type Option = {
+  id: string
+  name: string
+}
+
 interface BaseProps {
   label?: string
   name: string
@@ -15,7 +20,7 @@ interface BaseProps {
   theme?: 'light' | 'dark' | 'grey'
   required?: boolean
   hint?: string
-  options?: string[]
+  options?: Option[]
   error?: string
   value?: string
   onChange?: (value: string) => void
@@ -28,8 +33,8 @@ const FormSelectField = forwardRef<HTMLDivElement, BaseProps>(({ label, name, pl
 
   useImperativeHandle(ref, () => containerRef.current!, [])
 
-  const handleSelect = (option: string) => {
-    onChange?.(option)
+  const handleSelect = (option: Option) => {
+    onChange?.(option.id)
     setOpen(false)
   }
 
@@ -66,7 +71,7 @@ const FormSelectField = forwardRef<HTMLDivElement, BaseProps>(({ label, name, pl
         onBlur={onBlur}
         {...rest}
       >
-        <span>{value || placeholder}</span>
+        <span>{options.find(opt => opt.id === value)?.name || placeholder}</span>
         <Icon icon="chevron" />
       </div>
 
@@ -74,11 +79,11 @@ const FormSelectField = forwardRef<HTMLDivElement, BaseProps>(({ label, name, pl
         <ul className={styles.options}>
           {options.map(opt => (
             <li
-              key={opt}
+              key={opt.id}
               className={styles.option}
               onClick={() => handleSelect(opt)}
             >
-              {opt}
+              {opt.name}
             </li>
           ))}
         </ul>

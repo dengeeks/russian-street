@@ -22,23 +22,13 @@
     flex-direction: column;
 }
 
-.eventFullInfoDescriptionText, .eventFullInfoContactsLabel {
+.eventFullInfoDescriptionText {
     font-weight: 400;
     font-size: 20px;
     line-height: 130%;
     font-stretch: semi-condensed;
 }
 
-
-.eventFullInfoContactsBlock {
-    display: flex;
-    gap: 12px;
-}
-
-.eventFullInfoSocialLinks {
-    display: flex;
-    gap: 8px;
-}
 
 .eventFullInfoActionsBlock {
     display: flex;

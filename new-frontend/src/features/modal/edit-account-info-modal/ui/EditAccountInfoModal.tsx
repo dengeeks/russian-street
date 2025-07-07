@@ -1,6 +1,6 @@
 import Button from '@/shared/ui/Button'
 import FormField from '@/shared/ui/FormField'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import useModal from '@/shared/store/modal'
 
 import {
@@ -13,13 +13,16 @@ import Modal from '@/shared/ui/Modal'
 import { UserUpdateType } from '@/shared/api/user/patchUserUpdate'
 import { useUpdateInfo } from '@/features/modal/edit-account-info-modal/model/useUpdateInfo'
 import { useGlobalData } from '@/shared/context/global-data/useGlobalDataContext'
+import FormSelectField from '@/shared/ui/FormField/FormSelectField'
+import { useRegionList } from '@/shared/hooks/filter/useRegionList'
 
 const EditAccountInfoModal = () => {
   const {userData} = useGlobalData()
-
+  const { regions } = useRegionList()
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isSubmitting },
     setError,
   } = useForm<UserUpdateType>({
@@ -30,6 +33,7 @@ const EditAccountInfoModal = () => {
       middle_name: userData?.middle_name || '',
       email: userData?.email || '',
       phone_number: userData?.phone_number || '',
+      region: userData?.region?.id || '',
     },
   });
 
@@ -94,6 +98,24 @@ const EditAccountInfoModal = () => {
             placeholder="+7 923 567-89-90"
             hint="Можно изменить в личном кабинете"
             theme="dark"
+          />
+          <Controller
+            name="region"
+            control={control}
+            rules={{ onChange: () => setHasManualError(false), }}
+            render={({ field }) => (
+              <FormSelectField
+                {...field}
+                error={errors.region?.message}
+                label="Регион"
+                required
+                name="region"
+                placeholder="Калининградская область"
+                theme="dark"
+                hint="Выберите из списка"
+                options={regions}
+              />
+            )}
           />
         </div>
       </div>

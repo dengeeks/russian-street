@@ -29,6 +29,7 @@
 .directionItem__textBlock {
     display: flex;
     justify-content: space-between;
+    gap: 20px;
 }
 
 .directionItem__description {
@@ -59,10 +60,8 @@
 }
 
 @media (max-width: 1100px) {
-
     .directionItem__description {
         font-size: 18px;
-        max-width: 400px;
     }
 }
 

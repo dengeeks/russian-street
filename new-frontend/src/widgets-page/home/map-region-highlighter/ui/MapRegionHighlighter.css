@@ -9,6 +9,7 @@
     padding: 0 16px;
     right: 0;
     display: flex;
+    gap: 20px;
     justify-content: space-between;
     box-sizing: border-box;
     z-index: 1;

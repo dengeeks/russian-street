@@ -17,6 +17,7 @@ import Partners from '@/widgets/partners'
 import ContentShowcase from '@/widgets/сontent-showcase'
 import { getHome } from '@/shared/api/static/home/getHome'
 import { HomeDataProvider } from '@/shared/context/home-data/HomeDataContext'
+import { MapRegionProvider } from '@/shared/context/map-region/MapRegionContext'
 
 export default async function HomePage() {
   const homeData = await getHome()
@@ -26,8 +27,10 @@ export default async function HomePage() {
   return (
     <HomeDataProvider homeData={homeData}>
       <BannerHome promoVideo={promotional_video} />
-      <MapRegionHighlighter />
-      <Events />
+      <MapRegionProvider>
+        <MapRegionHighlighter />
+        <Events />
+      </MapRegionProvider>
       {street_images.length > 0 && (
         <Suspense fallback={<Loader />}>
           <StreetGallery />

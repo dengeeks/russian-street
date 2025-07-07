@@ -1,0 +1,24 @@
+.map-region-path {
+    fill: var(--grey);
+    stroke: #333;
+    stroke-width: 0.5;
+    transition: fill 0.3s;
+    cursor: pointer;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .map-region-path:hover, .map-region--empty {
+        fill: #ADADAD;
+    }
+}
+
+
+.map-region--red {
+    fill: var(--red);
+    background-color: var(--red);
+}
+
+.map-region--blue {
+    fill: var(--blue);
+    background-color: var(--blue);
+}
