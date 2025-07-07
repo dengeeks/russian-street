@@ -45,6 +45,9 @@ CACHE_TEAM_TIMEOUT = config('CACHE_TEAM_TIMEOUT', cast = int, default = 60 * 60 
 CACHE_SUBDISCIPLINE_KEY = config('CACHE_SUBDISCIPLINE_KEY', cast = str, default = 'CACHE_SUBDISCIPLINE_KEY')
 CACHE_SUBDISCIPLINE_TIMEOUT = config('CACHE_SUBDISCIPLINE_TIMEOUT', cast = int, default = 60 * 60 * 24)
 
+CACHE_EVENTCONTENT_KEY = config('CACHE_EVENTCONTENT_KEY', cast = str, default = 'CACHE_EVENTCONTENT_KEY')
+CACHE_EVENTCONTENT_TIMEOUT = config('CACHE_EVENTCONTENT_TIMEOUT', cast = int, default = 60 * 60 * 24)
+
 INSTALLED_APPS = [
     'unfold',
     'django.contrib.admin',
@@ -348,7 +351,7 @@ UNFOLD = {
                 ],
             },
             {
-                "title": "Мероприятия и Площадки",
+                "title": "Страница мероприятий и площадок",
                 "collapsible": True,
                 "separator": True,
                 "items": [
@@ -397,7 +400,7 @@ UNFOLD = {
                 ],
             },
             {
-                "title": "Новости",
+                "title": "Страница новостей",
                 "collapsible": True,
                 "separator": True,
                 "items": [
@@ -530,7 +533,20 @@ UNFOLD = {
 
             },
             {
-                "title": "О нас",
+                "title": "Страница мероприятий промо блок",
+                "collapsible": True,
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Промо блок",
+                        "icon": "people",
+                        "permission": lambda request: request.user.is_superuser,
+                        "link": reverse_lazy("admin:contents_eventcontent_changelist"),
+                    }
+                ]
+            },
+            {
+                "title": "Страница о нас",
                 "collapsible": True,
                 "separator": True,
                 "items": [

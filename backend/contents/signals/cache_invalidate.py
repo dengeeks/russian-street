@@ -6,7 +6,7 @@ from django.db import models
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
-from contents.models import homepage, about_us, contact, cooperation, everyone_likes
+from contents.models import homepage, about_us, contact, cooperation, everyone_likes,event
 
 logger = logging.getLogger(__name__)
 
@@ -16,6 +16,7 @@ MODULES = {
     'about_us': about_us,
     'contact': contact,
     'cooperation': cooperation,
+    'event': event,
     'everyone_likes': everyone_likes,
 }
 
@@ -26,6 +27,7 @@ CACHE_KEYS = {
     'contact': settings.CACHE_CONTACT_KEY,
     'cooperation': settings.CACHE_COOPERATION_KEY,
     'everyone_likes': settings.CACHE_EVERYONELIKES_KEY,
+    'event': settings.CACHE_EVENTCONTENT_KEY,
 }
 
 # Модели для каждого модуля
