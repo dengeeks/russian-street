@@ -1,6 +1,7 @@
 from uuid import UUID
 
 from django.core.exceptions import ValidationError
+from rest_framework.generics import get_object_or_404
 
 from regions.models.region import Region
 
@@ -27,7 +28,7 @@ class RegionManagerService:
         try:
             region = Region.objects.select_related('manager').prefetch_related(
                 'manager__social_links__social_media'
-                ).get(id = region_uuid)
+            ).get(id = region_uuid)
         except Region.DoesNotExist:
             return None
 
@@ -36,3 +37,12 @@ class RegionManagerService:
             return region.manager
 
         return None
+
+
+class ManagerDetailService:
+    @classmethod
+    def get_region_by_manager_uuid(cls, manager_uuid):
+        return get_object_or_404(
+            Region.objects.select_related('manager').prefetch_related('manager__social_links__social_media'),
+            manager__uuid = manager_uuid
+        )
