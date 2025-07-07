@@ -7,10 +7,11 @@ import Breadcrumbs from '@/widgets/breadcrumbs'
 import EventMap from '@/widgets-page/events/map'
 import { getEventOrAreaDetail } from '@/shared/api/event-or-area/detail/getEventOrAreaDetail'
 import { notFound } from 'next/navigation'
+import { EventOrAreaType } from '@/shared/api/type'
 
 interface EventDetailPageProps {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{type: 'event' | 'area'}>
+  searchParams: Promise<{type: EventOrAreaType}>
 }
 
 export default async function EventDetailPage(props: EventDetailPageProps) {

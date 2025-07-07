@@ -6,10 +6,11 @@ import type { EventOrAreaHomeListType } from '@/shared/api/event-or-area/home-li
 import { useMobileDetection } from '@/shared/hooks/useIsMobile'
 import { useState } from 'react'
 import { getImageUrl } from '@/shared/utils/getImageUrl'
+import { EventOrAreaType } from '@/shared/api/type'
 
 interface EventListWithImageProps {
   homeEventsList: EventOrAreaHomeListType[];
-  type: 'event' | 'area';
+  type: EventOrAreaType;
 }
 
 const EventListWithImage = ({homeEventsList, type}: EventListWithImageProps) => {

@@ -11,7 +11,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import {getVideoThumbnail} from "../utils/getVideoThumbnail"
 import { useMobileDetection } from '@/shared/hooks/useIsMobile'
-import type {GalleryItem} from "@/shared/api/direction/detail-discipline/type"
+import type {GalleryItem} from "@/shared/api/type"
 import { extractVideoId } from '@/shared/utils/extractVideoId'
 import { getImageUrl } from '@/shared/utils/getImageUrl'
 

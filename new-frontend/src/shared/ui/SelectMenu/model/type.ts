@@ -7,7 +7,7 @@ export interface OptionType {
 
 export interface SelectMenuProps {
   options: OptionType[];
-  onChange?: (value: string) => void;
+  onChange?: (value: string | undefined) => void;
   searchable?: boolean;
   placeholder?: string;
   value: string | undefined;

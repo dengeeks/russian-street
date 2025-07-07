@@ -2,42 +2,61 @@ import styles from "./ProfileParticipationCard.module.css";
 import Icon from '@/shared/icon'
 import Tag from '@/shared/ui/Tag'
 import Image from 'next/image'
+import { getImageUrl } from '@/shared/utils/getImageUrl'
+import EditableTextBlock from '@/shared/ui/EditableTextBlock'
+import { EventOrAreaType} from '@/shared/api/type'
+import Link from 'next/link'
+import { formatDateRange } from '@/shared/utils/formatDate'
+import type { FavoriteItemType } from '@/shared/api/favorite/list/type'
 
-const ProfileParticipationCard = () => {
+interface ProfileParticipationCardProps extends FavoriteItemType{
+  type: EventOrAreaType;
+}
+
+const ProfileParticipationCard = ({ card_image, title, description, type, id, sub_discipline, city, ending_date, starting_date }: ProfileParticipationCardProps) => {
   return (
     <div className={styles.participationCard}>
-      <div className={styles.participationCardImageWrapper}>
-        <Image src="/assets/test/events.png" alt="" fill sizes="
+      <Link href={`/events/${id}?=${type}`} className={styles.participationCardImageWrapper}>
+        <Image
+          src={getImageUrl(card_image)}
+          alt={title}
+          fill
+          sizes="
   (min-width: 1200px) 286px,
   (min-width: 1100px) 260px,
   (min-width: 1024px) 240px,
   (max-width: 1023px) calc(50vw - 16px),
   (max-width: 767px) calc(100vw - 32px),
-"/>
-      </div>
+"
+        />
+      </Link>
       <div className={styles.participationCardContent}>
         <div className={styles.participationCardInfo}>
           <div className={styles.participationCardTags}>
-            <Tag variant="location">Москва</Tag>
-            <Tag>Street art</Tag>
+            <Tag variant="location">{city}</Tag>
+            <Tag>{sub_discipline.name}</Tag>
           </div>
-          <div className={styles.participationCardDate}>12-15 мая 2024 г.</div>
+          {starting_date && ending_date && (
+            <div className={styles.participationCardDate}>
+              {formatDateRange(starting_date, ending_date)}
+            </div>
+          )}
+
         </div>
         <div className={styles.participationCardText}>
-          <div className={styles.participationCardTitle}>
-            Паркур соревнования на скорость «Забег за подарками»
-          </div>
-          <div className={styles.participationCardDescription}>
-            Море рационального перемещения, в виде соревнований по прохождению
-            заданной трассы на время, излюбленные всеми паркур-челленджи, еда и
-            напитки в кругу единомышленников, а ещё вас ждут призы от наших
-            спонсоров и денежный призовой фонд.
-          </div>
+          <Link href={`/events/${id}?=${type}`} className={styles.participationCardTitle} title={title}>
+            {title}
+          </Link>
+          <EditableTextBlock
+            text={description}
+            className={styles.participationCardDescription}
+            variant="none"
+          />
         </div>
-        <div className={styles.participationCardButton}>
+        <Link href={`/events/${id}?=${type}`} className={styles.participationCardButton}>
           <div className={styles.participationCardButtonText}>Подробнее</div>
-          <Icon icon="chevron" width={24} height={24} className="right"/>
-        </div>
+          <Icon icon="chevron" width={24} height={24} className="right" />
+        </Link>
       </div>
     </div>
   )

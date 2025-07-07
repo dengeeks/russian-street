@@ -112,8 +112,14 @@ export const useEventFilterFromQuery = () => {
     }
   }, [updateQuery])
 
+  const onFilterChangeMultiple = (params: Partial<EventFilterType>) => {
+    const update: Partial<EventFilterType> = { ...params, page: 1 }
+    updateQuery(update)
+  }
+
   return {
     eventFilter,
     onFilterChange,
+    onFilterChangeMultiple
   }
 }

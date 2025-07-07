@@ -21,7 +21,7 @@ const SelectFilters = ({ onFilterChange, filter, directions, children }: BaseFil
   const {cities} = useCityList(filter.region_id)
 
   return (
-    <div className="container selectFilters">
+    <div className="container selectFilters" id="pagination-scroll">
       <SelectMenu
         placeholder="Выбрать регион"
         value={filter.region_id}

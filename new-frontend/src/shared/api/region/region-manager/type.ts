@@ -1,3 +1,4 @@
+
 export type RegionManagerType = {
   uuid: string;
   email: string;

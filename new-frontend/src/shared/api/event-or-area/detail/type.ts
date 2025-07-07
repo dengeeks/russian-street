@@ -1,5 +1,6 @@
+import type { MediaFormatType, SubDisciplineType } from '@/shared/api/type'
 
-export type EventOrAreaDetailType = {
+export type EventOrAreaDetailType = MediaFormatType &{
   id: string;
   title: string;
   card_image: string;
@@ -10,11 +11,8 @@ export type EventOrAreaDetailType = {
   description: string;
   address: string;
   yandex_address: string;
-  format_type: 'video_url' | 'image';
-  video_url: string | null;
-  image: string | null;
   region: string;
   is_favorite: boolean;
-  sub_discipline: { id: string, name: string },
+  sub_discipline: SubDisciplineType,
 
 }

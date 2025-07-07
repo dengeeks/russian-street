@@ -4,10 +4,11 @@ import Link from 'next/link'
 import ContentShowcaseSwiper from './internal/ContentShowcaseSwiper'
 import { getBlogList } from '@/shared/api/blog-new/list/getBlogList'
 import { getEventOrAreaList } from '@/shared/api/event-or-area/list/getEventOrAreaList'
+import { EventOrAreaType } from '@/shared/api/type'
 
 interface ContentShowcaseProps {
   title: string;
-  type?: 'event' | 'area';
+  type?: EventOrAreaType;
   subdiscipline_ids?: string;
 }
 

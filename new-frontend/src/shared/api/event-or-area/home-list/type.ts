@@ -1,5 +1,7 @@
+import { EventOrAreaType } from '@/shared/api/type'
+
 export type EventHomeFilterType = {
-  type: 'event' | 'area'
+  type: EventOrAreaType;
   region_id?: string;
   limit?: number
 }
@@ -11,5 +13,5 @@ export type EventOrAreaHomeListType = {
   city: string;
   is_favorite: boolean;
   address: string;
-  starting_date: string;
+  starting_date?: string;
 }

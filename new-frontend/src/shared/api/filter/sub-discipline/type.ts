@@ -1,3 +1,5 @@
+import { EventOrAreaType } from '@/shared/api/type'
+
 export type FilterSubDisciplinesType = {
   discipline: {
     id: string;
@@ -11,7 +13,7 @@ export type FilterSubDisciplinesType = {
 
 
 export type SubDisciplinesFilterType = {
-  type: 'event' | 'area';
+  type: EventOrAreaType;
   region_id?: string;
   starting_date?: string;
   ending_date?: string;

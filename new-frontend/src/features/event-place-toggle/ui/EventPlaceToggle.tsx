@@ -1,9 +1,10 @@
 'use client';
 import styles from './EventPlaceToggle.module.css';
+import { EventOrAreaType } from '@/shared/api/type'
 
 interface EventPlaceToggleProps {
-  value: 'event' | 'area';
-  onChange?: (value: 'event' | 'area') => void;
+  value: EventOrAreaType;
+  onChange?: (value: EventOrAreaType) => void;
 }
 
 const EventPlaceToggle = ({ onChange, value }: EventPlaceToggleProps) => {
@@ -13,7 +14,7 @@ const EventPlaceToggle = ({ onChange, value }: EventPlaceToggleProps) => {
     onChange?.(newValue);
   };
 
-  const handleClick = (value: 'event' | 'area') => {
+  const handleClick = (value: EventOrAreaType) => {
     onChange?.(value);
   };
 

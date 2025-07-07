@@ -2,6 +2,7 @@ import { EVENT_OR_AREA_DETAIL } from '@/shared/api/endpoints'
 import type {EventOrAreaDetailType } from './type'
 import { cookies } from 'next/headers'
 import { ACCESS_TOKEN } from '@/shared/settings'
+import { EventOrAreaType } from '@/shared/api/type'
 
 export const EMPTY_EVENT_OR_AREA_DETAIL: EventOrAreaDetailType = {
   id: "string",
@@ -22,7 +23,7 @@ export const EMPTY_EVENT_OR_AREA_DETAIL: EventOrAreaDetailType = {
   sub_discipline: { id: 'c5d59780-821e-4620-b310-98dbcf88c963', name: 'рэп' },
 }
 
-export async function getEventOrAreaDetail(slug: string, type: 'event' | 'area'): Promise<EventOrAreaDetailType | 404> {
+export async function getEventOrAreaDetail(slug: string, type: EventOrAreaType): Promise<EventOrAreaDetailType | 404> {
   const cookieStore = await cookies();
   const access_token = cookieStore.get(ACCESS_TOKEN)?.value;
   try {
