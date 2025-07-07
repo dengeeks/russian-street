@@ -20,5 +20,5 @@ class Area(BaseEvent):
     )
 
     class Meta:
-        verbose_name = 'Мероприятие'
-        verbose_name_plural = 'Мероприятия'
+        verbose_name = 'площадки'
+        verbose_name_plural = 'площадки'

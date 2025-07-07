@@ -1,7 +1,7 @@
 import uuid
 
 from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
-                                        PermissionsMixin)
+                                        PermissionsMixin, Permission)
 from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
 from django.db import models
@@ -215,6 +215,28 @@ class UserAccount(AbstractBaseUser, DateTimeMixin, PermissionsMixin):
                     errors[field_name] = f'{field_label} обязательно для региональных/федеральных руководителей'
             if errors:
                 raise ValidationError(errors)
+
+    def save(self, *args, **kwargs):
+        is_new = self._state.adding  # Новый ли пользователь
+        super().save(*args, **kwargs)
+
+        if self.role in [self.Role.REGIONAL_DIRECTOR, self.Role.FEDERAL_DIRECTOR]:
+            # Список кодовых имен нужных permissions
+            needed_permissions = [
+                "add_area", "change_area", "delete_area", "view_area",
+                "view_areatype",
+                "view_discipline",
+                "add_event", "change_event", "delete_event", "view_event",
+                "view_eventactivitytype",
+                "add_gallerysubdiscipline", "change_gallerysubdiscipline", "delete_gallerysubdiscipline",
+                "view_gallerysubdiscipline",
+                "add_subdiscipline", "change_subdiscipline", "delete_subdiscipline", "view_subdiscipline",
+                "view_city",
+                "view_region",
+            ]
+
+            permissions = Permission.objects.filter(codename__in = needed_permissions)
+            self.user_permissions.set(permissions)
 
     class Meta:
         verbose_name = 'Пользователь'

@@ -46,8 +46,10 @@ class Event(BaseEvent):
         super().clean()
         now = timezone.now()
 
-        if self.starting_date and self.starting_date < now:
-            raise ValidationError({'starting_date': 'Дата начала не может быть в прошлом.'})
+        is_creation = self._state.adding
+
+        if is_creation and self.starting_date and self.starting_date < now:
+            raise ValidationError({'starting_date': 'Дата начала не может быть в прошлом при создании.'})
 
         if self.ending_date and self.starting_date and self.ending_date < self.starting_date:
             raise ValidationError({'ending_date': 'Дата окончания не может быть раньше даты начала.'})
