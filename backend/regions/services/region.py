@@ -42,7 +42,7 @@ class RegionStatsService:
 
         # Получаем все регионы заранее (1 запрос)
         regions = Region.objects.select_related('manager').only(
-            'id', 'name', 'code', 'manager__id', 'manager__email', 'manager__phone_number', 'manager__address'
+            'id', 'name', 'code', 'manager__uuid', 'manager__email', 'manager__phone_number', 'manager__address'
         )
 
         # Получаем кол-во мероприятий по region_id (1 запрос)
@@ -81,7 +81,7 @@ class RegionStatsService:
                     "count_events": count_events,
                     "count_areas": count_areas,
                     "manager": {
-                        "id": manager.id,
+                        "id": manager.uuid,
                         "email": manager.email,
                         "phone": manager.phone_number,
                         "address": manager.address,

@@ -1,9 +1,9 @@
 import logging
 
 from django.core.exceptions import ValidationError
-from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from regions.models.region import Region
 from users.serializers.manager import RegionManagerSerializer
 from users.services.manager import RegionManagerService
 
@@ -37,3 +37,25 @@ class RegionManagerAPI(APIView):
         except Exception as e:
             logger.error(f'Внутренняя ошибка сервера: {e}', exc_info = True)
             return Response({'ошибка': 'Внутренняя ошибка сервера'}, status = 500)
+
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.exceptions import NotFound
+from users.services.manager import ManagerDetailService
+from regions.serializers.region import RegionWithManagerSerializer
+
+
+class ManagerDetailAPI(APIView):
+    """
+    API для получения региона по UUID регионального менеджера (UserAccount).
+    Пример: GET /api/regions/manager/<uuid:manager_uuid>/
+    """
+
+    def get(self, request, manager_uuid):
+        try:
+            region = ManagerDetailService.get_region_by_manager_uuid(manager_uuid)
+            serializer = RegionWithManagerSerializer(region)
+            return Response(serializer.data)
+        except Region.DoesNotExist:
+            raise NotFound('Регион с таким менеджером не найден')

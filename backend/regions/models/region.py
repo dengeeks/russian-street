@@ -44,7 +44,7 @@ class Region(UUIDMixin, DateTimeMixin):
             )
         ]
     )
-    manager = models.ForeignKey(
+    manager = models.OneToOneField(
         to = 'users.UserAccount',
         verbose_name = 'Руководитель региона',
         related_name = 'regions',
