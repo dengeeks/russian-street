@@ -62,7 +62,7 @@ const FeedbackForm = () => {
             name="email_feed"
             placeholder="user@mail.ru"
             required
-            hint="Пришлём код подтверждения"
+            hint="user@mail.ru"
           />
         </div>
         <FormField

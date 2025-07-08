@@ -23,13 +23,16 @@ export const useResetPasswordRequest = (setError: UseFormSetError<ResetPasswordR
       if (status === 200) {
         closeModal()
         showToast(data.message, 'success')
+      } else if (status === 429) {
+        showToast('Превышен лимит запросов. Повторите попытку через 10 минут.', 'invalid');
+        closeModal();
       } else {
         if (handleServerError(data, setError)) {
           return;
         }
       }
     } catch {
-      showToast('Произошла ошибка при восстановлении пароля.', 'error')
+      showToast('Не удалось отправить запрос. Проверьте подключение к интернету и повторите попытку.', 'error')
     }
   };
 

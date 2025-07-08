@@ -41,7 +41,7 @@ export const USER_UPDATE = getApiUrl(`user/update/`, false);
 
   export const STATIC_ABOUT_US = getApiUrl(`static/aboutus/`, true);
 
-  export const STATIC_EVENT_AREA = getApiUrl('static/event-area/', false)
+  export const STATIC_EVENT_AREA = getApiUrl('static/event-area/', true)
 
 
 export const O_AUTH_2 = getApiUrl(`o/authorize/`, false);

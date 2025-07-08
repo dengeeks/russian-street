@@ -1,14 +1,14 @@
 'use client'
 import { createContext, ReactNode } from 'react'
-import { useBlogListData, useBlogFilters } from './hook'
-import { BlogDataContextType } from './type'
+import { useBlogListData, useBlogFilterFromQuery} from './hook'
+import type { BlogDataContextType } from './type'
 
 export const BlogDataContext = createContext<| BlogDataContextType | undefined>(undefined)
 
 type Props = { children: ReactNode }
 
 export const BlogDataProvider = ({ children }: Props) => {
-  const { blogFilters, onFilterChange} = useBlogFilters()
+  const { blogFilters, onFilterChange} = useBlogFilterFromQuery()
   const {blogListData, isLoading} = useBlogListData(blogFilters)
 
   return (

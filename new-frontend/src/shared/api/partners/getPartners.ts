@@ -1,5 +1,5 @@
 import { PARTNERS } from '@/shared/api/endpoints'
-import { REVALIDATE_TIME } from '@/shared/settings'
+import { REVALIDATE_PARTNERS_TIME } from '@/shared/settings'
 import type { PartnerListType } from './type'
 
 // заглушка при ошибке
@@ -12,7 +12,7 @@ export async function getPartners(): Promise<PartnerListType> {
       headers: {
         'Content-Type': 'application/json'
       },
-      next: { revalidate: REVALIDATE_TIME }
+      next: { revalidate: REVALIDATE_PARTNERS_TIME }
     })
 
     if (!res.ok) {

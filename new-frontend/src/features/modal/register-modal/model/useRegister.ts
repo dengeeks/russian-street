@@ -38,6 +38,9 @@ export const useRegister = (setError: UseFormSetError<RegisterUserType>): UseReg
           closeModal();
           showToast('Вы успешно зарегистрированы!', 'success');
         }
+      } else if (status === 429) {
+        showToast('Вы превысили лимит создания аккаунтов. Повторите попытку через час.', 'invalid');
+        closeModal();
       } else {
         if (handleServerError(data, setError)) {
           return;
