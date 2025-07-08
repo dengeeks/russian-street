@@ -34,7 +34,7 @@ def validate_phone_number(value):
         ValidationError: Возникает в случае, если номер
         телефона не соответствует формату.
     """
-    pattern = re.compile(r'^((\+7|7|8)+([0-9]){10})$')
+    pattern = re.compile(r'^(?:\+7|7|8)[\s-]?\(?\d{3}\)?[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}$')
     if not pattern.match(value):
         raise ValidationError('Пожалуйста, введите правильный номер телефона')
 

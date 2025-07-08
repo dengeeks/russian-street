@@ -22,11 +22,10 @@ class PromotionalVideo(DateTimeMixin, SingleInstanceMixin):
         verbose_name_plural: 'Промо-видео'
     """
 
-    video_url = models.CharField(
-        verbose_name = 'Ссылка на видео (iframe)',
-        help_text = 'Введите URL видео в формате iframe для отображения на сайте.',
-        max_length = 1000,
-        validators = [validate_iframe]
+    video_url = models.URLField(
+        verbose_name = 'Ссылка на видео',
+        help_text = 'URL видео',
+        max_length = 1000
     )
 
     def __str__(self):
