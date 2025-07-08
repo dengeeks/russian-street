@@ -168,6 +168,7 @@ REST_FRAMEWORK = {
         'user': '10000/hour',
         'feedback_create': '5/hour',
         'feedback_org_create': '5/hour',
+        'user_create': '5/hour',
     }
 }
 
