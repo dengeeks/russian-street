@@ -23,8 +23,9 @@ export interface BaseFilterProps {
 
 export interface CommonFiltersProps extends BaseFilterProps {
   cities: FilterRegionType[];
+  onRegionRequired?: () => void;
 }
 
-export interface FilterMobileProps extends BaseFilterProps {
-  cities: FilterRegionType[];
+export interface FilterMobileProps{
+  children: ReactNode;
 }

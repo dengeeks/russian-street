@@ -30,7 +30,7 @@ const ArticleCard = ({title, card_image, city, starting_date, linkPath='/', chil
         <Link href={linkPath} className="article-card-info">
           <span className="article-card-info-title">{title}</span>
           <p>
-            {starting_date && formatDate(starting_date)}, г.{city}
+              {starting_date ? `${formatDate(starting_date)}, ` : ''}г.{city}
           </p>
         </Link>
     </article>

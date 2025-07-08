@@ -35,7 +35,9 @@ const DirectionCard = ({name, id, image, main_page_info, isActive, onClick, onCl
             <span className={styles.directionTitleInfo}>{name}</span>
             <div className={styles.directionContent}>
               <p>
-                {main_page_info}
+                  {main_page_info.length > 700
+                    ? main_page_info.slice(0, 700) + '...'
+                    : main_page_info}
               </p>
             </div>
           </div>
