@@ -1,5 +1,5 @@
 import { DISCIPLINES } from '@/shared/api/endpoints'
-import { REVALIDATE_TIME } from '@/shared/settings'
+import { REVALIDATE_DISCIPLINES_TIME } from '@/shared/settings'
 import type { DisciplinesType } from './type'
 
 // заглушка при ошибке
@@ -12,7 +12,7 @@ export async function getDisciplines(): Promise<DisciplinesType[]> {
       headers: {
         'Content-Type': 'application/json'
       },
-      next: { revalidate: REVALIDATE_TIME }
+      next: { revalidate: REVALIDATE_DISCIPLINES_TIME }
     })
 
     if (!res.ok) {

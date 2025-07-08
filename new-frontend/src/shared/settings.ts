@@ -13,4 +13,8 @@ export const remoteMediaPattern = {
 };
 
 
-export const REVALIDATE_TIME = parseInt(process.env.NEXT_PUBLIC_REVALIDATE_TIME || '86400', 10);
+export const REVALIDATE_TIME = parseInt(process.env.NEXT_PUBLIC_STATIC_TIME || '86400', 10);
+export const REVALIDATE_PARTNERS_TIME = parseInt(process.env.NEXT_PUBLIC_PARTNERS_TIME || '86400', 10);
+export const REVALIDATE_DISCIPLINES_TIME = parseInt(process.env.NEXT_PUBLIC_DISCIPLINES_TIME || '86400', 10);
+
+

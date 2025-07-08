@@ -41,7 +41,7 @@ const ResetPasswordRequest = () => {
             name="email"
             required
             placeholder="example@mail.ru"
-            hint="Пришлём код подтверждения"
+            hint="Инструкция по сбросу будет отправлена на email"
             theme="dark"
           />
         </div>
