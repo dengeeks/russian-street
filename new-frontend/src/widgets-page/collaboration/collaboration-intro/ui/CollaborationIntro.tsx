@@ -20,7 +20,7 @@ const CollaborationIntro = async () => {
           </Link>
           <div className={styles.collaborationIntro__imageWrapper}>
             <Image
-              src="/assets/test/directions/1.png"
+              src="/assets/directions/1.png"
               alt={`${cooperation?.partners_count || 0} партнеров в России`}
               fill
               priority
@@ -42,7 +42,7 @@ const CollaborationIntro = async () => {
         <div className={styles.collaborationIntro__item}>
           <div className={styles.collaborationIntro__imageWrapper}>
             <Image
-              src="/assets/test/directions/2.png"
+              src="/assets/directions/2.png"
               alt={`${cooperation?.projects_count || 0} реализованных проектов`}
               fill
               priority

@@ -1,7 +1,7 @@
 import styles from './DirectionCard.module.css'
 import Image from 'next/image'
 import Icon from '@/shared/icon'
-import { MouseEvent } from 'react'
+import type { MouseEvent } from 'react'
 import Link from 'next/link'
 import type {SubDisciplinesType} from "@/shared/api/direction/sub-disciplines/type"
 import { getImageUrl } from '@/shared/utils/getImageUrl'
@@ -35,7 +35,9 @@ const DirectionCard = ({name, id, image, main_page_info, isActive, onClick, onCl
             <span className={styles.directionTitleInfo}>{name}</span>
             <div className={styles.directionContent}>
               <p>
-                {main_page_info}
+                  {main_page_info.length > 700
+                    ? main_page_info.slice(0, 700) + '...'
+                    : main_page_info}
               </p>
             </div>
           </div>

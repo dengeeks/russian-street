@@ -26,6 +26,9 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  experimental: {
+    cssChunking: false,
+  },
 };
 
 export default nextConfig

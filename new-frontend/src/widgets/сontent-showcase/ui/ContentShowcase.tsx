@@ -38,7 +38,7 @@ const ContentShowcase = async ({ title, type, subdiscipline_ids }: ContentShowca
     <section className="container content-showcase section-spacing-top section-spacing-bottom">
         <SectionTitle>{title}</SectionTitle>
         <ContentShowcaseSwiper data={data.results} type={type}/>
-       <Link className="more-link content-showcase_hidden-desktop" href="/">смотреть все</Link>
+       <Link className="more-link content-showcase_hidden-desktop" href={type ? `/events/?type=${type}` : '/blog'}>смотреть все</Link>
     </section>
   )
 }

@@ -132,8 +132,8 @@
     }
 
     .directionItemActive {
-        flex: 0 0 350px;
-        max-width: 350px;
+        flex: 0 0 400px;
+        max-width: 400px;
     }
 
     .directionImage {
@@ -229,6 +229,15 @@
 
     .directionMore {
         padding: 0 16px 16px 0;
+    }
+
+}
+
+
+@media (max-width: 430px) {
+    .directionItemActive {
+        flex: 1 1 550px;
+        max-height: 550px;
     }
 
 }

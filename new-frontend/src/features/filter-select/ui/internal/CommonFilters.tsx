@@ -2,10 +2,17 @@
 import SelectMenu from '@/shared/ui/SelectMenu'
 import type { CommonFiltersProps } from '../../model/type'
 
-const CommonFilters = ({ cities, directions, filter, onFilterChange, children }: CommonFiltersProps) => {
+const CommonFilters = ({ cities, directions, filter, onFilterChange, children, onRegionRequired}: CommonFiltersProps) => {
   return (
     <>
-      <div className={`${!filter.region_id ? 'selectDisabled' : ''}`}>
+      <div
+        className={`${!filter.region_id ? 'selectDisabled' : ''}`}
+        onClick={() => {
+          if (!filter.region_id) {
+            onRegionRequired?.()
+          }
+        }}
+      >
         <SelectMenu
           placeholder="Город"
           value={filter.city_id}
