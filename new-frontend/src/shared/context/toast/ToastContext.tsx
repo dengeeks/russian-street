@@ -1,8 +1,10 @@
 'use client';
-import React, { createContext, useState, useCallback, ReactNode, useRef, useEffect, } from 'react';
-import Toast from './ui/Toast';
+import dynamic from 'next/dynamic'
 
-import { ToastType, ToastMessage, ToastContextType } from './type';
+import React, { createContext, useState, useCallback, ReactNode, useRef, useEffect, } from 'react';
+const Toast = dynamic(() => import('./ui/Toast'), { ssr: false });
+
+import type { ToastType, ToastMessage, ToastContextType } from './type';
 
 export const ToastContext = createContext<ToastContextType | undefined>(undefined);
 

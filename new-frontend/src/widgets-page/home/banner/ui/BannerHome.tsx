@@ -22,6 +22,7 @@ const BannerHome = ({ promoVideo }: BannerHomeProps) => {
               width={573}
               height={157}
               alt="Улица России"
+              fetchPriority="high"
               priority
               sizes="(min-width: 768px) 573px, 320px"
             />

@@ -1,4 +1,3 @@
-@import "normalize.css";
 @import "decor.css";
 
 :root {
@@ -53,6 +52,11 @@ textarea,
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+.list-style{
+  list-style: none;
+  padding: 0;
 }
 
 .no-scroll {
