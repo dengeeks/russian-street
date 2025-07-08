@@ -34,7 +34,7 @@
 .not-region-error {
     position: absolute;
     z-index: 2;
-    color: var(--red);
+    color: var(--error);
     font-size: 30px;
     height: 100%;
     display: flex;
