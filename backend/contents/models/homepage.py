@@ -231,7 +231,7 @@ class OrganizationInfo(DateTimeMixin, SingleInstanceMixin):
     iframe = models.CharField(
         max_length = 1000,
         verbose_name = 'Адрес Яндекс.Карт',
-        help_text = 'Введите iframe Яндекс.Карт, начинающийся с <iframe>.',
+        help_text = 'Введите iframe Яндекс.Карт. Конструктор карты: https://yandex.ru/map-constructor/?from=constructorapi',
         validators = [validate_iframe]
     )
     address = models.CharField(max_length = 65, verbose_name = 'Адрес')
