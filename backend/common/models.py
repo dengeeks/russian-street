@@ -29,7 +29,8 @@ class MediaContentMixin(models.Model):
         verbose_name = 'Тип контента',
         help_text = 'Выберите тип медиа (Изображение или видео)'
     )
-    video_url = models.CharField(
+
+    video_url = models.URLField(
         verbose_name = 'Ссылка на видео',
         help_text = 'URL видео',
         blank = True,
