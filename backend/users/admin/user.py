@@ -12,10 +12,6 @@ from users.models.user import UserAccount
 
 admin.site.unregister(Group)
 
-from unfold.admin import ModelAdmin
-from import_export.admin import ImportExportModelAdmin
-from unfold.contrib.import_export.forms import ExportForm
-
 
 class CustomUserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label = 'Пароль', widget = forms.PasswordInput)
