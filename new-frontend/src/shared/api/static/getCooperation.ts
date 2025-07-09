@@ -6,9 +6,10 @@ export type CooperationType = {
     text: string;
     partners_count: string;
     projects_count: string;
+    first_image: string;
+    second_image: string;
   } | null;
 }
-
 
 // заглушка при ошибке
 const EMPTY_COOPERATION: CooperationType = {

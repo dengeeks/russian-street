@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useState } from 'react'
 
 export function useMobileDetection(breakpoint = 768) {
-  const [isMobile, setIsMobile] = useState(false)
+  const [isMobile, setIsMobile] = useState(true)
 
   const updateIsMobile = useCallback(() => {
     setIsMobile(window.innerWidth <= breakpoint)

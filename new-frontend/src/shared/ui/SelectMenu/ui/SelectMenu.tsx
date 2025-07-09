@@ -6,7 +6,7 @@ import type { SelectMenuProps } from '../model/type'
 import useClickOutside from '@/shared/hooks/useClickOutside'
 
 const SelectMenu = ({ options, onChange, searchable = false, placeholder, value }: SelectMenuProps) => {
-  const { isOpen, search, setSearch, setIsOpen, filteredOptions, longestOption, toggleOpen } = useSelectMenu(options, searchable)
+  const { isOpen, search, setSearch, filteredOptions, longestOption, toggleOpen } = useSelectMenu(options, searchable)
   const {
     menuRef,
     hoveredItem,
@@ -23,14 +23,14 @@ const SelectMenu = ({ options, onChange, searchable = false, placeholder, value 
       onChange?.(id)
     }
     setHoveredItem(null)
-    setIsOpen(false)
+    toggleOpen()
   }
 
   useClickOutside(menuRef, () => isOpen && toggleOpen())
 
   return (
     <div className={`select-menu ${isOpen ? 'open' : ''}`} ref={menuRef}>
-      <div className="select-menu__width-helper">{longestOption}</div>
+      <div className="select-menu__width-helper select-none">{longestOption}</div>
       <div className="select-menu__selected" onClick={toggleOpen}>
         <span className="select-menu__selected-text">{getSelectedLabel()}</span>
         <Icon icon="chevron" width={20} height={20} className={isOpen ? 'bottom' : ''} />
@@ -46,7 +46,13 @@ const SelectMenu = ({ options, onChange, searchable = false, placeholder, value 
                 placeholder="Поиск"
                 value={search}
                 onChange={e => setSearch(e.target.value)}
+                onKeyDown={e => {
+                  if (e.key === 'Enter' && filteredOptions.length > 0) {
+                    onOptionClick(filteredOptions[0].id)
+                  }
+                }}
               />
+
             </li>
           )}
 

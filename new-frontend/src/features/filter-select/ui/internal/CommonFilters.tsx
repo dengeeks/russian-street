@@ -2,7 +2,16 @@
 import SelectMenu from '@/shared/ui/SelectMenu'
 import type { CommonFiltersProps } from '../../model/type'
 
-const CommonFilters = ({ cities, directions, filter, onFilterChange, children, onRegionRequired}: CommonFiltersProps) => {
+const CommonFilters = ({
+  cities,
+  directions,
+  filter,
+  onFilterChange,
+  children,
+  onRegionRequired,
+  date
+}: CommonFiltersProps) => {
+
   return (
     <>
       <div
@@ -11,13 +20,13 @@ const CommonFilters = ({ cities, directions, filter, onFilterChange, children, o
           if (!filter.region_id) {
             onRegionRequired?.()
           }
-        }}
-      >
+        }}>
         <SelectMenu
           placeholder="Город"
           value={filter.city_id}
           options={cities}
           onChange={value => onFilterChange('city_id', value)}
+          searchable
         />
       </div>
 
@@ -26,6 +35,7 @@ const CommonFilters = ({ cities, directions, filter, onFilterChange, children, o
         value={filter.subdiscipline_ids}
         options={directions}
         onChange={value => onFilterChange('subdiscipline_ids', value)}
+        searchable
       />
 
       <SelectMenu
@@ -37,7 +47,7 @@ const CommonFilters = ({ cities, directions, filter, onFilterChange, children, o
         ]}
         onChange={value => onFilterChange('sort', value)}
       />
-
+      {date}
       {children}
     </>
   )

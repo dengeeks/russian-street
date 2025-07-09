@@ -7,8 +7,14 @@ import EventsFilterBlocks from '../internal/EventsFilterBlocks'
 const EventsSelectFilters = () => {
   const {onFilterChange, eventFilter, directions} = useEventsData()
 
+  const filter = {
+    region_id: eventFilter.region_id,
+    city_id: eventFilter.city_id,
+    sort: eventFilter.sort,
+    subdiscipline_ids: eventFilter.subdiscipline_ids,
+  }
   return (
-    <SelectFilters directions={directions.flatMap(({ subdisciplines }) => subdisciplines)} filter={{region_id: eventFilter.region_id, subdiscipline_ids: eventFilter.subdiscipline_ids, sort: eventFilter.sort, city_id: eventFilter.city_id}} onFilterChange={onFilterChange}>
+    <SelectFilters directions={directions.flatMap(({ subdisciplines }) => subdisciplines)} filter={filter} onFilterChange={onFilterChange}>
       <EventsFilterBlocks/>
     </SelectFilters>
   )

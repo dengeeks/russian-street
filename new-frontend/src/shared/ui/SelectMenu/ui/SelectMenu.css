@@ -65,12 +65,13 @@
 
 
 .select-search input {
+    font-family: var(--font-Bahnschrift), sans-serif;
     border: none;
     outline: none;
     background-color: var(--grey);
     color: var(--black);
     max-width: 150px;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .select-search input::placeholder {
@@ -86,7 +87,6 @@
     min-height: 0;
     height: 0;
     pointer-events: none;
-    user-select: none;
     margin: 0 14px;
 }
 
@@ -173,6 +173,10 @@
     .select-menu__width-helper {
         font-size: 15px;
         padding: 0 24px;
+    }
+
+    .select-search input {
+        font-size: 16px;
     }
 }
 

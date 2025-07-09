@@ -79,26 +79,6 @@ const EditAccountInfoModal = () => {
             hint="Можно изменить в личном кабинете"
             theme="dark"
           />
-          <FormField
-            {...register('email', { ...emailValidation, onChange: () => setHasManualError(false), } )}
-            error={errors.email?.message}
-            label="Email"
-            name="email"
-            placeholder="ivan@gmail.com"
-            hint="Можно изменить в личном кабинете"
-            theme="dark"
-          />
-        </div>
-        <div className="form--modal__row">
-          <FormField
-            {...register('phone_number', { ...phoneValidation, onChange: () => setHasManualError(false) })}
-            error={errors.phone_number?.message}
-            label="Номер телефона"
-            name="phone_number"
-            placeholder="+7 923 567-89-90"
-            hint="Можно изменить в личном кабинете"
-            theme="dark"
-          />
           <Controller
             name="region"
             control={control}
@@ -112,10 +92,31 @@ const EditAccountInfoModal = () => {
                 name="region"
                 placeholder="Калининградская область"
                 theme="dark"
-                hint="Выберите из списка"
+                hint="Введите вручную или выберите из списка"
                 options={regions}
+                searchable
               />
             )}
+          />
+        </div>
+        <div className="form--modal__row">
+          <FormField
+            {...register('phone_number', { ...phoneValidation, onChange: () => setHasManualError(false) })}
+            error={errors.phone_number?.message}
+            label="Номер телефона"
+            name="phone_number"
+            placeholder="+7 923 567-89-90"
+            hint="Можно изменить в личном кабинете"
+            theme="dark"
+          />
+          <FormField
+            {...register('email', { ...emailValidation, onChange: () => setHasManualError(false), } )}
+            error={errors.email?.message}
+            label="Email"
+            name="email"
+            placeholder="ivan@gmail.com"
+            hint="Можно изменить в личном кабинете"
+            theme="dark"
           />
         </div>
       </div>

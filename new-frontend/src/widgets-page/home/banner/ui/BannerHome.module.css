@@ -19,10 +19,6 @@
     gap: 40px;
 }
 
-.bannerLogo {
-    user-select: none;
-}
-
 .bannerContent h1 {
     font-weight: 400;
     text-transform: uppercase;
@@ -65,7 +61,7 @@
         margin: 160px 0 20px;
     }
 
-    .bannerWrapperButtonDesktop {
+    .bannerContainer .bannerWrapperButtonDesktop {
         display: none;
     }
 

@@ -8,7 +8,7 @@ interface LogoProps {
 
 const Logo = ({onClick}:LogoProps) => {
   return (
-    <Link href="/" className="logo-wrapper" onClick={onClick}>
+    <Link href="/" className="logo-wrapper select-none" onClick={onClick}>
       <Image
         src="/assets/logo.webp"
         className="logo"
