@@ -7,11 +7,11 @@ from contents.models.cooperation import Cooperation
 
 
 @admin.register(Cooperation)
-class CooperationAdmin(LinkToDetailMixin, NoAddDeleteMixin, ModelAdmin):
+class CooperationAdmin(LinkToDetailMixin, ModelAdmin):
     """
     Класс администратора для модели Cooperation.
     """
-    fields = ['partners_count', 'projects_count', 'text', 'created_at', 'updated_at']
+    fields = ['partners_count', 'projects_count', 'text', 'first_image', 'second_image', 'created_at', 'updated_at']
     list_display = ['link_to_detail', 'text_html', 'projects_count', 'partners_count']
     readonly_fields = ['link_to_detail', 'created_at', 'updated_at']
 

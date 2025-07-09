@@ -1,6 +1,7 @@
 from ckeditor.fields import RichTextField
 from django.core.validators import FileExtensionValidator
 from django.db import models
+from django.utils import timezone
 
 from common.models import DateTimeMixin, UUIDMixin, MediaContentMixin
 from common.utils import setup_image_path
@@ -8,7 +9,7 @@ from events.models.discipline import SubDiscipline
 from regions.models.region import Region, City
 
 
-class New(UUIDMixin, DateTimeMixin):
+class New(UUIDMixin):
     """
     Модель для хранения информации о новостном материале.
     """
@@ -48,6 +49,15 @@ class New(UUIDMixin, DateTimeMixin):
     count_views = models.PositiveIntegerField(
         verbose_name = 'Кол-во просмотров',
         default = 0
+    )
+    created_at = models.DateTimeField(
+        'Дата создания записи',
+        default = timezone.now,
+    )
+    updated_at = models.DateTimeField(
+        'Дата редактирования записи',
+        auto_now = True,
+        editable = False
     )
 
     class Meta:

@@ -4,6 +4,7 @@ from django.forms import BaseInlineFormSet
 from django.http import JsonResponse
 from django.urls import path
 from unfold.admin import ModelAdmin, TabularInline
+from unfold.contrib.filters.admin import RangeDateTimeFilter, RelatedDropdownFilter
 
 from common.admin import LinkToDetailMixin, MediaContentFormMixin
 from news.models.new import GalleryNew, New
@@ -64,14 +65,15 @@ class NewAdmin(LinkToDetailMixin, ModelAdmin):
     """
     fields = [
         'title', 'description', 'card_image', 'subdiscipline',
-        'region', 'city'
+        'region', 'city', 'created_at'
     ]
-    list_display = ['link_to_detail', 'title', 'region', 'city','subdiscipline', 'created_at', 'updated_at']
-    readonly_fields = ['created_at', 'updated_at', 'link_to_detail']
+    list_display = ['link_to_detail', 'title', 'region', 'city', 'subdiscipline', 'created_at', 'updated_at']
+    readonly_fields = ['updated_at', 'link_to_detail']
     compressed_fields = True
     search_fields = ['name']
     inlines = [GalleryInline]
-    list_filter = ['subdiscipline', 'region']
+    list_filter = [('subdiscipline', RelatedDropdownFilter),
+                   ('region', RelatedDropdownFilter), ('created_at', RangeDateTimeFilter)]
     autocomplete_fields = ['subdiscipline']
 
     def get_urls(self):

@@ -1,5 +1,6 @@
 from django.contrib import admin
 from unfold.admin import ModelAdmin
+from unfold.contrib.filters.admin import RelatedDropdownFilter
 
 from common.admin import LinkToDetailMixin
 from feedbacks.models.feedback import Feedback, FeedbackOrganization
@@ -38,7 +39,10 @@ class FeedbackOrganizationAdmin(LinkToDetailMixin, ModelAdmin):
         'link_to_detail', 'last_name', 'first_name', 'email',
         'phone', 'region', 'city', 'status', 'created_at'
     )
-    list_filter = ('region', 'city', 'status', 'gender')
+    list_filter = (('region', RelatedDropdownFilter),
+                   ('city', RelatedDropdownFilter), 'status', 'gender',
+
+                   )
     search_fields = (
         'first_name', 'last_name', 'middle_name',
         'email', 'phone', 'passport_series', 'passport_number'
