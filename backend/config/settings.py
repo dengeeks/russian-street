@@ -50,6 +50,7 @@ CACHE_EVENTCONTENT_TIMEOUT = config('CACHE_EVENTCONTENT_TIMEOUT', cast = int, de
 
 INSTALLED_APPS = [
     'unfold',
+    'unfold.contrib.filters',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

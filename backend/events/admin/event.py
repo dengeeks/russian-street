@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.http import JsonResponse
 from django.urls import path
 from unfold.admin import ModelAdmin
+from unfold.contrib.filters.admin import RangeDateTimeFilter, RelatedDropdownFilter
 
 from common.admin import LinkToDetailMixin, MediaContentFormMixin
 from events.models.area import Area
@@ -67,13 +68,19 @@ class EventAdmin(BaseEventAdmin):
     form = EventForm
     list_display = [
         'link_to_detail', 'title', 'region', 'city', 'discipline',
-        'is_our_project', 'is_priority', 'created_at'
+        'is_our_project', 'is_priority',
     ]
     list_filter = [
-        'is_our_project', 'is_priority', 'region',
-        'discipline', 'sub_discipline', 'type', 'created_at'
+        ('region', RelatedDropdownFilter),
+        ('discipline', RelatedDropdownFilter),
+        ('sub_discipline', RelatedDropdownFilter),
+        'is_our_project', 'is_priority',
+        'type',
+        ('starting_date', RangeDateTimeFilter),
+        ('ending_date', RangeDateTimeFilter)
     ]
     ordering = ['-created_at']
+
     search_fields = ['title', 'description', 'address']
     readonly_fields = ['created_at', 'updated_at', 'link_to_detail']
     fieldsets = (
@@ -125,8 +132,10 @@ class AreaAdmin(BaseEventAdmin):
         'link_to_detail', 'title', 'region', 'city', 'discipline', 'created_at'
     ]
     list_filter = [
-        'region', 'discipline', 'sub_discipline', 'type', 'created_at',
-        'updated_at',
+        ('region', RelatedDropdownFilter),
+        ('discipline', RelatedDropdownFilter),
+        ('sub_discipline', RelatedDropdownFilter),
+        'type',
     ]
     search_fields = ['title', 'description', 'address']
     readonly_fields = ['created_at', 'updated_at', 'link_to_detail']

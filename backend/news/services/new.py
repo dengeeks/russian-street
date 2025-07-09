@@ -1,5 +1,6 @@
 import logging
 import uuid
+from datetime import datetime
 from uuid import UUID
 
 from django.db.models import F
@@ -16,6 +17,30 @@ class NewsFilterService:
     SORT_OPTIONS = {
         'recent': '-created_at',
     }
+
+    @classmethod
+    def _validate_year(cls, value, field_name):
+        if not value:
+            return None
+        try:
+            year = int(value)
+            if year < 1 or year > 9999:
+                raise ValueError
+            return year
+        except ValueError:
+            raise ValidationError({field_name: 'Неверный формат года. Ожидается целое число от 1 до 9999.'})
+
+    @classmethod
+    def _validate_month(cls, value, field_name):
+        if not value:
+            return None
+        try:
+            month = int(value)
+            if month < 1 or month > 12:
+                raise ValueError
+            return month
+        except ValueError:
+            raise ValidationError({field_name: 'Неверный формат месяца. Ожидается число от 1 до 12.'})
 
     @classmethod
     def _validate_uuid(cls, value, field_name):
@@ -43,6 +68,8 @@ class NewsFilterService:
             'city_id': cls._validate_uuid(params.get('city_id'), 'city_id'),
             'subdiscipline_ids': cls._validate_uuid(params.get('subdiscipline_ids'), 'subdiscipline_ids'),
             'sort': cls._validate_sort(params.get('sort')),
+            'created_at_year': cls._validate_year(params.get('created_at_date'), 'created_at_date'),
+            'created_at_month': cls._validate_month(params.get('created_at_month'), 'created_at_month'),
         }
 
     @classmethod
@@ -56,6 +83,27 @@ class NewsFilterService:
             filters &= Q(city_id = validated_params['city_id'])
         if validated_params['subdiscipline_ids']:
             filters &= Q(subdiscipline_id = validated_params['subdiscipline_ids'])
+        year = validated_params['created_at_year']
+        month = validated_params['created_at_month']
+
+        if year and month:
+            # Фильтрация по году и месяцу
+            start_date = datetime(year, month, 1)
+            if month == 12:
+                end_date = datetime(year + 1, 1, 1)
+            else:
+                end_date = datetime(year, month + 1, 1)
+            filters &= Q(created_at__gte = start_date, created_at__lt = end_date)
+
+        elif year:
+            # Только год
+            start_date = datetime(year, 1, 1)
+            end_date = datetime(year + 1, 1, 1)
+            filters &= Q(created_at__gte = start_date, created_at__lt = end_date)
+
+        elif month:
+            # Только месяц (независимо от года)
+            filters &= Q(created_at__month = month)
 
         return qs.filter(filters).order_by(validated_params['sort'])
 
@@ -87,7 +135,7 @@ class NewsDetailService:
             session.modified = True
 
         return get_object_or_404(
-            New.objects.select_related('city','subdiscipline').prefetch_related('gallery_items'),
+            New.objects.select_related('city', 'subdiscipline').prefetch_related('gallery_items'),
             id = news_id
         )
 
