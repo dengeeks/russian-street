@@ -78,8 +78,7 @@ class CustomUserCreationForm(forms.ModelForm):
 
 
 @admin.register(UserAccount)
-class UserAccountAdmin(BaseUserAdmin, LinkToDetailMixin, ModelAdmin):
-    export_form_class = ExportForm
+class UserAccountAdmin(BaseUserAdmin, LinkToDetailMixin):
     list_display = [
         'link_to_detail',
         'email',
