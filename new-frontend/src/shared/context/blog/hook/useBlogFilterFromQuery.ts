@@ -7,7 +7,7 @@ import type { BlogListFilterType } from '@/shared/api/blog-new/list/type'
 // Константы для значений по умолчанию
 const INITIAL_FILTER = {
   page: 1,
-  page_size: 12,
+  page_size: 10,
 } as const;
 
 export const useBlogFilterFromQuery = () => {
