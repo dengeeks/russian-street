@@ -2,7 +2,7 @@ from django import forms
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import Group
-from unfold.admin import ModelAdmin
+from unfold.contrib.filters.admin import RelatedDropdownFilter
 from unfold.forms import UserChangeForm, AdminPasswordChangeForm
 from unfold.widgets import UnfoldAdminPasswordInput
 
@@ -11,6 +11,10 @@ from users.admin.social import SocialLinkManagerInline
 from users.models.user import UserAccount
 
 admin.site.unregister(Group)
+
+from unfold.admin import ModelAdmin
+from import_export.admin import ImportExportModelAdmin
+from unfold.contrib.import_export.forms import ExportForm
 
 
 class CustomUserCreationForm(forms.ModelForm):
@@ -79,6 +83,7 @@ class CustomUserCreationForm(forms.ModelForm):
 
 @admin.register(UserAccount)
 class UserAccountAdmin(BaseUserAdmin, LinkToDetailMixin, ModelAdmin):
+    export_form_class = ExportForm
     list_display = [
         'link_to_detail',
         'email',
@@ -163,11 +168,11 @@ class UserAccountAdmin(BaseUserAdmin, LinkToDetailMixin, ModelAdmin):
         }),
     )
     list_filter = (
+        ('region', RelatedDropdownFilter),
         'role',
         'is_staff',
         'is_superuser',
         'status',
-        'region'
     )
     readonly_fields = [
         'last_login',
