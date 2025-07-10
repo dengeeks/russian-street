@@ -25,4 +25,5 @@ export type IconName =
     | 'clock'
     | 'step-check'
     | 'upload'
-    | 'favorites';
+    | 'favorites'
+    | 'scroll';
