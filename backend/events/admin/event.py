@@ -79,6 +79,7 @@ class EventAdmin(BaseEventAdmin):
         ('starting_date', RangeDateTimeFilter),
         ('ending_date', RangeDateTimeFilter)
     ]
+    list_filter_submit = True
     ordering = ['-created_at']
 
     search_fields = ['title', 'description', 'address']
@@ -137,6 +138,7 @@ class AreaAdmin(BaseEventAdmin):
         ('sub_discipline', RelatedDropdownFilter),
         'type',
     ]
+    list_filter_submit = True
     search_fields = ['title', 'description', 'address']
     readonly_fields = ['created_at', 'updated_at', 'link_to_detail']
     ordering = ['-created_at']

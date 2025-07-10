@@ -12,10 +12,6 @@ from users.models.user import UserAccount
 
 admin.site.unregister(Group)
 
-from unfold.admin import ModelAdmin
-from import_export.admin import ImportExportModelAdmin
-from unfold.contrib.import_export.forms import ExportForm
-
 
 class CustomUserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label = 'Пароль', widget = forms.PasswordInput)
@@ -82,8 +78,7 @@ class CustomUserCreationForm(forms.ModelForm):
 
 
 @admin.register(UserAccount)
-class UserAccountAdmin(BaseUserAdmin, LinkToDetailMixin, ModelAdmin):
-    export_form_class = ExportForm
+class UserAccountAdmin(BaseUserAdmin, LinkToDetailMixin):
     list_display = [
         'link_to_detail',
         'email',
@@ -174,6 +169,7 @@ class UserAccountAdmin(BaseUserAdmin, LinkToDetailMixin, ModelAdmin):
         'is_superuser',
         'status',
     )
+    list_filter_submit = True
     readonly_fields = [
         'last_login',
         'created_at',
