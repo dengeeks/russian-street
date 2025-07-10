@@ -75,6 +75,7 @@ class NewAdmin(LinkToDetailMixin, ModelAdmin):
     list_filter = [('subdiscipline', RelatedDropdownFilter),
                    ('region', RelatedDropdownFilter), ('created_at', RangeDateTimeFilter)]
     autocomplete_fields = ['subdiscipline']
+    list_filter_submit = True
 
     def get_urls(self):
         urls = super().get_urls()

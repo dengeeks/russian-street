@@ -43,6 +43,7 @@ class FeedbackOrganizationAdmin(LinkToDetailMixin, ModelAdmin):
                    ('city', RelatedDropdownFilter), 'status', 'gender',
 
                    )
+    list_filter_submit = True
     search_fields = (
         'first_name', 'last_name', 'middle_name',
         'email', 'phone', 'passport_series', 'passport_number'

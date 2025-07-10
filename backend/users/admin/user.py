@@ -169,6 +169,7 @@ class UserAccountAdmin(BaseUserAdmin, LinkToDetailMixin):
         'is_superuser',
         'status',
     )
+    list_filter_submit = True
     readonly_fields = [
         'last_login',
         'created_at',
