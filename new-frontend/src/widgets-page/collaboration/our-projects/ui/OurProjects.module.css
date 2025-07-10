@@ -8,6 +8,8 @@
     display: flex;
     justify-content: space-between;
     gap: 20px;
+    align-items: flex-end;
+    flex-wrap: wrap;
 }
 
 .projectsGrid {
@@ -25,11 +27,7 @@
     .projectsSection {
         gap: 40px;
     }
-
-    .projectsHeader {
-        flex-direction: column;
-    }
-
+    
     .projectsGrid :nth-child(1), .projectsGrid :nth-child(6)  {
         grid-column: span 1;
     }

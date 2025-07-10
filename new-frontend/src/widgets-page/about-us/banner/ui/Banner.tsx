@@ -22,7 +22,7 @@ const Banner = ({joinStreet}: BannerProps) => {
             <Image src="/assets/webp/about-us-arrow.webp" alt="стрелки" width={74} height={68} priority />
           </div>
           <SectionTitle>СТАНЬ ЧАСТЬЮ УЛИЦ</SectionTitle>
-          <ActionButton type="button" modalName="join-organization" requireAuth>Участвовать</ActionButton>
+          <ActionButton type="button" modalName="join-organization" requireAuth>вступить в организацию</ActionButton>
         </div>
 
         <div className={styles.bannerAboutVideoWrapper}>

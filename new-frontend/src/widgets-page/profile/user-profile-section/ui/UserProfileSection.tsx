@@ -3,16 +3,16 @@ import loadable from 'next/dynamic'
 import styles from './UserProfileSection.module.css'
 import RegionalLeaderCard from '@/entities/regional-leader-card'
 import SectionTitle from '@/shared/ui/SectionTitle'
-import { UserAvatar, UserAccountInfo, Logout, DonationHistory } from '@/features/profile'
+import { UserAvatar, UserAccountInfo, Logout} from '@/features/profile';
+import DonationHistory from '@/features/profile/donation-history'
 import ActionButton from '@/features/action-buttons'
 import { useGlobalData } from '@/shared/context/global-data/useGlobalDataContext'
+
 
 const JoinOrganizationPromo = loadable(() => import('./internal/JoinOrganizationPromo'));
 
 const UserProfileSection = () => {
   const {userData} = useGlobalData()
-  console.log(userData)
-
   return (
     <section className={`container ${styles.userProfileSection}`}>
       <Logout />

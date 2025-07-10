@@ -4,7 +4,7 @@ import { buildQueryString } from '@/shared/utils/buildQueryString'
 
 export const EMPTY_EVENT_OR_AREA_HOME_LIST: EventOrAreaHomeListType[] = []
 
-export async function getEventOrAreaList(params: EventHomeFilterType): Promise<EventOrAreaHomeListType[]> {
+export async function getEventOrAreaHomeList(params: EventHomeFilterType): Promise<EventOrAreaHomeListType[]> {
   const queryString = buildQueryString(params)
   try {
     const res = await fetch(`${EVENT_OR_AREA_HOME_LIST}?${queryString}`, {

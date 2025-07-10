@@ -31,9 +31,9 @@ const RegionalLeaderCard = ({ region_id }: RegionalLeaderCardProps) => {
       </Link>
       <div className={styles.regionalLeaderCardInfo}>
         <span className={styles.regionalLeaderCardTitle}>Представитель региона</span>
-        <p className={styles.regionalLeaderCardName}>
+        <Link href={`/region/${uuid}`} className={styles.regionalLeaderCardName}>
           {first_name} {last_name}
-        </p>
+        </Link>
         <div className={styles.regionalLeaderCardContacts}>
           <a
             href={`mailto:${email}`}
@@ -59,7 +59,7 @@ const RegionalLeaderCard = ({ region_id }: RegionalLeaderCardProps) => {
               className={styles.regionalLeaderCardSocialLink}
               target="_blank"
               rel="noopener noreferrer">
-              <Image src={getImageUrl(social.social_media.image)} alt="Соцсеть" width={42} height={42} />
+              <Image src={getImageUrl(social.social_media.image)} alt="Соцсеть" width={30} height={30} />
             </a>
           ))}
         </div>

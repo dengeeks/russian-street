@@ -1,52 +1,62 @@
 import styles from "./ProfileEventCard.module.css"
 import Icon from '@/shared/icon'
-import ProfileEventGallery from '@/entities/profile/profile-Event-card/ui/ProfileEventGallery'
 import Tag from '@/shared/ui/Tag'
+import Image from 'next/image'
+import type { EventOrAreaItem } from '@/shared/api/event-or-area/list/type'
+import { getImageUrl } from '@/shared/utils/getImageUrl'
+import Link from 'next/link'
+import { formatFullDateTime } from '@/shared/utils/formatDate'
 
-const ProfileEventCard = () => {
+
+const ProfileEventCard = ({card_image, id, city, address, title, starting_date, ending_date, sub_discipline}: EventOrAreaItem) => {
   return (
-    <div className={styles.profileEventCard}>
-      <ProfileEventGallery/>
+    <article className={styles.profileEventCard}>
+      <Link href={`/events/${id}/?type=event`} className={styles.profileEventCardWrapperImage}>
+        <Image src={getImageUrl(card_image)} alt={title} fill className={styles.profileEventCardImage}
+               sizes="(min-width: 1100px) 650px,
+       (min-width: 950px) 500px,
+       (min-width: 768px) 400px,
+       calc(100vw - 32px)"
+        />
+      </Link>
       <div className={styles.profileEventCardContent}>
         <div className={styles.profileEventCardTags}>
-          <Tag variant="location">Сыктывкар</Tag>
-          <Tag>Street art</Tag>
-          <Tag>Hip-Hop Dance</Tag>
+          <Tag variant="location">{city}</Tag>
+          <Tag>{sub_discipline.name}</Tag>
         </div>
 
         <div className={styles.profileEventCardDetails}>
-          <div className={styles.profileEventCardHeading}>
-            «КЛИЧ» Крытый Скейт-Парк в Сыктывкаре
-          </div>
-
+          <Link href={`/events/${id}/?type=event`} className={styles.profileEventCardHeading}>
+            {title}
+          </Link>
+          {address && (
           <div className={styles.profileEventCardInfoBlock}>
             <Icon icon="place" width={24} height={24} />
             <div className={styles.profileEventCardInfoContent}>
               <div className={styles.profileEventCardInfoTitle}>Адрес</div>
               <div className={styles.profileEventCardInfoValue}>
-                г. Сыктывкар, ул. Лужники, 24
+                {address}
               </div>
             </div>
           </div>
+          )}
 
-          <div className={styles.profileEventCardInfoBlock}>
-            <Icon icon="clock" width={24} height={24} />
-            <div className={styles.profileEventCardInfoContent}>
-              <div className={styles.profileEventCardInfoTitle}>Время работы</div>
-              <div className={styles.profileEventCardInfoValue}>
-                ПН-ПТ 10.00–21.00<br />
-                СБ-ВС 11.00–22.00
+          {(starting_date || ending_date) && (
+            <div className={styles.profileEventCardInfoBlock}>
+              <Icon icon="clock" width={24} height={24} />
+              <div className={styles.profileEventCardInfoContent}>
+                <div className={styles.profileEventCardInfoTitle}>Дата проведения</div>
+                <div className={styles.profileEventCardInfoValue}>
+                  {starting_date && formatFullDateTime(starting_date)}<br />
+                  {ending_date && formatFullDateTime(ending_date)}
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
-          <div className={styles.profileEventCardSocial}>
-            <Icon icon="vk" />
-            <span>Страница в соцсетях</span>
-          </div>
         </div>
       </div>
-    </div>
+    </article>
   )
 }
 

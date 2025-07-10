@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import './toast.css';
 import Image from 'next/image';
-import { ToastMessage } from '../type'
+import type { ToastMessage } from '../type'
 
 const Toast = memo(({ message, type }: ToastMessage) => {
   return (

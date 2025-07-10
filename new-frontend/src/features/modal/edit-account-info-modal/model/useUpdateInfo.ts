@@ -54,7 +54,6 @@ export const useUpdateInfo = (setError: UseFormSetError<UserUpdateType>): UseLog
             : undefined
         }
 
-        console.log(updatedUser)
           updateUserData(updatedUser);
 
           showToast(data.message, 'success');

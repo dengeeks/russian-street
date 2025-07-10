@@ -41,6 +41,8 @@ export const USER_UPDATE = getApiUrl(`user/update/`, false);
 
   export const STATIC_ABOUT_US = getApiUrl(`static/aboutus/`, true);
 
+  export const STATIC_EVENT_AREA = getApiUrl('static/event-area/', true)
+
 
 export const O_AUTH_2 = getApiUrl(`o/authorize/`, false);
 
@@ -64,8 +66,6 @@ export const TEAM = getApiUrl('list/team_member/', false);
   // короткий список мероприятий в главной странице
   export const EVENT_OR_AREA_HOME_LIST = getApiUrl(`list/short/event-or-area/`, false);
 
-  // добавление и удаление избранные мероприятий
-  export const EVENT_ADD_DELETE_FAVORITE = getApiUrl('add-delete/events/', false);
 
 
 // фильтры
@@ -74,9 +74,9 @@ export const TEAM = getApiUrl('list/team_member/', false);
 
 // регион
   export const REGION_MANAGER = getApiUrl('region-manager/card/', false);
+  export const REGION_MANAGER_DETAIL = (id: string) => getApiUrl(`detail/manager/${id}`, true);
+  export const MAP_REGION_LIST = getApiUrl('list/map-region/', false);
 
-
-export const MAP_REGION_LIST = getApiUrl('list/map-region/', false);
 
 // блог - новости
   export const BLOG_LIST = getApiUrl('list/new/', false);
@@ -85,6 +85,11 @@ export const MAP_REGION_LIST = getApiUrl('list/map-region/', false);
 
 
 // заявка
-export const FEEDBACK_QUESTION = getApiUrl(`feedback/question/`, false);
+  export const FEEDBACK_QUESTION = getApiUrl(`feedback/question/`, false);
+  export const FEEDBACK_ORGANIZATION = getApiUrl(`feedback/organization/`, false);
 
-export const FEEDBACK_ORGANIZATION = getApiUrl(`feedback/organization/`, false);
+// избранные
+  export const FAVORITE_LIST = getApiUrl(`list/favorite/`, false);
+
+  // добавление и удаление избранные мероприятий
+  export const ADD_DELETE_FAVORITE = getApiUrl('add-delete/events/', false);

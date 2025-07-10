@@ -29,7 +29,7 @@ const PostList = () => {
         )
       )}
 
-      <section className="container section-spacing-top section-spacing-bottom">
+      <section className={`container section-spacing-top section-spacing-bottom ${styles.postListWrapper}`} id="pagination-scroll">
         {isLoading ? (
           <div className={styles.postListGrid}>
             {Array.from({ length: totalCount - 1 }).map((_, i) => (

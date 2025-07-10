@@ -127,7 +127,7 @@ export default function ContactInfoForm({ register, control, errors, setHasManua
             name="email"
             placeholder="ivan@gmail.com"
             theme="dark"
-            hint="Пришлём код подтверждения"
+            hint="user@mail.ru"
           />
         </div>
         <div className="form--modal__row">
@@ -144,8 +144,9 @@ export default function ContactInfoForm({ register, control, errors, setHasManua
                 name="region_id"
                 placeholder="Калининградская область"
                 theme="dark"
-                hint="Выберите из списка"
+                hint="Введите вручную или выберите из списка"
                 options={regions}
+                searchable
               />
             )}
           />
@@ -162,8 +163,9 @@ export default function ContactInfoForm({ register, control, errors, setHasManua
                 name="city_id"
                 placeholder="Переяславль-Залесский"
                 theme="dark"
-                hint="Выберите из списка"
+                hint="Введите вручную или выберите из списка"
                 options={cities}
+                searchable
               />
             )}
           />

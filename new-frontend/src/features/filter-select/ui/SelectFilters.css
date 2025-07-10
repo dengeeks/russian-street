@@ -2,7 +2,6 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 20px;
-    margin-bottom: 60px;
 }
 
 .selectFilters .select-menu {
@@ -17,7 +16,30 @@
 }
 
 .selectDisabled {
-    pointer-events: none;
+    position: relative;
+}
+
+.selectDisabled::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    cursor: default;
+}
+
+.regionSelectWrapper {
+    position: relative;
+}
+
+.not-region-error {
+    position: absolute;
+    z-index: 2;
+    color: var(--error);
+    font-size: 30px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-top: 15px;
+    padding-left: 15px;
 }
 
 @media (min-width: 769px) {
@@ -31,11 +53,25 @@
         display: flex;
         justify-content: space-between;
         gap: 20px;
-        margin-bottom: 40px;
     }
 
     .selectFilters .select-menu {
         width: max-content;
     }
+
+    .regionSelectWrapper .select-menu {
+        max-width: 240px;
+    }
+
+    .not-region-error {
+        font-size: 20px;
+        padding-top: 10px;
+        padding-left: 10px;
+    }
+
+    .selectFiltersDesktop {
+        display: none;
+    }
+
 }
 

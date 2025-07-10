@@ -3,6 +3,17 @@
     min-height: 380px;
 }
 
+.profileEventCardWrapperImage {
+    max-width: 650px;
+    width: 100%;
+    position: relative;
+    aspect-ratio: 650 / 380;
+}
+
+.profileEventCardImage {
+    object-fit: cover;
+}
+
 .profileEventCardContent {
     display: flex;
     flex-direction: column;
@@ -33,7 +44,7 @@
 
 }
 
-.profileEventCardInfoBlock, .profileEventCardSocial {
+.profileEventCardInfoBlock{
     display: flex;
     align-items: center;
     gap: 16px;
@@ -54,19 +65,21 @@
 
 }
 
-.profileEventCardInfoValue, .profileEventCardSocial {
+.profileEventCardInfoValue{
     font-size: 16px;
     font-weight: 400;
     line-height: 150%;
 }
 
-.profileEventCardSocial {
-    text-decoration: underline;
-}
+
 
 @media (max-width: 768px) {
     .profileEventCard {
         flex-direction: column;
+    }
+
+    .profileEventCardWrapperImage {
+        max-width: none;
     }
 
     .profileEventCardContent {
@@ -86,7 +99,7 @@
         font-size: 16px;
     }
 
-    .profileEventCardInfoValue, .profileEventCardSocial {
+    .profileEventCardInfoValue{
         font-size: 14px;
     }
 

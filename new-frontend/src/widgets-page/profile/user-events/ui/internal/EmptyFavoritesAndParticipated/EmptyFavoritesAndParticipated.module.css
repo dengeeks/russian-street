@@ -1,0 +1,27 @@
+.emptyWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 32px;
+    align-items: center;
+}
+
+.emptyText {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 150%;
+    letter-spacing: 0.02rem;
+    font-stretch: semi-condensed;
+    text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+    .emptyImage {
+        width: 247px;
+        height: 123px;
+    }
+
+    .emptyText {
+        font-size: 16px;
+    }
+}

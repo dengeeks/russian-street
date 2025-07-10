@@ -1,5 +1,5 @@
 import { DETAIL_DISCIPLINE } from '@/shared/api/endpoints'
-import { REVALIDATE_TIME } from '@/shared/settings'
+import { REVALIDATE_DISCIPLINES_TIME } from '@/shared/settings'
 import type { DetailDisciplineType } from './type'
 
 // заглушка при ошибке
@@ -27,7 +27,7 @@ export async function getDetailDiscipline(slug: string): Promise<DetailDisciplin
       headers: {
         'Content-Type': 'application/json'
       },
-      next: { revalidate: REVALIDATE_TIME }
+      next: { revalidate: REVALIDATE_DISCIPLINES_TIME }
     })
 
     if (res.status === 404) {

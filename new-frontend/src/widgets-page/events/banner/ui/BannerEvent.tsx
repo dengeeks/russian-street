@@ -4,16 +4,14 @@ import MediaSwitcher from '@/shared/ui/MediaSwitcher'
 import ActionButton from '@/features/action-buttons'
 import { extractVideoId } from '@/shared/utils/extractVideoId'
 import FavoriteToggleButton from '@/features/favorite-toggle'
+import { EventOrAreaType, MediaFormatType } from '@/shared/api/type'
 
-interface BannerEventProps {
+interface BannerEventProps extends MediaFormatType {
   title: string
   city?: string
-  format_type: 'image' | 'video_url'
-  image: string | null
-  video_url: string | null
   is_favorite?: boolean
   id?: string
-  type?: 'event' | 'area'
+  type?: EventOrAreaType
 }
 
 const BannerEvent = ({
@@ -61,7 +59,7 @@ const BannerEvent = ({
             modalName="join-organization"
             className={`red ${styles.eventBannerButton}`}
             requireAuth>
-            Участвовать
+            вступить в организацию
           </ActionButton>
         </div>
       </div>

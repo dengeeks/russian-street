@@ -1,0 +1,12 @@
+.postFilterWrapper {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    margin-bottom: 60px;
+}
+
+@media (max-width: 768px) {
+    .postFilterWrapper {
+        margin-bottom: 40px;
+    }
+}

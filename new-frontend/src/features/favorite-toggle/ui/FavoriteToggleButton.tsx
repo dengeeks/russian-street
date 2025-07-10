@@ -2,15 +2,21 @@
 import { useFavoriteToggle } from '../model/useFavoriteToggle'
 import Icon from '@/shared/icon'
 import styles from './FavoriteToggleButton.module.css'
+import { EventOrAreaType } from '@/shared/api/type'
+import { useGlobalData } from '@/shared/context/global-data/useGlobalDataContext'
 
-interface Props {
-  initial: boolean
-  type: 'event' | 'area'
-  objectId: string
+interface FavoriteToggleButtonProps {
+  initial: boolean;
+  type: EventOrAreaType;
+  objectId: string;
 }
 
-const FavoriteToggleButton = ({ initial, type, objectId }: Props) => {
+const FavoriteToggleButton = ({ initial, type, objectId }: FavoriteToggleButtonProps) => {
+  const {userData} = useGlobalData()
+
   const { isFavorite, toggleFavorite, loading } = useFavoriteToggle(initial, type, objectId)
+
+  if (!userData) return null
 
   return (
     <button

@@ -18,4 +18,6 @@ export type BlogListFilterType = {
   sort?: string;
   page?: number;
   page_size: number;
+  created_at_month?: string;
+  created_at_year?: string;
 }

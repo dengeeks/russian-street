@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function NotFound() {
   return (
     <section className="notFoundContainer">
-      <div className="notFoundCode">404</div>
+      <div className="notFoundCode select-none">404</div>
       <div className="notFoundMessage">
         Кажется, мы удалили эту страницу, или она находится в работе.
         Попробуйте вернуться на главную.

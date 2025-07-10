@@ -18,17 +18,18 @@ const BannerHome = ({ promoVideo }: BannerHomeProps) => {
         <div className={styles.bannerContent}>
             <Image
               src="/assets/logo-banner.webp"
-              className={styles.bannerLogo}
-              width={573}
-              height={157}
+              className={`${styles.bannerLogo} select-none`}
+              width={568}
+              height={152}
               alt="Улица России"
+              fetchPriority="high"
               priority
-              sizes="(min-width: 768px) 573px, 320px"
+              sizes="(min-width: 768px) 568px, 320px"
             />
 
           <h1>общероссийская общественная организация уличной культуры и спорта</h1>
           <div className={styles.bannerWrapperButton}>
-            <ActionButton type="button" modalName="join-organization" requireAuth>Участвовать</ActionButton>
+            <ActionButton type="button" modalName="join-organization" requireAuth>вступить</ActionButton>
             <ActionButton type="button" modalName="donating" className={`gray ${styles.bannerWrapperButtonDesktop}`}>поддержать организацию</ActionButton>
           </div>
         </div>

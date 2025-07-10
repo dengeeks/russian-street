@@ -1,27 +1,28 @@
+import type { BaseEventOrAreaItem, EventOrAreaType } from '@/shared/api/type'
+
+export type EventOrAreaItem = BaseEventOrAreaItem & {
+  address: string;
+};
 
 export type EventOrAreaListType = {
   count: number;
   total_pages: number;
   current_page: number;
-  results: {
-    id: string;
-    title: string;
-    card_image: string;
-    city: string;
-    starting_date: string;
-    is_favorite: boolean;
-  }[]
+  results: EventOrAreaItem[]
 }
 
-export type EventFilterType = {
-  type: 'event' | 'area';
-  region_id?: string;
-  city_id?: string;
+export type EventFilterType = EventFilterSelectType & {
+  type: EventOrAreaType;
   type_ids?: string;
-  subdiscipline_ids?: string;
   starting_date?: string;
   ending_date?: string;
-  sort?: string;
   page?: number;
   page_size: number;
+}
+
+export type EventFilterSelectType = {
+  region_id?: string;
+  city_id?: string;
+  subdiscipline_ids?: string;
+  sort?: string;
 }

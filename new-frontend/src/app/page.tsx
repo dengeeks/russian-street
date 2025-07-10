@@ -2,7 +2,7 @@ import loadable from 'next/dynamic'
 import { Suspense } from 'react'
 import Loader from '@/shared/ui/Loader'
 
-import BannerHome from '@/widgets-page/home/banner'
+const BannerHome = loadable(() => import('@/widgets-page/home/banner'))
 import MapRegionHighlighter from '@/widgets-page/home/map-region-highlighter'
 import Events from '@/widgets-page/home/events'
 
