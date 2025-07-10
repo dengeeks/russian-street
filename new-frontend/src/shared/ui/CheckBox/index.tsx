@@ -12,7 +12,7 @@ interface CheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {
 const CheckBox = ({ id, children, theme = 'light', error, ...inputProps }: CheckBoxProps) => {
   return (
    <div className={styles.checkbox}>
-    <label htmlFor={id} className={`${styles.label} ${styles[theme]}`}>
+    <label htmlFor={id} className={`${styles.label} ${styles[theme]} select-none`}>
       <input
         type="checkbox"
         id={id}

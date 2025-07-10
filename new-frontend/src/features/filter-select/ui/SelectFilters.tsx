@@ -8,14 +8,14 @@ import { useMobileDetection } from '@/shared/hooks/useIsMobile'
 import { useRegionList } from '@/shared/hooks/filter/useRegionList'
 
 import CommonFilters from './internal/CommonFilters'
-import type { BaseFilterProps } from '@/features/filter-select/model/type'
+import type { BaseFilterProps } from '../model/type'
 import { useCityList } from '@/shared/hooks/filter/useCityList'
 
 const EventsFilterMobile = dynamic(() => import('./internal/FilterMobile'), {
   loading: () => <Loader />
 })
 
-const SelectFilters = ({ onFilterChange, filter, directions, children }: BaseFilterProps) => {
+const SelectFilters = ({ onFilterChange, filter, directions, children, date}: BaseFilterProps) => {
   const [isRegionError, setIsRegionError] = useState(false)
 
   const isMobile = useMobileDetection()
@@ -50,7 +50,8 @@ const SelectFilters = ({ onFilterChange, filter, directions, children }: BaseFil
             filter={filter}
             onFilterChange={onFilterChange}
             directions={directions}
-            onRegionRequired={handleRegionRequired}>
+            onRegionRequired={handleRegionRequired}
+            date={date}>
             {children}
           </CommonFilters>
         </EventsFilterMobile>
@@ -61,6 +62,7 @@ const SelectFilters = ({ onFilterChange, filter, directions, children }: BaseFil
           onFilterChange={onFilterChange}
           directions={directions}
           onRegionRequired={handleRegionRequired}
+          date={date}
         />
       )}
     </div>

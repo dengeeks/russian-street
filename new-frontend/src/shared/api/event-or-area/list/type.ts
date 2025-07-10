@@ -11,15 +11,18 @@ export type EventOrAreaListType = {
   results: EventOrAreaItem[]
 }
 
-export type EventFilterType = {
+export type EventFilterType = EventFilterSelectType & {
   type: EventOrAreaType;
-  region_id?: string;
-  city_id?: string;
   type_ids?: string;
-  subdiscipline_ids?: string;
   starting_date?: string;
   ending_date?: string;
-  sort?: string;
   page?: number;
   page_size: number;
+}
+
+export type EventFilterSelectType = {
+  region_id?: string;
+  city_id?: string;
+  subdiscipline_ids?: string;
+  sort?: string;
 }

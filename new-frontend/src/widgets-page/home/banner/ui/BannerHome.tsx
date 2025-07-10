@@ -18,7 +18,7 @@ const BannerHome = ({ promoVideo }: BannerHomeProps) => {
         <div className={styles.bannerContent}>
             <Image
               src="/assets/logo-banner.webp"
-              className={styles.bannerLogo}
+              className={`${styles.bannerLogo} select-none`}
               width={568}
               height={152}
               alt="Улица России"

@@ -4,10 +4,11 @@ import EditableTextBlock from '@/shared/ui/EditableTextBlock'
 import Image from 'next/image'
 import Link from 'next/link'
 import { getCooperation } from '@/shared/api/static/getCooperation'
+import { getImageUrl } from '@/shared/utils/getImageUrl'
 
 const CollaborationIntro = async () => {
   const collaborationData = await getCooperation()
-  const { cooperation } = collaborationData
+  const { cooperation } = collaborationData;
 
   return (
     <section className={`container section-spacing-bottom ${styles.collaborationIntro}`}>
@@ -20,7 +21,7 @@ const CollaborationIntro = async () => {
           </Link>
           <div className={styles.collaborationIntro__imageWrapper}>
             <Image
-              src="/assets/directions/1.png"
+              src={getImageUrl(cooperation?.first_image)}
               alt={`${cooperation?.partners_count || 0} партнеров в России`}
               fill
               priority
@@ -42,7 +43,7 @@ const CollaborationIntro = async () => {
         <div className={styles.collaborationIntro__item}>
           <div className={styles.collaborationIntro__imageWrapper}>
             <Image
-              src="/assets/directions/2.png"
+              src={getImageUrl(cooperation?.second_image)}
               alt={`${cooperation?.projects_count || 0} реализованных проектов`}
               fill
               priority

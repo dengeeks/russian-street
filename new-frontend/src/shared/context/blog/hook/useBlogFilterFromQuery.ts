@@ -35,7 +35,7 @@ export const useBlogFilterFromQuery = () => {
 
     // Строковые параметры
     const stringKeys: (keyof Omit<BlogListFilterType, 'page' | 'page_size'>)[] = [
-      'region_id', 'city_id',  'subdiscipline_ids', 'sort'
+      'region_id', 'city_id',  'subdiscipline_ids', 'sort', 'created_at_year', 'created_at_month'
     ]
 
     stringKeys.forEach(key => {
