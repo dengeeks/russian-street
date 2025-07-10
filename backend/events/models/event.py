@@ -42,17 +42,6 @@ class Event(BaseEvent):
     starting_date = models.DateTimeField('Дата начала')
     ending_date = models.DateTimeField('Дата окончания')
 
-    def clean(self):
-        super().clean()
-        now = timezone.now()
-
-        is_creation = self._state.adding
-
-        if is_creation and self.starting_date and self.starting_date < now:
-            raise ValidationError({'starting_date': 'Дата начала не может быть в прошлом при создании.'})
-
-        if self.ending_date and self.starting_date and self.ending_date < self.starting_date:
-            raise ValidationError({'ending_date': 'Дата окончания не может быть раньше даты начала.'})
     class Meta:
         verbose_name = 'Мероприятие'
         verbose_name_plural = 'Мероприятия'
