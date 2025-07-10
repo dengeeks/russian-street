@@ -68,7 +68,7 @@ class NewsFilterService:
             'city_id': cls._validate_uuid(params.get('city_id'), 'city_id'),
             'subdiscipline_ids': cls._validate_uuid(params.get('subdiscipline_ids'), 'subdiscipline_ids'),
             'sort': cls._validate_sort(params.get('sort')),
-            'created_at_year': cls._validate_year(params.get('created_at_date'), 'created_at_date'),
+            'created_at_year': cls._validate_year(params.get('created_at_year'), 'created_at_year'),
             'created_at_month': cls._validate_month(params.get('created_at_month'), 'created_at_month'),
         }
 
