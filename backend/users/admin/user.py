@@ -2,6 +2,7 @@ from django import forms
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import Group
+from unfold.admin import ModelAdmin
 from unfold.contrib.filters.admin import RelatedDropdownFilter
 from unfold.forms import UserChangeForm, AdminPasswordChangeForm
 from unfold.widgets import UnfoldAdminPasswordInput
@@ -78,7 +79,7 @@ class CustomUserCreationForm(forms.ModelForm):
 
 
 @admin.register(UserAccount)
-class UserAccountAdmin(BaseUserAdmin, LinkToDetailMixin):
+class UserAccountAdmin(BaseUserAdmin, LinkToDetailMixin,ModelAdmin):
     list_display = [
         'link_to_detail',
         'email',
@@ -120,7 +121,6 @@ class UserAccountAdmin(BaseUserAdmin, LinkToDetailMixin):
                 'is_active',
                 'is_staff',
                 'is_superuser',
-                'user_permissions'
             )
         }),
         ('Системная информация', {
