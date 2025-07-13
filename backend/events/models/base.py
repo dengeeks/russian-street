@@ -9,15 +9,7 @@ from regions.models.region import Region, City
 
 
 class EventType(UUIDMixin, DateTimeMixin):
-    """Базовая модель типа событий (площадки/мероприятия).
-
-    Наследует:
-        - UUIDMixin: UUID в качестве первичного ключа.
-        - DateTimeMixin: Автоматические поля created_at и updated_at.
-
-    Поля:
-        - name (CharField): Название типа .
-    """
+    """Базовая модель типа событий (площадки/мероприятия)."""
     name = models.CharField(
         max_length = 100,
         verbose_name = 'Название',
@@ -32,11 +24,7 @@ class EventType(UUIDMixin, DateTimeMixin):
 
 
 class AreaType(EventType):
-    """Модель типа спортивной площадки.
-
-    Наследует:
-        - EventType: Базовая модель типа событий.
-    """
+    """Модель типа спортивной площадки."""
 
     class Meta:
         verbose_name = 'Тип площадки'
@@ -44,11 +32,7 @@ class AreaType(EventType):
 
 
 class EventActivityType(EventType):
-    """Модель типа спортивного мероприятия.
-
-    Наследует:
-        - EventType: Базовая модель типа событий.
-    """
+    """Модель типа спортивного мероприятия."""
 
     class Meta:
         verbose_name = 'Тип мероприятия'
@@ -56,24 +40,7 @@ class EventActivityType(EventType):
 
 
 class BaseEvent(UUIDMixin, DateTimeMixin, MediaContentMixin):
-    """
-    Абстрактная модель базового мероприятия.
-
-    Наследует:
-        - UUIDMixin: UUID в качестве первичного ключа.
-        - DateTimeMixin: Автоматические поля created_at и updated_at.
-        - MediaContentMixin: Поля для медиа-контента.
-
-    Поля:
-        - title (CharField): Название мероприятия.
-        - description (RichTextField): Полное описание с HTML-форматированием.
-        - address (CharField): Физический адрес проведения.
-        - yandex_address (CharField): Код iframe для Яндекс.Карт.
-        - region (ForeignKey): Регион проведения.
-        - city (ForeignKey): Город проведения.
-        - discipline (ForeignKey): Основная дисциплина.
-        - sub_discipline (ForeignKey): Поддисциплина.
-    """
+    """Абстрактная модель базового мероприятия."""
 
     def setup_image_path(self, filename: str):
         filename = filename.replace(' ', '_')

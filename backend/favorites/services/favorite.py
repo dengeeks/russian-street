@@ -1,8 +1,10 @@
+from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ObjectDoesNotExist
 
 from events.models.area import Area
 from events.models.event import Event
 from events.services.event import FavoriteService
+from favorites.models.favorite import FavoriteObject
 
 
 class FavoriteToggleService:
@@ -39,12 +41,6 @@ class FavoriteToggleService:
                 object_id = object_id
             )
             return {'is_favorite': True, 'message': 'Добавлено в избранное.'}
-
-
-from django.contrib.contenttypes.models import ContentType
-from favorites.models.favorite import FavoriteObject
-from events.models.event import Event
-from events.models.area import Area
 
 
 class FavoriteListService:

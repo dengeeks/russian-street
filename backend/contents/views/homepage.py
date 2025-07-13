@@ -10,9 +10,6 @@ logger = logging.getLogger(__name__)
 
 class HomePageAPI(APIView):
     def get(self, request):
-        """
-            Извлечение статического контента домашней страницы с помощью HomePageService.
-        """
         try:
             data = HomePageService.get_content_data()
             return Response(data)

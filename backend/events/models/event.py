@@ -1,23 +1,10 @@
-from django.core.exceptions import ValidationError
 from django.db import models
-from django.utils import timezone
 
 from events.models.base import BaseEvent, EventActivityType
 
 
 class Event(BaseEvent):
-    """
-    Модель мероприятия.
-
-    Наследует:
-        - BaseEvent: Все поля базового мероприятия.
-
-    Поля:
-        - type (ForeignKey): Тип мероприятия (связь с EventActivityType).
-        - is_our_project (BooleanField): Флаг "Наш проект".
-        - is_priority (BooleanField): Флаг приоритетного отображения.
-        - service_id (CharField): Идентификатор внешнего сервиса.
-    """
+    """Модель мероприятия."""
 
     type = models.ForeignKey(
         EventActivityType,

@@ -7,20 +7,7 @@ from common.validators import validate_iframe, validate_phone_number
 
 
 class PromotionalVideo(DateTimeMixin, SingleInstanceMixin):
-    """
-    Модель для хранения ссылки на промо-видео, отображаемое на сайте.
-
-    Наследует:
-        - DateTimeMixin: автоматические поля создания и обновления.
-        - SingleInstanceMixin: ограничение на создание только одного экземпляра.
-
-    Поля:
-        - video_url (URLField): Ссылка на видео в формате iframe.
-
-    Meta:
-        verbose_name: 'Промо-видео'
-        verbose_name_plural: 'Промо-видео'
-    """
+    """ Модель для хранения ссылки на промо-видео, отображаемое на сайте. """
 
     video_url = models.URLField(
         verbose_name = 'Ссылка на видео',
@@ -37,25 +24,7 @@ class PromotionalVideo(DateTimeMixin, SingleInstanceMixin):
 
 
 class StreetIsUsImage(UUIDMixin, DateTimeMixin, MaxCountLimitedMixin):
-    """
-    Модель для изображений раздела Street Is Us.
-
-    Наследует:
-        - UUIDMixin: UUID как первичный ключ.
-        - DateTimeMixin: автоматические поля создания и обновления.
-        - MaxCountLimitedMixin: ограничение по количеству (16 объектов).
-
-    Поля:
-        - image (ImageField): Загружаемое изображение.
-        - order (PositiveIntegerField): Порядок отображения изображения.
-
-    Атрибуты:
-        - MAX_COUNT = 17
-
-    Meta:
-        verbose_name: 'Изображение Street Is Us'
-        verbose_name_plural: 'Изображения Street Is Us'
-    """
+    """ Модель для изображений раздела Street Is Us. """
 
     MAX_COUNT = 17
 
@@ -85,20 +54,7 @@ class StreetIsUsImage(UUIDMixin, DateTimeMixin, MaxCountLimitedMixin):
 
 
 class AboutUs(DateTimeMixin, SingleInstanceMixin):
-    """
-    Модель для отображения статистики о количестве публикаций в СМИ.
-
-    Наследует:
-        - DateTimeMixin: автоматические поля создания и обновления.
-        - SingleInstanceMixin: ограничение на единственный экземпляр.
-
-    Поля:
-        - media_publications (PositiveIntegerField): Количество публикаций в СМИ.
-
-    Meta:
-        verbose_name: 'О нас'
-        verbose_name_plural: 'О нас'
-    """
+    """ Модель для отображения статистики о количестве публикаций в СМИ. """
 
     discipline = models.PositiveIntegerField(
         verbose_name = 'Количество направлений'
@@ -125,21 +81,7 @@ class AboutUs(DateTimeMixin, SingleInstanceMixin):
 
 
 class MissionAndGoalsText(DateTimeMixin, SingleInstanceMixin):
-    """
-    Модель для хранения текста миссии и целей организации.
-
-    Наследует:
-        - DateTimeMixin: автоматические поля создания и обновления.
-        - SingleInstanceMixin: ограничение на один экземпляр.
-
-    Поля:
-        - mission (CharField): Текст миссии.
-        - goal (CharField): Текст цели.
-
-    Meta:
-        verbose_name: 'Миссия и цели (текст)'
-        verbose_name_plural: 'Миссия и цели (текст)'
-    """
+    """ Модель для хранения текста миссии и целей организации. """
 
     mission = models.CharField(
         verbose_name = 'Миссия',
@@ -161,25 +103,7 @@ class MissionAndGoalsText(DateTimeMixin, SingleInstanceMixin):
 
 
 class MissionAndGoalsImage(UUIDMixin, DateTimeMixin, MaxCountLimitedMixin):
-    """
-    Модель для изображений, сопровождающих блок "Миссия и цели".
-
-    Наследует:
-        - UUIDMixin: UUID primary key наследование.
-        - DateTimeMixin: автоматические поля создания и обновления.
-        - MaxCountLimitedMixin: ограничение по количеству изображений (до 4).
-
-    Поля:
-        - image (ImageField): Загружаемое изображение.
-        - order (PositiveIntegerField): Порядок отображения.
-
-    Атрибуты:
-        - MAX_COUNT = 4
-
-    Meta:
-        verbose_name: 'Изображение миссии и целей'
-        verbose_name_plural: 'Изображения миссии и целей'
-    """
+    """ Модель для изображений, сопровождающих блок "Миссия и цели". """
 
     MAX_COUNT = 4
 
@@ -209,24 +133,7 @@ class MissionAndGoalsImage(UUIDMixin, DateTimeMixin, MaxCountLimitedMixin):
 
 
 class OrganizationInfo(DateTimeMixin, SingleInstanceMixin):
-    """
-    Модель для хранения контактной информации организации, включая карту.
-
-    Наследует:
-        - DateTimeMixin: автоматические поля создания и обновления.
-        - SingleInstanceMixin: только один экземпляр.
-
-    Поля:
-        - iframe (URLField): iframe с картой Яндекс.Карт.
-        - address (CharField): Адрес организации.
-        - work_time (CharField): Режим работы.
-        - phone (CharField): Номер телефона.
-        - email (EmailField): Контактная почта.
-
-    Meta:
-        verbose_name: 'Контактная информация'
-        verbose_name_plural: 'Контактная информация'
-    """
+    """ Модель для хранения контактной информации организации, включая карту. """
 
     iframe = models.CharField(
         max_length = 1000,

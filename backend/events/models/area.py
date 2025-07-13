@@ -4,15 +4,7 @@ from events.models.base import BaseEvent, AreaType
 
 
 class Area(BaseEvent):
-    """
-    Модель площадки для мероприятий.
-
-    Наследует:
-        - BaseEvent: Все поля базового мероприятия.
-
-    Поля:
-        - type (ForeignKey): Тип площадки.
-    """
+    """ Модель площадки для мероприятий."""
     type = models.ForeignKey(
         AreaType,
         on_delete = models.PROTECT,

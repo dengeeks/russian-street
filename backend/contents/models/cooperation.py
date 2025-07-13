@@ -6,22 +6,7 @@ from common.models import DateTimeMixin, SingleInstanceMixin, UUIDMixin
 
 
 class Cooperation(UUIDMixin, DateTimeMixin, SingleInstanceMixin):
-    """
-    Модель для страницы сотрудничество.
-
-    Наследует:
-        - DateTimeMixin: автоматические поля создания и обновления.
-        - SingleInstanceMixin: ограничение на 1 обьект.
-
-    Поля:
-        - text (RichTextField): Текст с редактором.
-        - partners_count (PositiveIntegerField): Количество партнеров.
-        - projects_count (PositiveIntegerField): Количество реализованных проектов.
-
-    Meta:
-        verbose_name: 'Изображение миссии и целей'
-        verbose_name_plural: 'Изображения миссии и целей'
-    """
+    """ Модель для страницы сотрудничество. """
 
     def setup_first_image_path(self, filename: str):
         filename = filename.replace(' ', '_')

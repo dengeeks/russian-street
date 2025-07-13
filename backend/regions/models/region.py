@@ -6,22 +6,7 @@ from common.utils import setup_image_path
 
 
 class Region(UUIDMixin, DateTimeMixin):
-    """
-    Модель, представляющая регион.
-
-    Атрибуты:
-        - name (CharField): Название региона.
-        - code (CharField): Код региона.
-        - image (ImageField): Изображение.
-        - info (TextField): Описание региона.
-
-    Мета:
-        verbose_name = 'регион'
-        verbose_name_plural = 'регионы'
-
-    Методы:
-        __str__(): Возвращает строковое представление региона.
-    """
+    """Модель, представляющая регион."""
     name = models.CharField(
         'Название региона',
         max_length = 50,
@@ -65,20 +50,7 @@ class Region(UUIDMixin, DateTimeMixin):
 
 
 class City(UUIDMixin, DateTimeMixin):
-    """
-    Модель, представляющая город.
-
-    Атрибуты:
-        - name (CharField): Название города.
-        - region (ForeignKey): Название региона.
-
-    Мета:
-        verbose_name (str): Название модели в единственном числе.
-        verbose_name_plural (str): Название модели во множественном числе.
-
-    Методы:
-        __str__(): Возвращает строковое представление города.
-    """
+    """Модель, представляющая город."""
     name = models.CharField(
         'Название города',
         max_length = 25,

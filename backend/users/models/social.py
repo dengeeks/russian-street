@@ -7,21 +7,7 @@ from users.models.user import UserAccount
 
 
 class SocialMediaManager(UUIDMixin, DateTimeMixin):
-    """
-    Модель для изображения соцсети.
-
-    Наследует:
-        - UUIDMixin: UUID primary key наследование.
-        - DateTimeMixin: автоматические поля создания и обновления.
-
-    Поля:
-        - name (URLField): Название соцсети.
-        - image (ImageField): Изображение.
-
-    Meta:
-        verbose_name = 'изображение соцсети'
-        verbose_name_plural = 'изображения соцсети'
-    """
+    """ Модель для изображения соцсети. """
 
     name = models.CharField(
         max_length = 25,

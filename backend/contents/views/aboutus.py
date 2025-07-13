@@ -10,9 +10,6 @@ logger = logging.getLogger(__name__)
 
 class AboutUsAPI(APIView):
     def get(self, request):
-        """
-            Извлечение статического контента страницы о нас с помощью AboutUsService.
-        """
         try:
             data = AboutUsService.get_content_data()
             return Response(data)

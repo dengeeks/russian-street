@@ -10,9 +10,6 @@ logger = logging.getLogger(__name__)
 
 class ContactAPI(APIView):
     def get(self, request):
-        """
-            Извлечение статического контента контактов с помощью ContactService.
-        """
         try:
             data = ContactService.get_content_data()
             return Response(data)

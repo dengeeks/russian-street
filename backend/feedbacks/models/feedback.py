@@ -7,25 +7,7 @@ from users.models.user import UserAccount
 
 
 class Feedback(DateTimeMixin):
-    """
-    Модель, представляющая обратную связь.
-
-    Атрибуты:
-        - user (ForeignKey): Пользователь отправивший запрос.
-        - name (CharField): Имя отправителя.
-        - content (TextField): Содержимое письма
-        - phone_number (BooleanField): Номер телефона
-        - consent_to_rights (BoolField): Согласие о правилах
-        - consent_to_processing (BoolField): Согласие на обработку данных
-        - status (CharField): Статус заявки.
-
-    Мета:
-        verbose_name (str): Название модели в единственном числе.
-        verbose_name_plural (str): Название модели во множественном числе.
-
-    Методы:
-        __str__(): Возвращает строковое представление обратной связи.
-    """
+    """ Модель, представляющая обратную связь."""
     STATUS_FEEDBACK = [
         ('PENDING', 'В ожидании'),
         ('CLOSED', 'Закрыто'),
@@ -62,25 +44,7 @@ class Feedback(DateTimeMixin):
 
 
 class FeedbackOrganization(DateTimeMixin):
-    """
-    Модель, представляющая обратную связь.
-
-    Атрибуты:
-        - user (ForeignKey): Пользователь отправивший запрос.
-        - name (CharField): Имя отправителя.
-        - content (TextField): Содержимое письма
-        - phone_number (BooleanField): Номер телефона
-        - consent_to_rights (BoolField): Согласие о правилах
-        - consent_to_processing (BoolField): Согласие на обработку данных
-        - status (CharField): Статус заявки.
-
-    Мета:
-        verbose_name (str): Название модели в единственном числе.
-        verbose_name_plural (str): Название модели во множественном числе.
-
-    Методы:
-        __str__(): Возвращает строковое представление обратной связи.
-    """
+    """ Модель, представляющая обратную связь. """
     STATUS_FEEDBACK = [
         ('PENDING', 'В ожидании'),
         ('CLOSED', 'Закрыто'),

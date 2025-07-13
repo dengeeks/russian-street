@@ -10,9 +10,6 @@ logger = logging.getLogger(__name__)
 
 class EveryOneLikesAPI(APIView):
     def get(self, request):
-        """
-            Извлечение статического контента блока у нас понравится всем с помощью EveryOneLikesService.
-        """
         try:
             data = EveryOneLikesService.get_content_data()
             return Response(data)

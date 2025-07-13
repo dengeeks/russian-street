@@ -4,24 +4,7 @@ from common.models import DateTimeMixin, UUIDMixin, MediaContentMixin
 
 
 class EventContent(UUIDMixin, DateTimeMixin, MediaContentMixin):
-    """
-    Модель для хранения контактной информации организации, включая карту.
-
-    Наследует:
-        - DateTimeMixin: автоматические поля создания и обновления.
-        - SingleInstanceMixin: только один экземпляр.
-
-    Поля:
-        - iframe (URLField): iframe с картой Яндекс.Карт.
-        - address (CharField): Адрес организации.
-        - work_time (CharField): Режим работы.
-        - phone (CharField): Номер телефона.
-        - email (EmailField): Контактная почта.
-
-    Meta:
-        verbose_name: 'Контактная информация'
-        verbose_name_plural: 'Контактная информация'
-    """
+    """ Модель для хранения контактной информации организации, включая карту. """
 
     TYPE_CHOICES = [
         ('event', 'Мероприятия'),
