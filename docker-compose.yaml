@@ -12,6 +12,8 @@ services:
       - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data/
+    networks:
+      - street_russia_network
 
   backend:
     build:
@@ -22,20 +24,25 @@ services:
     command: gunicorn config.wsgi:application --workers 5 --threads 2 --timeout 60 --preload --bind 0.0.0.0:8000
     ports:
       - '8000:8000'
-    restart: always
+    restart: unless-stopped
     depends_on:
       - db
       - redis
     volumes:
       - static:/app/back_static
       - media:/app/back_media
+    networks:
+      - street_russia_network
 
   nextjs:
     build:
       context: ./new-frontend
     container_name: nextjs
+    restart: unless-stopped
     ports:
       - 3000:3000
+    networks:
+      - street_russia_network
 
   celery:
     build:
@@ -46,6 +53,8 @@ services:
     depends_on:
       - backend
       - redis
+    networks:
+      - street_russia_network
 
   redis:
     image: redis:latest
@@ -54,23 +63,15 @@ services:
     ports:
       - "6379:6379"
     command: redis-server --requirepass redis_password
+    networks:
+      - street_russia_network
 
-  nginx:
-    container_name: nginx
-    image: nginx:latest
-    ports:
-      - "80:80"
-      - "443:443"
-    restart: always
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-      - static:/app/back_static
-      - media:/app/back_media
-      - /etc/letsencrypt:/etc/letsencrypt
-    depends_on:
-      - nextjs
 
 volumes:
   static:
   media:
   db_data:
+
+networks:
+  street_russia_network:
+    external: true
