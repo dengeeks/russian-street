@@ -10,9 +10,6 @@ logger = logging.getLogger(__name__)
 
 class CooperationAPI(APIView):
     def get(self, request):
-        """
-            Извлечение статического контента страницы сотрудничество с помощью CooperationService.
-        """
         try:
             data = CooperationService.get_content_data()
             return Response(data)

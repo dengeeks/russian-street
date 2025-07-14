@@ -18,5 +18,6 @@ class CustomOAuth2Validator(OAuth2Validator):
         return {
             'family_name': request.user.last_name,
             'given_name': request.user.first_name,
-            'middle_name': request.user.middle_name
+            'middle_name': request.user.middle_name,
+            'email': request.user.email
         }

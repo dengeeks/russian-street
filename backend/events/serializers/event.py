@@ -7,7 +7,6 @@ from events.serializers.discipline import SubDisciplineShortSerializer
 
 
 class TypeSerializer(serializers.ModelSerializer):
-    """Базовый сериализатор для типов (мероприятий/площадок)"""
 
     class Meta:
         fields = ('id', 'name')

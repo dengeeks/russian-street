@@ -61,25 +61,7 @@ class UserAccountManager(BaseUserManager):
 
 
 class UserAccount(AbstractBaseUser, DateTimeMixin, PermissionsMixin):
-    """
-    Модель учетной записи пользователя.
-
-    Поля:
-        role (CharField): Роль пользователя.
-        first_name (CharField): Имя пользователя.
-        last_name (CharField): Фамилия пользователя.
-        middle_name (CharField): Отчество пользователя.
-        phone_number (CharField): Номер телефона пользователя.
-        region (CharField): Регион пользователя
-        email (EmailField): Электронная почта пользователя.
-        status (BooleanField): Является ли членом организации?.
-
-        USERNAME_FIELD (str): Поле, используемое для уникальной
-        идентификации пользователя.
-        REQUIRED_FIELDS (list): Дополнительные поля, обязательные
-        при создании суперпользователя.
-        objects (UserAccountManager): Менеджер модели UserAccount.
-    """
+    """ Модель учетной записи пользователя."""
 
     def setup_avatar_path(self, filename: str):
         filename = filename.replace(' ', '_')

@@ -7,25 +7,7 @@ from common.utils import setup_image_path
 
 
 class Discipline(UUIDMixin, DateTimeMixin):
-    """
-    Модель дисциплины уличной культуры.
-
-    Наследует:
-        - UUIDMixin: UUID в качестве первичного ключа.
-        - DateTimeMixin: Автоматические поля created_at и updated_at.
-
-    Поля:
-        - name (CharField): Уникальное название дисциплины.
-        - first_image (ImageField): Вертикальное изображение для первого блока.
-        - second_image (ImageField): Квадратное изображение для второго блока.
-        - first_description (TextField): Текст первого блока.
-        - second_description (TextField): Текст второго блока.
-
-    Методы:
-        - setup_first_path: Генерирует путь для сохранения first_image.
-        - setup_second_path: Генерирует путь для сохранения second_image.
-        - __str__: Возвращает название дисциплины.
-    """
+    """Модель дисциплины уличной культуры."""
 
     def setup_first_path(self, filename: str):
         filename = filename.replace(' ', '_')

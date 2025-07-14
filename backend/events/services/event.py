@@ -1,12 +1,15 @@
 import uuid
 from datetime import datetime
+from typing import Literal
 
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q, OuterRef, Value, Exists, BooleanField
 from django.utils import timezone
+from rest_framework.exceptions import ValidationError
 from rest_framework.generics import get_object_or_404
 
 from events.models.area import Area
+from events.models.base import AreaType, EventActivityType
 from events.models.event import Event
 from favorites.models.favorite import FavoriteObject
 
@@ -319,10 +322,6 @@ class EventAreaDetailService:
         return obj
 
 
-from events.models.base import AreaType, EventActivityType
-from rest_framework.exceptions import ValidationError
-
-
 class EventTypeService:
     """
     Сервис для получения типов мероприятий и площадок.
@@ -348,12 +347,6 @@ class EventTypeService:
     def get_queryset(cls, model_type: str):
         cls.validate_type(model_type)
         return cls.MODEL_MAPPING[model_type].objects.all()
-
-
-from typing import Literal
-
-from events.models.event import Event
-from events.models.area import Area
 
 
 class ShortListService:

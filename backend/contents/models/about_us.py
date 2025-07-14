@@ -7,25 +7,7 @@ from common.utils import setup_image_path
 
 
 class JoinStreet(UUIDMixin, DateTimeMixin, MediaContentMixin, SingleInstanceMixin):
-    """
-    Модель для блока стань частью улицы.
-
-    Наследует:
-        - UUIDMixin: UUID primary key наследование.
-        - DateTimeMixin: автоматические поля создания и обновления.
-        - SingleInstanceMixin: ограничение до одного экземпляра.
-        - MediaContentMixin: Поля для медиа-контента.
-
-    Поля:
-        - format_type (CharField): тип (Изображение или видео).
-        - video_url (CharField): iframe video (необязательное поле).
-        - image (ImageField): изображение (необязательное поле).
-        - text (RichTextField): Текст с редактором.
-
-    Meta:
-        verbose_name: 'стань частью улицы'
-        verbose_name_plural: 'стань частью улицы'
-    """
+    """ Модель для блока стань частью улицы. """
 
     text = RichTextField(
         verbose_name = 'Текстовое описание'
@@ -40,21 +22,7 @@ class JoinStreet(UUIDMixin, DateTimeMixin, MediaContentMixin, SingleInstanceMixi
 
 
 class Mission(UUIDMixin, DateTimeMixin, SingleInstanceMixin):
-    """
-    Модель для блока миссия.
-
-    Наследует:
-        - UUIDMixin: UUID primary key наследование.
-        - DateTimeMixin: автоматические поля создания и обновления.
-        - SingleInstanceMixin: ограничение до одного экземпляра.
-
-    Поля:
-        - image (ImageField): Изображение.
-
-    Meta:
-        verbose_name: 'миссия'
-        verbose_name_plural: 'миссия'
-    """
+    """ Модель для блока миссия. """
     image = models.ImageField(
         upload_to = setup_image_path,
         verbose_name = 'Изображение',
@@ -76,23 +44,7 @@ class Mission(UUIDMixin, DateTimeMixin, SingleInstanceMixin):
 
 
 class Information(DateTimeMixin, SingleInstanceMixin):
-    """
-    Модель для информации об организации.
-
-    Наследует:
-        - DateTimeMixin: автоматические поля создания и обновления.
-        - SingleInstanceMixin: ограничение на один экземпляр.
-
-    Поля:
-        - person (PositiveIntegerField): количество человек.
-        - discipline (PositiveIntegerField): количество дисциплин.
-        - organization (PositiveIntegerField): количество организаций.
-        - event (PositiveIntegerField): количество мероприятий.
-
-    Meta:
-        verbose_name: 'информация'
-        verbose_name_plural: 'информация'
-    """
+    """ Модель для информации об организации. """
     person = models.PositiveIntegerField(
         verbose_name = 'Количество человек'
     )

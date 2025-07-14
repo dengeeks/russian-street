@@ -6,19 +6,7 @@ from common.utils import setup_image_path
 
 
 class PartnerType(DateTimeMixin):
-    """
-    Модель, представляющая Тип партнера.
-
-    Атрибуты:
-        name (CharField): Тип партнёра.
-
-    Мета:
-        verbose_name (str): Название модели в единственном числе.
-        verbose_name_plural (str): Название модели во множественном числе.
-
-    Методы:
-        __str__(): Возвращает строковое представление тип партнёра.
-    """
+    """ Модель, представляющая Тип партнера."""
     name = models.CharField(
         verbose_name = 'Тип партнера',
         max_length = 125
@@ -33,23 +21,7 @@ class PartnerType(DateTimeMixin):
 
 
 class Partner(UUIDMixin, DateTimeMixin):
-    """
-    Модель, представляющая партёра.
-
-    Атрибуты:
-        name (CharField): Название партнёра.
-        image (ImageField): Изображение партнёра.
-        description (TextField): Описание партёра.
-        type (ForeignKey): Тип партнёра.
-        url (URLField): Ссылка на партнера.
-
-    Мета:
-        verbose_name (str): Название модели в единственном числе.
-        verbose_name_plural (str): Название модели во множественном числе.
-
-    Методы:
-        __str__(): Возвращает строковое представление партнёра.
-    """
+    """Модель, представляющая партёра."""
 
     name = models.CharField(
         'Название партнёра',

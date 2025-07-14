@@ -4,21 +4,7 @@ from common.models import DateTimeMixin, MaxCountLimitedMixin
 
 
 class EveryoneLikes(DateTimeMixin, MaxCountLimitedMixin):
-    """
-    Модель для блока у нас понравится всем".
-
-    Наследует:
-        - DateTimeMixin: автоматические поля создания и обновления.
-        - MaxCountLimitedMixin: ограничение по количеству изображений (до 7).
-
-    Поля:
-        - title (CharField): Заголовок (студент, школьник).
-        - description (TextField): Описание.
-
-    Meta:
-        verbose_name: 'у нас понравится всем'
-        verbose_name_plural: 'у нас понравится всем'
-    """
+    """ Модель для блока у нас понравится всем". """
 
     MAX_COUNT = 7
 

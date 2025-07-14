@@ -10,9 +10,6 @@ logger = logging.getLogger(__name__)
 
 class EventContentAPI(APIView):
     def get(self, request):
-        """
-            Извлечение статического контента страницы о нас с помощью EventContentService.
-        """
         try:
             data = EventContentService.get_content_data()
             return Response(data)

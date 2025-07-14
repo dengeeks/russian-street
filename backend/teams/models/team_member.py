@@ -7,25 +7,7 @@ from teams.models.team_type import TeamType
 
 
 class TeamMember(UUIDMixin, DateTimeMixin):
-    """
-    Модель для команды.
-
-    Наследует:
-        - UUIDMixin: UUID primary key наследование.
-        - DateTimeMixin: автоматические поля создания и обновления.
-
-    Поля:
-        - image (ImageField): изображение.
-        - first_name (CharField): Имя.
-        - last_name (CharField): Фамилия.
-        - info (TextField): Описание.
-        - type (ForeignKey): Тип руководителя.
-
-    Meta:
-        verbose_name = 'команда'
-        verbose_name_plural = 'команда'
-
-    """
+    """ Модель для команды."""
 
     image = models.ImageField(
         upload_to = setup_image_path,

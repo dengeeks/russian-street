@@ -21,10 +21,10 @@ class FavoriteObject(DateTimeMixin):
     object_id = models.UUIDField()
     content_object = GenericForeignKey('content_type', 'object_id')
 
+    def __str__(self):
+        return f'{self.user.email} → {self.content_type} | {self.object_id}'
+
     class Meta:
         unique_together = ('user', 'content_type', 'object_id')
         verbose_name = 'Избранный объект'
         verbose_name_plural = 'Избранные объекты'
-
-    def __str__(self):
-        return f'{self.user.email} → {self.content_type} | {self.object_id}'

@@ -4,19 +4,7 @@ from common.models import DateTimeMixin
 
 
 class TeamType(DateTimeMixin):
-    """
-    Модель, представляющая тип команды.
-
-    Атрибуты:
-        name (CharField): тип команды.
-
-    Мета:
-        verbose_name = 'тип команды'
-        verbose_name_plural = 'тип команды'
-
-    Методы:
-        __str__(): Возвращает строковое представление тип команды.
-    """
+    """ Модель, представляющая тип команды."""
     name = models.CharField(
         verbose_name = 'Тип команды',
         max_length = 125

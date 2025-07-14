@@ -69,19 +69,7 @@ class New(UUIDMixin):
 
 
 class GalleryNew(UUIDMixin, DateTimeMixin, MediaContentMixin):
-    """
-       Модель элемента галереи для новостей.
-
-       Наследует:
-           - UUIDMixin: UUID в качестве первичного ключа.
-           - DateTimeMixin: Автоматические поля created_at и updated_at.
-           - MediaContentMixin: Поля для медиа-контента.
-
-       Поля:
-           - subdiscipline (ForeignKey): Связь с поддисциплиной.
-           - is_main (BooleanField): Флаг главного изображения.
-
-    """
+    """ Модель элемента галереи для новостей."""
     new = models.ForeignKey(
         New,
         on_delete = models.CASCADE,
