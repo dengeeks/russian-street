@@ -48,9 +48,7 @@ const Documentation = ({ data }: DocumentationProps) => {
                   {item.subtitle}
                   <ul className={styles.documentationListSub}>
                     {item.items.map((subItem, subIndex) => (
-                      <li key={subIndex} className={styles.documentationListSubItem}>
-                        {subItem}
-                      </li>
+                      <li key={subIndex} className={styles.documentationListSubItem} dangerouslySetInnerHTML={{ __html: subItem }}/>
                     ))}
                   </ul>
                 </li>

@@ -26,4 +26,7 @@ export type IconName =
     | 'step-check'
     | 'upload'
     | 'favorites'
-    | 'scroll';
+    | 'scroll'
+    | 'user-lock'
+    | 'user-check'
+    | 'book';

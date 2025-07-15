@@ -37,6 +37,7 @@
     line-height: 130%;
     font-weight: 400;
     font-size: 20px;
+    white-space: pre-wrap;
 }
 
 .whoWeAre__photoGrid {

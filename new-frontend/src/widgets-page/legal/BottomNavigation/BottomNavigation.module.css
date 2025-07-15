@@ -1,0 +1,50 @@
+.bottomNav {
+    position: sticky;
+    bottom: 0;
+    display: none;
+    justify-content: space-around;
+    padding: 12px 0;
+    background-color: var(--blue-hover);
+    width: 100%;
+    z-index: 2;
+}
+
+.mobileLink {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--grey);
+    text-decoration: none;
+    text-align: center;
+    font-size: 12px;
+}
+
+.label {
+    font-size: 10px;
+    max-width: 120px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-break: break-word;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .bottomNav {
+        display: flex;
+    }
+
+}
+
+@media (max-width: 500px) {
+    .label {
+        font-size: 8px;
+        max-width: 90px;
+    }
+
+
+}

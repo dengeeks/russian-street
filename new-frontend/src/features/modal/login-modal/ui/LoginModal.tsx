@@ -51,7 +51,7 @@ const LoginModal = () => {
           theme="dark"
           type="password"
         />
-        <div className="modal--form__link-wrapper"><button type="submit" onClick={() => openModal('reset-password-request')} className="modal--form__link">Восстановить пароль</button></div>
+        <div className="modal--form__link-wrapper"><button type="submit" onClick={() => openModal('reset-password-request')} className="legal-link">Восстановить пароль</button></div>
       </div>
 
       <div className="form--modal__actions form--modal__actions--column">

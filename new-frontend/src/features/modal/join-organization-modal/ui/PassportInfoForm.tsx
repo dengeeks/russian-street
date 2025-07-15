@@ -100,7 +100,7 @@ export default function PassportInfoForm({ register, errors, setHasManualError, 
           error={errors.memberRightsAgreement?.message}
           theme="dark">
           Я согласен с{' '}
-          <Link href="/" className="modal--form__link">
+          <Link href="/assets/legal/Устав_ОООУКС_Улицы_России_оригинал.pdf" target="_blank" rel="noopener noreferrer" className="legal-link">
             правами и обязанностями члена ООО УКС «Улицы России»
           </Link>
         </CheckBox>
@@ -112,7 +112,7 @@ export default function PassportInfoForm({ register, errors, setHasManualError, 
           error={errors.agreement?.message}
           theme="dark">
           Я согласен (на){' '}
-          <Link href="/" className="modal--form__link">
+          <Link href="/assets/legal/Согласие_на_обработку_персональных_данных_Сайт_УР.pdf" target="_blank" rel="noopener noreferrer" className="legal-link">
             на обработку персональных данных
           </Link>
         </CheckBox>

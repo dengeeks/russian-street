@@ -30,8 +30,8 @@ const Footer = () => {
           <Link href="/directions">Направления</Link>
           <Link href="/blog">Блог</Link>
           <Link href="/collaboration">Сотрудничество</Link>
-          <Link href="/">Для СМИ</Link>
-          <Link href="/privacy">Документы</Link>
+          <Link href="/#who-are-we">Для СМИ</Link>
+          <Link href="/privacy-policy">Документы</Link>
         </nav>
 
         <div className={styles.donation}>
