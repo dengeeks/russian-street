@@ -8,6 +8,7 @@
 .eventFullInfoContentWrapper {
     display: flex;
     gap: 26px;
+    justify-content: space-between;
 }
 
 .eventFullInfoDescriptionContent {

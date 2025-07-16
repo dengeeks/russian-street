@@ -50,7 +50,7 @@ const RegionalLeaderCard = ({ region_id }: RegionalLeaderCardProps) => {
             {phone_number}
           </a>
         </div>
-        <address className={styles.regionalLeaderCardOffice}>{address}</address>
+        <address className={styles.regionalLeaderCardOffice}>Офис: {address}</address>
         <div className={styles.regionalLeaderCardSocials}>
           {social_links.map((social, i) => (
             <a

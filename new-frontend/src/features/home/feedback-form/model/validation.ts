@@ -10,6 +10,6 @@ export const nameValidation = {
   required: 'Обязательное поле',
   maxLength: {
     value: 50,
-    message: 'Имя не должно превышать 500 символов'
+    message: 'Имя не должно превышать 50 символов'
   }
 }

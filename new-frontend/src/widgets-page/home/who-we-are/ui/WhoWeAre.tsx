@@ -15,7 +15,7 @@ const WhoWeAre = () => {
     : new Array(4).fill({ image: null, order: 0 });
 
   return (
-    <section className={styles.whoWeAre}>
+    <section className={`${styles.whoWeAre} section-spacing-top`} id="who-are-we">
       <div className="container">
         <SectionTitle>кто мы</SectionTitle>
       </div>

@@ -7,6 +7,7 @@ import { FeedbackType } from '../model/type'
 import { messageValidation, nameValidation } from '../model/validation'
 import {emailValidation, phoneValidation} from "@/shared/validation/validators"
 import { useFeedback } from '@/features/home/feedback-form/model/useFeedback'
+import Link from 'next/link'
 
 const FeedbackForm = () => {
   const {
@@ -85,7 +86,7 @@ const FeedbackForm = () => {
           })}
           error={errors.agreement?.message}
         >
-          Я согласен на обработку персональных данных
+          Я согласен <Link href="/assets/legal/Согласие_на_обработку_персональных_данных_Сайт_УР.pdf" target="_blank" rel="noopener noreferrer" className="legal-link">на обработку персональных данных</Link>
         </CheckBox>
       </div>
 

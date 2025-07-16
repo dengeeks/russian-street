@@ -36,6 +36,7 @@
     font-stretch: semi-condensed;
     text-transform: uppercase;
     max-width: 592px;
+    white-space: pre-wrap;
 }
 
 

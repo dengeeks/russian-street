@@ -5,7 +5,7 @@ import { legalRouteMap } from '../model/legalRoutes'
 
 const BreadcrumbsClient = () => {
   const pathname = usePathname()
-  const label = legalRouteMap[pathname]
+  const label = legalRouteMap[pathname].title
 
   return <Breadcrumbs items={[{ label: 'Главная', href: '/' }, { label }]} />
 }

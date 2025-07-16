@@ -42,6 +42,7 @@
     line-height: 130%;
     color: var(--grey);
     max-width: 591px;
+    white-space: pre-wrap;
 }
 
 .directionItem__imageAndSubcategories {

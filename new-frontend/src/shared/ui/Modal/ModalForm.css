@@ -68,11 +68,6 @@
     cursor: pointer;
 }
 
-.modal--form__link {
-    color: var(--blue-link);
-}
-
-
 .form--modal__row--donate {
     margin-bottom: 10px;
     display: grid;
