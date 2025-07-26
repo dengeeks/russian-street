@@ -42,7 +42,8 @@ const MapRegionTooltipLayer = ({ regions }: Props) => {
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
         height="100%"
-        viewBox="0 0 1196 797"
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 1000 600"
       >
         {regionsPath.map(({ id, d }, index) => {
           const region = regions.find(r => r.code === id)
