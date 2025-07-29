@@ -24,15 +24,15 @@ const UserAccountInfo = () => {
       <div className={styles.userProfileDetails}>
         <div className={styles.userProfileDetailItem}>
           <div className={styles.userProfileDetailLabel}>Фамилия</div>
-          <div className={styles.userProfileDetailValue}>{userData?.last_name || 'Нету'}</div>
+          <div className={styles.userProfileDetailValue}>{userData?.last_name || 'Нет'}</div>
         </div>
         <div className={styles.userProfileDetailItem}>
           <div className={styles.userProfileDetailLabel}>Имя</div>
-          <div className={styles.userProfileDetailValue}>{userData?.first_name || 'Нету'}</div>
+          <div className={styles.userProfileDetailValue}>{userData?.first_name || 'Нет'}</div>
         </div>
         <div className={styles.userProfileDetailItem}>
           <div className={styles.userProfileDetailLabel}>Отчество</div>
-          <div className={styles.userProfileDetailValue}>{userData?.middle_name || 'Нету'}</div>
+          <div className={styles.userProfileDetailValue}>{userData?.middle_name || 'Нет'}</div>
         </div>
         {userData?.status && (
           <div className={styles.userProfileDetailItem}>
@@ -46,12 +46,12 @@ const UserAccountInfo = () => {
 
         <div className={styles.userProfileDetailItem}>
           <div className={styles.userProfileDetailLabel}>Электронная почта</div>
-          <div className={styles.userProfileDetailValue}>{userData?.email || 'Нету'}</div>
+          <div className={styles.userProfileDetailValue}>{userData?.email || 'Нет'}</div>
         </div>
 
         <div className={styles.userProfileDetailItem}>
           <div className={styles.userProfileDetailLabel}>Номер телефона</div>
-          <div className={styles.userProfileDetailValue}>{userData?.phone_number || 'Нету'}</div>
+          <div className={styles.userProfileDetailValue}>{userData?.phone_number || 'Нет'}</div>
         </div>
         {userData?.region && (
           <div className={styles.userProfileDetailItem}>
