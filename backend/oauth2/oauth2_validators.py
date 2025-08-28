@@ -16,6 +16,7 @@ class CustomOAuth2Validator(OAuth2Validator):
         Добавляем кастомные claims в ID токен на основе данных пользователя.
         """
         return {
+            "user_id": request.user.id,
             'family_name': request.user.last_name,
             'given_name': request.user.first_name,
             'middle_name': request.user.middle_name,
