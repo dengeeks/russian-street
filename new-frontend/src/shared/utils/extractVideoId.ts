@@ -17,6 +17,12 @@ export function extractVideoId(input: string): VideoSource {
     return { type: 'vk', id: `${vkMatch[1]}_${vkMatch[2]}` };
   }
 
+  // VK (новый формат)
+  const vkAltMatch = url.match(/(?:vk\.com\/video|vkvideo\.ru\/video)(-?\d+_\d+)/);
+  if (vkAltMatch) {
+    return { type: 'vk', id: vkAltMatch[1] };
+  }
+
   // VK: iframe embed link (video_ext.php)
   const vkExtMatch = url.match(/vk\.com\/video_ext\.php.*?[?&]oid=([-0-9]+).*?[?&]id=([0-9]+)/);
   if (vkExtMatch) {
